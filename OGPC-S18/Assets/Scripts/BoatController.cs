@@ -17,6 +17,7 @@ public class BoatController : MonoBehaviour
     private void Update()
     {
         RotateSailToMatchWind();
+        SailSpeed();
     }
 
     private void RotateSailToMatchWind()
@@ -33,5 +34,12 @@ public class BoatController : MonoBehaviour
             windSailRotation = ((360 - relativeWindDirection) / 2) % 90;
         }
         sail.transform.localRotation = Quaternion.Euler(0, 0, windSailRotation);
+    }
+
+    private void SailSpeed()
+    {
+        float sailAngle = sail.transform.eulerAngles.z;
+        float sailAngleSpeedMod = Mathf.Cos(Mathf.Deg2Rad * sailAngle);
+        float speedMagnitude = sailAngleSpeedMod * windManager.GetWindSpeed();
     }
 }

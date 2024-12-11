@@ -10,8 +10,9 @@ public class WindManager : MonoBehaviour
     private void Start()
     {
         windDirection = 0f;
-        Debug.Log($"The Wind Direction is {windDirection}");
-        windIndicator.rotation = Quaternion.Euler(0, 0, 90 - windDirection); 
+        windSpeed = 10f;
+        Debug.Log($"The wind direction is {windDirection}, and the wind speed is {windSpeed}");
+        windIndicator.rotation = Quaternion.Euler(0, 0, 90 - windDirection);
     }
 
     public float GetWindDirection()
