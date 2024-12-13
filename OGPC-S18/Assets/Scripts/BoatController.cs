@@ -4,14 +4,20 @@ using UnityEngine;
 
 public class BoatController : MonoBehaviour
 {
+    [Header("Ship Data")]
+    [SerializeField] private float maxSpeed;
+    [SerializeField] private float speedAccelerationMod;
+
+    [Header("One Time")]
+    [SerializeField] private Transform sail;
+    private Rigidbody2D rb;
     private WindManager windManager;
     private float relativeWindDirection;
-
-    [SerializeField] private Transform sail;
 
     private void Start()
     {
         windManager = FindFirstObjectByType<WindManager>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     private void Update()
@@ -40,6 +46,7 @@ public class BoatController : MonoBehaviour
     {
         float sailAngle = sail.transform.eulerAngles.z;
         float sailAngleSpeedMod = Mathf.Cos(Mathf.Deg2Rad * sailAngle);
-        float speedMagnitude = sailAngleSpeedMod * windManager.GetWindSpeed();
+        float speedMagnitude = sailAngleSpeedMod * windManager.GetWindSpeed() * speedAccelerationMod;
+        rb.AddRelativeForceY(speedMagnitude);
     }
 }
