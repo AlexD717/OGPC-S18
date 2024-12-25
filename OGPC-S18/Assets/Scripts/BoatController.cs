@@ -1,4 +1,5 @@
 using System.Security.Cryptography;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -13,6 +14,7 @@ public class BoatController : MonoBehaviour
     private Rigidbody2D rb;
     private WindManager windManager;
     private float relativeWindDirection;
+    [SerializeField] private TextMeshProUGUI boatSpeedText;
 
     private void Start()
     {
@@ -24,6 +26,8 @@ public class BoatController : MonoBehaviour
     {
         RotateSailToMatchWind();
         SailSpeed();
+
+        UpdateUI();
     }
 
     private void RotateSailToMatchWind()
@@ -40,6 +44,12 @@ public class BoatController : MonoBehaviour
             windSailRotation = ((360 - relativeWindDirection) / 2) % 90;
         }
         sail.transform.localRotation = Quaternion.Euler(0, 0, windSailRotation);
+    }
+
+    private void UpdateUI()
+    {
+        float speed = rb.linearVelocity.magnitude;
+        boatSpeedText.text = $"Boat Speed: {speed.ToString("F1")}";
     }
 
     private void SailSpeed()
