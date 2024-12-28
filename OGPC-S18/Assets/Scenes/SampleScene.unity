@@ -942,6 +942,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 703202724}
+  - component: {fileID: 703202727}
   - component: {fileID: 703202725}
   - component: {fileID: 703202726}
   m_Layer: 0
@@ -1013,6 +1014,21 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &703202727
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 703202723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6eb8927d8164f7e46bb8380b8eb08058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rudderMoveSpeed: 5
+  inputActions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  rudderPositionIndicator: {fileID: 984653260}
 --- !u!1 &793305401
 GameObject:
   m_ObjectHideFlags: 0

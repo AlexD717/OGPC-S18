@@ -39,7 +39,6 @@ public class BoatController : MonoBehaviour
     private void RotateSailToMatchWind()
     {
         relativeWindDirection = (windManager.GetWindDirection() + transform.localRotation.eulerAngles.z) % 360;
-        Debug.Log(relativeWindDirection);
 
         float windSailRotation;
         if (relativeWindDirection > 0 && relativeWindDirection < 180)
@@ -81,6 +80,7 @@ public class BoatController : MonoBehaviour
 
         float speedMagnitude = sailAngleSpeedMod * windManager.GetWindSpeed() * speedAccelerationMod;
 
+        // Makes sure boat doesn't exceed maximum speed
         if (boatSpeed < maxSpeed)
             rb.AddRelativeForceY(speedMagnitude);
     }
