@@ -44,7 +44,7 @@ public class RudderController : MonoBehaviour
 
     public float GetRudderPosition()
     {
-        return rudderPosition / 200f;
+        return -(rudderPosition / 200f);
     }
 
     public void SetRudderMoveSpeed(float _rudderMoveSpeed)

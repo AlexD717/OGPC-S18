@@ -985,9 +985,9 @@ MonoBehaviour:
   speedAccelerationMod: 0.2
   maxRudderAngle: 30
   turningSpeed: 5
-  rudderMoveSpeed: 5
+  rudderMoveSpeed: 10
   maxRotationResistance: 0.5
-  baseResistance: 0.05
+  baseResistance: 0.2
   stallAngle: 45
   sail: {fileID: 1263568185}
   boatSpeedText: {fileID: 41876431}
@@ -1005,7 +1005,7 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 10
   m_LinearDamping: 0.05
-  m_AngularDamping: 0.1
+  m_AngularDamping: 0.4
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
