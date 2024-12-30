@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 public class RudderController : MonoBehaviour
 {
-    [SerializeField] private float rudderMoveSpeed;
+    private float rudderMoveSpeed;
     private float rudderPosition;
     
     [SerializeField] private InputActionAsset inputActions;
@@ -38,7 +38,17 @@ public class RudderController : MonoBehaviour
 
     private void UpdateUI()
     {
-        rudderPosition = Mathf.Lerp(rudderPositionIndicator.localPosition.x, rotationInput * 200, rudderMoveSpeed/1000);
+        rudderPosition = Mathf.Lerp(rudderPositionIndicator.localPosition.x, rotationInput * 200, rudderMoveSpeed/10f * Time.deltaTime);
         rudderPositionIndicator.localPosition = new Vector2(rudderPosition, rudderPositionIndicator.localPosition.y);
+    }
+
+    public float GetRudderPosition()
+    {
+        return rudderPosition / 200f;
+    }
+
+    public void SetRudderMoveSpeed(float _rudderMoveSpeed)
+    {
+        rudderMoveSpeed = _rudderMoveSpeed;
     }
 }

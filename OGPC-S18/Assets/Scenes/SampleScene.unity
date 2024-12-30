@@ -983,7 +983,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSpeed: 5
   speedAccelerationMod: 0.2
-  windAccelerationMod: 0.5
+  maxRudderAngle: 30
+  turningSpeed: 5
+  rudderMoveSpeed: 5
+  maxRotationResistance: 0.5
+  baseResistance: 0.05
   stallAngle: 45
   sail: {fileID: 1263568185}
   boatSpeedText: {fileID: 41876431}
@@ -1026,7 +1030,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6eb8927d8164f7e46bb8380b8eb08058, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rudderMoveSpeed: 5
   inputActions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   rudderPositionIndicator: {fileID: 984653260}
 --- !u!1 &793305401
