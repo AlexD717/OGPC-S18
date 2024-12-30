@@ -8,9 +8,12 @@ public class BoatController : MonoBehaviour
     [Header("Ship Data")]
     [SerializeField] private float maxSpeed;
     [SerializeField] private float speedAccelerationMod;
-    [SerializeField] private float windAccelerationMod;
+    [SerializeField] private float maxRudderAngle;
+    [SerializeField] private float turningSpeed;
+    [SerializeField] private float rudderMoveSpeed;
+    [SerializeField] private float maxRotationResistance;
+    [SerializeField] private float baseResistance;
     [SerializeField] private float stallAngle;
-
 
     [Header("One Time")]
     [SerializeField] private Transform sail;
@@ -18,6 +21,7 @@ public class BoatController : MonoBehaviour
 
     private Rigidbody2D rb;
     private WindManager windManager;
+    private RudderController rudderController;
     private float relativeWindDirection;
     private float boatSpeed;
 
@@ -25,6 +29,8 @@ public class BoatController : MonoBehaviour
     {
         windManager = FindFirstObjectByType<WindManager>();
         rb = GetComponent<Rigidbody2D>();
+        rudderController = GetComponent<RudderController>();
+        rudderController.SetRudderMoveSpeed(rudderMoveSpeed);
     }
 
     private void Update()
@@ -32,6 +38,7 @@ public class BoatController : MonoBehaviour
         RotateSailToMatchWind();
         boatSpeed = rb.linearVelocity.magnitude;
         BoatForwardVelocity();
+        BoatRotation();
 
         UpdateUI();
     }
@@ -39,7 +46,6 @@ public class BoatController : MonoBehaviour
     private void RotateSailToMatchWind()
     {
         relativeWindDirection = (windManager.GetWindDirection() + transform.localRotation.eulerAngles.z) % 360;
-        Debug.Log(relativeWindDirection);
 
         float windSailRotation;
         if (relativeWindDirection > 0 && relativeWindDirection < 180)
@@ -76,12 +82,30 @@ public class BoatController : MonoBehaviour
                 sailAngleSpeedMod /= stallAngle + 1 - Mathf.Abs(180 - relativeWindDirection);
 
             }
-            Debug.Log(sailAngleSpeedMod);
         }
 
         float speedMagnitude = sailAngleSpeedMod * windManager.GetWindSpeed() * speedAccelerationMod;
 
+        // Makes sure boat doesn't exceed maximum speed
         if (boatSpeed < maxSpeed)
             rb.AddRelativeForceY(speedMagnitude);
+    }
+
+    private void BoatRotation()
+    {
+        float rudderPosition = rudderController.GetRudderPosition();
+        Debug.Log(rudderPosition);
+        float rudderAngle = rudderPosition * maxRudderAngle;
+
+        float targetPosition = transform.eulerAngles.z + rudderAngle;
+        float smoothRotation = Mathf.LerpAngle(transform.eulerAngles.z, targetPosition, turningSpeed * Time.deltaTime);
+        transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, smoothRotation);
+
+        if (rudderPosition != 0)
+        {
+            //Boat is turning
+            //Increase linear resistance
+            rb.linearDamping = Mathf.Abs(rudderPosition) * maxRotationResistance + baseResistance;
+        }
     }
 }
