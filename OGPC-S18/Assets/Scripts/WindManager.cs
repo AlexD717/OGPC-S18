@@ -84,7 +84,7 @@ public class WindManager : MonoBehaviour
     {
         windSpeedText.text = $"Windspeed: {windSpeed.ToString("F1")}";
         windBearingText.text = $"Wind Bearing: {windDirection.ToString("F1")}";
-
+        windIndicator.rotation = Quaternion.Euler(0, 0, 90 - windDirection);
     }
 
     int count = 0;
