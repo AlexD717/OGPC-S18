@@ -19,11 +19,15 @@ public class BoatController : MonoBehaviour
     [SerializeField] private Transform sail;
     [SerializeField] private TextMeshProUGUI boatSpeedText;
 
+    [SerializeField] private int debugTicksInterval; //gives debug message only every n gameticks
+
     private Rigidbody2D rb;
     private WindManager windManager;
     private RudderController rudderController;
     private float relativeWindDirection;
     private float boatSpeed;
+
+    private int debugTimer = 0;
 
     private void Start()
     {
@@ -31,6 +35,8 @@ public class BoatController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         rudderController = GetComponent<RudderController>();
         rudderController.SetRudderMoveSpeed(rudderMoveSpeed);
+
+        debugTimer = debugTicksInterval - 1;
     }
 
     private void Update()
@@ -94,7 +100,17 @@ public class BoatController : MonoBehaviour
     private void BoatRotation()
     {
         float rudderPosition = rudderController.GetRudderPosition();
-        Debug.Log(rudderPosition);
+        if (Mathf.Abs(rudderPosition) < 0.0001f) 
+        {
+            rudderPosition = 0;
+        }
+
+        debugTimer++;
+        if (debugTimer == debugTicksInterval) 
+        {
+            debugTimer = 0;
+            Debug.Log(rudderPosition);
+        }
         float rudderAngle = rudderPosition * maxRudderAngle;
 
         float targetPosition = transform.eulerAngles.z + rudderAngle;
