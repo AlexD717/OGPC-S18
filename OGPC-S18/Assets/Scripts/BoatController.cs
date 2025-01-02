@@ -14,6 +14,7 @@ public class BoatController : MonoBehaviour
     [SerializeField] private float maxRotationResistance;
     [SerializeField] private float baseResistance;
     [SerializeField] private float stallAngle;
+    [SerializeField] private float currentPushPower;
 
     [Header("One Time")]
     [SerializeField] private Transform sail;
@@ -23,7 +24,9 @@ public class BoatController : MonoBehaviour
     [SerializeField] private int debugTicksInterval; //gives debug message only every n gameticks
 
     private Rigidbody2D rb;
+    private BoxCollider2D boxCollider;
     private WindManager windManager;
+    private CurrentManager currentManager;
     private RudderController rudderController;
     private float relativeWindDirection;
     private float boatSpeed;
@@ -32,7 +35,9 @@ public class BoatController : MonoBehaviour
     private void Start()
     {
         windManager = FindFirstObjectByType<WindManager>();
+        currentManager = FindFirstObjectByType<CurrentManager>();
         rb = GetComponent<Rigidbody2D>();
+        boxCollider = GetComponent<BoxCollider2D>();
         rudderController = GetComponent<RudderController>();
         rudderController.SetRudderMoveSpeed(rudderMoveSpeed);
 
@@ -43,8 +48,9 @@ public class BoatController : MonoBehaviour
     {
         RotateSailToMatchWind();
         boatSpeed = rb.linearVelocity.magnitude;
-        BoatForwardVelocity();
+        //BoatForwardVelocity();
         BoatRotation();
+        ApplyCurrent();
 
         UpdateUI();
     }
@@ -72,7 +78,6 @@ public class BoatController : MonoBehaviour
 
     private void BoatForwardVelocity()
     {
-        
         float sailAngle = sail.transform.localEulerAngles.z;
         float sailAngleSpeedMod = Mathf.Cos(Mathf.Deg2Rad * sailAngle);
         
@@ -86,7 +91,6 @@ public class BoatController : MonoBehaviour
             else
             {
                 sailAngleSpeedMod /= stallAngle + 1 - Mathf.Abs(180 - relativeWindDirection);
-
             }
         }
 
@@ -109,12 +113,10 @@ public class BoatController : MonoBehaviour
             rudderPosition = 1;
         }
 
-
         debugTimer++;
         if (debugTimer == debugTicksInterval) 
         {
             debugTimer = 0;
-            Debug.Log("Rudder Position: " + rudderPosition);
         }
         float rudderAngle = rudderPosition * maxRudderAngle;
 
@@ -128,5 +130,21 @@ public class BoatController : MonoBehaviour
             //Increase linear resistance
             rb.linearDamping = Mathf.Abs(rudderPosition) * maxRotationResistance + baseResistance;
         }
+    }
+
+    private void ApplyCurrent()
+    {
+        float currentDirection = currentManager.GetCurrentDirection();
+
+        float relativeSideCurrentDirection = (transform.eulerAngles.z + currentDirection) % 360; //180 is facing into the wind, 0 is facing away
+        float sideCurrentPowerMod = Mathf.Abs(Mathf.Sin(Mathf.Deg2Rad * relativeSideCurrentDirection));
+
+        float relativeFrontCurrentDirection = (transform.eulerAngles.z + currentDirection) % 360; //180 is facing into the wind, 0 is facing away
+        float frontCurrentPowerMod = Mathf.Abs(Mathf.Cos(Mathf.Deg2Rad * relativeFrontCurrentDirection));
+
+        float sideToFrontRatio = boxCollider.size.y / boxCollider.size.x;
+        float currentPowerMod = (sideCurrentPowerMod * sideToFrontRatio + frontCurrentPowerMod) * currentPushPower;
+        Vector2 currentVector = new Vector2(Mathf.Cos(currentDirection * Mathf.Deg2Rad), Mathf.Sin(currentDirection * Mathf.Deg2Rad));
+        rb.AddForce(-currentVector * currentPowerMod);
     }
 }

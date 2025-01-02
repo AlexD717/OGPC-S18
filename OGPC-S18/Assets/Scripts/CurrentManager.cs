@@ -3,13 +3,9 @@ using TMPro;
 
 public class CurrentManager : MonoBehaviour
 {
-
     [Header("References")]
     [SerializeField] private TextMeshProUGUI currentBearingText;
     [SerializeField] private TextMeshProUGUI currentSpeedText;
-
-
-
     [SerializeField] private Transform currentIndicator;
 
     [Header("Starting Current Condition")]
@@ -31,13 +27,11 @@ public class CurrentManager : MonoBehaviour
     [SerializeField] private int debugTicksInterval; //gives debug message only every n gameticks
     private int debugTimer = 0;
 
-
     float[] magDeltas;
     float[] angDeltas;
 
     string magDebug;
     string angDebug;
-
 
     private void Start()
     {
@@ -57,13 +51,13 @@ public class CurrentManager : MonoBehaviour
         debugTimer = debugTicksInterval - 1;
     }
 
+    // TODO replace with Mathf.Clamp
     private float Limit(float n, float max)
     {
         if (n > max) {n = max;}
         if (n < -max) {n = -max;}
         return n;
     }
-
 
     private void UpdateCurrent() 
     {
@@ -88,9 +82,7 @@ public class CurrentManager : MonoBehaviour
     {
         currentSpeedText.text = $"Current speed: {currentSpeed.ToString("F1")}";
         currentBearingText.text = $"Current Bearing: {currentDirection.ToString("F1")}";
-
     }
-
 
     int count = 0;
     private void Update()
@@ -109,5 +101,10 @@ public class CurrentManager : MonoBehaviour
             Debug.Log($"The current's direction is {currentDirection}, and its speed is {currentSpeed}");
             Debug.Log($"magDeltas: [{string.Join(", ", magDeltas)}] angDeltas: [{string.Join(", ", angDeltas)}]");       
         }
+    }
+
+    public float GetCurrentDirection()
+    {
+        return currentDirection;
     }
 }
