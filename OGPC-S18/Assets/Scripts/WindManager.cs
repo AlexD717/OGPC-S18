@@ -22,7 +22,7 @@ public class WindManager : MonoBehaviour
     [SerializeField] private float randomAngRange; // Maximum variance from zero in random distribution for lowest delta
     [SerializeField] private float maxMagDeltaStep; //Maximum delta for magnitude, increases for each delta
     [SerializeField] private float maxAngDeltaStep; //Maximum delta for angle, increases for each delta
-    [SerializeField] private int stepMultiple; //Multiplier for the step, controlling how much each step increases
+    [SerializeField] private float stepMultiple; //Multiplier for the step, controlling how much each step increases
     [SerializeField] private float scalar; //Multiplier for the magnitude to help adjust strength
     [SerializeField] private int updateInterval; // Updates values every "this many frames"
 

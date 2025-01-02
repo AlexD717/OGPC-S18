@@ -7,7 +7,7 @@ public class CurrentManager : MonoBehaviour
     [Header("References")]
     [SerializeField] private TextMeshProUGUI currentBearingText;
     [SerializeField] private TextMeshProUGUI currentSpeedText;
-    [HideInInspector] public Vector2 deltaCurrent; //Change in current from previous tick to the next
+    [HideInInspector] public Vector2 deltaCurrentTick; //Change in current from previous tick to the next
 
 
     [SerializeField] private Transform currentIndicator;
@@ -23,7 +23,7 @@ public class CurrentManager : MonoBehaviour
     [SerializeField] private float RandomAngRange; // Maximum variance from zero in random distribution for lowest delta
     [SerializeField] private float maxMagDeltaStep; //Maximum delta for magnitude, increases for each delta
     [SerializeField] private float maxAngDeltaStep; //Maximum delta for angle, increases for each delta
-    [SerializeField] private int stepMultiple; //Multiplier for the step, controlling how much each step increases
+    [SerializeField] private float stepMultiple; //Multiplier for the step, controlling how much each step increases
     [SerializeField] private float scalar; //Multiplier for the magnitude to help adjust strength
     [SerializeField] private int updateInterval; // Updates values every "this many frames"
 
@@ -37,8 +37,7 @@ public class CurrentManager : MonoBehaviour
 
     string magDebug;
     string angDebug;
-    Vector2 oldCurrent;
-    Vector2 newCurrent;
+
 
 
     private void Start()
@@ -88,7 +87,7 @@ public class CurrentManager : MonoBehaviour
 
         //store previous current before updating
 
-        deltaCurrent = new Vector2(magDeltas[^1]*Mathf.Sin(angDeltas[^1]*Mathf.Deg2Rad),magDeltas[^1]*Mathf.Cos(angDeltas[^1]*Mathf.Deg2Rad));
+        //deltaCurrentTick = scalar * new Vector2(magDeltas[^1]*Mathf.Sin(angDeltas[^1]*Mathf.Deg2Rad),magDeltas[^1]*Mathf.Cos(angDeltas[^1]*Mathf.Deg2Rad))/updateInterval;
     }
 
     private void UpdateUI()
@@ -113,7 +112,7 @@ public class CurrentManager : MonoBehaviour
         if (debugTimer == debugTicksInterval) 
         {
             debugTimer = 0;
-            Debug.Log($"The current's direction is {currentDirection}, and its speed is {currentSpeed}");
+            Debug.Log($"The current's direction is {currentDirection},  its speed is {currentSpeed}. Last Delta: Ang: {angDeltas[^1].ToString()}, Mag: {magDeltas[^1].ToString()}");
             //Debug.Log($"magDeltas: [{string.Join(", ", magDeltas)}] angDeltas: [{string.Join(", ", angDeltas)}]");       
         }
     }

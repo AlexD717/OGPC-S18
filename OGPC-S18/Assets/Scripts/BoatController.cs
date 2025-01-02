@@ -82,7 +82,7 @@ public class BoatController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        deltaCurrent = currentManager.deltaCurrent;
+        deltaCurrent = currentManager.deltaCurrentTick;
         rb.linearVelocity = rb.linearVelocity + deltaCurrent;
     }
 
