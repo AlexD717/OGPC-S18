@@ -13,8 +13,8 @@ public class CurrentManager : MonoBehaviour
     [SerializeField] private Transform currentIndicator;
 
     [Header("Starting Current Condition")]
-    [SerializeField] private float currentDirection; // starting current direction, 0 is North, 90 is East, 180 is South, and 270 is West
-    [SerializeField] private float currentSpeed; // starting current speed
+    [SerializeField] public float currentDirection; // starting current direction, 0 is North, 90 is East, 180 is South, and 270 is West
+    [SerializeField] public float currentSpeed; // starting current speed
 
     [Header("Current Generation Variables")]
     [SerializeField] private int maxCurrentSpeed; // Maximum speed of current
@@ -24,7 +24,6 @@ public class CurrentManager : MonoBehaviour
     [SerializeField] private float maxMagDeltaStep; //Maximum delta for magnitude, increases for each delta
     [SerializeField] private float maxAngDeltaStep; //Maximum delta for angle, increases for each delta
     [SerializeField] private float stepMultiple; //Multiplier for the step, controlling how much each step increases
-    [SerializeField] private float scalar; //Multiplier for the magnitude to help adjust strength
     [SerializeField] private int updateInterval; // Updates values every "this many frames"
 
     [Header("Debug Settings")]
@@ -80,14 +79,13 @@ public class CurrentManager : MonoBehaviour
         }
 
         currentDirection = currentDirection + angDeltas[^1];
-        currentSpeed = currentSpeed + scalar*magDeltas[^1];
+        currentSpeed = currentSpeed + magDeltas[^1];
         currentSpeed = Mathf.Clamp(currentSpeed,0,maxCurrentSpeed);
 
         currentIndicator.rotation = Quaternion.Euler(0, 0, 90 - currentDirection);
 
-        //store previous current before updating
 
-        //deltaCurrentTick = scalar * new Vector2(magDeltas[^1]*Mathf.Sin(angDeltas[^1]*Mathf.Deg2Rad),magDeltas[^1]*Mathf.Cos(angDeltas[^1]*Mathf.Deg2Rad))/updateInterval;
+        deltaCurrentTick = new Vector2(magDeltas[^1]*Mathf.Sin(angDeltas[^1]*Mathf.Deg2Rad),magDeltas[^1]*Mathf.Cos(angDeltas[^1]*Mathf.Deg2Rad))/updateInterval;
     }
 
     private void UpdateUI()

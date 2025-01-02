@@ -43,6 +43,8 @@ public class BoatController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         rudderController = GetComponent<RudderController>();
         rudderController.SetRudderMoveSpeed(rudderMoveSpeed);
+        
+        rb.linearVelocity = rb.linearVelocity + new Vector2(currentManager.currentSpeed*Mathf.Sin(currentManager.currentDirection*Mathf.Deg2Rad),currentManager.currentSpeed*Mathf.Cos(currentManager.currentDirection*Mathf.Deg2Rad));
 
         debugTimer = debugTicksInterval - 1;
     }

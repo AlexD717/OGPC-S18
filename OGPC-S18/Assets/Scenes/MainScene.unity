@@ -1287,7 +1287,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentBearingText: {fileID: 1513588340}
   currentSpeedText: {fileID: 1570743260}
-  deltaCurrent: {x: 0, y: 0}
+  deltaCurrentTick: {x: 0, y: 0}
   currentIndicator: {fileID: 965439466}
   currentDirection: 180
   currentSpeed: 4
@@ -1298,7 +1298,6 @@ MonoBehaviour:
   maxMagDeltaStep: 0.01
   maxAngDeltaStep: 0.1
   stepMultiple: 1
-  scalar: 50
   updateInterval: 100
   debugTicksInterval: 500
 --- !u!1 &965439465
