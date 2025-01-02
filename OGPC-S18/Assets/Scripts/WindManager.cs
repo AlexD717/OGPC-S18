@@ -18,8 +18,8 @@ public class WindManager : MonoBehaviour
     [Header("Wind Generation Variables")]
     [SerializeField] private int stabilityLevels; // increases amount of deltas, increasing stability in strength and direction, minval = 2
     [SerializeField] private int mainMaxMag; // Maximum windspeed
-    [SerializeField] private float RandomMagRange; // Maximum variance from zero in random distribution for lowest delta
-    [SerializeField] private float RandomAngRange; // Maximum variance from zero in random distribution for lowest delta
+    [SerializeField] private float randomMagRange; // Maximum variance from zero in random distribution for lowest delta
+    [SerializeField] private float randomAngRange; // Maximum variance from zero in random distribution for lowest delta
     [SerializeField] private float maxMagDeltaStep; //Maximum delta for magnitude, increases for each delta
     [SerializeField] private float maxAngDeltaStep; //Maximum delta for angle, increases for each delta
     [SerializeField] private int stepMultiple; //Multiplier for the step, controlling how much each step increases
@@ -40,12 +40,13 @@ public class WindManager : MonoBehaviour
 
     private void Start()
     {
+        windIndicator.rotation = Quaternion.Euler(0, 0, 90 - windDirection);
+        
         //Generation Variable/Array Stuff
         if (stabilityLevels < 2) {stabilityLevels = 2;}
     
         magDeltas = new float[stabilityLevels];
         angDeltas = new float[stabilityLevels];
-
 
         //starting deltas are all 0
         for (int i = 0; i < stabilityLevels; i++)
@@ -56,23 +57,15 @@ public class WindManager : MonoBehaviour
         debugTimer = debugTicksInterval - 1;
     }
 
-    private float Limit(float n, float max)
-    {
-        if (n > max) {n = max;}
-        if (n < -max) {n = -max;}
-        return n;
-    }
-
-
     private void UpdateWind() 
     {
-        magDeltas[0] = Random.Range(-RandomMagRange, RandomMagRange);
-        angDeltas[0] = Random.Range(-RandomAngRange, RandomAngRange);
+        magDeltas[0] = Random.Range(-1 * randomMagRange, randomMagRange);
+        angDeltas[0] = Random.Range(-1 * randomAngRange, randomAngRange);
 
         for (int i = 1; i < stabilityLevels; i++)
         {
-            magDeltas[i] = Limit(magDeltas[i] + magDeltas[i-1], stepMultiple*i*maxMagDeltaStep); //adding the delta(+ or -) to the next delta to get the new ROC
-            angDeltas[i] = Limit(angDeltas[i] + angDeltas[i-1], stepMultiple*i*maxAngDeltaStep); //adding the delta(+ or -) to the next delta to get the new ROC
+            magDeltas[i] = Mathf.Clamp(magDeltas[i] + magDeltas[i-1], -stepMultiple * i * maxMagDeltaStep, stepMultiple * i*maxMagDeltaStep); //adding the delta(+ or -) to the next delta to get the new ROC
+            angDeltas[i] = Mathf.Clamp(angDeltas[i] + angDeltas[i-1], -stepMultiple * i * maxAngDeltaStep, stepMultiple * i*maxAngDeltaStep); //adding the delta(+ or -) to the next delta to get the new ROC
         }
 
         windDirection = windDirection + angDeltas[^1];
@@ -85,9 +78,9 @@ public class WindManager : MonoBehaviour
 
     private void UpdateUI()
     {
-        windSpeedText.text = $"Windspeed: {windSpeed.ToString("F1")}";
+        windSpeedText.text = $"Wind Speed: {windSpeed.ToString("F1")}";
         windBearingText.text = $"Wind Bearing: {windDirection.ToString("F1")}";
-
+        windIndicator.rotation = Quaternion.Euler(0, 0, 90 - windDirection);
     }
 
     int count = 0;
