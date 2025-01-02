@@ -104,12 +104,17 @@ public class BoatController : MonoBehaviour
         {
             rudderPosition = 0;
         }
+        else if (rudderPosition > 0.9999f)
+        {
+            rudderPosition = 1;
+        }
+
 
         debugTimer++;
         if (debugTimer == debugTicksInterval) 
         {
             debugTimer = 0;
-            Debug.Log(rudderPosition);
+            Debug.Log("Rudder Position: " + rudderPosition);
         }
         float rudderAngle = rudderPosition * maxRudderAngle;
 
