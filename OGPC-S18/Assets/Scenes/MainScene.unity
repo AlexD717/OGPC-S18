@@ -1262,8 +1262,8 @@ MonoBehaviour:
   windSpeed: 5
   stabilityLevels: 5
   mainMaxMag: 10
-  randomMagRange: 0.01
-  randomAngRange: 0.01
+  RandomMagRange: 0.01
+  RandomAngRange: 0.01
   maxMagDeltaStep: 0.01
   maxAngDeltaStep: 0.1
   stepMultiple: 1
