@@ -48,7 +48,7 @@ public class BoatController : MonoBehaviour
     {
         RotateSailToMatchWind();
         boatSpeed = rb.linearVelocity.magnitude;
-        //BoatForwardVelocity();
+        BoatForwardVelocity();
         BoatRotation();
         ApplyCurrent();
 
