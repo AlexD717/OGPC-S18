@@ -19,6 +19,7 @@ public class BoatController : MonoBehaviour
     [SerializeField] private Transform sail;
     [SerializeField] private TextMeshProUGUI boatSpeedText;
 
+    [Header("Debug Settings")]
     [SerializeField] private int debugTicksInterval; //gives debug message only every n gameticks
 
     private Rigidbody2D rb;
@@ -26,7 +27,6 @@ public class BoatController : MonoBehaviour
     private RudderController rudderController;
     private float relativeWindDirection;
     private float boatSpeed;
-
     private int debugTimer = 0;
 
     private void Start()

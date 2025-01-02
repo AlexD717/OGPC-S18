@@ -1,23 +1,24 @@
 using UnityEngine;
 using TMPro;
 
-public class WindManager : MonoBehaviour
+public class CurrentManager : MonoBehaviour
 {
+
     [Header("References")]
+    [SerializeField] private TextMeshProUGUI currentBearingText;
+    [SerializeField] private TextMeshProUGUI currentSpeedText;
 
-    [SerializeField] private TextMeshProUGUI windBearingText;
-    [SerializeField] private TextMeshProUGUI windSpeedText;
 
 
-    [SerializeField] private Transform windIndicator;
+    [SerializeField] private Transform currentIndicator;
 
-    [Header("Starting Wind Condition")]
-    [SerializeField] private float windDirection; // starting wind direction, 0 is North, 90 is East, 180 is South, and 270 is West
-    [SerializeField] private float windSpeed; // starting windspeed
+    [Header("Starting Current Condition")]
+    [SerializeField] private float currentDirection; // starting current direction, 0 is North, 90 is East, 180 is South, and 270 is West
+    [SerializeField] private float currentSpeed; // starting current speed
 
-    [Header("Wind Generation Variables")]
+    [Header("Current Generation Variables")]
     [SerializeField] private int stabilityLevels; // increases amount of deltas, increasing stability in strength and direction, minval = 2
-    [SerializeField] private int mainMaxMag; // Maximum windspeed
+    [SerializeField] private int mainMaxMag; // Maximum speed of current
     [SerializeField] private float RandomMagRange; // Maximum variance from zero in random distribution for lowest delta
     [SerializeField] private float RandomAngRange; // Maximum variance from zero in random distribution for lowest delta
     [SerializeField] private float maxMagDeltaStep; //Maximum delta for magnitude, increases for each delta
@@ -64,7 +65,7 @@ public class WindManager : MonoBehaviour
     }
 
 
-    private void UpdateWind() 
+    private void UpdateCurrent() 
     {
         magDeltas[0] = Random.Range(-RandomMagRange, RandomMagRange);
         angDeltas[0] = Random.Range(-RandomAngRange, RandomAngRange);
@@ -75,20 +76,21 @@ public class WindManager : MonoBehaviour
             angDeltas[i] = Limit(angDeltas[i] + angDeltas[i-1], stepMultiple*i*maxAngDeltaStep); //adding the delta(+ or -) to the next delta to get the new ROC
         }
 
-        windDirection = windDirection + angDeltas[^1];
-        windSpeed = windSpeed + scalar*magDeltas[^1];
+        currentDirection = currentDirection + angDeltas[^1];
+        currentSpeed = currentSpeed + scalar*magDeltas[^1];
 
-        windIndicator.rotation = Quaternion.Euler(0, 0, 90 - windDirection);
+        currentIndicator.rotation = Quaternion.Euler(0, 0, 90 - currentDirection);
 
 
     }
 
     private void UpdateUI()
     {
-        windSpeedText.text = $"Windspeed: {windSpeed.ToString("F1")}";
-        windBearingText.text = $"Wind Bearing: {windDirection.ToString("F1")}";
+        currentSpeedText.text = $"Current speed: {currentSpeed.ToString("F1")}";
+        currentBearingText.text = $"Current Bearing: {currentDirection.ToString("F1")}";
 
     }
+
 
     int count = 0;
     private void Update()
@@ -97,25 +99,15 @@ public class WindManager : MonoBehaviour
         if (count == updateInterval)
         {
             count = 0;
-            UpdateWind();
+            UpdateCurrent();
             UpdateUI();
         }
         debugTimer++;
         if (debugTimer == debugTicksInterval) 
         {
             debugTimer = 0;
-            Debug.Log($"The wind direction is {windDirection}, and the wind speed is {windSpeed}");
+            Debug.Log($"The current's direction is {currentDirection}, and its speed is {currentSpeed}");
             Debug.Log($"magDeltas: [{string.Join(", ", magDeltas)}] angDeltas: [{string.Join(", ", angDeltas)}]");       
         }
-    }
-
-    public float GetWindDirection()
-    {
-        return windDirection;
-    }
-
-    public float GetWindSpeed()
-    {
-        return windSpeed;
     }
 }
