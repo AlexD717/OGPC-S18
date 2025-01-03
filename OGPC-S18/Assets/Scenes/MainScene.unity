@@ -1123,6 +1123,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxSpeed: 5
+  oarPower: 1
+  maxSpeedUnderOars: 2
   speedAccelerationMod: 20
   maxRudderAngle: 30
   turningSpeed: 5
@@ -1133,6 +1135,7 @@ MonoBehaviour:
   currentPushPower: 0.3
   sail: {fileID: 1263568185}
   boatSpeedText: {fileID: 41876431}
+  inputActions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   debugTicksInterval: 1000
 --- !u!50 &703202726
 Rigidbody2D:
