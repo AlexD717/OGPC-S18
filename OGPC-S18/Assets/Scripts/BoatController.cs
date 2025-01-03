@@ -25,10 +25,16 @@ public class BoatController : MonoBehaviour
     [Header("Debug Settings")]
     [SerializeField] private int debugTicksInterval; //gives debug message only every n gameticks
 
+    private enum BoatState
+    {
+        sailing,
+        docked,
+    }
+    private BoatState boatState;
+
     private InputAction sailToggle;
 
     private bool sailEnabled = true;
-    private float previousSailMagnitude = 0;
     private Vector2 sailVelocity = Vector2.zero;
 
     private Rigidbody2D rb;
@@ -56,6 +62,8 @@ public class BoatController : MonoBehaviour
 
     private void Start()
     {
+        boatState = BoatState.sailing;
+
         windManager = FindFirstObjectByType<WindManager>();
         currentManager = FindFirstObjectByType<CurrentManager>();
         rb = GetComponent<Rigidbody2D>();
@@ -68,23 +76,29 @@ public class BoatController : MonoBehaviour
 
     private void Update()
     {
-        if (sailToggle.triggered)
+        if (boatState == BoatState.sailing)
         {
-            sailEnabled = !sailEnabled;
-            sail.gameObject.SetActive(sailEnabled);
-        }
+            if (sailToggle.triggered)
+            {
+                sailEnabled = !sailEnabled;
+                sail.gameObject.SetActive(sailEnabled);
+            }
 
-        if (sailEnabled)
-        {
-            RotateSailToMatchWind();
+            if (sailEnabled)
+            {
+                RotateSailToMatchWind();
+            }
+
+            ApplyCurrent();
         }
-        ApplyCurrent();
 
         UpdateUI();
     }
 
     private void FixedUpdate()
     {
+        if (boatState != BoatState.sailing) return;
+
         boatVelocityMagnitude = rb.linearVelocity.magnitude;
         BoatForwardVelocity();
 
@@ -190,5 +204,28 @@ public class BoatController : MonoBehaviour
 
         Vector2 currentVector = new Vector2(Mathf.Cos(currentDirection * Mathf.Deg2Rad), Mathf.Sin(currentDirection * Mathf.Deg2Rad));
         transform.Translate(-currentVector * currentPushPower * currentManager.GetCurrentSpeed() * Time.deltaTime, Space.World);
+    }
+
+    public void Dock(Transform dockTransform)
+    {
+        boatState = BoatState.docked;
+        sailEnabled = false;
+        sail.gameObject.SetActive(sailEnabled);
+
+        rb.linearVelocity = Vector3.zero;
+        rb.angularVelocity = 0;
+
+        transform.parent = dockTransform;
+        transform.localPosition = Vector3.zero;
+        transform.localRotation = Quaternion.identity;
+    }
+
+    public void UnDock()
+    {
+        boatState = BoatState.sailing;
+        sailEnabled = true;
+        sail.gameObject.SetActive(sailEnabled);
+
+        transform.parent = null;
     }
 }
