@@ -1,13 +1,13 @@
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Security.Cryptography;
-using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using TMPro;
 
 public class BoatController : MonoBehaviour
 {
     [Header("Ship Data")]
     [SerializeField] private float maxSpeed;
+    [SerializeField] private float oarPower;
+    [SerializeField] private float maxSpeedUnderOars;
     [SerializeField] private float speedAccelerationMod;
     [SerializeField] private float maxRudderAngle;
     [SerializeField] private float turningSpeed;
@@ -20,10 +20,14 @@ public class BoatController : MonoBehaviour
     [Header("One Time")]
     [SerializeField] private Transform sail;
     [SerializeField] private TextMeshProUGUI boatSpeedText;
+    [SerializeField] private InputActionAsset inputActions;
 
     [Header("Debug Settings")]
     [SerializeField] private int debugTicksInterval; //gives debug message only every n gameticks
 
+    private InputAction sailToggle;
+
+    private bool sailEnabled = true;
     private float previousSailMagnitude = 0;
     private Vector2 sailVelocity = Vector2.zero;
 
@@ -32,9 +36,23 @@ public class BoatController : MonoBehaviour
     private WindManager windManager;
     private CurrentManager currentManager;
     private RudderController rudderController;
+    
     private float relativeWindDirection;
     private float boatVelocityMagnitude;
     private int debugTimer = 0;
+
+    private void OnEnable()
+    {
+        var playerControls = inputActions.FindActionMap("Player");
+        sailToggle = playerControls.FindAction("SailToggle");
+
+        sailToggle.Enable();
+    }
+
+    private void OnDisable()
+    {
+        sailToggle.Disable();
+    }
 
     private void Start()
     {
@@ -50,7 +68,16 @@ public class BoatController : MonoBehaviour
 
     private void Update()
     {
-        RotateSailToMatchWind();
+        if (sailToggle.triggered)
+        {
+            sailEnabled = !sailEnabled;
+            sail.gameObject.SetActive(sailEnabled);
+        }
+
+        if (sailEnabled)
+        {
+            RotateSailToMatchWind();
+        }
         ApplyCurrent();
 
         UpdateUI();
@@ -87,6 +114,16 @@ public class BoatController : MonoBehaviour
 
     private void BoatForwardVelocity()
     {
+        if (!sailEnabled)
+        {
+            // Boat is powered by oars
+            if (boatVelocityMagnitude < maxSpeedUnderOars)
+            {
+                rb.AddRelativeForceY(oarPower);
+            }
+            return;
+        }
+
         float sailAngle = sail.transform.localEulerAngles.z;
         float sailAngleSpeedMod = Mathf.Cos(Mathf.Deg2Rad * sailAngle);
         
