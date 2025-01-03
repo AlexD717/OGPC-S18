@@ -107,4 +107,9 @@ public class CurrentManager : MonoBehaviour
     {
         return currentDirection;
     }
+
+    public float GetCurrentSpeed()
+    {
+        return currentSpeed;
+    }
 }
