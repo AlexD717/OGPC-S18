@@ -19,6 +19,7 @@ public class BoatController : MonoBehaviour
 
     [Header("One Time")]
     [SerializeField] private Transform sail;
+    [SerializeField] private TextMeshProUGUI boatHeadingText;
     [SerializeField] private TextMeshProUGUI boatSpeedText;
     [SerializeField] private InputActionAsset inputActions;
 
@@ -45,6 +46,7 @@ public class BoatController : MonoBehaviour
     
     private float relativeWindDirection;
     private float boatVelocityMagnitude;
+    private float boatHeading;
     private int debugTimer = 0;
 
     private void OnEnable()
@@ -105,6 +107,11 @@ public class BoatController : MonoBehaviour
         BoatRotation();
     }
 
+    private void UpdateBoatStats()
+    {
+        boatHeading = 360-rb.transform.localEulerAngles.z;
+    }
+
     private void RotateSailToMatchWind()
     {
         relativeWindDirection = (windManager.GetWindDirection() + transform.localRotation.eulerAngles.z) % 360;
@@ -123,6 +130,7 @@ public class BoatController : MonoBehaviour
 
     private void UpdateUI()
     {
+        boatHeadingText.text = $"Boat Heading: {boatHeading.ToString("F1")}";
         boatSpeedText.text = $"Boat Speed: {boatVelocityMagnitude.ToString("F1")}";
     }
 
