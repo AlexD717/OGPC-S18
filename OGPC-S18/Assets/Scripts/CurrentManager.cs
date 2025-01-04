@@ -37,7 +37,7 @@ public class CurrentManager : MonoBehaviour
     string magDebug;
     string angDebug;
 
-
+    Vector2 currentVector;
 
     private void Start()
     {
@@ -54,14 +54,15 @@ public class CurrentManager : MonoBehaviour
             magDeltas[i] = 0f;
             angDeltas[i] = 0f;
         }
-        
-
-
 
         debugTimer = debugTicksInterval - 1;
-        
-        
 
+        currentVector = Polar2Vector(currentDirection,currentSpeed);
+    }
+
+    private Vector2 Polar2Vector(float angle, float magnitude)
+    {
+        return new Vector2(magnitude*Mathf.Sin(angle*Mathf.Deg2Rad),magnitude*Mathf.Cos(angle*Mathf.Deg2Rad));
     }
 
 
@@ -84,8 +85,8 @@ public class CurrentManager : MonoBehaviour
 
         currentIndicator.rotation = Quaternion.Euler(0, 0, 90 - currentDirection);
 
-
-        deltaCurrentTick = new Vector2(magDeltas[^1]*Mathf.Sin(angDeltas[^1]*Mathf.Deg2Rad),magDeltas[^1]*Mathf.Cos(angDeltas[^1]*Mathf.Deg2Rad))/updateInterval;
+        currentVector = Polar2Vector(currentDirection,currentSpeed);
+        //deltaCurrentTick = new Vector2(magDeltas[^1]*Mathf.Sin(angDeltas[^1]*Mathf.Deg2Rad),magDeltas[^1]*Mathf.Cos(angDeltas[^1]*Mathf.Deg2Rad))/updateInterval;
     }
 
     private void UpdateUI()
@@ -113,5 +114,10 @@ public class CurrentManager : MonoBehaviour
             Debug.Log($"The current's direction is {currentDirection},  its speed is {currentSpeed}. Last Delta: Ang: {angDeltas[^1].ToString()}, Mag: {magDeltas[^1].ToString()}");
             //Debug.Log($"magDeltas: [{string.Join(", ", magDeltas)}] angDeltas: [{string.Join(", ", angDeltas)}]");       
         }
+    }
+
+    public Vector2 GetCurrentVector()
+    {
+        return currentVector;
     }
 }

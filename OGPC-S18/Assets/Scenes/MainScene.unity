@@ -1262,8 +1262,8 @@ MonoBehaviour:
   windSpeedText: {fileID: 624586064}
   windIndicator: {fileID: 222996966}
   windDirection: 0
-  windSpeed: 5
-  maxWindspeed: 10
+  windSpeed: 0
+  maxWindspeed: 0
   stabilityLevels: 5
   randomMagRange: 0.01
   randomAngRange: 0.01
@@ -1290,7 +1290,7 @@ MonoBehaviour:
   deltaCurrentTick: {x: 0, y: 0}
   currentIndicator: {fileID: 965439466}
   currentDirection: 180
-  currentSpeed: 4
+  currentSpeed: 5
   maxCurrentSpeed: 10
   stabilityLevels: 5
   RandomMagRange: 0.01
