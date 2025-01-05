@@ -545,7 +545,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 40
+  orthographic size: 15.938232
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -972,8 +972,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 223.02, y: -564}
-  m_SizeDelta: {x: 432.31, y: 50}
+  m_AnchoredPosition: {x: 199.39, y: -564}
+  m_SizeDelta: {x: 385.05, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &690639696
 CanvasRenderer:
@@ -1086,7 +1086,6 @@ GameObject:
   - component: {fileID: 703202727}
   - component: {fileID: 703202725}
   - component: {fileID: 703202726}
-  - component: {fileID: 703202728}
   m_Layer: 0
   m_Name: Boat
   m_TagString: Untagged
@@ -1103,7 +1102,7 @@ Transform:
   m_GameObject: {fileID: 703202723}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.08, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1124,21 +1123,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxSpeed: 5
-  oarPower: 1
-  maxSpeedUnderOars: 2
-  speedAccelerationMod: 20
+  speedAccelerationMod: 0.2
   maxRudderAngle: 30
   turningSpeed: 5
   rudderMoveSpeed: 10
-  maxRotationResistance: 3
-  baseResistance: 0.3
+  maxRotationResistance: 0.5
+  baseResistance: 0.2
   stallAngle: 45
-  currentPushPower: 0.3
   sail: {fileID: 1263568185}
   boatHeadingText: {fileID: 1419846108}
   boatSpeedText: {fileID: 41876431}
-  inputActions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
-  debugTicksInterval: 1000
+  deltaCurrent: {x: 0, y: 0}
+  debugTicksInterval: 500
 --- !u!50 &703202726
 Rigidbody2D:
   serializedVersion: 5
@@ -1180,52 +1176,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputActions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   rudderPositionIndicator: {fileID: 984653260}
---- !u!61 &703202728
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 703202723}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0.44390953}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 0.9, y: 1.8}
-  m_EdgeRadius: 0
 --- !u!1 &793305401
 GameObject:
   m_ObjectHideFlags: 0
@@ -1702,8 +1652,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 223.0213, y: -680}
-  m_SizeDelta: {x: 432.3126, y: 50}
+  m_AnchoredPosition: {x: 219.39, y: -680}
+  m_SizeDelta: {x: 425.05, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1513588339
 CanvasRenderer:
@@ -2203,6 +2153,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1993186923}
   - component: {fileID: 1993186922}
+  - component: {fileID: 1993186924}
   m_Layer: 0
   m_Name: Cinemachine Camera
   m_TagString: Untagged
@@ -2235,7 +2186,7 @@ MonoBehaviour:
     CustomLookAtTarget: 0
   Lens:
     FieldOfView: 34
-    OrthographicSize: 40
+    OrthographicSize: 15.938232
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
@@ -2268,6 +2219,25 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1993186924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1993186921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b617507da6d07e749b7efdb34e1173e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TrackerSettings:
+    BindingMode: 4
+    PositionDamping: {x: 0, y: 0, z: 0}
+    AngularDampingMode: 0
+    RotationDamping: {x: 1, y: 1, z: 1}
+    QuaternionDamping: 1
+  FollowOffset: {x: 0, y: 0, z: -10}
 --- !u!1 &2069273420
 GameObject:
   m_ObjectHideFlags: 0

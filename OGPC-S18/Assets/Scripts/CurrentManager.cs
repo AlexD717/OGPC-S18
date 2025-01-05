@@ -3,11 +3,13 @@ using TMPro;
 
 public class CurrentManager : MonoBehaviour
 {
+
     [Header("References")]
     [SerializeField] private TextMeshProUGUI currentBearingText;
     [SerializeField] private TextMeshProUGUI currentSpeedText;
-
     [HideInInspector] public Vector2 deltaCurrentTick; //Change in current from previous tick to the next
+
+
     [SerializeField] private Transform currentIndicator;
 
     [Header("Starting Current Condition")]
@@ -28,12 +30,12 @@ public class CurrentManager : MonoBehaviour
     [SerializeField] private int debugTicksInterval; //gives debug message only every n gameticks
     private int debugTimer = 0;
 
+
     float[] magDeltas;
     float[] angDeltas;
 
     string magDebug;
     string angDebug;
-
 
     Vector2 currentVector;
 
@@ -63,6 +65,7 @@ public class CurrentManager : MonoBehaviour
         return new Vector2(magnitude*Mathf.Sin(angle*Mathf.Deg2Rad),magnitude*Mathf.Cos(angle*Mathf.Deg2Rad));
     }
 
+
     private void UpdateCurrent() 
     {
 
@@ -90,7 +93,9 @@ public class CurrentManager : MonoBehaviour
     {
         currentSpeedText.text = $"Current speed: {currentSpeed.ToString("F1")}";
         currentBearingText.text = $"Current Bearing: {currentDirection.ToString("F1")}";
+
     }
+
 
     int count = 0;
     private void Update()
@@ -114,6 +119,5 @@ public class CurrentManager : MonoBehaviour
     public Vector2 GetCurrentVector()
     {
         return currentVector;
-
     }
 }
