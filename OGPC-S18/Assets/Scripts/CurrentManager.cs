@@ -6,21 +6,22 @@ public class CurrentManager : MonoBehaviour
     [Header("References")]
     [SerializeField] private TextMeshProUGUI currentBearingText;
     [SerializeField] private TextMeshProUGUI currentSpeedText;
+
+    [HideInInspector] public Vector2 deltaCurrentTick; //Change in current from previous tick to the next
     [SerializeField] private Transform currentIndicator;
 
     [Header("Starting Current Condition")]
-    [SerializeField] private float currentDirection; // starting current direction, 0 is North, 90 is East, 180 is South, and 270 is West
-    [SerializeField] private float currentSpeed; // starting current speed
+    [SerializeField] public float currentDirection; // starting current direction, 0 is North, 90 is East, 180 is South, and 270 is West
+    [SerializeField] public float currentSpeed; // starting current speed
 
     [Header("Current Generation Variables")]
+    [SerializeField] private int maxCurrentSpeed; // Maximum speed of current
     [SerializeField] private int stabilityLevels; // increases amount of deltas, increasing stability in strength and direction, minval = 2
-    [SerializeField] private int mainMaxMag; // Maximum speed of current
     [SerializeField] private float RandomMagRange; // Maximum variance from zero in random distribution for lowest delta
     [SerializeField] private float RandomAngRange; // Maximum variance from zero in random distribution for lowest delta
     [SerializeField] private float maxMagDeltaStep; //Maximum delta for magnitude, increases for each delta
     [SerializeField] private float maxAngDeltaStep; //Maximum delta for angle, increases for each delta
-    [SerializeField] private int stepMultiple; //Multiplier for the step, controlling how much each step increases
-    [SerializeField] private float scalar; //Multiplier for the magnitude to help adjust strength
+    [SerializeField] private float stepMultiple; //Multiplier for the step, controlling how much each step increases
     [SerializeField] private int updateInterval; // Updates values every "this many frames"
 
     [Header("Debug Settings")]
@@ -32,6 +33,9 @@ public class CurrentManager : MonoBehaviour
 
     string magDebug;
     string angDebug;
+
+
+    Vector2 currentVector;
 
     private void Start()
     {
@@ -48,34 +52,38 @@ public class CurrentManager : MonoBehaviour
             magDeltas[i] = 0f;
             angDeltas[i] = 0f;
         }
+
         debugTimer = debugTicksInterval - 1;
+
+        currentVector = Polar2Vector(currentDirection,currentSpeed);
     }
 
-    // TODO replace with Mathf.Clamp
-    private float Limit(float n, float max)
+    private Vector2 Polar2Vector(float angle, float magnitude)
     {
-        if (n > max) {n = max;}
-        if (n < -max) {n = -max;}
-        return n;
+        return new Vector2(magnitude*Mathf.Sin(angle*Mathf.Deg2Rad),magnitude*Mathf.Cos(angle*Mathf.Deg2Rad));
     }
 
     private void UpdateCurrent() 
     {
+
+
         magDeltas[0] = Random.Range(-RandomMagRange, RandomMagRange);
         angDeltas[0] = Random.Range(-RandomAngRange, RandomAngRange);
 
         for (int i = 1; i < stabilityLevels; i++)
         {
-            magDeltas[i] = Limit(magDeltas[i] + magDeltas[i-1], stepMultiple*i*maxMagDeltaStep); //adding the delta(+ or -) to the next delta to get the new ROC
-            angDeltas[i] = Limit(angDeltas[i] + angDeltas[i-1], stepMultiple*i*maxAngDeltaStep); //adding the delta(+ or -) to the next delta to get the new ROC
+            magDeltas[i] = Mathf.Clamp(magDeltas[i] + magDeltas[i-1], -stepMultiple * i * maxMagDeltaStep, stepMultiple * i*maxMagDeltaStep); //adding the delta(+ or -) to the next delta to get the new ROC
+            angDeltas[i] = Mathf.Clamp(angDeltas[i] + angDeltas[i-1], -stepMultiple * i * maxAngDeltaStep, stepMultiple * i*maxAngDeltaStep); //adding the delta(+ or -) to the next delta to get the new ROC
         }
 
         currentDirection = currentDirection + angDeltas[^1];
-        currentSpeed = currentSpeed + scalar*magDeltas[^1];
+        currentSpeed = currentSpeed + magDeltas[^1];
+        currentSpeed = Mathf.Clamp(currentSpeed,0,maxCurrentSpeed);
 
         currentIndicator.rotation = Quaternion.Euler(0, 0, 90 - currentDirection);
 
-
+        currentVector = Polar2Vector(currentDirection,currentSpeed);
+        //deltaCurrentTick = new Vector2(magDeltas[^1]*Mathf.Sin(angDeltas[^1]*Mathf.Deg2Rad),magDeltas[^1]*Mathf.Cos(angDeltas[^1]*Mathf.Deg2Rad))/updateInterval;
     }
 
     private void UpdateUI()
@@ -98,18 +106,14 @@ public class CurrentManager : MonoBehaviour
         if (debugTimer == debugTicksInterval) 
         {
             debugTimer = 0;
-            Debug.Log($"The current's direction is {currentDirection}, and its speed is {currentSpeed}");
-            Debug.Log($"magDeltas: [{string.Join(", ", magDeltas)}] angDeltas: [{string.Join(", ", angDeltas)}]");       
+            Debug.Log($"The current's direction is {currentDirection},  its speed is {currentSpeed}. Last Delta: Ang: {angDeltas[^1].ToString()}, Mag: {magDeltas[^1].ToString()}");
+            //Debug.Log($"magDeltas: [{string.Join(", ", magDeltas)}] angDeltas: [{string.Join(", ", angDeltas)}]");       
         }
     }
 
-    public float GetCurrentDirection()
+    public Vector2 GetCurrentVector()
     {
-        return currentDirection;
-    }
+        return currentVector;
 
-    public float GetCurrentSpeed()
-    {
-        return currentSpeed;
     }
 }
