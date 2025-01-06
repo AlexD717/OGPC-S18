@@ -11,6 +11,7 @@ public class UsefulStuff
         num = num / Mathf.Pow(10, places); // undoing previous multiplication factor to get correctly scaled output
         return num;
     }
+
     public static Vector2 Polar2Vector(float ang, float mag) //Turns polar coords into a vector
     {
         return new Vector2(mag*Mathf.Sin(ang*Mathf.Deg2Rad),mag*Mathf.Cos(ang*Mathf.Deg2Rad));

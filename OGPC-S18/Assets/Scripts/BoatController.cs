@@ -22,6 +22,7 @@ public class BoatController : MonoBehaviour
     [SerializeField] private Transform sail;
     [SerializeField] private TextMeshProUGUI boatHeadingText;
     [SerializeField] private TextMeshProUGUI boatSpeedText;
+    [SerializeField] private InputActionAsset inputActions;
 
     [Header("Debug Settings")]
     [SerializeField] private int debugTicksInterval; //gives debug message only every n gameticks
@@ -51,6 +52,19 @@ public class BoatController : MonoBehaviour
     private float boatVelocityMagnitude;
     private int debugTimer = 0;
     private bool logDebug = false;
+
+    private void OnEnable()
+    {
+        var playerControls = inputActions.FindActionMap("Player");
+        sailToggle = playerControls.FindAction("SailToggle");
+
+        sailToggle.Enable();
+    }
+
+    private void OnDisable()
+    {
+        sailToggle.Disable();
+    }
 
     private void Start()
     {
@@ -98,7 +112,9 @@ public class BoatController : MonoBehaviour
     private void FixedUpdate()
     {
         UpdateBoatData();
-        if (boatState == BoatState.sailing)
+        if (boatState != BoatState.sailing) return;
+        
+        if (sailEnabled)
         {
             AddWind2Boat();
         }
