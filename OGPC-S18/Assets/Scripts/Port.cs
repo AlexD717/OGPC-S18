@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,17 +9,27 @@ public class Port : MonoBehaviour
     [SerializeField] private GameObject range;
     private SpriteRenderer rangeSprite;
 
-    [SerializeField] private Transform playerDockPosition;
+    [SerializeField] private Transform playerDockPositionsParent;
+    private Transform[] playerDockPositions;
 
     [SerializeField] private InputActionAsset inputActions;
     private InputAction interact;
 
+    private GameObject player;
     private BoatController boatController;
 
     private void Start()
     {
         rangeSprite = range.GetComponent<SpriteRenderer>();
         rangeSprite.enabled = false;
+
+        player = GameObject.FindGameObjectWithTag("Player");
+
+        playerDockPositions = new Transform[playerDockPositionsParent.childCount];
+        for (int i = 0; i < playerDockPositionsParent.childCount; i++)
+        {
+            playerDockPositions[i] = playerDockPositionsParent.GetChild(i).transform;
+        }
     }
 
     private void OnEnable()
@@ -44,7 +53,7 @@ public class Port : MonoBehaviour
             {
                 if (!playerDocked)
                 {
-                    boatController.Dock(playerDockPosition);
+                    boatController.Dock(GetClosestDockPosition());
                     playerDocked = true;
                     rangeSprite.enabled = false;
                 }
@@ -56,6 +65,24 @@ public class Port : MonoBehaviour
                 }
             }
         }
+    }
+
+    private Transform GetClosestDockPosition()
+    {
+        float smallestDistance = Mathf.Infinity;
+        Transform closestDock = null;
+
+        foreach (Transform dock in playerDockPositions)
+        {
+            float distanceBetween = Vector2.Distance(dock.position, player.transform.position);
+            if (distanceBetween < smallestDistance)
+            {
+                smallestDistance = distanceBetween;
+                closestDock = dock;
+            }
+        }
+
+        return closestDock;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
