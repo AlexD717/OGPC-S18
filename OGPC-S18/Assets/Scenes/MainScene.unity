@@ -1133,7 +1133,6 @@ MonoBehaviour:
   sail: {fileID: 1263568185}
   boatHeadingText: {fileID: 1419846108}
   boatSpeedText: {fileID: 41876431}
-  deltaCurrent: {x: 0, y: 0}
   debugTicksInterval: 500
 --- !u!50 &703202726
 Rigidbody2D:
@@ -1287,7 +1286,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentBearingText: {fileID: 1513588340}
   currentSpeedText: {fileID: 1570743260}
-  deltaCurrentTick: {x: 0, y: 0}
   currentIndicator: {fileID: 965439466}
   currentDirection: 180
   currentSpeed: 5
