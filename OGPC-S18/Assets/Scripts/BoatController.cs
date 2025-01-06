@@ -1,12 +1,13 @@
-using System.Security.Cryptography;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class BoatController : MonoBehaviour
 {
     [Header("Ship Data")]
     [SerializeField] private float maxSpeed;
+    [SerializeField] private float maxSpeedUnderOars;
+    [SerializeField] private float oarAcceleration;
     [SerializeField] private float speedAccelerationMod;
     [SerializeField] private float maxRudderAngle;
     [SerializeField] private float turningSpeed;
@@ -25,6 +26,18 @@ public class BoatController : MonoBehaviour
     [Header("Debug Settings")]
     [SerializeField] private int debugTicksInterval; //gives debug message only every n gameticks
 
+    private enum BoatState
+    {
+        sailing,
+        docked,
+    }
+    private BoatState boatState;
+
+    private InputAction sailToggle;
+
+    private bool sailEnabled = true;
+    private Vector2 sailVelocity = Vector2.zero;
+
     private Rigidbody2D rb;
     private WindManager windManager;
     private CurrentManager currentManager;
@@ -35,11 +48,14 @@ public class BoatController : MonoBehaviour
     private float boatHeading;
     private Vector2 boatWaterVector;
 
+    private float boatVelocityMagnitude;
     private int debugTimer = 0;
     private bool logDebug = false;
 
     private void Start()
     {
+        boatState = BoatState.sailing;
+
         windManager = FindFirstObjectByType<WindManager>();
         currentManager = FindFirstObjectByType<CurrentManager>();
         rb = GetComponent<Rigidbody2D>();
@@ -60,17 +76,37 @@ public class BoatController : MonoBehaviour
             debugTimer = 0;
         }
 
-        RotateSailToMatchWind();
-
         UpdateUI();
         logDebug = false;
+
+        if (boatState != BoatState.sailing)
+        {
+            return;
+        }
+
+        if (sailToggle.triggered)
+        {
+            sailEnabled = !sailEnabled;
+            sail.gameObject.SetActive(sailEnabled);
+        }
+        if (sailEnabled)
+        {
+            RotateSailToMatchWind();
+        }
     }
 
     private void FixedUpdate()
     {
         UpdateBoatData();
+        if (boatState == BoatState.sailing)
+        {
+            AddWind2Boat();
+        }
+        else
+        {
+            AddOar2Boat();
+        }
 
-        AddWind2Boat();
         AddCurrent2Boat();
         BoatRotation();
     }
@@ -79,6 +115,7 @@ public class BoatController : MonoBehaviour
     {
         boatHeading = (360-rb.transform.localEulerAngles.z)%360;
         boatSpeed = rb.linearVelocity.magnitude;
+        boatVelocityMagnitude = rb.linearVelocity.magnitude;
 
         Vector2 currentVector = currentManager.GetCurrentVector() * currentMaxSpeedMod;
         boatWaterVector = rb.linearVelocity - currentVector;
@@ -136,6 +173,12 @@ public class BoatController : MonoBehaviour
         if (boatWaterSpeed < maxSpeed)
             rb.AddRelativeForceY(speedMagnitude);
     }
+
+    private void AddOar2Boat()
+    {
+        if (boatWaterSpeed < maxSpeedUnderOars)
+            rb.AddRelativeForceY(oarAcceleration);
+    }
     
     private void AddCurrent2Boat()
     {
@@ -165,5 +208,27 @@ public class BoatController : MonoBehaviour
             rb.linearDamping = Mathf.Abs(rudderPosition) * maxRotationResistance + baseResistance;
         }
     }
-    
+
+    public void Dock(Transform dockTransform)
+    {
+        boatState = BoatState.docked;
+        sailEnabled = false;
+        sail.gameObject.SetActive(sailEnabled);
+
+        rb.linearVelocity = Vector3.zero;
+        rb.angularVelocity = 0;
+
+        transform.parent = dockTransform;
+        transform.localPosition = Vector3.zero;
+        transform.localRotation = Quaternion.identity;
+    }
+
+    public void UnDock()
+    {
+        boatState = BoatState.sailing;
+        sailEnabled = true;
+        sail.gameObject.SetActive(sailEnabled);
+
+        transform.parent = null;
+    }
 }

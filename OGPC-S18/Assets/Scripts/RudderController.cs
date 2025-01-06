@@ -14,7 +14,7 @@ public class RudderController : MonoBehaviour
     
     private void OnEnable()
     {
-        // Get the "Move" action from the Input Action Asset
+        // Get the "Rotation" action from the Input Action Asset
         var playerControls = inputActions.FindActionMap("Player");
         rotationAxis = playerControls.FindAction("Rotation");
 
