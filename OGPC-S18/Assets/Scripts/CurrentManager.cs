@@ -3,11 +3,11 @@ using TMPro;
 
 public class CurrentManager : MonoBehaviour
 {
+
     [Header("References")]
     [SerializeField] private TextMeshProUGUI currentBearingText;
     [SerializeField] private TextMeshProUGUI currentSpeedText;
 
-    [HideInInspector] public Vector2 deltaCurrentTick; //Change in current from previous tick to the next
     [SerializeField] private Transform currentIndicator;
 
     [Header("Starting Current Condition")]
@@ -28,18 +28,18 @@ public class CurrentManager : MonoBehaviour
     [SerializeField] private int debugTicksInterval; //gives debug message only every n gameticks
     private int debugTimer = 0;
 
+
     float[] magDeltas;
     float[] angDeltas;
 
     string magDebug;
     string angDebug;
 
-
     Vector2 currentVector;
 
     private void Start()
-    {
-        //Generation Variable/Array Stuff
+    {   
+
         if (stabilityLevels < 2) {stabilityLevels = 2;}
     
         magDeltas = new float[stabilityLevels];
@@ -55,18 +55,11 @@ public class CurrentManager : MonoBehaviour
 
         debugTimer = debugTicksInterval - 1;
 
-        currentVector = Polar2Vector(currentDirection,currentSpeed);
-    }
-
-    private Vector2 Polar2Vector(float angle, float magnitude)
-    {
-        return new Vector2(magnitude*Mathf.Sin(angle*Mathf.Deg2Rad),magnitude*Mathf.Cos(angle*Mathf.Deg2Rad));
+        currentVector = UsefulStuff.Polar2Vector(currentDirection,currentSpeed);
     }
 
     private void UpdateCurrent() 
     {
-
-
         magDeltas[0] = Random.Range(-RandomMagRange, RandomMagRange);
         angDeltas[0] = Random.Range(-RandomAngRange, RandomAngRange);
 
@@ -77,20 +70,18 @@ public class CurrentManager : MonoBehaviour
         }
 
         currentDirection = currentDirection + angDeltas[^1];
-        currentSpeed = currentSpeed + magDeltas[^1];
-        currentSpeed = Mathf.Clamp(currentSpeed,0,maxCurrentSpeed);
+        currentSpeed = Mathf.Clamp(currentSpeed + magDeltas[^1],0,maxCurrentSpeed);
 
-        currentIndicator.rotation = Quaternion.Euler(0, 0, 90 - currentDirection);
-
-        currentVector = Polar2Vector(currentDirection,currentSpeed);
-        //deltaCurrentTick = new Vector2(magDeltas[^1]*Mathf.Sin(angDeltas[^1]*Mathf.Deg2Rad),magDeltas[^1]*Mathf.Cos(angDeltas[^1]*Mathf.Deg2Rad))/updateInterval;
+        currentVector = UsefulStuff.Polar2Vector(currentDirection,currentSpeed);
     }
 
     private void UpdateUI()
     {
         currentSpeedText.text = $"Current speed: {currentSpeed.ToString("F1")}";
         currentBearingText.text = $"Current Bearing: {currentDirection.ToString("F1")}";
+        currentIndicator.rotation = Quaternion.Euler(0, 0, 90 - currentDirection);
     }
+
 
     int count = 0;
     private void Update()
@@ -114,6 +105,5 @@ public class CurrentManager : MonoBehaviour
     public Vector2 GetCurrentVector()
     {
         return currentVector;
-
     }
 }
