@@ -29,9 +29,9 @@ public class BoatController : MonoBehaviour
     private RudderController rudderController;
     private float relativeWindDirection;
     private float boatSpeed;
-    private float BoatWaterSpeed;
+    private float boatWaterSpeed;
     private float boatHeading;
-    private Vector2 BoatWaterVector;
+    private Vector2 boatWaterVector;
 
     private int debugTimer = 0;
     private bool logDebug = false;
@@ -44,14 +44,13 @@ public class BoatController : MonoBehaviour
         rudderController = GetComponent<RudderController>();
         rudderController.SetRudderMoveSpeed(rudderMoveSpeed);
         
-        rb.linearVelocity = rb.linearVelocity + UsefulStuff.Polar2Vector(currentManager.currentDirection,currentManager.currentSpeed);
+        rb.linearVelocity = rb.linearVelocity + UsefulStuff.Polar2Vector(currentManager.currentDirection, currentManager.currentSpeed);
 
         debugTimer = debugTicksInterval - 1;
     }
 
     private void Update()
     {
-        
         debugTimer++;
         if (debugTimer == debugTicksInterval) 
         {
@@ -59,17 +58,19 @@ public class BoatController : MonoBehaviour
             debugTimer = 0;
         }
 
-        UpdateBoatData();
-
         RotateSailToMatchWind();
+
+        UpdateUI();
+        logDebug = false;
+    }
+
+    private void FixedUpdate()
+    {
+        UpdateBoatData();
 
         AddWind2Boat();
         AddCurrent2Boat();
         BoatRotation();
-
-
-        UpdateUI();
-        logDebug = false;
     }
 
     private void UpdateBoatData()
@@ -78,14 +79,13 @@ public class BoatController : MonoBehaviour
         boatSpeed = rb.linearVelocity.magnitude;
 
         Vector2 currentVector = currentManager.GetCurrentVector();
-        BoatWaterVector = rb.linearVelocity - currentVector;
-        BoatWaterSpeed = BoatWaterVector.magnitude;
+        boatWaterVector = rb.linearVelocity - currentVector;
+        boatWaterSpeed = boatWaterVector.magnitude;
         if (logDebug)
         {
             Debug.Log($"Boats True Speed: {boatSpeed.ToString()}");
             Debug.Log("Boat Heading: " + boatHeading.ToString());
         }
-
     }
 
     private void RotateSailToMatchWind()
@@ -132,16 +132,15 @@ public class BoatController : MonoBehaviour
         float speedMagnitude = sailAngleSpeedMod * windManager.GetWindSpeed() * speedAccelerationMod;
 
         // Makes sure boat doesn't exceed maximum speed relative to current
-        if (BoatWaterSpeed < maxSpeed)
+        if (boatWaterSpeed < maxSpeed)
             rb.AddRelativeForceY(speedMagnitude);
     }
     
     private void AddCurrent2Boat()
     {
+        rb.AddForce(-boatWaterVector);
 
-        rb.AddForce(-BoatWaterVector);
-
-        if (logDebug) {Debug.Log("BoatWaterSpeed: " + BoatWaterVector.magnitude.ToString());}
+        if (logDebug) {Debug.Log("BoatWaterSpeed: " + boatWaterVector.magnitude.ToString());}
     }
 
     private void BoatRotation()
