@@ -14,6 +14,8 @@ public class BoatController : MonoBehaviour
     [SerializeField] private float maxRotationResistance;
     [SerializeField] private float baseResistance;
     [SerializeField] private float stallAngle;
+    [SerializeField] private float currentAccelerationMod;
+    [SerializeField] private float currentMaxSpeedMod;
 
     [Header("References")]
     [SerializeField] private Transform sail;
@@ -44,7 +46,7 @@ public class BoatController : MonoBehaviour
         rudderController = GetComponent<RudderController>();
         rudderController.SetRudderMoveSpeed(rudderMoveSpeed);
         
-        rb.linearVelocity = rb.linearVelocity + UsefulStuff.Polar2Vector(currentManager.currentDirection, currentManager.currentSpeed);
+        rb.linearVelocity = rb.linearVelocity + UsefulStuff.Polar2Vector(currentManager.currentDirection, currentManager.currentSpeed * currentMaxSpeedMod);
 
         debugTimer = debugTicksInterval - 1;
     }
@@ -78,7 +80,7 @@ public class BoatController : MonoBehaviour
         boatHeading = (360-rb.transform.localEulerAngles.z)%360;
         boatSpeed = rb.linearVelocity.magnitude;
 
-        Vector2 currentVector = currentManager.GetCurrentVector();
+        Vector2 currentVector = currentManager.GetCurrentVector() * currentMaxSpeedMod;
         boatWaterVector = rb.linearVelocity - currentVector;
         boatWaterSpeed = boatWaterVector.magnitude;
         if (logDebug)
@@ -112,7 +114,6 @@ public class BoatController : MonoBehaviour
 
     private void AddWind2Boat()
     {
-        
         float sailAngle = sail.transform.localEulerAngles.z;
         float sailAngleSpeedMod = Mathf.Cos(Mathf.Deg2Rad * sailAngle);
         
@@ -138,7 +139,7 @@ public class BoatController : MonoBehaviour
     
     private void AddCurrent2Boat()
     {
-        rb.AddForce(-boatWaterVector);
+        rb.AddForce(-boatWaterVector * currentAccelerationMod);
 
         if (logDebug) {Debug.Log("BoatWaterSpeed: " + boatWaterVector.magnitude.ToString());}
     }

@@ -1123,13 +1123,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxSpeed: 5
-  speedAccelerationMod: 0.2
+  speedAccelerationMod: 2
   maxRudderAngle: 30
   turningSpeed: 5
   rudderMoveSpeed: 10
   maxRotationResistance: 0.5
   baseResistance: 0.2
   stallAngle: 45
+  currentAccelerationMod: 3
+  currentMaxSpeedMod: 0.1
   sail: {fileID: 1263568185}
   boatHeadingText: {fileID: 1419846108}
   boatSpeedText: {fileID: 41876431}
