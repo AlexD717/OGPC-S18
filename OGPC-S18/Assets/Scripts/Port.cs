@@ -15,6 +15,8 @@ public class Port : MonoBehaviour
     [SerializeField] private InputActionAsset inputActions;
     private InputAction interact;
 
+    [SerializeField] private RectTransform worldCanvas;
+
     private GameObject player;
     private BoatController boatController;
 
@@ -30,6 +32,8 @@ public class Port : MonoBehaviour
         {
             playerDockPositions[i] = playerDockPositionsParent.GetChild(i).transform;
         }
+
+        worldCanvas.rotation = Quaternion.identity;
     }
 
     private void OnEnable()
