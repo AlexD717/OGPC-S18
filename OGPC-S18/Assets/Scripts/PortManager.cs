@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class PortManager : MonoBehaviour
@@ -5,6 +6,7 @@ public class PortManager : MonoBehaviour
     [SerializeField] private GameObject dockCanvas;
     private Transform dockPanel;
     private GameObject[] dockPanelMenus;
+    private TextMeshProUGUI dockedTextIndicator;
 
     private GameObject player;
     private BoatController boatController;
@@ -13,7 +15,9 @@ public class PortManager : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
         boatController = player.GetComponent<BoatController>();
-        
+
+        dockedTextIndicator = dockCanvas.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
+
         // Gets all the menus under dockPanel and puts them in the panelMenus array
         dockPanel = dockCanvas.transform.GetChild(0);
         dockPanelMenus = new GameObject[dockPanel.childCount];
@@ -46,9 +50,10 @@ public class PortManager : MonoBehaviour
         }
     }
 
-    public void PlayerDocked(Transform[] playerDockPositions)
+    public void PlayerDocked(Transform[] playerDockPositions, string portName)
     {
         dockCanvas.SetActive(true);
+        dockedTextIndicator.text = "Docked at " + portName;
         boatController.Dock(GetClosestDockPosition(playerDockPositions));
     }
 
@@ -59,6 +64,7 @@ public class PortManager : MonoBehaviour
         boatController.UnDock();
     }
 
+    // Returns transform of closest dock position from the player, giving possible player dock positions
     private Transform GetClosestDockPosition(Transform[] playerDockPositions)
     {
         float smallestDistance = Mathf.Infinity;
