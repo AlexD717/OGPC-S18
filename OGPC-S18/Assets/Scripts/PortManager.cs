@@ -59,6 +59,7 @@ public class PortManager : MonoBehaviour
         boatController.UnDock();
     }
 
+    // Returns transform of closest dock position from the player, giving possible player dock positions
     private Transform GetClosestDockPosition(Transform[] playerDockPositions)
     {
         float smallestDistance = Mathf.Infinity;
