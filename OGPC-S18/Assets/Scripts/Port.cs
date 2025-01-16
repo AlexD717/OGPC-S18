@@ -29,7 +29,7 @@ public class Port : MonoBehaviour
         playerDockPositions = new Transform[playerDockPositionsParent.childCount];
         for (int i = 0; i < playerDockPositionsParent.childCount; i++)
         {
-            playerDockPositions[i] = playerDockPositionsParent.GetChild(i).transform;
+            playerDockPositions[i] = playerDockPositionsParent.GetChild(i);
         }
 
         worldCanvas.rotation = Quaternion.identity;

@@ -2,7 +2,10 @@ using UnityEngine;
 
 public class PortManager : MonoBehaviour
 {
-    [SerializeField] private GameObject questCanvas;
+    [SerializeField] private GameObject dockCanvas;
+    private Transform dockPanel;
+    private GameObject[] dockPanelMenus;
+
     private GameObject player;
     private BoatController boatController;
 
@@ -10,19 +13,49 @@ public class PortManager : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
         boatController = player.GetComponent<BoatController>();
+        
+        // Gets all the menus under dockPanel and puts them in the panelMenus array
+        dockPanel = dockCanvas.transform.GetChild(0);
+        dockPanelMenus = new GameObject[dockPanel.childCount];
+        for (int i = 0; i < dockPanel.childCount; i++)
+        {
+            dockPanelMenus[i] = dockPanel.GetChild(i).gameObject;
+        }
+        /*
+         *  panelMenus[0] = Main Menu
+         *  paznelMenus[1] = Quests
+        */
+        SelectMenu(0); // Sets Main Menu as the active menu
 
-        questCanvas.SetActive(false);
+        dockCanvas.SetActive(false);
+    }
+
+    // Makes only one panel active
+    public void SelectMenu(int childMenuIndex) 
+    {
+        for (int i = 0; i < dockPanelMenus.Length; i++)
+        {
+            if (i == childMenuIndex)
+            {
+                dockPanelMenus[i].SetActive(true);
+            }
+            else
+            {
+                dockPanelMenus[i].SetActive(false);
+            }
+        }
     }
 
     public void PlayerDocked(Transform[] playerDockPositions)
     {
-        questCanvas.SetActive(true);
+        dockCanvas.SetActive(true);
         boatController.Dock(GetClosestDockPosition(playerDockPositions));
     }
 
     public void PlayerUndocked()
     {
-        questCanvas.SetActive(false);
+        SelectMenu(0);
+        dockCanvas.SetActive(false);
         boatController.UnDock();
     }
 
