@@ -84,7 +84,7 @@ MonoBehaviour:
   playerDockPositionsParent: {fileID: 383428477439939439}
   inputActions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   worldCanvas: {fileID: 8304038454675778215}
-  worldCanvasPosition: {x: -1.8, y: -11, z: 0}
+  questCanvasName: Quest Canvas
 --- !u!58 &7056585914427181172
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -293,7 +293,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -120}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 9, y: 5}
+  m_AnchoredPosition: {x: -8.3, y: 6.4}
   m_SizeDelta: {x: 1101, y: 309.0999}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &1585063069136859458
