@@ -1,8 +1,11 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Port : MonoBehaviour
 {
+    [SerializeField] private string portName;
+
     private bool playerWithinRange = false;
     private bool playerDocked = false;
 
@@ -16,6 +19,7 @@ public class Port : MonoBehaviour
     private InputAction interact;
 
     [SerializeField] private RectTransform worldCanvas;
+    private TextMeshProUGUI nameText;
 
     private PortManager portManager;
 
@@ -33,6 +37,8 @@ public class Port : MonoBehaviour
         }
 
         worldCanvas.rotation = Quaternion.identity;
+        nameText = worldCanvas.GetChild(0).GetComponent<TextMeshProUGUI>();
+        nameText.text = portName;
     }
 
     private void OnEnable()
@@ -69,9 +75,10 @@ public class Port : MonoBehaviour
 
     private void Dock()
     {
-        portManager.PlayerDocked(playerDockPositions);
+        portManager.PlayerDocked(playerDockPositions, nameText.text);
         playerDocked = true;
         rangeSprite.enabled = false;
+        nameText.enabled = false;
     }
 
     private void UnDock()
@@ -79,6 +86,7 @@ public class Port : MonoBehaviour
         portManager.PlayerUndocked();
         playerDocked = false;
         rangeSprite.enabled = true;
+        nameText.enabled = true;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
