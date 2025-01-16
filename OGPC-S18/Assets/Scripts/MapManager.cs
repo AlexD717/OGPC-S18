@@ -13,7 +13,7 @@ public class MapManager : MonoBehaviour
         Vector2 islandCoords;
         islandCoords = island.position;
         Debug.Log(islandCoords.x.ToString() + " " + islandCoords.y.ToString());
-        islandIcon.transform.position = islandCoords;
+        islandIcon.transform.localPosition = islandCoords;
         Debug.Log(islandIcon.position.x.ToString() + " " + islandIcon.position.y.ToString());
     }
 
