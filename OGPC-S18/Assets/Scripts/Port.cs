@@ -17,15 +17,14 @@ public class Port : MonoBehaviour
 
     [SerializeField] private RectTransform worldCanvas;
 
-    private GameObject player;
-    private BoatController boatController;
+    private PortManager portManager;
 
     private void Start()
     {
         rangeSprite = range.GetComponent<SpriteRenderer>();
         rangeSprite.enabled = false;
 
-        player = GameObject.FindGameObjectWithTag("Player");
+        portManager = FindFirstObjectByType<PortManager>();
 
         playerDockPositions = new Transform[playerDockPositionsParent.childCount];
         for (int i = 0; i < playerDockPositionsParent.childCount; i++)
@@ -57,36 +56,29 @@ public class Port : MonoBehaviour
             {
                 if (!playerDocked)
                 {
-                    boatController.Dock(GetClosestDockPosition());
-                    playerDocked = true;
-                    rangeSprite.enabled = false;
+                    Dock();
+
                 }
                 else
                 {
-                    boatController.UnDock();
-                    playerDocked = false;
-                    rangeSprite.enabled = true;
+                    UnDock();
                 }
             }
         }
     }
 
-    private Transform GetClosestDockPosition()
+    private void Dock()
     {
-        float smallestDistance = Mathf.Infinity;
-        Transform closestDock = null;
+        portManager.PlayerDocked(playerDockPositions);
+        playerDocked = true;
+        rangeSprite.enabled = false;
+    }
 
-        foreach (Transform dock in playerDockPositions)
-        {
-            float distanceBetween = Vector2.Distance(dock.position, player.transform.position);
-            if (distanceBetween < smallestDistance)
-            {
-                smallestDistance = distanceBetween;
-                closestDock = dock;
-            }
-        }
-
-        return closestDock;
+    private void UnDock()
+    {
+        portManager.PlayerUndocked();
+        playerDocked = false;
+        rangeSprite.enabled = true;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -96,7 +88,6 @@ public class Port : MonoBehaviour
             playerWithinRange = true;
 
             rangeSprite.enabled = true;
-            boatController = collision.GetComponent<BoatController>();
         } 
     }
 
