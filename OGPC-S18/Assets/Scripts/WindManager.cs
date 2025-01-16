@@ -68,7 +68,8 @@ public class WindManager : MonoBehaviour
         }
 
         windDirection = windDirection + angDeltas[^1];
-        if (windDirection < 0) {windDirection = (360 + windDirection)%360;}
+        if (windDirection < 0) {windDirection = (360 + windDirection);}
+        windDirection = windDirection%360;
         windSpeed = Mathf.Clamp(windSpeed + scalar*magDeltas[^1], 0, scalar*maxWindspeed);
     }
 
