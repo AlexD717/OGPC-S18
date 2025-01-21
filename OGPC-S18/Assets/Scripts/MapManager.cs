@@ -12,14 +12,17 @@ public class MapManager : MonoBehaviour
     void Start()
     {
         islands = GameObject.FindGameObjectsWithTag("Island");
+        islandIcons = new GameObject[islands.Length];
         scaleFactor = DetermineMapScaleFactor();
+
 
         Vector2 islandCoords;
         for (int i = 0; i < islands.Length; i++)
         {
             islandCoords = islands[i].transform.position;
             islandIcons[i] = Instantiate(islandIconReference, map.transform);
-            islandIcons[i].transform.position = scaleFactor * islandCoords;
+            islandIcons[i].transform.localPosition = scaleFactor * islandCoords;
+            
         }
         
 
