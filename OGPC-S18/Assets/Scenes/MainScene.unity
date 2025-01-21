@@ -1430,8 +1430,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   worldSize: {x: 100, y: 100}
-  map: {fileID: 0}
-  islandIconReference: {fileID: 0}
+  map: {fileID: 1180899225}
+  islandIconReference: {fileID: 1610398613}
 --- !u!1 &965439465
 GameObject:
   m_ObjectHideFlags: 0
