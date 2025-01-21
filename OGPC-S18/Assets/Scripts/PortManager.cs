@@ -10,11 +10,13 @@ public class PortManager : MonoBehaviour
 
     private GameObject player;
     private BoatController boatController;
+    private QuestManager questManager;
 
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         boatController = player.GetComponent<BoatController>();
+        questManager = GetComponent<QuestManager>();
 
         dockedTextIndicator = dockCanvas.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
 
@@ -55,6 +57,8 @@ public class PortManager : MonoBehaviour
         dockCanvas.SetActive(true);
         dockedTextIndicator.text = "Docked at " + portName;
         boatController.Dock(GetClosestDockPosition(playerDockPositions));
+
+        questManager.AddQuestsToMenu();
     }
 
     public void PlayerUndocked()
