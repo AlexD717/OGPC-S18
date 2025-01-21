@@ -1674,6 +1674,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8862feff7c7de754cbc84217bb305edc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  quests:
+  - {fileID: 11400000, guid: b94bb12de4daa184b8c4489f14078503, type: 2}
+  - {fileID: 11400000, guid: a61af1211f4ec3541817532f1f9998e4, type: 2}
+  - {fileID: 11400000, guid: 0c95dd1709436d7458367342b19544f4, type: 2}
+  - {fileID: 11400000, guid: f9253eb828c2904488a1d402160db62b, type: 2}
+  - {fileID: 11400000, guid: cf394fe016a4a494cb7f2e0aad3f23cb, type: 2}
+  questButtonPrefab: {fileID: 0}
 --- !u!1 &965439465
 GameObject:
   m_ObjectHideFlags: 0

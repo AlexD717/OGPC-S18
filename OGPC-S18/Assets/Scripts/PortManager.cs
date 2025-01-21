@@ -58,7 +58,7 @@ public class PortManager : MonoBehaviour
         dockedTextIndicator.text = "Docked at " + portName;
         boatController.Dock(GetClosestDockPosition(playerDockPositions));
 
-        questManager.AddQuestsToMenu();
+        questManager.AddQuestsToMenu(dockPanelMenus[1].transform, portName);
     }
 
     public void PlayerUndocked()

@@ -10,11 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: db41edd8047daf8438a05db5796d973d, type: 3}
-  m_Name: RandomTestQuest
+  m_Name: RandomTestQuest 3
   m_EditorClassIdentifier: 
-  questName: 1
-  questType: 1
+  questName: 4
+  questType: 2
   questStatus: 0
   viablePorts:
   - Something
-  - name
