@@ -2,19 +2,41 @@ using UnityEngine;
 
 public class MapManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [SerializeField] private Vector2 worldSize;
+    [SerializeField] private Canvas map;
+    [SerializeField] private GameObject islandIconReference;
     
-    //Not production ready, just figuring out how this works
-
-    [SerializeField] private Transform island;
-    [SerializeField] private RectTransform islandIcon;
+    GameObject[] islands;
+    GameObject[] islandIcons;
+    float scaleFactor;
     void Start()
     {
+        islands = GameObject.FindGameObjectsWithTag("Island");
+        scaleFactor = DetermineMapScaleFactor();
+
         Vector2 islandCoords;
-        islandCoords = island.position;
-        Debug.Log(islandCoords.x.ToString() + " " + islandCoords.y.ToString());
-        islandIcon.transform.localPosition = islandCoords;
-        Debug.Log(islandIcon.position.x.ToString() + " " + islandIcon.position.y.ToString());
+        for (int i = 0; i < islands.Length; i++)
+        {
+            islandCoords = islands[i].transform.position;
+            islandIcons[i] = Instantiate(islandIconReference, map.transform);
+            islandIcons[i].transform.position = scaleFactor * islandCoords;
+        }
+        
+
+    }
+
+    float DetermineMapScaleFactor()
+    {
+        float xFactor;
+        float yFactor;
+        float realFactor;
+
+        Vector2 mapSize = new Vector2(2*454,2*230);
+        xFactor = worldSize.x/mapSize.x;
+        yFactor = worldSize.y/mapSize.y;
+        realFactor = 1 / Mathf.Max(xFactor,yFactor);
+
+        return realFactor;
     }
 
     // Update is called once per frame
