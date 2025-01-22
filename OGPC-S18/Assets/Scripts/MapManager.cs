@@ -6,13 +6,18 @@ public class MapManager : MonoBehaviour
     [SerializeField] private Vector2 worldSize;
     [SerializeField] private GameObject map;
     [SerializeField] private GameObject islandIconReference;
+    [SerializeField] private GameObject portIconReference;
+
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject playerIcon;
     [SerializeField] private InputActionAsset inputs;
     private InputAction mapToggle;
     private bool mapOn;
     GameObject[] islands;
+    GameObject[] ports;
+
     GameObject[] islandIcons;
+    GameObject[] portIcons;
     float worldToMapScalar;
 
     void OnEnable()
@@ -23,7 +28,6 @@ public class MapManager : MonoBehaviour
         mapOn = false;
         mapToggle = inputs.FindActionMap("Player").FindAction("MapToggle");
         mapToggle.Enable();
-
     }
 
     void OnDisable()
@@ -33,6 +37,7 @@ public class MapManager : MonoBehaviour
     void Start()
     {
         AddIslandsToMap();
+        AddPortsToMap();
     }
 
     void UpdatePlayerOnMap()
@@ -58,6 +63,25 @@ public class MapManager : MonoBehaviour
             islandSprite = islands[i].GetComponent<SpriteRenderer>();
             iconImage.sprite = islandSprite.sprite;
             iconImage.color = islandSprite.color;
+        }
+    }
+    void AddPortsToMap()
+    {
+        ports = GameObject.FindGameObjectsWithTag("Port");
+        portIcons = new GameObject[ports.Length];
+        Image iconImage;
+        Vector2 portCoords;
+        Quaternion portRotation;
+        
+        for (int i = 0; i < ports.Length; i++)
+        {
+            portCoords = ports[i].transform.position;
+            portRotation = ports[i].transform.localRotation;
+            portIcons[i] = Instantiate(portIconReference, map.transform);
+            portIcons[i].transform.localPosition = worldToMapScalar * portCoords;
+            portIcons[i].transform.localRotation = portRotation;
+            Debug.Log(worldToMapScalar.ToString());
+            iconImage = portIcons[i].GetComponent<Image>();
         }
     }
 
