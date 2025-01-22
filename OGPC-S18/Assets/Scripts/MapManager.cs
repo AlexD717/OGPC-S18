@@ -16,11 +16,11 @@ public class MapManager : MonoBehaviour
     float worldtoMapScalar;
 
     void OnEnable()
-    {
+    { 
+        worldtoMapScalar = DetermineMapScaleFactor();
         mapOn = false;
         mapToggle = inputs.FindActionMap("Player").FindAction("MapToggle");
         mapToggle.Enable();
-        map.SetActive(false);
     }
 
     void OnDisable()
@@ -41,7 +41,6 @@ public class MapManager : MonoBehaviour
     {
         islands = GameObject.FindGameObjectsWithTag("Island");
         islandIcons = new GameObject[islands.Length];
-        worldtoMapScalar = DetermineMapScaleFactor();
         Image iconImage;
         SpriteRenderer islandSprite;
 
@@ -61,21 +60,23 @@ public class MapManager : MonoBehaviour
 
     float DetermineMapScaleFactor()
     {
+        map.SetActive(true); // allows reference of its components
         float xFactor;
         float yFactor;
         float realFactor;
         RectTransform mapRect = map.GetComponent<RectTransform>();
 
         Vector2 mapSize = new Vector2(mapRect.rect.width,mapRect.rect.height);
+        Debug.Log(mapRect.rect.width.ToString() + " " + mapRect.rect.width.ToString());
         xFactor = worldSize.x/mapSize.x;
         yFactor = worldSize.y/mapSize.y;
         Debug.Log(worldSize.x.ToString() + " " + worldSize.x.ToString());
         Debug.Log(mapSize.x.ToString() + " " + mapSize.x.ToString());
         realFactor = 1 / Mathf.Max(xFactor,yFactor);
 
+        map.SetActive(false);
         return realFactor;
     }
-
     void Update()
     {
         if (mapToggle.triggered)
