@@ -13,14 +13,17 @@ public class MapManager : MonoBehaviour
     private bool mapOn;
     GameObject[] islands;
     GameObject[] islandIcons;
-    float worldtoMapScalar;
+    float worldToMapScalar;
 
     void OnEnable()
     { 
-        worldtoMapScalar = DetermineMapScaleFactor();
+        map.SetActive(true); // allows reference of its components
+        worldToMapScalar = DetermineMapScaleFactor();
+        map.SetActive(false);
         mapOn = false;
         mapToggle = inputs.FindActionMap("Player").FindAction("MapToggle");
         mapToggle.Enable();
+
     }
 
     void OnDisable()
@@ -34,7 +37,7 @@ public class MapManager : MonoBehaviour
 
     void UpdatePlayerOnMap()
     {
-        playerIcon.transform.localPosition = worldtoMapScalar * player.transform.position;
+        playerIcon.transform.localPosition = worldToMapScalar * player.transform.position;
         playerIcon.transform.localRotation = player.transform.rotation;
     }
     void AddIslandsToMap()
@@ -49,8 +52,8 @@ public class MapManager : MonoBehaviour
         {
             islandCoords = islands[i].transform.position;
             islandIcons[i] = Instantiate(islandIconReference, map.transform);
-            islandIcons[i].transform.localPosition = worldtoMapScalar * islandCoords;
-            Debug.Log(worldtoMapScalar.ToString());
+            islandIcons[i].transform.localPosition = worldToMapScalar * islandCoords;
+            Debug.Log(worldToMapScalar.ToString());
             iconImage = islandIcons[i].GetComponent<Image>();
             islandSprite = islands[i].GetComponent<SpriteRenderer>();
             iconImage.sprite = islandSprite.sprite;
@@ -60,21 +63,16 @@ public class MapManager : MonoBehaviour
 
     float DetermineMapScaleFactor()
     {
-        map.SetActive(true); // allows reference of its components
         float xFactor;
         float yFactor;
         float realFactor;
         RectTransform mapRect = map.GetComponent<RectTransform>();
 
         Vector2 mapSize = new Vector2(mapRect.rect.width,mapRect.rect.height);
-        Debug.Log(mapRect.rect.width.ToString() + " " + mapRect.rect.width.ToString());
         xFactor = worldSize.x/mapSize.x;
         yFactor = worldSize.y/mapSize.y;
-        Debug.Log(worldSize.x.ToString() + " " + worldSize.x.ToString());
-        Debug.Log(mapSize.x.ToString() + " " + mapSize.x.ToString());
         realFactor = 1 / Mathf.Max(xFactor,yFactor);
 
-        map.SetActive(false);
         return realFactor;
     }
     void Update()
