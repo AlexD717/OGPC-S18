@@ -1,37 +1,61 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 public class MapManager : MonoBehaviour
 {
     [SerializeField] private Vector2 worldSize;
     [SerializeField] private GameObject map;
     [SerializeField] private GameObject islandIconReference;
-
+    [SerializeField] private GameObject player;
+    [SerializeField] private GameObject playerIcon;
     [SerializeField] private InputActionAsset inputs;
-    
     private InputAction mapToggle;
     private bool mapOn;
     GameObject[] islands;
     GameObject[] islandIcons;
-    float scaleFactor;
-    void Start()
+    float worldtoMapScalar;
+
+    void OnEnable()
     {
+        mapOn = false;
         mapToggle = inputs.FindActionMap("Player").FindAction("MapToggle");
         mapToggle.Enable();
+        map.SetActive(false);
+    }
 
+    void OnDisable()
+    {
+        mapToggle.Disable();
+    }
+    void Start()
+    {
+        AddIslandsToMap();
+    }
+
+    void UpdatePlayerOnMap()
+    {
+        playerIcon.transform.localPosition = worldtoMapScalar * player.transform.position;
+        playerIcon.transform.localRotation = player.transform.rotation;
+    }
+    void AddIslandsToMap()
+    {
         islands = GameObject.FindGameObjectsWithTag("Island");
         islandIcons = new GameObject[islands.Length];
-        scaleFactor = DetermineMapScaleFactor();
+        worldtoMapScalar = DetermineMapScaleFactor();
+        Image iconImage;
+        SpriteRenderer islandSprite;
 
         Vector2 islandCoords;
         for (int i = 0; i < islands.Length; i++)
         {
             islandCoords = islands[i].transform.position;
             islandIcons[i] = Instantiate(islandIconReference, map.transform);
-            islandIcons[i].transform.localPosition = scaleFactor * islandCoords;
-            
+            islandIcons[i].transform.localPosition = worldtoMapScalar * islandCoords;
+            iconImage = islandIcons[i].GetComponent<Image>();
+            islandSprite = islands[i].GetComponent<SpriteRenderer>();
+            iconImage.sprite = islandSprite.sprite;
+            iconImage.color = islandSprite.color;
         }
-        
-
     }
 
     float DetermineMapScaleFactor()
@@ -49,22 +73,16 @@ public class MapManager : MonoBehaviour
         return realFactor;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (mapToggle.triggered)
         {
-            if (mapOn)
-            {
-                mapOn = false;
-                mapToggle.Disable();
-            }
-            else
-            {
-                mapOn = true;
-                mapToggle.Enable();
-            }
+            mapOn = !mapOn;
             map.SetActive(mapOn);
+        }
+        if (mapOn)
+        {
+            UpdatePlayerOnMap();
         }
     }
 }
