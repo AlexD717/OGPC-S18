@@ -51,6 +51,7 @@ public class MapManager : MonoBehaviour
             islandCoords = islands[i].transform.position;
             islandIcons[i] = Instantiate(islandIconReference, map.transform);
             islandIcons[i].transform.localPosition = worldtoMapScalar * islandCoords;
+            Debug.Log(worldtoMapScalar.ToString());
             iconImage = islandIcons[i].GetComponent<Image>();
             islandSprite = islands[i].GetComponent<SpriteRenderer>();
             iconImage.sprite = islandSprite.sprite;
@@ -68,6 +69,8 @@ public class MapManager : MonoBehaviour
         Vector2 mapSize = new Vector2(mapRect.rect.width,mapRect.rect.height);
         xFactor = worldSize.x/mapSize.x;
         yFactor = worldSize.y/mapSize.y;
+        Debug.Log(worldSize.x.ToString() + " " + worldSize.x.ToString());
+        Debug.Log(mapSize.x.ToString() + " " + mapSize.x.ToString());
         realFactor = 1 / Mathf.Max(xFactor,yFactor);
 
         return realFactor;
