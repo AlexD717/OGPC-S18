@@ -17,7 +17,6 @@ public class QuestManager : MonoBehaviour
     }
 
     [SerializeField] private Quest[] quests;
-    private Quest[] randomQuests;
     [SerializeField] private GameObject questButtonPrefab;
 
     public void AddQuestsToMenu(Transform questMenu, string portName)
@@ -26,11 +25,14 @@ public class QuestManager : MonoBehaviour
         // Up to 4 quests can be added, one must be reserved for story quests
         Transform questLocation = questMenu.GetChild(2);
 
+        // Add story quests
+
+        // Add faction quests
 
         // Add random quests
         for (int i = 0; i < Mathf.Clamp(4 - questLocation.childCount, 0, 3); i++)
         {
-            Quest[] randomViableQuest = GetViableQuests(portName);
+            Quest[] randomViableQuest = GetViableQuests(portName, QuestType.random);
             foreach (Quest viableQuest in randomViableQuest)
             {
                 Debug.Log("Viable Quest Found: " + viableQuest.questName.ToString());
@@ -38,13 +40,13 @@ public class QuestManager : MonoBehaviour
         }
     }
 
-    private Quest[] GetViableQuests(string portName)
+    private Quest[] GetViableQuests(string portName, QuestType questTypeWanted)
     {
         List<Quest> viableQuestList = new List<Quest>();
         foreach (Quest quest in quests)
         {
             bool viableQuest = false;
-            if (quest.questType == QuestType.random)
+            if (quest.questType == questTypeWanted)
             {
                 foreach (string validLocation in quest.viablePorts)
                 {
