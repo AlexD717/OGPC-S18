@@ -24,10 +24,19 @@ public class CurrentManager : MonoBehaviour
     [SerializeField] private float stepMultiple; //Multiplier for the step, controlling how much each step increases
     [SerializeField] private int updateInterval; // Updates values every "this many frames"
 
+    [Header("Debug Settings")]
+    [SerializeField] private int debugTicksInterval; //gives debug message only every n gameticks
+    private int debugTimer = 0;
+
+
     float[] magDeltas;
     float[] angDeltas;
 
+    string magDebug;
+    string angDebug;
+
     Vector2 currentVector;
+
     private void Start()
     {   
 
@@ -43,6 +52,9 @@ public class CurrentManager : MonoBehaviour
             magDeltas[i] = 0f;
             angDeltas[i] = 0f;
         }
+
+        debugTimer = debugTicksInterval - 1;
+
         currentVector = UsefulStuff.Polar2Vector(currentDirection,currentSpeed);
     }
 
@@ -80,6 +92,13 @@ public class CurrentManager : MonoBehaviour
             count = 0;
             UpdateCurrent();
             UpdateUI();
+        }
+        debugTimer++;
+        if (debugTimer == debugTicksInterval) 
+        {
+            debugTimer = 0;
+            Debug.Log($"The current's direction is {currentDirection},  its speed is {currentSpeed}. Last Delta: Ang: {angDeltas[^1].ToString()}, Mag: {magDeltas[^1].ToString()}");
+            //Debug.Log($"magDeltas: [{string.Join(", ", magDeltas)}] angDeltas: [{string.Join(", ", angDeltas)}]");       
         }
     }
 
