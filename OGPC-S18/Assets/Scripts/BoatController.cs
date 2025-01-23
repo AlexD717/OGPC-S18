@@ -1,6 +1,6 @@
-using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class BoatController : MonoBehaviour
 {
