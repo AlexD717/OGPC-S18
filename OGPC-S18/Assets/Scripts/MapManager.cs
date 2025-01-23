@@ -50,19 +50,35 @@ public class MapManager : MonoBehaviour
         islands = GameObject.FindGameObjectsWithTag("Island");
         islandIcons = new GameObject[islands.Length];
         Image iconImage;
+        RectTransform islandRect;
         SpriteRenderer islandSprite;
+        Vector3 islandSize;
+        Quaternion islandRotation;
+
+        float islandScaleFactor;
+        float hexagaonYSquishFactor = 34.6875f / 40f;
+
+        islandSize = islands[0].GetComponent<PolygonCollider2D>().bounds.size;
+        islandScaleFactor = (islandSize.x / worldSize.x) * map.GetComponent<RectTransform>().rect.width / 100;
 
         Vector2 islandCoords;
         for (int i = 0; i < islands.Length; i++)
         {
             islandCoords = islands[i].transform.position;
+            islandRotation = islands[i].transform.rotation;
             islandIcons[i] = Instantiate(islandIconReference, map.transform);
-            islandIcons[i].transform.localPosition = worldToMapScalar * islandCoords;
-            Debug.Log(worldToMapScalar.ToString());
+
             iconImage = islandIcons[i].GetComponent<Image>();
             islandSprite = islands[i].GetComponent<SpriteRenderer>();
             iconImage.sprite = islandSprite.sprite;
             iconImage.color = islandSprite.color;
+            islandRect = islandIcons[i].GetComponent<RectTransform>();
+            islandSize = islands[i].GetComponent<PolygonCollider2D>().bounds.size;
+
+            islandIcons[i].transform.localPosition = worldToMapScalar * islandCoords;
+            islandIcons[i].transform.localRotation = islandRotation;
+            islandRect.localScale = new Vector3(islandRect.localScale.x * islandScaleFactor,islandRect.localScale.y * islandScaleFactor * hexagaonYSquishFactor, 1f);
+            Debug.Log("Collidor bounds" + islandSize.x.ToString() + " " + islandSize.y.ToString() + " " + islandSize.z.ToString());
         }
     }
     void AddPortsToMap()
@@ -76,7 +92,7 @@ public class MapManager : MonoBehaviour
         for (int i = 0; i < ports.Length; i++)
         {
             portCoords = ports[i].transform.position;
-            portRotation = ports[i].transform.localRotation;
+            portRotation = ports[i].transform.rotation;
             portIcons[i] = Instantiate(portIconReference, map.transform);
             portIcons[i].transform.localPosition = worldToMapScalar * portCoords;
             portIcons[i].transform.localRotation = portRotation;
@@ -105,6 +121,14 @@ public class MapManager : MonoBehaviour
         {
             mapOn = !mapOn;
             map.SetActive(mapOn);
+            if (mapOn)
+            {
+                Time.timeScale = 0f;
+            }
+            else
+            {
+                Time.timeScale = 1f;
+            }
         }
         if (mapOn)
         {

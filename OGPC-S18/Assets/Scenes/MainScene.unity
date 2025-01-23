@@ -509,6 +509,18 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
+    - target: {fileID: 2311373708324427341, guid: 7cacb9884504f5540b6a128f72ad7598, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2311373708324427341, guid: 7cacb9884504f5540b6a128f72ad7598, type: 3}
+      propertyPath: m_Color.g
+      value: 0.38431376
+      objectReference: {fileID: 0}
+    - target: {fileID: 2311373708324427341, guid: 7cacb9884504f5540b6a128f72ad7598, type: 3}
+      propertyPath: m_Color.r
+      value: 0.6313726
+      objectReference: {fileID: 0}
     - target: {fileID: 2533157145034090695, guid: 7cacb9884504f5540b6a128f72ad7598, type: 3}
       propertyPath: m_Name
       value: PortIcon
@@ -521,6 +533,11 @@ PrefabInstance:
 --- !u!224 &251664371 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1651921698127400653, guid: 7cacb9884504f5540b6a128f72ad7598, type: 3}
+  m_PrefabInstance: {fileID: 251664370}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &254705191 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2533157145034090695, guid: 7cacb9884504f5540b6a128f72ad7598, type: 3}
   m_PrefabInstance: {fileID: 251664370}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &448357336
@@ -1413,6 +1430,11 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &700359717 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2533157145034090695, guid: 7cacb9884504f5540b6a128f72ad7598, type: 3}
+  m_PrefabInstance: {fileID: 3294039871188412793}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &703202723
 GameObject:
   m_ObjectHideFlags: 0
@@ -1763,7 +1785,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   worldSize: {x: 100, y: 100}
   map: {fileID: 1180899222}
-  islandIconReference: {fileID: 2533157145034090695, guid: 7cacb9884504f5540b6a128f72ad7598, type: 3}
+  islandIconReference: {fileID: 700359717}
+  portIconReference: {fileID: 254705191}
   player: {fileID: 703202723}
   playerIcon: {fileID: 1757790720}
   inputs: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
