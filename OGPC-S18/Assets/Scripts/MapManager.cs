@@ -77,8 +77,8 @@ public class MapManager : MonoBehaviour
 
             islandIcons[i].transform.localPosition = worldToMapScalar * islandCoords;
             islandIcons[i].transform.localRotation = islandRotation;
-            islandRect.localScale = new Vector3(islandRect.localScale.x * islandScaleFactor,islandRect.localScale.y * islandScaleFactor * hexagaonYSquishFactor, 1f);
-            Debug.Log("Collidor bounds" + islandSize.x.ToString() + " " + islandSize.y.ToString() + " " + islandSize.z.ToString());
+            islandRect.localScale = 1.4f * new Vector3(islandRect.localScale.x * islandScaleFactor,islandRect.localScale.y * islandScaleFactor * hexagaonYSquishFactor, 1f);
+            Debug.Log("Collider bounds" + islandSize.x.ToString() + " " + islandSize.y.ToString() + " " + islandSize.z.ToString());
         }
     }
     void AddPortsToMap()
@@ -88,7 +88,7 @@ public class MapManager : MonoBehaviour
         Image iconImage;
         Vector2 portCoords;
         Quaternion portRotation;
-        
+
         for (int i = 0; i < ports.Length; i++)
         {
             portCoords = ports[i].transform.position;
@@ -96,7 +96,6 @@ public class MapManager : MonoBehaviour
             portIcons[i] = Instantiate(portIconReference, map.transform);
             portIcons[i].transform.localPosition = worldToMapScalar * portCoords;
             portIcons[i].transform.localRotation = portRotation;
-            Debug.Log(worldToMapScalar.ToString());
             iconImage = portIcons[i].GetComponent<Image>();
         }
     }
