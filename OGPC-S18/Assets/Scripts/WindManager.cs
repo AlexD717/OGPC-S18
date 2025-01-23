@@ -26,16 +26,9 @@ public class WindManager : MonoBehaviour
     [SerializeField] private float scalar; //Multiplier for the magnitude to help adjust strength
     [SerializeField] private int updateInterval; // Updates values every "this many frames"
 
-    [Header("Debug Settings")]
-    [SerializeField] private int debugTicksInterval; //gives debug message only every n gameticks
-    private int debugTimer = 0;
-
 
     float[] magDeltas;
     float[] angDeltas;
-
-    string magDebug;
-    string angDebug;
 
 
     private void Start()
@@ -53,7 +46,6 @@ public class WindManager : MonoBehaviour
             magDeltas[i] = 0f;
             angDeltas[i] = 0f;
         }
-        debugTimer = debugTicksInterval - 1;
     }
 
     private void UpdateWind() 
@@ -68,7 +60,8 @@ public class WindManager : MonoBehaviour
         }
 
         windDirection = windDirection + angDeltas[^1];
-        if (windDirection < 0) {windDirection = (360 + windDirection)%360;}
+        if (windDirection < 0) {windDirection = (360 + windDirection);}
+        windDirection = windDirection%360;
         windSpeed = Mathf.Clamp(windSpeed + scalar*magDeltas[^1], 0, scalar*maxWindspeed);
     }
 
@@ -88,13 +81,6 @@ public class WindManager : MonoBehaviour
             count = 0;
             UpdateWind();
             UpdateUI();
-        }
-        debugTimer++;
-        if (debugTimer == debugTicksInterval) 
-        {
-            debugTimer = 0;
-            Debug.Log($"The wind direction is {windDirection}, and the wind speed is {windSpeed}");
-            //Debug.Log($"magDeltas: [{string.Join(", ", magDeltas)}] angDeltas: [{string.Join(", ", angDeltas)}]");       
         }
     }
 
