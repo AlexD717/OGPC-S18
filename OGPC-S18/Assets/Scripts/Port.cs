@@ -1,44 +1,26 @@
-using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Port : MonoBehaviour
 {
-    [SerializeField] private string portName;
-
     private bool playerWithinRange = false;
     private bool playerDocked = false;
 
     [SerializeField] private GameObject range;
     private SpriteRenderer rangeSprite;
 
-    [SerializeField] private Transform playerDockPositionsParent;
-    private Transform[] playerDockPositions;
+    [SerializeField] private Transform playerDockPosition;
 
     [SerializeField] private InputActionAsset inputActions;
     private InputAction interact;
 
-    [SerializeField] private RectTransform worldCanvas;
-    private TextMeshProUGUI nameText;
-
-    private PortManager portManager;
+    private BoatController boatController;
 
     private void Start()
     {
         rangeSprite = range.GetComponent<SpriteRenderer>();
         rangeSprite.enabled = false;
-
-        portManager = FindFirstObjectByType<PortManager>();
-
-        playerDockPositions = new Transform[playerDockPositionsParent.childCount];
-        for (int i = 0; i < playerDockPositionsParent.childCount; i++)
-        {
-            playerDockPositions[i] = playerDockPositionsParent.GetChild(i);
-        }
-
-        worldCanvas.rotation = Quaternion.identity;
-        nameText = worldCanvas.GetChild(0).GetComponent<TextMeshProUGUI>();
-        nameText.text = portName;
     }
 
     private void OnEnable()
@@ -62,31 +44,18 @@ public class Port : MonoBehaviour
             {
                 if (!playerDocked)
                 {
-                    Dock();
-
+                    boatController.Dock(playerDockPosition);
+                    playerDocked = true;
+                    rangeSprite.enabled = false;
                 }
                 else
                 {
-                    UnDock();
+                    boatController.UnDock();
+                    playerDocked = false;
+                    rangeSprite.enabled = true;
                 }
             }
         }
-    }
-
-    private void Dock()
-    {
-        portManager.PlayerDocked(playerDockPositions, nameText.text);
-        playerDocked = true;
-        rangeSprite.enabled = false;
-        nameText.enabled = false;
-    }
-
-    private void UnDock()
-    {
-        portManager.PlayerUndocked();
-        playerDocked = false;
-        rangeSprite.enabled = true;
-        nameText.enabled = true;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -96,6 +65,7 @@ public class Port : MonoBehaviour
             playerWithinRange = true;
 
             rangeSprite.enabled = true;
+            boatController = collision.GetComponent<BoatController>();
         } 
     }
 
