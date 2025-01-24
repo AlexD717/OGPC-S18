@@ -3,6 +3,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Quest", menuName = "Scriptable Objects/Quest")]
 public class Quest : ScriptableObject
 {
+    // TODO - Add custom inspector
+
     public string questName;
 
     public QuestManager.QuestType questType;

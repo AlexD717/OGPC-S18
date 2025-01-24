@@ -17,7 +17,13 @@ public class QuestManager : MonoBehaviour
     }
 
     [SerializeField] private Quest[] quests;
+    private List<Quest> randomQuests;
     [SerializeField] private GameObject questButtonPrefab;
+
+    private void Start()
+    {
+        randomQuests = new List<Quest>();
+    }
 
     public void AddQuestsToMenu(Transform questMenu, string portName)
     {
@@ -32,11 +38,9 @@ public class QuestManager : MonoBehaviour
         // Add random quests
         for (int i = 0; i < Mathf.Clamp(4 - questLocation.childCount, 0, 3); i++)
         {
-            Quest[] randomViableQuest = GetViableQuests(portName, QuestType.random);
-            foreach (Quest viableQuest in randomViableQuest)
-            {
-                Debug.Log("Viable Quest Found: " + viableQuest.questName.ToString());
-            }
+            Quest randomViableQuest = GenerateRandomQuest();
+            GameObject questButton = Instantiate(questButtonPrefab, questLocation);
+            questButton.transform.GetChild(0).GetComponent<TMPro.TextMeshProUGUI>().text = randomViableQuest.questName;
         }
     }
 
@@ -64,5 +68,18 @@ public class QuestManager : MonoBehaviour
         }
 
         return viableQuestList.ToArray();
+    }
+
+    private Quest GenerateRandomQuest()
+    {
+        // Creates a new quest
+        Quest randomQuest = new Quest();
+
+        // Assigns random values to the quest
+        randomQuest.questName = "Quest Name";
+        randomQuest.questType = QuestType.random;
+        randomQuest.questStatus = QuestStatus.notStarted;
+
+        return randomQuest;
     }
 }
