@@ -1676,7 +1676,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   quests:
   - {fileID: 11400000, guid: b94bb12de4daa184b8c4489f14078503, type: 2}
-  questButtonPrefab: {fileID: 2753785917654110327, guid: 856c009ae0dfee14ab6f8a6ca9f53d85, type: 3}
+  questButtonPrefab: {fileID: 2753785917654110327, guid: 3c40f35e0fe03384299b88e8b889fde3, type: 3}
 --- !u!1 &965439465
 GameObject:
   m_ObjectHideFlags: 0
@@ -3022,7 +3022,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1672924469
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3639,6 +3639,10 @@ PrefabInstance:
     - target: {fileID: 2753785917654110327, guid: 856c009ae0dfee14ab6f8a6ca9f53d85, type: 3}
       propertyPath: m_Name
       value: DockButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 5888017620732606628, guid: 856c009ae0dfee14ab6f8a6ca9f53d85, type: 3}
+      propertyPath: m_text
+      value: Back
       objectReference: {fileID: 0}
     - target: {fileID: 6591693311353405073, guid: 856c009ae0dfee14ab6f8a6ca9f53d85, type: 3}
       propertyPath: m_Pivot.x
