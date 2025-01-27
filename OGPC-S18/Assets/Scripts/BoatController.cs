@@ -1,6 +1,6 @@
-using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class BoatController : MonoBehaviour
 {
@@ -39,7 +39,7 @@ public class BoatController : MonoBehaviour
     private bool sailEnabled = true;
     private Vector2 sailVelocity = Vector2.zero;
 
-    private Rigidbody2D boat;
+    private Rigidbody2D rb;
     private WindManager windManager;
     private CurrentManager currentManager;
     private RudderController rudderController;
@@ -72,11 +72,11 @@ public class BoatController : MonoBehaviour
 
         windManager = FindFirstObjectByType<WindManager>();
         currentManager = FindFirstObjectByType<CurrentManager>();
-        boat = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
         rudderController = GetComponent<RudderController>();
         rudderController.SetRudderMoveSpeed(rudderMoveSpeed);
         
-        boat.linearVelocity = boat.linearVelocity + UsefulStuff.Polar2Vector(currentManager.currentDirection, currentManager.currentSpeed * currentMaxSpeedMod);
+        rb.linearVelocity = rb.linearVelocity + UsefulStuff.Polar2Vector(currentManager.currentDirection, currentManager.currentSpeed * currentMaxSpeedMod);
 
         debugTimer = debugTicksInterval - 1;
     }
@@ -129,19 +129,17 @@ public class BoatController : MonoBehaviour
 
     private void UpdateBoatData()
     {
-        boatHeading = (360-boat.transform.localEulerAngles.z)%360;
-        boatSpeed = boat.linearVelocity.magnitude;
-        boatVelocityMagnitude = boat.linearVelocity.magnitude;
+        boatHeading = (360-rb.transform.localEulerAngles.z)%360;
+        boatSpeed = rb.linearVelocity.magnitude;
+        boatVelocityMagnitude = rb.linearVelocity.magnitude;
 
         Vector2 currentVector = currentManager.GetCurrentVector() * currentMaxSpeedMod;
-        boatWaterVector = boat.linearVelocity - currentVector;
+        boatWaterVector = rb.linearVelocity - currentVector;
         boatWaterSpeed = boatWaterVector.magnitude;
-        
         if (logDebug)
         {
             Debug.Log($"Boats True Speed: {boatSpeed.ToString()}");
             Debug.Log("Boat Heading: " + boatHeading.ToString());
-            Debug.Log("Boat Position: " + boat.transform.position.ToString());
         }
     }
 
@@ -189,18 +187,18 @@ public class BoatController : MonoBehaviour
 
         // Makes sure boat doesn't exceed maximum speed relative to current
         if (boatWaterSpeed < maxSpeed)
-            boat.AddRelativeForceY(speedMagnitude);
+            rb.AddRelativeForceY(speedMagnitude);
     }
 
     private void AddOar2Boat()
     {
         if (boatWaterSpeed < maxSpeedUnderOars)
-            boat.AddRelativeForceY(oarAcceleration);
+            rb.AddRelativeForceY(oarAcceleration);
     }
     
     private void AddCurrent2Boat()
     {
-        boat.AddForce(-boatWaterVector * currentAccelerationMod);
+        rb.AddForce(-boatWaterVector * currentAccelerationMod);
 
         if (logDebug) {Debug.Log("BoatWaterSpeed: " + boatWaterVector.magnitude.ToString());}
     }
@@ -223,7 +221,7 @@ public class BoatController : MonoBehaviour
         {
             //Boat is turning
             //Increase linear resistance
-            boat.linearDamping = Mathf.Abs(rudderPosition) * maxRotationResistance + baseResistance;
+            rb.linearDamping = Mathf.Abs(rudderPosition) * maxRotationResistance + baseResistance;
         }
     }
 
@@ -233,8 +231,8 @@ public class BoatController : MonoBehaviour
         sailEnabled = false;
         sail.gameObject.SetActive(sailEnabled);
 
-        boat.linearVelocity = Vector3.zero;
-        boat.angularVelocity = 0;
+        rb.linearVelocity = Vector3.zero;
+        rb.angularVelocity = 0;
 
         transform.parent = dockTransform;
         transform.localPosition = Vector3.zero;
