@@ -20,6 +20,8 @@ public class BoatController : MonoBehaviour
 
     [Header("References")]
     [SerializeField] private Transform sail;
+    [SerializeField] private Transform player;
+    [SerializeField] private Transform compass;
     [SerializeField] private TextMeshProUGUI boatHeadingText;
     [SerializeField] private TextMeshProUGUI boatSpeedText;
     [SerializeField] private InputActionAsset inputActions;
@@ -84,7 +86,7 @@ public class BoatController : MonoBehaviour
     private void Update()
     {
         debugTimer++;
-        if (debugTimer == debugTicksInterval) 
+        if (debugTimer == debugTicksInterval)
         {
             logDebug = true;
             debugTimer = 0;
@@ -163,6 +165,7 @@ public class BoatController : MonoBehaviour
     {
         boatHeadingText.text = $"Boat Heading: {boatHeading.ToString("F1")}";
         boatSpeedText.text = $"Boat Speed: {boatSpeed.ToString("F1")}";
+        compass.rotation = Quaternion.Euler(0,0,90 - player.eulerAngles.z);
     }
 
     private void AddWind2Boat()

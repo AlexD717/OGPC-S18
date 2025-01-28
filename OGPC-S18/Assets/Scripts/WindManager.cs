@@ -8,7 +8,6 @@ public class WindManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI windBearingText;
     [SerializeField] private TextMeshProUGUI windSpeedText;
 
-
     [SerializeField] private Transform windIndicator;
 
     [Header("Starting Wind Condition")]
