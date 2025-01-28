@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5388170385361665768}
   - component: {fileID: 8484338750370517834}
   m_Layer: 0
-  m_Name: PortIcon
+  m_Name: PortIconRef
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
