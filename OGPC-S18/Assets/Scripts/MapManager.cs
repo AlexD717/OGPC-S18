@@ -78,7 +78,6 @@ public class MapManager : MonoBehaviour
             islandIcons[i].transform.localPosition = worldToMapScalar * islandCoords;
             islandIcons[i].transform.localRotation = islandRotation;
             islandRect.localScale = 1.4f * new Vector3(islandRect.localScale.x * islandScaleFactor,islandRect.localScale.y * islandScaleFactor * hexagaonYSquishFactor, 1f);
-            Debug.Log("Collider bounds" + islandSize.x.ToString() + " " + islandSize.y.ToString() + " " + islandSize.z.ToString());
         }
     }
     void AddPortsToMap()
