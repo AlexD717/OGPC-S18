@@ -66,6 +66,7 @@ public class WindManager : MonoBehaviour
         windSpeedText.text = $"Wind Speed: {windSpeed.ToString("F1")}";
         windBearingText.text = $"Wind Bearing: {windDirection.ToString("F1")}";
         windIndicator.rotation = Quaternion.Euler(0, 0, 90 - (windDirection+player.eulerAngles.z));
+        windIndicator.localScale = new Vector3(windSpeed / maxWindspeed, windSpeed/maxWindspeed, 1f);
     }
 
     int count = 0;
