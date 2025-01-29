@@ -1540,7 +1540,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc3e58f9e6a9fbd4aa32cb6f7565c3cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 5
+  maxSpeed: 80
   maxSpeedUnderOars: 5
   oarAcceleration: 10
   speedAccelerationMod: 2
@@ -1799,6 +1799,7 @@ MonoBehaviour:
   windBearingText: {fileID: 690639697}
   windSpeedText: {fileID: 624586064}
   windIndicator: {fileID: 222996966}
+  player: {fileID: 703202724}
   windDirection: 0
   windSpeed: 20
   maxWindspeed: 20
@@ -1825,6 +1826,7 @@ MonoBehaviour:
   currentBearingText: {fileID: 1513588340}
   currentSpeedText: {fileID: 1570743260}
   currentIndicator: {fileID: 965439466}
+  player: {fileID: 0}
   currentDirection: 180
   currentSpeed: 5
   maxCurrentSpeed: 10

@@ -7,8 +7,8 @@ public class WindManager : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI windBearingText;
     [SerializeField] private TextMeshProUGUI windSpeedText;
-
     [SerializeField] private Transform windIndicator;
+    [SerializeField] private Transform player;
 
     [Header("Starting Wind Condition")]
     [SerializeField] private float windDirection; // starting wind direction, 0 is North, 90 is East, 180 is South, and 270 is West
@@ -65,7 +65,7 @@ public class WindManager : MonoBehaviour
     {
         windSpeedText.text = $"Wind Speed: {windSpeed.ToString("F1")}";
         windBearingText.text = $"Wind Bearing: {windDirection.ToString("F1")}";
-        windIndicator.rotation = Quaternion.Euler(0, 0, 90 - windDirection);
+        windIndicator.rotation = Quaternion.Euler(0, 0, 90 - (windDirection+player.eulerAngles.z));
     }
 
     int count = 0;
@@ -76,8 +76,8 @@ public class WindManager : MonoBehaviour
         {
             count = 0;
             UpdateWind();
-            UpdateUI();
         }
+        UpdateUI();
     }
 
     public float GetWindDirection()
