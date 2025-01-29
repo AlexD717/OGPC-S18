@@ -5,7 +5,7 @@ using TMPro;
 public class BoatController : MonoBehaviour
 {
     [Header("Ship Data")]
-    [SerializeField] private float maxSpeed;
+    [SerializeField] private float maxSpeed; //Make less than 100
     [SerializeField] private float maxSpeedUnderOars;
     [SerializeField] private float oarAcceleration;
     [SerializeField] private float speedAccelerationMod;
@@ -71,7 +71,6 @@ public class BoatController : MonoBehaviour
     private void Start()
     {
         boatState = BoatState.sailing;
-
         windManager = FindFirstObjectByType<WindManager>();
         currentManager = FindFirstObjectByType<CurrentManager>();
         rb = GetComponent<Rigidbody2D>();
@@ -189,7 +188,7 @@ public class BoatController : MonoBehaviour
         float speedMagnitude = sailAngleSpeedMod * windManager.GetWindSpeed() * speedAccelerationMod;
 
         // Makes sure boat doesn't exceed maximum speed relative to current
-        if (boatWaterSpeed < maxSpeed)
+        if (boatWaterSpeed < maxSpeed/100 * windManager.GetWindSpeed())
             rb.AddRelativeForceY(speedMagnitude);
     }
 
