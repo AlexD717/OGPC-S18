@@ -5,7 +5,7 @@ using TMPro;
 public class BoatController : MonoBehaviour
 {
     [Header("Ship Data")]
-    [SerializeField] private float maxSpeed;
+    [SerializeField] private float maxSpeed; //Make less than 100
     [SerializeField] private float maxSpeedUnderOars;
     [SerializeField] private float oarAcceleration;
     [SerializeField] private float speedAccelerationMod;
@@ -20,6 +20,8 @@ public class BoatController : MonoBehaviour
 
     [Header("References")]
     [SerializeField] private Transform sail;
+    [SerializeField] private Transform player;
+    [SerializeField] private Transform compass;
     [SerializeField] private TextMeshProUGUI boatHeadingText;
     [SerializeField] private TextMeshProUGUI boatSpeedText;
     [SerializeField] private InputActionAsset inputActions;
@@ -69,7 +71,6 @@ public class BoatController : MonoBehaviour
     private void Start()
     {
         boatState = BoatState.sailing;
-
         windManager = FindFirstObjectByType<WindManager>();
         currentManager = FindFirstObjectByType<CurrentManager>();
         rb = GetComponent<Rigidbody2D>();
@@ -84,7 +85,7 @@ public class BoatController : MonoBehaviour
     private void Update()
     {
         debugTimer++;
-        if (debugTimer == debugTicksInterval) 
+        if (debugTimer == debugTicksInterval)
         {
             logDebug = true;
             debugTimer = 0;
@@ -163,6 +164,7 @@ public class BoatController : MonoBehaviour
     {
         boatHeadingText.text = $"Boat Heading: {boatHeading.ToString("F1")}";
         boatSpeedText.text = $"Boat Speed: {boatSpeed.ToString("F1")}";
+        compass.rotation = Quaternion.Euler(0,0,90 - player.eulerAngles.z);
     }
 
     private void AddWind2Boat()
@@ -186,7 +188,7 @@ public class BoatController : MonoBehaviour
         float speedMagnitude = sailAngleSpeedMod * windManager.GetWindSpeed() * speedAccelerationMod;
 
         // Makes sure boat doesn't exceed maximum speed relative to current
-        if (boatWaterSpeed < maxSpeed)
+        if (boatWaterSpeed < maxSpeed/100 * windManager.GetWindSpeed())
             rb.AddRelativeForceY(speedMagnitude);
     }
 

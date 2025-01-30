@@ -22,10 +22,6 @@ public class MapManager : MonoBehaviour
 
     void OnEnable()
     { 
-        map.SetActive(true); // allows reference of its components
-        worldToMapScalar = DetermineMapScaleFactor();
-        map.SetActive(false);
-        mapOn = false;
         mapToggle = inputs.FindActionMap("Player").FindAction("MapToggle");
         mapToggle.Enable();
     }
@@ -36,6 +32,10 @@ public class MapManager : MonoBehaviour
     }
     void Start()
     {
+        map.SetActive(true); // allows reference of its components
+        worldToMapScalar = DetermineMapScaleFactor();
+        map.SetActive(false);
+        mapOn = false;
         AddIslandsToMap();
         AddPortsToMap();
     }

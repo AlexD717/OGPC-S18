@@ -7,8 +7,9 @@ public class CurrentManager : MonoBehaviour
     [Header("References")]
     [SerializeField] private TextMeshProUGUI currentBearingText;
     [SerializeField] private TextMeshProUGUI currentSpeedText;
-
     [SerializeField] private Transform currentIndicator;
+    [SerializeField] private Transform player;
+
 
     [Header("Starting Current Condition")]
     [SerializeField] public float currentDirection; // starting current direction, 0 is North, 90 is East, 180 is South, and 270 is West
@@ -71,7 +72,8 @@ public class CurrentManager : MonoBehaviour
     {
         currentSpeedText.text = $"Current speed: {currentSpeed.ToString("F1")}";
         currentBearingText.text = $"Current Bearing: {currentDirection.ToString("F1")}";
-        currentIndicator.rotation = Quaternion.Euler(0, 0, 90 - currentDirection);
+        currentIndicator.rotation = Quaternion.Euler(0, 0, 90 - (currentDirection+player.eulerAngles.z));
+        currentIndicator.localScale = new Vector3(currentSpeed/maxCurrentSpeed, currentSpeed/maxCurrentSpeed, 1f);
     }
 
 
@@ -83,8 +85,8 @@ public class CurrentManager : MonoBehaviour
         {
             count = 0;
             UpdateCurrent();
-            UpdateUI();
         }
+        UpdateUI();
     }
 
     public Vector2 GetCurrentVector()

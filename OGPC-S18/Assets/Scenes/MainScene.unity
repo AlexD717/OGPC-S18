@@ -1124,6 +1124,7 @@ RectTransform:
   - {fileID: 965439466}
   - {fileID: 1513588338}
   - {fileID: 1570743258}
+  - {fileID: 870582552}
   - {fileID: 1419846107}
   - {fileID: 41876430}
   - {fileID: 793305402}
@@ -1235,7 +1236,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &624586063
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1371,7 +1372,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &690639695
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1539,7 +1540,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc3e58f9e6a9fbd4aa32cb6f7565c3cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 5
+  maxSpeed: 80
   maxSpeedUnderOars: 5
   oarAcceleration: 10
   speedAccelerationMod: 2
@@ -1552,6 +1553,8 @@ MonoBehaviour:
   currentAccelerationMod: 3
   currentMaxSpeedMod: 0.1
   sail: {fileID: 1263568185}
+  player: {fileID: 703202724}
+  compass: {fileID: 870582552}
   boatHeadingText: {fileID: 1419846108}
   boatSpeedText: {fileID: 41876431}
   inputActions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
@@ -1653,6 +1656,10 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 79045104933699514, guid: 9e0ee1631593008429d3b842f58fcebb, type: 3}
       propertyPath: m_Name
+      value: Port
+      objectReference: {fileID: 0}
+    - target: {fileID: 79045104933699514, guid: 9e0ee1631593008429d3b842f58fcebb, type: 3}
+      propertyPath: m_TagString
       value: Port
       objectReference: {fileID: 0}
     - target: {fileID: 3868320402575240516, guid: 9e0ee1631593008429d3b842f58fcebb, type: 3}
@@ -1792,6 +1799,7 @@ MonoBehaviour:
   windBearingText: {fileID: 690639697}
   windSpeedText: {fileID: 624586064}
   windIndicator: {fileID: 222996966}
+  player: {fileID: 703202724}
   windDirection: 0
   windSpeed: 20
   maxWindspeed: 20
@@ -1803,7 +1811,6 @@ MonoBehaviour:
   stepMultiple: 1
   scalar: 1
   updateInterval: 100
-  debugTicksInterval: 500
 --- !u!114 &806108048
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1819,6 +1826,7 @@ MonoBehaviour:
   currentBearingText: {fileID: 1513588340}
   currentSpeedText: {fileID: 1570743260}
   currentIndicator: {fileID: 965439466}
+  player: {fileID: 0}
   currentDirection: 180
   currentSpeed: 5
   maxCurrentSpeed: 10
@@ -1829,7 +1837,6 @@ MonoBehaviour:
   maxAngDeltaStep: 0.1
   stepMultiple: 1
   updateInterval: 100
-  debugTicksInterval: 500
 --- !u!114 &806108049
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1877,6 +1884,81 @@ MonoBehaviour:
   player: {fileID: 703202723}
   playerIcon: {fileID: 177628065}
   inputs: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+--- !u!1 &870582551
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 870582552}
+  - component: {fileID: 870582554}
+  - component: {fileID: 870582553}
+  m_Layer: 5
+  m_Name: Compass
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &870582552
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 870582551}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 531563305}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 150, y: -650}
+  m_SizeDelta: {x: 300, y: 300}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &870582553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 870582551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 0.216981, b: 0.216981, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 28d47cbaafc98254f8d4f6184dff22cd, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &870582554
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 870582551}
+  m_CullTransparentMesh: 1
 --- !u!1 &965439465
 GameObject:
   m_ObjectHideFlags: 0
@@ -2182,7 +2264,7 @@ GameObject:
   - component: {fileID: 1154212140}
   m_Layer: 0
   m_Name: Island
-  m_TagString: Untagged
+  m_TagString: Island
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2641,7 +2723,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1513588338
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3107,7 +3189,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1570743258
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3526,6 +3608,7 @@ GameObject:
   - component: {fileID: 1993186923}
   - component: {fileID: 1993186922}
   - component: {fileID: 1993186924}
+  - component: {fileID: 1993186925}
   m_Layer: 0
   m_Name: Cinemachine Camera
   m_TagString: Untagged
@@ -3610,6 +3693,19 @@ MonoBehaviour:
     RotationDamping: {x: 1, y: 1, z: 1}
     QuaternionDamping: 1
   FollowOffset: {x: 0, y: 0, z: -10}
+--- !u!114 &1993186925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1993186921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4afa82ae3200b82408d605c3dbdd1e38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Damping: 3
 --- !u!1 &2026063655
 GameObject:
   m_ObjectHideFlags: 0
@@ -3628,7 +3724,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2026063656
 MonoBehaviour:
   m_ObjectHideFlags: 0
