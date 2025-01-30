@@ -1826,7 +1826,7 @@ MonoBehaviour:
   currentBearingText: {fileID: 1513588340}
   currentSpeedText: {fileID: 1570743260}
   currentIndicator: {fileID: 965439466}
-  player: {fileID: 0}
+  player: {fileID: 703202724}
   currentDirection: 180
   currentSpeed: 5
   maxCurrentSpeed: 10
