@@ -56,8 +56,8 @@ public class QuestManager : MonoBehaviour
 
             GameObject questButton = Instantiate(questButtonPrefab, questLocation);
             questButton.transform.GetChild(0).GetComponent<TMPro.TextMeshProUGUI>().text = randomQuest.questName;
-            questButton.transform.GetChild(1).GetComponent<TMPro.TextMeshProUGUI>().text = randomQuest.goalPort.name;
-            questButton.transform.GetChild(2).GetComponent<TMPro.TextMeshProUGUI>().text = randomQuest.difficulty.ToString("F0");
+            questButton.transform.GetChild(1).GetComponent<TMPro.TextMeshProUGUI>().text = "Reward: " + randomQuest.reward.ToString("F0");
+            questButton.transform.GetChild(2).GetComponent<TMPro.TextMeshProUGUI>().text = "Difficulty: " + randomQuest.difficulty.ToString("F0");
         }
     }
 
@@ -93,22 +93,23 @@ public class QuestManager : MonoBehaviour
         Quest randomQuest = ScriptableObject.CreateInstance<Quest>();
 
         // Assigns random values to the quest
-        randomQuest.questName = "Quest Name";
         randomQuest.questType = QuestType.random;
         randomQuest.questStatus = QuestStatus.notStarted;
         
         int difficulty = Random.Range(1, difficultyIdealDistance.Length);
         randomQuest.difficulty = difficulty;
-        randomQuest.reward = Random.Range(0.5f, 2f) * difficulty * rewardConst;
+        randomQuest.reward = Mathf.Round(Random.Range(0.8f, 1.2f) * difficulty * rewardConst);
 
-        GameObject goalPort = GetIdealPort(difficultyIdealDistance[difficulty - 1]);
+        GameObject goalPort = GetGoalPort(difficultyIdealDistance[difficulty - 1]);
         validQuestPortList.Remove(goalPort);
         randomQuest.goalPort = goalPort.GetComponent<Port>();
+
+        randomQuest.questName = "Diliver to " + randomQuest.goalPort.nameText.text;
 
         return randomQuest;
     }
 
-    private GameObject GetIdealPort(float idealDistance)
+    private GameObject GetGoalPort(float idealDistance)
     {
         float closestDistance = Mathf.Infinity;
         GameObject idealPort = null;
