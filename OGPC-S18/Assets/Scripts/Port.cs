@@ -1,4 +1,5 @@
 using TMPro;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -23,6 +24,11 @@ public class Port : MonoBehaviour
 
     private PortManager portManager;
 
+    [SerializeField] private GameObject dockCanvas;
+    private Transform dockPanel;
+    private GameObject[] dockPanelMenus;
+    private TextMeshProUGUI dockedTextIndicator;
+
     private void Start()
     {
         rangeSprite = range.GetComponent<SpriteRenderer>();
@@ -39,6 +45,23 @@ public class Port : MonoBehaviour
         worldCanvas.rotation = Quaternion.identity;
         nameText = worldCanvas.GetChild(0).GetComponent<TextMeshProUGUI>();
         nameText.text = portName;
+
+        dockedTextIndicator = dockCanvas.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
+        dockedTextIndicator.text = "Docked at " + nameText.text;
+
+        // Gets all the menus under dockPanel and puts them in the panelMenus array
+        dockPanel = dockCanvas.transform.GetChild(0);
+        dockPanelMenus = new GameObject[dockPanel.childCount];
+        for (int i = 0; i < dockPanel.childCount; i++)
+        {
+            dockPanelMenus[i] = dockPanel.GetChild(i).gameObject;
+        }
+        dockCanvas.SetActive(false);
+        SelectMenu(0);
+        /*
+         *  panelMenus[0] = Main Menu
+         *  paznelMenus[1] = Quests
+        */
     }
 
     private void OnEnable()
@@ -75,7 +98,9 @@ public class Port : MonoBehaviour
 
     private void Dock()
     {
-        portManager.PlayerDocked(playerDockPositions, this);
+        dockCanvas.SetActive(true);
+        SelectMenu(0);
+        portManager.PlayerDocked(playerDockPositions, dockPanelMenus, this);
         playerDocked = true;
         rangeSprite.enabled = false;
         nameText.enabled = false;
@@ -83,6 +108,7 @@ public class Port : MonoBehaviour
 
     private void UnDock()
     {
+        dockCanvas.SetActive(false);
         portManager.PlayerUndocked();
         playerDocked = false;
         rangeSprite.enabled = true;
@@ -108,4 +134,21 @@ public class Port : MonoBehaviour
             rangeSprite.enabled = false;
         }
     }
+
+    // Makes only one panel active
+    public void SelectMenu(int childMenuIndex)
+    {
+        for (int i = 0; i < dockPanelMenus.Length; i++)
+        {
+            if (i == childMenuIndex)
+            {
+                dockPanelMenus[i].SetActive(true);
+            }
+            else
+            {
+                dockPanelMenus[i].SetActive(false);
+            }
+        }
+    }
+
 }

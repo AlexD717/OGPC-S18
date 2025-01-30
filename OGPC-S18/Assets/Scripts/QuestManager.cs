@@ -97,7 +97,7 @@ public class QuestManager : MonoBehaviour
         randomQuest.questType = QuestType.random;
         randomQuest.questStatus = QuestStatus.notStarted;
         
-        int difficulty = Random.Range(0, difficultyIdealDistance.Length);
+        int difficulty = Random.Range(1, difficultyIdealDistance.Length);
         randomQuest.difficulty = difficulty;
         randomQuest.reward = Random.Range(0.5f, 2f) * difficulty * rewardConst;
 
