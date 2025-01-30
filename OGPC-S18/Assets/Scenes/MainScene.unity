@@ -1702,6 +1702,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 120
       objectReference: {fileID: 0}
+    - target: {fileID: 8304038454675778215, guid: 9e0ee1631593008429d3b842f58fcebb, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.5107681
+      objectReference: {fileID: 0}
+    - target: {fileID: 8304038454675778215, guid: 9e0ee1631593008429d3b842f58fcebb, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.85971856
+      objectReference: {fileID: 0}
+    - target: {fileID: 8304038454675778215, guid: 9e0ee1631593008429d3b842f58fcebb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -118.57
+      objectReference: {fileID: 0}
     - target: {fileID: 8584749577235315376, guid: 9e0ee1631593008429d3b842f58fcebb, type: 3}
       propertyPath: portName
       value: Something
@@ -3705,7 +3717,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4afa82ae3200b82408d605c3dbdd1e38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damping: 3
+  Damping: 1
 --- !u!1 &2026063655
 GameObject:
   m_ObjectHideFlags: 0

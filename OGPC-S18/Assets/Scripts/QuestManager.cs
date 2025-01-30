@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 
 public class QuestManager : MonoBehaviour
 {
@@ -25,14 +26,21 @@ public class QuestManager : MonoBehaviour
         randomQuests = new List<Quest>();
     }
 
-    public void AddQuestsToMenu(Transform questMenu, string portName)
+    public void AddQuestsToMenu(Transform questMenu, Port port)
     {
         // Add quests to the Quests Menu
         // Up to 4 quests can be added, one must be reserved for story quests
         Transform questLocation = questMenu.GetChild(2);
+        
+        bool questsAlreadyAdded = false;
+        if (questLocation.childCount > 0) { questsAlreadyAdded = true; }
 
         // Add story quests
 
+        if (questsAlreadyAdded)
+        {
+            return;
+        }
         // Add faction quests
 
         // Add random quests

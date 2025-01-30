@@ -19,7 +19,7 @@ public class Port : MonoBehaviour
     private InputAction interact;
 
     [SerializeField] private RectTransform worldCanvas;
-    private TextMeshProUGUI nameText;
+    [HideInInspector] public TextMeshProUGUI nameText;
 
     private PortManager portManager;
 
@@ -75,7 +75,7 @@ public class Port : MonoBehaviour
 
     private void Dock()
     {
-        portManager.PlayerDocked(playerDockPositions, nameText.text);
+        portManager.PlayerDocked(playerDockPositions, this);
         playerDocked = true;
         rangeSprite.enabled = false;
         nameText.enabled = false;
