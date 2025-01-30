@@ -3,41 +3,64 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 public class MapManager : MonoBehaviour
 {
+
+    [Header("Configurables")]
     [SerializeField] private Vector2 worldSize;
+    [SerializeField] private Vector2 mapZoomLimits;
+
+    [Header("References")]
     [SerializeField] private GameObject map;
     [SerializeField] private GameObject islandIconReference;
-    [SerializeField] private GameObject portIconReference;
-
+    [SerializeField] private GameObject portIconPrefab;
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject playerIcon;
     [SerializeField] private InputActionAsset inputs;
+    [SerializeField] private RectTransform background;
+
+    private InputAction mapZoomInput;
+    private float mapZoomScale;
     private InputAction mapToggle;
     private bool mapOn;
+
+    private RectTransform mapRect;
     GameObject[] islands;
     GameObject[] ports;
 
     GameObject[] islandIcons;
+    Vector3[] islandIconsBaseRef; //For storing default location and scale
     GameObject[] portIcons;
+    Vector3[] portIconsBaseRef; //For storing default location and scale
+
+    float iconScaleFactor;
+
     float worldToMapScalar;
 
     void OnEnable()
     { 
-        mapToggle = inputs.FindActionMap("Player").FindAction("MapToggle");
+        mapToggle = inputs.FindActionMap("Map").FindAction("MapToggle");
         mapToggle.Enable();
+        mapZoomInput = inputs.FindActionMap("Map").FindAction("MapZoom");
+        mapZoomInput.Enable();
     }
 
     void OnDisable()
     {
         mapToggle.Disable();
+        mapZoomInput.Disable();
     }
     void Start()
     {
+        mapRect = map.GetComponent<RectTransform>();
+        background.localScale = new Vector3(mapRect.rect.width, mapRect.rect.height, 1f);
+        mapZoomScale = 1f;
+        Mathf.Clamp(mapZoomScale, mapZoomLimits.x, mapZoomLimits.y);
         map.SetActive(true); // allows reference of its components
         worldToMapScalar = DetermineMapScaleFactor();
         map.SetActive(false);
         mapOn = false;
         AddIslandsToMap();
         AddPortsToMap();
+
     }
 
     void UpdatePlayerOnMap()
@@ -54,12 +77,13 @@ public class MapManager : MonoBehaviour
         SpriteRenderer islandSprite;
         Vector3 islandSize;
         Quaternion islandRotation;
-
-        float islandScaleFactor;
-        float hexagaonYSquishFactor = 34.6875f / 40f;
+        float hexagonYSquishFactor = 34.6875f / 40f;
 
         islandSize = islands[0].GetComponent<PolygonCollider2D>().bounds.size;
-        islandScaleFactor = (islandSize.x / worldSize.x) * map.GetComponent<RectTransform>().rect.width / 100;
+        iconScaleFactor = (islandSize.x / worldSize.x) * map.GetComponent<RectTransform>().rect.width / 100;
+
+        Debug.Log(iconScaleFactor.ToString());
+
 
         Vector2 islandCoords;
         for (int i = 0; i < islands.Length; i++)
@@ -75,27 +99,31 @@ public class MapManager : MonoBehaviour
             islandRect = islandIcons[i].GetComponent<RectTransform>();
             islandSize = islands[i].GetComponent<PolygonCollider2D>().bounds.size;
 
-            islandIcons[i].transform.localPosition = worldToMapScalar * islandCoords;
+            islandIcons[i].transform.localPosition = worldToMapScalar * islandCoords * mapZoomScale;
             islandIcons[i].transform.localRotation = islandRotation;
-            islandRect.localScale = 1.4f * new Vector3(islandRect.localScale.x * islandScaleFactor,islandRect.localScale.y * islandScaleFactor * hexagaonYSquishFactor, 1f);
+            islandRect.localScale = 1.6f * new Vector3(islandRect.localScale.x * iconScaleFactor,islandRect.localScale.y * iconScaleFactor * hexagonYSquishFactor, 1f);
         }
     }
     void AddPortsToMap()
     {
         ports = GameObject.FindGameObjectsWithTag("Port");
         portIcons = new GameObject[ports.Length];
-        Image iconImage;
         Vector2 portCoords;
         Quaternion portRotation;
+        RectTransform portRect;
 
         for (int i = 0; i < ports.Length; i++)
         {
             portCoords = ports[i].transform.position;
             portRotation = ports[i].transform.rotation;
-            portIcons[i] = Instantiate(portIconReference, map.transform);
-            portIcons[i].transform.localPosition = worldToMapScalar * portCoords;
+            portIcons[i] = Instantiate(portIconPrefab, map.transform);
+            portIcons[i].transform.localPosition = worldToMapScalar * portCoords * mapZoomScale;
             portIcons[i].transform.localRotation = portRotation;
-            iconImage = portIcons[i].GetComponent<Image>();
+            
+            portRect = portIcons[i].GetComponent<RectTransform>();
+            portRect.localScale = 1.4f * new Vector3(portRect.localScale.x * iconScaleFactor,portRect.localScale.y * iconScaleFactor, 1f);
+
+            portIconsBaseRef[i] = new Vector2(portIcons[i].transform.position, portIcons[i].localScale)
         }
     }
 
@@ -104,29 +132,27 @@ public class MapManager : MonoBehaviour
         float xFactor;
         float yFactor;
         float realFactor;
-        RectTransform mapRect = map.GetComponent<RectTransform>();
-
         Vector2 mapSize = new Vector2(mapRect.rect.width,mapRect.rect.height);
         xFactor = worldSize.x/mapSize.x;
         yFactor = worldSize.y/mapSize.y;
         realFactor = 1 / Mathf.Max(xFactor,yFactor);
 
+        Debug.Log(realFactor.ToString());
         return realFactor;
     }
     void Update()
     {
+        if (mapZoomInput.ReadValue<float>() != 0)
+        {
+            mapZoomScale = mapZoomScale + Time.deltaTime * 0.5f * mapZoomInput.ReadValue<float>();
+            Debug.Log("Map Scale " + mapZoomScale.ToString());
+        }
+
         if (mapToggle.triggered)
         {
             mapOn = !mapOn;
             map.SetActive(mapOn);
-            if (mapOn)
-            {
-                Time.timeScale = 0f;
-            }
-            else
-            {
-                Time.timeScale = 1f;
-            }
+            UsefulStuff.GamePaused(mapOn);
         }
         if (mapOn)
         {

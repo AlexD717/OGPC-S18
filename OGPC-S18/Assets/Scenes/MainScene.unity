@@ -1801,7 +1801,7 @@ MonoBehaviour:
   windIndicator: {fileID: 222996966}
   player: {fileID: 703202724}
   windDirection: 0
-  windSpeed: 20
+  windSpeed: 10
   maxWindspeed: 20
   stabilityLevels: 5
   randomMagRange: 0.01
@@ -1826,7 +1826,7 @@ MonoBehaviour:
   currentBearingText: {fileID: 1513588340}
   currentSpeedText: {fileID: 1570743260}
   currentIndicator: {fileID: 965439466}
-  player: {fileID: 0}
+  player: {fileID: 703202724}
   currentDirection: 180
   currentSpeed: 5
   maxCurrentSpeed: 10
@@ -1878,6 +1878,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   worldSize: {x: 100, y: 100}
+  mapZoomLimits: {x: 0.25, y: 1}
   map: {fileID: 1117752311}
   islandIconReference: {fileID: 1425195521}
   portIconReference: {fileID: 1787571035}
@@ -2127,7 +2128,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1117752312
 MonoBehaviour:
   m_ObjectHideFlags: 0

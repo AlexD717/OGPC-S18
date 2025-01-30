@@ -16,4 +16,10 @@ public class UsefulStuff
     {
         return new Vector2(mag*Mathf.Sin(ang*Mathf.Deg2Rad),mag*Mathf.Cos(ang*Mathf.Deg2Rad));
     }
+
+    public static void GamePaused(bool pause)
+    {
+        if (pause) { Time.timeScale = 0f;}
+        else { Time.timeScale = 1f;}
+    }
 }
