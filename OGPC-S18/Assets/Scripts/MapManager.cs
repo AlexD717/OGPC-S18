@@ -123,7 +123,7 @@ public class MapManager : MonoBehaviour
             portRect = portIcons[i].GetComponent<RectTransform>();
             portRect.localScale = 1.4f * new Vector3(portRect.localScale.x * iconScaleFactor,portRect.localScale.y * iconScaleFactor, 1f);
 
-            portIconsBaseRef[i] = new Vector2(portIcons[i].transform.position, portIcons[i].localScale)
+            //portIconsBaseRef[i] = new Vector2(portIcons[i].transform.position, portRect.localScale);
         }
     }
 
