@@ -1879,6 +1879,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   worldSize: {x: 100, y: 100}
   mapZoomLimits: {x: 0.25, y: 1}
+  mapZoomSensitivity: 1
   map: {fileID: 1117752311}
   islandIconReference: {fileID: 1425195521}
   portIconPrefab: {fileID: 1787571035}
@@ -3115,11 +3116,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2008751500430864526, guid: 4509cf964100a634b9cccdc93d367088, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.49375
+      value: 0.049375
       objectReference: {fileID: 0}
     - target: {fileID: 2008751500430864526, guid: 4509cf964100a634b9cccdc93d367088, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.49375
+      value: 0.049375
       objectReference: {fileID: 0}
     - target: {fileID: 2008751500430864526, guid: 4509cf964100a634b9cccdc93d367088, type: 3}
       propertyPath: m_LocalPosition.x

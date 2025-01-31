@@ -7,7 +7,7 @@ public class MapManager : MonoBehaviour
     [Header("Configurables")]
     [SerializeField] private Vector2 worldSize;
     [SerializeField] private Vector2 mapZoomLimits;
-
+    [SerializeField] private float mapZoomSensitivity;
     [Header("References")]
     [SerializeField] private GameObject map;
     [SerializeField] private GameObject islandIconReference;
@@ -19,6 +19,7 @@ public class MapManager : MonoBehaviour
 
     private InputAction mapZoomInput;
     private float mapZoomScale;
+    private Vector2 panLocation;
     private InputAction mapToggle;
     private bool mapOn;
 
@@ -32,10 +33,10 @@ public class MapManager : MonoBehaviour
     Vector3[] portIconsBaseRef; //For storing default location and scale
 
     float iconScaleFactor;
-
+    Transform IconManager;
     float worldToMapScalar;
 
-    void OnEnable()
+    private void OnEnable()
     { 
         mapToggle = inputs.FindActionMap("Map").FindAction("MapToggle");
         mapToggle.Enable();
@@ -43,13 +44,15 @@ public class MapManager : MonoBehaviour
         mapZoomInput.Enable();
     }
 
-    void OnDisable()
+    private void OnDisable()
     {
         mapToggle.Disable();
         mapZoomInput.Disable();
     }
-    void Start()
+    private void Start()
     {
+        panLocation = new Vector2(0f,0f);
+        IconManager = map.transform.GetChild(3);
         mapRect = map.GetComponent<RectTransform>();
         background.localScale = new Vector3(mapRect.rect.width, mapRect.rect.height, 1f);
         mapZoomScale = 1f;
@@ -63,12 +66,12 @@ public class MapManager : MonoBehaviour
 
     }
 
-    void UpdatePlayerOnMap()
+    private void UpdatePlayerOnMap()
     {
         playerIcon.transform.localPosition = worldToMapScalar * player.transform.position;
         playerIcon.transform.localRotation = player.transform.rotation;
     }
-    void AddIslandsToMap()
+    private void AddIslandsToMap()
     {
         islands = GameObject.FindGameObjectsWithTag("Island");
         islandIcons = new GameObject[islands.Length];
@@ -82,15 +85,12 @@ public class MapManager : MonoBehaviour
         islandSize = islands[0].GetComponent<PolygonCollider2D>().bounds.size;
         iconScaleFactor = (islandSize.x / worldSize.x) * map.GetComponent<RectTransform>().rect.width / 100;
 
-        Debug.Log(iconScaleFactor.ToString());
-
-
         Vector2 islandCoords;
         for (int i = 0; i < islands.Length; i++)
         {
             islandCoords = islands[i].transform.position;
             islandRotation = islands[i].transform.rotation;
-            islandIcons[i] = Instantiate(islandIconReference, map.transform);
+            islandIcons[i] = Instantiate(islandIconReference, IconManager);
 
             iconImage = islandIcons[i].GetComponent<Image>();
             islandSprite = islands[i].GetComponent<SpriteRenderer>();
@@ -101,10 +101,10 @@ public class MapManager : MonoBehaviour
 
             islandIcons[i].transform.localPosition = worldToMapScalar * islandCoords * mapZoomScale;
             islandIcons[i].transform.localRotation = islandRotation;
-            islandRect.localScale = 1.6f * new Vector3(islandRect.localScale.x * iconScaleFactor,islandRect.localScale.y * iconScaleFactor * hexagonYSquishFactor, 1f);
+            islandRect.localScale = new Vector3(islandRect.localScale.x * iconScaleFactor,islandRect.localScale.y * iconScaleFactor * hexagonYSquishFactor, 1f);
         }
     }
-    void AddPortsToMap()
+    private void AddPortsToMap()
     {
         ports = GameObject.FindGameObjectsWithTag("Port");
         portIcons = new GameObject[ports.Length];
@@ -116,18 +116,37 @@ public class MapManager : MonoBehaviour
         {
             portCoords = ports[i].transform.position;
             portRotation = ports[i].transform.rotation;
-            portIcons[i] = Instantiate(portIconPrefab, map.transform);
+            portIcons[i] = Instantiate(portIconPrefab, IconManager);
             portIcons[i].transform.localPosition = worldToMapScalar * portCoords * mapZoomScale;
             portIcons[i].transform.localRotation = portRotation;
             
             portRect = portIcons[i].GetComponent<RectTransform>();
             portRect.localScale = 1.4f * new Vector3(portRect.localScale.x * iconScaleFactor,portRect.localScale.y * iconScaleFactor, 1f);
-
-            //portIconsBaseRef[i] = new Vector2(portIcons[i].transform.position, portRect.localScale);
         }
     }
 
-    float DetermineMapScaleFactor()
+    private void ProcessInputs()
+    {
+        if (mapZoomInput.ReadValue<float>() != 0)
+        {
+            mapZoomScale = mapZoomScale + mapZoomSensitivity * mapZoomInput.ReadValue<float>();
+            mapZoomScale = Mathf.Clamp(mapZoomScale, mapZoomLimits.x, mapZoomLimits.y);
+            Debug.Log("Map scale" + mapZoomScale.ToString());
+            Debug.Log("Map Delta" + (mapZoomSensitivity * mapZoomInput.ReadValue<float>()).ToString());
+            Debug.Log("Map DeltaTime" + Time.deltaTime.ToString());
+        }
+    }
+    private void UpdateMap()
+    {
+        if (mapOn)
+        {
+            ProcessInputs();
+            UpdatePlayerOnMap();
+            IconManager.localScale = new Vector3(mapZoomScale,mapZoomScale,1f);
+        }        
+    }
+
+    private float DetermineMapScaleFactor()
     {
         float xFactor;
         float yFactor;
@@ -137,26 +156,16 @@ public class MapManager : MonoBehaviour
         yFactor = worldSize.y/mapSize.y;
         realFactor = 1 / Mathf.Max(xFactor,yFactor);
 
-        Debug.Log(realFactor.ToString());
         return realFactor;
     }
-    void Update()
+    private void Update()
     {
-        if (mapZoomInput.ReadValue<float>() != 0)
-        {
-            mapZoomScale = mapZoomScale + Time.deltaTime * 0.5f * mapZoomInput.ReadValue<float>();
-            Debug.Log("Map Scale " + mapZoomScale.ToString());
-        }
-
         if (mapToggle.triggered)
         {
             mapOn = !mapOn;
             map.SetActive(mapOn);
             UsefulStuff.GamePaused(mapOn);
         }
-        if (mapOn)
-        {
-            UpdatePlayerOnMap();
-        }
+        UpdateMap();
     }
 }
