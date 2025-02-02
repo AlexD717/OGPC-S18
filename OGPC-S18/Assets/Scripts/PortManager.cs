@@ -14,11 +14,11 @@ public class PortManager : MonoBehaviour
         questManager = GetComponent<QuestManager>();
     }
 
-    public void PlayerDocked(Transform[] playerDockPositions, GameObject[] dockPanelMenus, Port port)
+    public void PlayerDocked(Transform[] playerDockPositions, GameObject[] dockPanelMenus)
     {
         boatController.Dock(GetClosestDockPosition(playerDockPositions));
 
-        questManager.AddQuestsToMenu(dockPanelMenus[1].transform, port);
+        questManager.AddQuestsToMenu(dockPanelMenus[1].transform);
     }
 
     public void PlayerUndocked()

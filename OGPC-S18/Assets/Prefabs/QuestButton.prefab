@@ -40,7 +40,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 445.636, y: 139.239}
+  m_SizeDelta: {x: 320, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7993391956256039584
 CanvasRenderer:
@@ -173,8 +173,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -107.5, y: -38.4}
-  m_SizeDelta: {x: -216.6719, y: -85.6167}
+  m_AnchoredPosition: {x: -77.3, y: -37.9}
+  m_SizeDelta: {x: -159.6372, y: -85.6167}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1177030907496167429
 CanvasRenderer:
@@ -231,8 +231,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40
-  m_fontSizeBase: 40
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 1
@@ -309,8 +309,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.0040283203, y: 27}
-  m_SizeDelta: {x: 0, y: -78.599}
+  m_AnchoredPosition: {x: 0, y: 25.7979}
+  m_SizeDelta: {x: 0, y: -45.6083}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2863073368420618915
 CanvasRenderer:
@@ -367,10 +367,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 65
+  m_fontSize: 54.8
   m_fontSizeBase: 65
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 1
   m_fontSizeMax: 65
   m_fontStyle: 0
@@ -445,8 +445,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 109.175934, y: -38.399994}
-  m_SizeDelta: {x: -216.6719, y: -85.6167}
+  m_AnchoredPosition: {x: 82.382645, y: -37.899994}
+  m_SizeDelta: {x: -171.4404, y: -85.6167}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &683678984535525975
 CanvasRenderer:
@@ -503,8 +503,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40
-  m_fontSizeBase: 40
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 1

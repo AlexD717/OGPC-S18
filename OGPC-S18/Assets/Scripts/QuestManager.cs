@@ -1,7 +1,8 @@
 using UnityEngine;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using System.Linq;
+using UnityEngine.UI;
+using UnityEditor.Experimental.GraphView;
 
 public class QuestManager : MonoBehaviour
 {
@@ -21,6 +22,7 @@ public class QuestManager : MonoBehaviour
     [SerializeField] private Quest[] quests;
     [SerializeField] private GameObject questButtonPrefab;
     private GameObject dockedPort;
+    private GameObject dockCanvas;
 
     [Header("Random Quest Generation")]
     public int[] difficultyIdealDistance = new int[] { 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 };
@@ -28,10 +30,14 @@ public class QuestManager : MonoBehaviour
     [SerializeField] private float rewardConst;
     private List<GameObject> validQuestPortList = new List<GameObject>();
 
-    public void AddQuestsToMenu(Transform questMenu, Port port)
+    public void PlayerDocked(Port port, GameObject _dockCanvas)
     {
         dockedPort = port.gameObject;
+        dockCanvas = _dockCanvas;
+    }
 
+    public void AddQuestsToMenu(Transform questMenu)
+    {
         // Add quests to the Quests Menu
         // Up to 4 quests can be added, one must be reserved for story quests
         Transform questLocation = questMenu.GetChild(2);
@@ -45,6 +51,7 @@ public class QuestManager : MonoBehaviour
         {
             return;
         }
+
         // Add faction quests
 
         // Add random quests
@@ -58,7 +65,18 @@ public class QuestManager : MonoBehaviour
             questButton.transform.GetChild(0).GetComponent<TMPro.TextMeshProUGUI>().text = randomQuest.questName;
             questButton.transform.GetChild(1).GetComponent<TMPro.TextMeshProUGUI>().text = "Reward: " + randomQuest.reward.ToString("F0");
             questButton.transform.GetChild(2).GetComponent<TMPro.TextMeshProUGUI>().text = "Difficulty: " + randomQuest.difficulty.ToString("F0");
+
+            questButton.GetComponent<Button>().onClick.AddListener(RandomQuestSelected); // When button clicked run this function
         }
+    }
+
+    private void RandomQuestSelected()
+    {
+        // Show menu to confirm quest selection
+        // Displays more detailed information about the quest
+
+        Transform selectedQuestPanel = dockCanvas.transform.GetChild(2);
+        selectedQuestPanel.gameObject.SetActive(true);
     }
 
     private Quest[] GetViableQuests(string portName, QuestType questTypeWanted)

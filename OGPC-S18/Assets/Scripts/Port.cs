@@ -1,5 +1,4 @@
 using TMPro;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -23,6 +22,7 @@ public class Port : MonoBehaviour
     [HideInInspector] public TextMeshProUGUI nameText;
 
     private PortManager portManager;
+    private QuestManager questManager;
 
     [SerializeField] private GameObject dockCanvas;
     private Transform dockPanel;
@@ -35,6 +35,7 @@ public class Port : MonoBehaviour
         rangeSprite.enabled = false;
 
         portManager = FindFirstObjectByType<PortManager>();
+        questManager = FindFirstObjectByType<QuestManager>();
 
         playerDockPositions = new Transform[playerDockPositionsParent.childCount];
         for (int i = 0; i < playerDockPositionsParent.childCount; i++)
@@ -62,6 +63,8 @@ public class Port : MonoBehaviour
          *  panelMenus[0] = Main Menu
          *  paznelMenus[1] = Quests
         */
+
+        dockCanvas.transform.GetChild(2).gameObject.SetActive(false); // Deactivates accepeted quest menu
     }
 
     private void OnEnable()
@@ -100,7 +103,8 @@ public class Port : MonoBehaviour
     {
         dockCanvas.SetActive(true);
         SelectMenu(0);
-        portManager.PlayerDocked(playerDockPositions, dockPanelMenus, this);
+        questManager.PlayerDocked(this, dockCanvas);
+        portManager.PlayerDocked(playerDockPositions, dockPanelMenus);
         playerDocked = true;
         rangeSprite.enabled = false;
         nameText.enabled = false;
