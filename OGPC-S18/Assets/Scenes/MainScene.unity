@@ -285,7 +285,7 @@ RectTransform:
   m_LocalScale: {x: 0.375, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1997816395}
+  m_Father: {fileID: 1117752315}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1880,6 +1880,7 @@ MonoBehaviour:
   worldSize: {x: 100, y: 100}
   mapZoomLimits: {x: 0.25, y: 1}
   mapZoomSensitivity: 1
+  mapPanSensitivity: 1
   map: {fileID: 1117752311}
   islandIconReference: {fileID: 1425195521}
   portIconPrefab: {fileID: 1787571035}
@@ -2209,6 +2210,7 @@ RectTransform:
   - {fileID: 1787571036}
   - {fileID: 1425195522}
   - {fileID: 2087232201}
+  - {fileID: 177628066}
   - {fileID: 1997816395}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3737,8 +3739,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 177628066}
+  m_Children: []
   m_Father: {fileID: 1117752315}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2026063655

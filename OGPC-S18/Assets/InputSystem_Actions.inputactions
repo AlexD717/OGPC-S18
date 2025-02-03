@@ -714,6 +714,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "MapReset",
+                    "type": "Button",
+                    "id": "d9f4e528-f771-479f-8402-42c85b8b0c8c",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -808,7 +817,7 @@
                 {
                     "name": "ArrowKeys",
                     "id": "73b31260-7ea7-461d-9820-56f076b08806",
-                    "path": "2DVector(mode=1)",
+                    "path": "2DVector",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -819,7 +828,7 @@
                 {
                     "name": "up",
                     "id": "a6b61c9b-ea2d-458d-b9dd-7a1676b4b465",
-                    "path": "<Gamepad>/buttonNorth",
+                    "path": "<Keyboard>/upArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -830,7 +839,7 @@
                 {
                     "name": "down",
                     "id": "8f59884f-f005-41bf-94ff-8bb46ab59d17",
-                    "path": "<Gamepad>/buttonSouth",
+                    "path": "<Keyboard>/downArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -841,7 +850,7 @@
                 {
                     "name": "left",
                     "id": "3ddec251-1464-40c0-bb22-ef88f9ebf2c7",
-                    "path": "<Gamepad>/buttonWest",
+                    "path": "<Keyboard>/leftArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -852,13 +861,24 @@
                 {
                     "name": "right",
                     "id": "2c5f0507-2f86-4a74-85c9-cbe4b03e0512",
-                    "path": "<Gamepad>/buttonEast",
+                    "path": "<Keyboard>/rightArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "MapPan",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "089e1fb2-0bfd-4676-8582-4c56fccc082c",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MapReset",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

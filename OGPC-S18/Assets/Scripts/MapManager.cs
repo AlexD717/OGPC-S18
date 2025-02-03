@@ -8,6 +8,7 @@ public class MapManager : MonoBehaviour
     [SerializeField] private Vector2 worldSize;
     [SerializeField] private Vector2 mapZoomLimits;
     [SerializeField] private float mapZoomSensitivity;
+    [SerializeField] private float mapPanSensitivity;
     [Header("References")]
     [SerializeField] private GameObject map;
     [SerializeField] private GameObject islandIconReference;
@@ -19,6 +20,8 @@ public class MapManager : MonoBehaviour
 
     private InputAction mapZoomInput;
     private float mapZoomScale;
+    private InputAction mapPanInput;
+    private InputAction mapReset; // Recenters around Player and rescales
     private Vector2 panLocation;
     private InputAction mapToggle;
     private bool mapOn;
@@ -42,20 +45,25 @@ public class MapManager : MonoBehaviour
         mapToggle.Enable();
         mapZoomInput = inputs.FindActionMap("Map").FindAction("MapZoom");
         mapZoomInput.Enable();
+        mapPanInput = inputs.FindActionMap("Map").FindAction("MapPan");
+        mapPanInput.Enable();
+        mapReset = inputs.FindActionMap("Map").FindAction("mapReset");
+        mapReset.Enable();
     }
 
     private void OnDisable()
     {
         mapToggle.Disable();
         mapZoomInput.Disable();
+        mapPanInput.Disable();
+        mapReset.Disable();
     }
     private void Start()
     {
-        panLocation = new Vector2(0f,0f);
-        IconManager = map.transform.GetChild(3);
+        mapZoomScale = 1f;
+        IconManager = map.transform.GetChild(4);
         mapRect = map.GetComponent<RectTransform>();
         background.localScale = new Vector3(mapRect.rect.width, mapRect.rect.height, 1f);
-        mapZoomScale = 1f;
         Mathf.Clamp(mapZoomScale, mapZoomLimits.x, mapZoomLimits.y);
         map.SetActive(true); // allows reference of its components
         worldToMapScalar = DetermineMapScaleFactor();
@@ -68,7 +76,7 @@ public class MapManager : MonoBehaviour
 
     private void UpdatePlayerOnMap()
     {
-        playerIcon.transform.localPosition = worldToMapScalar * player.transform.position;
+        panLocation = worldToMapScalar * player.transform.position;
         playerIcon.transform.localRotation = player.transform.rotation;
     }
     private void AddIslandsToMap()
@@ -131,19 +139,23 @@ public class MapManager : MonoBehaviour
         {
             mapZoomScale = mapZoomScale + mapZoomSensitivity * mapZoomInput.ReadValue<float>();
             mapZoomScale = Mathf.Clamp(mapZoomScale, mapZoomLimits.x, mapZoomLimits.y);
-            Debug.Log("Map scale" + mapZoomScale.ToString());
-            Debug.Log("Map Delta" + (mapZoomSensitivity * mapZoomInput.ReadValue<float>()).ToString());
-            Debug.Log("Map DeltaTime" + Time.deltaTime.ToString());
         }
+        panLocation = panLocation + mapPanSensitivity * mapPanInput.ReadValue<Vector2>();
+        Debug.Log("PanLocation " + panLocation.x.ToString() + " " + panLocation.y.ToString());
+        Debug.Log("PanLocationDelta " + mapPanInput.ReadValue<Vector2>().x.ToString() + " " + mapPanInput.ReadValue<Vector2>().y.ToString());
+
     }
     private void UpdateMap()
     {
-        if (mapOn)
+        ProcessInputs();
+        UpdatePlayerOnMap();
+        IconManager.localScale = new Vector3(mapZoomScale,mapZoomScale,1f);
+        IconManager.localPosition = -panLocation;
+        if (mapReset.triggered)
         {
-            ProcessInputs();
-            UpdatePlayerOnMap();
-            IconManager.localScale = new Vector3(mapZoomScale,mapZoomScale,1f);
-        }        
+            mapZoomScale = 1f;
+            panLocation = new Vector2(0f,0f); //Recenters on player
+        }     
     }
 
     private float DetermineMapScaleFactor()
@@ -160,12 +172,14 @@ public class MapManager : MonoBehaviour
     }
     private void Update()
     {
+
         if (mapToggle.triggered)
         {
             mapOn = !mapOn;
+            panLocation = playerIcon.transform.localPosition;
             map.SetActive(mapOn);
             UsefulStuff.GamePaused(mapOn);
         }
-        UpdateMap();
+        if (mapOn) {UpdateMap();}
     }
 }
