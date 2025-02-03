@@ -73,11 +73,6 @@ public class MapManager : MonoBehaviour
         AddPortsToMap();
 
     }
-
-    private void UpdatePlayerOnMap()
-    {
-        playerIcon.transform.localRotation = player.transform.rotation;
-    }
     private void AddIslandsToMap()
     {
         islands = GameObject.FindGameObjectsWithTag("Island");
@@ -147,7 +142,6 @@ public class MapManager : MonoBehaviour
     private void UpdateMap()
     {
         ProcessInputs();
-        UpdatePlayerOnMap();
         IconManager.localScale = new Vector3(mapZoomScale,mapZoomScale,1f);
         IconManager.localPosition = -panLocation;
         if (mapReset.triggered)
@@ -176,6 +170,7 @@ public class MapManager : MonoBehaviour
         {
             mapOn = !mapOn;
             panLocation = playerIcon.transform.localPosition;
+            playerIcon.transform.localRotation = player.transform.rotation;
             map.SetActive(mapOn);
             UsefulStuff.GamePaused(mapOn);
         }
