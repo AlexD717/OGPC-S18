@@ -61,7 +61,7 @@ public class MapManager : MonoBehaviour
     private void Start()
     {
         mapZoomScale = 1f;
-        IconManager = map.transform.GetChild(4);
+        IconManager = map.transform.GetChild(3);
         mapRect = map.GetComponent<RectTransform>();
         background.localScale = new Vector3(mapRect.rect.width, mapRect.rect.height, 1f);
         Mathf.Clamp(mapZoomScale, mapZoomLimits.x, mapZoomLimits.y);
@@ -76,7 +76,6 @@ public class MapManager : MonoBehaviour
 
     private void UpdatePlayerOnMap()
     {
-        panLocation = worldToMapScalar * player.transform.position;
         playerIcon.transform.localRotation = player.transform.rotation;
     }
     private void AddIslandsToMap()
