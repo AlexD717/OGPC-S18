@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEditor.Experimental.GraphView;
 using Unity.VisualScripting;
 
-public class QuestManager : MonoBehaviour
+public class QuestGetttingManager : MonoBehaviour
 {
     public enum QuestType
     {
@@ -187,9 +187,10 @@ public class QuestManager : MonoBehaviour
     {
         questPanel.SetActive(false);
     }
+
     private void QuestAccepted()
     {
-
+        Debug.Log("Quest Accepted");
     }
 
     private void FillChildText(Transform menu, int childIndex, string text)

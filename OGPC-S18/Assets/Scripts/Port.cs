@@ -22,7 +22,7 @@ public class Port : MonoBehaviour
     [HideInInspector] public TextMeshProUGUI nameText;
 
     private PortManager portManager;
-    private QuestManager questManager;
+    private QuestGetttingManager questManager;
 
     [SerializeField] private GameObject dockCanvas;
     private GameObject selectedQuestPanel;
@@ -36,7 +36,7 @@ public class Port : MonoBehaviour
         rangeSprite.enabled = false;
 
         portManager = FindFirstObjectByType<PortManager>();
-        questManager = FindFirstObjectByType<QuestManager>();
+        questManager = FindFirstObjectByType<QuestGetttingManager>();
 
         playerDockPositions = new Transform[playerDockPositionsParent.childCount];
         for (int i = 0; i < playerDockPositionsParent.childCount; i++)
