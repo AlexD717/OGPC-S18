@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine.UI;
 using UnityEditor.Experimental.GraphView;
+using Unity.VisualScripting;
 
 public class QuestManager : MonoBehaviour
 {
@@ -68,25 +69,6 @@ public class QuestManager : MonoBehaviour
 
             questButton.GetComponent<Button>().onClick.AddListener(() => RandomQuestSelected(randomQuest)); // When button clicked run this function
         }
-    }
-
-    private void RandomQuestSelected(Quest selectedQuest)
-    {
-        // Show menu to confirm quest selection
-        // Displays more detailed information about the quest
-
-        Transform selectedQuestPanel = dockCanvas.transform.GetChild(2);
-        selectedQuestPanel.gameObject.SetActive(true);
-
-        FillChildText(selectedQuestPanel, 0, selectedQuest.questName);
-        FillChildText(selectedQuestPanel, 1, "Quest Type: " + selectedQuest.questType.ToString());
-        FillChildText(selectedQuestPanel, 2, "Reward: " + selectedQuest.reward.ToString("F0"));
-        FillChildText(selectedQuestPanel, 3, "Difficulty: " + selectedQuest.difficulty.ToString("F0"));
-    }
-
-    private void FillChildText(Transform menu, int childIndex, string text)
-    {
-        menu.GetChild(childIndex).GetComponent<TMPro.TextMeshProUGUI>().text = text;
     }
 
     private Quest[] GetViableQuests(string portName, QuestType questTypeWanted)
@@ -167,5 +149,51 @@ public class QuestManager : MonoBehaviour
         }
 
         return validPorts[Random.Range(0, validPorts.Count - 1)];
+    }
+
+    private void RandomQuestSelected(Quest selectedQuest)
+    {
+        /* Show menu to confirm quest selection
+         * Displays more detailed information about the quest
+         * 
+         * Child(0) = Quest Name
+         * Child(1) = Quest Type
+         * Child(2) = Reward
+         * Child(3) = Difficulty
+         * Child(4) = Info - big block of text
+         * Child(5) = Cancel Quest Button
+         * Child(6) = Accept Quest Button
+         */
+
+        Transform selectedQuestPanel = dockCanvas.transform.GetChild(2);
+        selectedQuestPanel.gameObject.SetActive(true);
+
+        // Fill selectedQuestPanel with information
+        FillChildText(selectedQuestPanel, 0, selectedQuest.questName);
+        FillChildText(selectedQuestPanel, 1, "Quest Type: " + selectedQuest.questType.ToString());
+        FillChildText(selectedQuestPanel, 2, "Reward: " + selectedQuest.reward.ToString("F0"));
+        FillChildText(selectedQuestPanel, 3, "Difficulty: " + selectedQuest.difficulty.ToString("F0"));
+
+        // Assign actions to buttons
+        Button cancelQuestButton = selectedQuestPanel.GetChild(5).GetComponent<Button>();
+        cancelQuestButton.onClick.RemoveAllListeners();
+        cancelQuestButton.onClick.AddListener(() => CancelSelectedQuest(selectedQuestPanel.gameObject));
+        Button acceptQuestButton = selectedQuestPanel.GetChild(6).GetComponent<Button>();
+        acceptQuestButton.onClick.RemoveAllListeners();
+        acceptQuestButton.onClick.AddListener(() => QuestAccepted());
+    }
+
+    private void CancelSelectedQuest(GameObject questPanel)
+    {
+        questPanel.SetActive(false);
+    }
+    private void QuestAccepted()
+    {
+
+    }
+
+    private void FillChildText(Transform menu, int childIndex, string text)
+    {
+        menu.GetChild(childIndex).GetComponent<TMPro.TextMeshProUGUI>().text = text;
     }
 }
