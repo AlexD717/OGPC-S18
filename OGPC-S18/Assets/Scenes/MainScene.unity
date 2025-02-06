@@ -1521,6 +1521,7 @@ GameObject:
   - component: {fileID: 806108048}
   - component: {fileID: 806108049}
   - component: {fileID: 806108050}
+  - component: {fileID: 806108052}
   - component: {fileID: 806108051}
   m_Layer: 0
   m_Name: Game Manager
@@ -1646,6 +1647,18 @@ MonoBehaviour:
   player: {fileID: 703202723}
   playerIcon: {fileID: 177628065}
   inputs: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+--- !u!114 &806108052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 806108045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be32dac432543cb40833fca7030c9e31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &870582551
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,8 +2,6 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine.UI;
-using UnityEditor.Experimental.GraphView;
-using Unity.VisualScripting;
 
 public class QuestGetttingManager : MonoBehaviour
 {
@@ -30,6 +28,13 @@ public class QuestGetttingManager : MonoBehaviour
     [SerializeField] private float goodEnoughThershold;
     [SerializeField] private float rewardConst;
     private List<GameObject> validQuestPortList = new List<GameObject>();
+
+    private QuestActiveManager questActiveManager;
+
+    private void Start()
+    {
+        questActiveManager = FindFirstObjectByType<QuestActiveManager>();
+    }
 
     public void PlayerDocked(Port port, GameObject _dockCanvas)
     {
@@ -178,9 +183,14 @@ public class QuestGetttingManager : MonoBehaviour
         Button cancelQuestButton = selectedQuestPanel.GetChild(5).GetComponent<Button>();
         cancelQuestButton.onClick.RemoveAllListeners();
         cancelQuestButton.onClick.AddListener(() => CancelSelectedQuest(selectedQuestPanel.gameObject));
+        
         Button acceptQuestButton = selectedQuestPanel.GetChild(6).GetComponent<Button>();
         acceptQuestButton.onClick.RemoveAllListeners();
-        acceptQuestButton.onClick.AddListener(() => QuestAccepted());
+        acceptQuestButton.onClick.AddListener(() => QuestAccepted(selectedQuest, selectedQuestPanel.gameObject));
+        if (!questActiveManager.canAcceptQuest())
+        {
+            acceptQuestButton.interactable = false;
+        }
     }
 
     private void CancelSelectedQuest(GameObject questPanel)
@@ -188,9 +198,17 @@ public class QuestGetttingManager : MonoBehaviour
         questPanel.SetActive(false);
     }
 
-    private void QuestAccepted()
+    private void QuestAccepted(Quest acceptedQuest, GameObject selectedQuestPanel)
     {
+        if (!questActiveManager.canAcceptQuest())
+        {
+            Debug.Log("Can't accept quest, max number reached");
+            return;
+        }
+
+        questActiveManager.questAccepted(acceptedQuest);
         Debug.Log("Quest Accepted");
+        selectedQuestPanel.SetActive(false);
     }
 
     private void FillChildText(Transform menu, int childIndex, string text)
