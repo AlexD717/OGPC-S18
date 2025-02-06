@@ -8,9 +8,9 @@ public class QuestManager : MonoBehaviour
 {
     public enum QuestType
     {
-        story,
-        random,
-        faction
+        Story,
+        Random,
+        Faction
     }
     public enum QuestStatus
     {
@@ -66,17 +66,27 @@ public class QuestManager : MonoBehaviour
             questButton.transform.GetChild(1).GetComponent<TMPro.TextMeshProUGUI>().text = "Reward: " + randomQuest.reward.ToString("F0");
             questButton.transform.GetChild(2).GetComponent<TMPro.TextMeshProUGUI>().text = "Difficulty: " + randomQuest.difficulty.ToString("F0");
 
-            questButton.GetComponent<Button>().onClick.AddListener(RandomQuestSelected); // When button clicked run this function
+            questButton.GetComponent<Button>().onClick.AddListener(() => RandomQuestSelected(randomQuest)); // When button clicked run this function
         }
     }
 
-    private void RandomQuestSelected()
+    private void RandomQuestSelected(Quest selectedQuest)
     {
         // Show menu to confirm quest selection
         // Displays more detailed information about the quest
 
         Transform selectedQuestPanel = dockCanvas.transform.GetChild(2);
         selectedQuestPanel.gameObject.SetActive(true);
+
+        FillChildText(selectedQuestPanel, 0, selectedQuest.questName);
+        FillChildText(selectedQuestPanel, 1, "Quest Type: " + selectedQuest.questType.ToString());
+        FillChildText(selectedQuestPanel, 2, "Reward: " + selectedQuest.reward.ToString("F0"));
+        FillChildText(selectedQuestPanel, 3, "Difficulty: " + selectedQuest.difficulty.ToString("F0"));
+    }
+
+    private void FillChildText(Transform menu, int childIndex, string text)
+    {
+        menu.GetChild(childIndex).GetComponent<TMPro.TextMeshProUGUI>().text = text;
     }
 
     private Quest[] GetViableQuests(string portName, QuestType questTypeWanted)
@@ -111,7 +121,7 @@ public class QuestManager : MonoBehaviour
         Quest randomQuest = ScriptableObject.CreateInstance<Quest>();
 
         // Assigns random values to the quest
-        randomQuest.questType = QuestType.random;
+        randomQuest.questType = QuestType.Random;
         randomQuest.questStatus = QuestStatus.notStarted;
         
         int difficulty = Random.Range(1, difficultyIdealDistance.Length);
