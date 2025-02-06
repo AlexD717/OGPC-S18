@@ -25,6 +25,7 @@ public class Port : MonoBehaviour
     private QuestManager questManager;
 
     [SerializeField] private GameObject dockCanvas;
+    private GameObject selectedQuestPanel;
     private Transform dockPanel;
     private GameObject[] dockPanelMenus;
     private TextMeshProUGUI dockedTextIndicator;
@@ -50,6 +51,9 @@ public class Port : MonoBehaviour
         dockedTextIndicator = dockCanvas.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
         dockedTextIndicator.text = "Docked at " + nameText.text;
 
+        selectedQuestPanel = dockCanvas.transform.GetChild(2).gameObject;
+        selectedQuestPanel.SetActive(false); // Deactivates accepeted quest menu
+
         // Gets all the menus under dockPanel and puts them in the panelMenus array
         dockPanel = dockCanvas.transform.GetChild(0);
         dockPanelMenus = new GameObject[dockPanel.childCount];
@@ -63,8 +67,6 @@ public class Port : MonoBehaviour
          *  panelMenus[0] = Main Menu
          *  paznelMenus[1] = Quests
         */
-
-        dockCanvas.transform.GetChild(2).gameObject.SetActive(false); // Deactivates accepeted quest menu
     }
 
     private void OnEnable()
@@ -153,6 +155,8 @@ public class Port : MonoBehaviour
                 dockPanelMenus[i].SetActive(false);
             }
         }
+
+        selectedQuestPanel.SetActive(false);
     }
 
 }
