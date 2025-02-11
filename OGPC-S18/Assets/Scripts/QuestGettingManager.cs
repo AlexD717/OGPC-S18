@@ -119,7 +119,7 @@ public class QuestGetttingManager : MonoBehaviour
         validQuestPortList.Remove(goalPort);
         randomQuest.goalPort = goalPort.GetComponent<Port>();
 
-        randomQuest.questName = "Diliver to " + randomQuest.goalPort.nameText.text;
+        randomQuest.questName = "Deliver to " + randomQuest.goalPort.nameText.text;
 
         return randomQuest;
     }
