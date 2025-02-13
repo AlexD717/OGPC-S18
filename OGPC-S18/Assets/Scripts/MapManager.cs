@@ -66,12 +66,12 @@ public class MapManager : MonoBehaviour
     }
     private void Start()
     {
+        map.SetActive(true); // allows reference of its components
         mapZoomScale = 1f;
         IconManager = map.transform.GetChild(3);
         mapRect = map.GetComponent<RectTransform>();
         background.localScale = new Vector3(mapRect.rect.width, mapRect.rect.height, 1f);
         Mathf.Clamp(mapZoomScale, mapZoomLimits.x, mapZoomLimits.y);
-        map.SetActive(true); // allows reference of its components
         worldToMapScalar = DetermineMapScaleFactor();
         map.SetActive(false);
         mapOn = false;
@@ -105,15 +105,16 @@ public class MapManager : MonoBehaviour
             islandSprite = islands[i].GetComponent<SpriteRenderer>();
             iconImage.sprite = islandSprite.sprite;
             iconImage.color = islandSprite.color;
-            islandRect = islandIcons[i].GetComponent<RectTransform>();
             islandSize = islands[i].GetComponent<PolygonCollider2D>().bounds.size;
 
+            islandRect = islandIcons[i].GetComponent<RectTransform>();
             islandIcons[i].transform.localPosition = worldToMapScalar * islandCoords * mapZoomScale;
             islandIcons[i].transform.localRotation = islandRotation;
             islandRect.localScale = new Vector3(islandRect.localScale.x * iconScaleFactor,islandRect.localScale.y * iconScaleFactor, 1f);
         }
         playerIcon.GetComponent<RectTransform>().localScale = playerIcon.GetComponent<RectTransform>().localScale * iconScaleFactor;
     }
+    
     private void AddPortsToMap()
     {
         ports = GameObject.FindGameObjectsWithTag("Port");
@@ -122,15 +123,25 @@ public class MapManager : MonoBehaviour
         Quaternion portRotation;
         RectTransform portRect;
 
+        Image iconImage;
+        SpriteRenderer portSprite;
+        Vector3 portSize;
+
         for (int i = 0; i < ports.Length; i++)
         {
             portCoords = ports[i].transform.position;
             portRotation = ports[i].transform.rotation;
             portIcons[i] = Instantiate(portIconPrefab, IconManager);
-            portIcons[i].transform.localPosition = worldToMapScalar * portCoords * mapZoomScale;
-            portIcons[i].transform.localRotation = portRotation;
+
+            iconImage = portIcons[i].GetComponent<Image>();
+            portSprite = ports[i].transform.GetChild(0).GetComponent<SpriteRenderer>();
+            iconImage.sprite = portSprite.sprite;
+            iconImage.color = portSprite.color;
+            portSize = ports[i].transform.GetChild(2).GetComponent<PolygonCollider2D>().bounds.size;
             
             portRect = portIcons[i].GetComponent<RectTransform>();
+            portIcons[i].transform.localPosition = worldToMapScalar * portCoords * mapZoomScale;
+            portIcons[i].transform.localRotation = portRotation;
             portRect.localScale = new Vector3(portRect.localScale.x * iconScaleFactor,portRect.localScale.y * iconScaleFactor, 1f);
         }
     }
