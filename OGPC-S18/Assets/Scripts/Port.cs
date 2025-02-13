@@ -22,9 +22,10 @@ public class Port : MonoBehaviour
     [HideInInspector] public TextMeshProUGUI nameText;
 
     private PortManager portManager;
-    private QuestManager questManager;
+    private QuestGetttingManager questManager;
 
     [SerializeField] private GameObject dockCanvas;
+    private GameObject selectedQuestPanel;
     private Transform dockPanel;
     private GameObject[] dockPanelMenus;
     private TextMeshProUGUI dockedTextIndicator;
@@ -35,7 +36,7 @@ public class Port : MonoBehaviour
         rangeSprite.enabled = false;
 
         portManager = FindFirstObjectByType<PortManager>();
-        questManager = FindFirstObjectByType<QuestManager>();
+        questManager = FindFirstObjectByType<QuestGetttingManager>();
 
         playerDockPositions = new Transform[playerDockPositionsParent.childCount];
         for (int i = 0; i < playerDockPositionsParent.childCount; i++)
@@ -50,6 +51,9 @@ public class Port : MonoBehaviour
         dockedTextIndicator = dockCanvas.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
         dockedTextIndicator.text = "Docked at " + nameText.text;
 
+        selectedQuestPanel = dockCanvas.transform.GetChild(2).gameObject;
+        selectedQuestPanel.SetActive(false); // Deactivates accepeted quest menu
+
         // Gets all the menus under dockPanel and puts them in the panelMenus array
         dockPanel = dockCanvas.transform.GetChild(0);
         dockPanelMenus = new GameObject[dockPanel.childCount];
@@ -63,8 +67,6 @@ public class Port : MonoBehaviour
          *  panelMenus[0] = Main Menu
          *  paznelMenus[1] = Quests
         */
-
-        dockCanvas.transform.GetChild(2).gameObject.SetActive(false); // Deactivates accepeted quest menu
     }
 
     private void OnEnable()
@@ -104,7 +106,7 @@ public class Port : MonoBehaviour
         dockCanvas.SetActive(true);
         SelectMenu(0);
         questManager.PlayerDocked(this, dockCanvas);
-        portManager.PlayerDocked(playerDockPositions, dockPanelMenus);
+        portManager.PlayerDocked(playerDockPositions, dockPanelMenus, this);
         playerDocked = true;
         rangeSprite.enabled = false;
         nameText.enabled = false;
@@ -153,6 +155,8 @@ public class Port : MonoBehaviour
                 dockPanelMenus[i].SetActive(false);
             }
         }
+
+        selectedQuestPanel.SetActive(false);
     }
 
 }

@@ -5,8 +5,8 @@ public class Quest : ScriptableObject
 {
     public string questName;
 
-    public QuestManager.QuestType questType;
-    [HideInInspector] public QuestManager.QuestStatus questStatus = QuestManager.QuestStatus.notStarted;
+    public QuestGetttingManager.QuestType questType;
+    [HideInInspector] public QuestGetttingManager.QuestStatus questStatus = QuestGetttingManager.QuestStatus.notStarted;
 
     public string[] viablePorts; // Which ports can this quest be found in
 

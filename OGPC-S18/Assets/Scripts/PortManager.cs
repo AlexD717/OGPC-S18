@@ -5,20 +5,20 @@ public class PortManager : MonoBehaviour
 {
     private GameObject player;
     private BoatController boatController;
-    private QuestManager questManager;
+    private QuestGetttingManager questManager;
 
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         boatController = player.GetComponent<BoatController>();
-        questManager = GetComponent<QuestManager>();
+        questManager = GetComponent<QuestGetttingManager>();
     }
 
-    public void PlayerDocked(Transform[] playerDockPositions, GameObject[] dockPanelMenus)
+    public void PlayerDocked(Transform[] playerDockPositions, GameObject[] dockPanelMenus, Port dockedPort)
     {
         boatController.Dock(GetClosestDockPosition(playerDockPositions));
 
-        questManager.AddQuestsToMenu(dockPanelMenus[1].transform);
+        questManager.AddQuestsToMenu(dockPanelMenus[1].transform, dockedPort);
     }
 
     public void PlayerUndocked()
