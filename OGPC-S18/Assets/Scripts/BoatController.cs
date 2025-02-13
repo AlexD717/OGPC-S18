@@ -17,6 +17,8 @@ public class BoatController : MonoBehaviour
     [SerializeField] private float stallAngle;
     [SerializeField] private float currentAccelerationMod;
     [SerializeField] private float currentMaxSpeedMod;
+    [SerializeField] private float cargoCapacity;
+    [SerializeField] private float cargoEffectOnSpeed;
 
     [Header("References")]
     [SerializeField] private Transform sail;
@@ -50,6 +52,7 @@ public class BoatController : MonoBehaviour
     private float boatWaterSpeed;
     private float boatHeading;
     private Vector2 boatWaterVector;
+    private float currentCargoLoad = 0f;
 
     private float boatVelocityMagnitude;
     private int debugTimer = 0;
@@ -188,7 +191,7 @@ public class BoatController : MonoBehaviour
         float speedMagnitude = sailAngleSpeedMod * windManager.GetWindSpeed() * speedAccelerationMod;
 
         // Makes sure boat doesn't exceed maximum speed relative to current
-        if (boatWaterSpeed < maxSpeed/100 * windManager.GetWindSpeed())
+        if (boatWaterSpeed < maxSpeed/100 * windManager.GetWindSpeed() * ((1-cargoEffectOnSpeed) + cargoEffectOnSpeed * (1f-currentCargoLoad / cargoCapacity)))
             rb.AddRelativeForceY(speedMagnitude);
     }
 

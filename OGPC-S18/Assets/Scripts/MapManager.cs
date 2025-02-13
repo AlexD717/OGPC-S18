@@ -26,6 +26,10 @@ public class MapManager : MonoBehaviour
     private InputAction mapToggle;
     private bool mapOn;
 
+    private Vector2 screenBounds;
+    private Vector2 screenOrig;
+    private InputActionMap boatActionMap;
+
     private RectTransform mapRect;
     GameObject[] islands;
     GameObject[] ports;
@@ -48,7 +52,9 @@ public class MapManager : MonoBehaviour
         mapPanInput = inputs.FindActionMap("Map").FindAction("MapPan");
         mapPanInput.Enable();
         mapReset = inputs.FindActionMap("Map").FindAction("mapReset");
-        mapReset.Enable();
+        mapReset.Enable(); 
+        boatActionMap = inputs.FindActionMap("Player");
+        boatActionMap.Enable();
     }
 
     private void OnDisable()
@@ -72,6 +78,8 @@ public class MapManager : MonoBehaviour
         AddIslandsToMap();
         AddPortsToMap();
 
+        screenOrig = Camera.main.ScreenToWorldPoint(Vector2.zero);
+        screenBounds = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height));
     }
     private void AddIslandsToMap()
     {
@@ -135,9 +143,6 @@ public class MapManager : MonoBehaviour
             mapZoomScale = Mathf.Clamp(mapZoomScale, mapZoomLimits.x, mapZoomLimits.y);
         }
         panLocation = panLocation + mapPanSensitivity * mapPanInput.ReadValue<Vector2>();
-        Debug.Log("PanLocation " + panLocation.x.ToString() + " " + panLocation.y.ToString());
-        Debug.Log("PanLocationDelta " + mapPanInput.ReadValue<Vector2>().x.ToString() + " " + mapPanInput.ReadValue<Vector2>().y.ToString());
-
     }
     private void UpdateMap()
     {
@@ -149,6 +154,7 @@ public class MapManager : MonoBehaviour
             mapZoomScale = 1f;
             panLocation = new Vector2(0f,0f); //Recenters on player
         }     
+
     }
 
     private float DetermineMapScaleFactor()
@@ -165,7 +171,6 @@ public class MapManager : MonoBehaviour
     }
     private void Update()
     {
-
         if (mapToggle.triggered)
         {
             mapOn = !mapOn;
@@ -173,7 +178,19 @@ public class MapManager : MonoBehaviour
             playerIcon.transform.localRotation = player.transform.rotation;
             map.SetActive(mapOn);
             UsefulStuff.GamePaused(mapOn);
+            if (mapOn)
+            {
+                boatActionMap.Disable();
+            }
+            else
+            {
+                boatActionMap.Enable();
+            }
         }
-        if (mapOn) {UpdateMap();}
+        if (mapOn) 
+        {
+            UpdateMap();
+            
+        }
     }
 }
