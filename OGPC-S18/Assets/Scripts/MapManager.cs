@@ -90,7 +90,6 @@ public class MapManager : MonoBehaviour
         SpriteRenderer islandSprite;
         Vector3 islandSize;
         Quaternion islandRotation;
-        float hexagonYSquishFactor = 34.6875f / 40f;
 
         islandSize = islands[0].GetComponent<PolygonCollider2D>().bounds.size;
         iconScaleFactor = (islandSize.x / worldSize.x) * map.GetComponent<RectTransform>().rect.width / 100;
@@ -111,8 +110,9 @@ public class MapManager : MonoBehaviour
 
             islandIcons[i].transform.localPosition = worldToMapScalar * islandCoords * mapZoomScale;
             islandIcons[i].transform.localRotation = islandRotation;
-            islandRect.localScale = new Vector3(islandRect.localScale.x * iconScaleFactor,islandRect.localScale.y * iconScaleFactor * hexagonYSquishFactor, 1f);
+            islandRect.localScale = new Vector3(islandRect.localScale.x * iconScaleFactor,islandRect.localScale.y * iconScaleFactor, 1f);
         }
+        playerIcon.GetComponent<RectTransform>().localScale = playerIcon.GetComponent<RectTransform>().localScale * iconScaleFactor;
     }
     private void AddPortsToMap()
     {
@@ -131,30 +131,42 @@ public class MapManager : MonoBehaviour
             portIcons[i].transform.localRotation = portRotation;
             
             portRect = portIcons[i].GetComponent<RectTransform>();
-            portRect.localScale = 1.4f * new Vector3(portRect.localScale.x * iconScaleFactor,portRect.localScale.y * iconScaleFactor, 1f);
+            portRect.localScale = new Vector3(portRect.localScale.x * iconScaleFactor,portRect.localScale.y * iconScaleFactor, 1f);
         }
     }
 
-    private void ProcessInputs()
+    private void ZoomMap()
     {
         if (mapZoomInput.ReadValue<float>() != 0)
         {
             mapZoomScale = mapZoomScale + mapZoomSensitivity * mapZoomInput.ReadValue<float>();
             mapZoomScale = Mathf.Clamp(mapZoomScale, mapZoomLimits.x, mapZoomLimits.y);
+            IconManager.localScale = new Vector3(mapZoomScale,mapZoomScale,1f);
         }
-        panLocation = panLocation + mapPanSensitivity * mapPanInput.ReadValue<Vector2>();
+    }
+
+    private void PanMap()
+    {
+        if (mapPanInput.ReadValue<Vector2>() != Vector2.zero)
+        {
+            panLocation = panLocation + mapPanSensitivity * mapPanInput.ReadValue<Vector2>();
+            IconManager.localPosition = -panLocation;
+        }
+    }
+
+    private void ResetMap()
+    {
+        mapZoomScale = 1f;
+        panLocation = new Vector2(0f,0f); //Recenters on player
     }
     private void UpdateMap()
     {
-        ProcessInputs();
-        IconManager.localScale = new Vector3(mapZoomScale,mapZoomScale,1f);
-        IconManager.localPosition = -panLocation;
         if (mapReset.triggered)
         {
-            mapZoomScale = 1f;
-            panLocation = new Vector2(0f,0f); //Recenters on player
+            ResetMap();
         }     
-
+        ZoomMap();
+        PanMap();
     }
 
     private float DetermineMapScaleFactor()
@@ -169,15 +181,22 @@ public class MapManager : MonoBehaviour
 
         return realFactor;
     }
+
+    private void ToggleMap()
+    {
+        mapOn = !mapOn;
+        playerIcon.transform.localPosition = player.transform.position * worldToMapScalar;
+        playerIcon.transform.localRotation = player.transform.rotation;
+        panLocation = playerIcon.transform.localPosition;
+        mapZoomScale = 1f;
+        map.SetActive(mapOn);
+        UsefulStuff.GamePaused(mapOn);
+    }
     private void Update()
     {
         if (mapToggle.triggered)
         {
-            mapOn = !mapOn;
-            panLocation = playerIcon.transform.localPosition;
-            playerIcon.transform.localRotation = player.transform.rotation;
-            map.SetActive(mapOn);
-            UsefulStuff.GamePaused(mapOn);
+            ToggleMap();            
             if (mapOn)
             {
                 boatActionMap.Disable();
