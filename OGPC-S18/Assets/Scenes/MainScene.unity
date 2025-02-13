@@ -1622,12 +1622,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8862feff7c7de754cbc84217bb305edc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  questRefreshTimeLenght: 60
+  difficultyIdealDistance: 0a000000140000001e00000028000000320000003c00000046000000500000005a00000064000000
+  goodEnoughThershold: 0
+  rewardConst: 0
   quests:
   - {fileID: 11400000, guid: b94bb12de4daa184b8c4489f14078503, type: 2}
   questButtonPrefab: {fileID: 2753785917654110327, guid: 3c40f35e0fe03384299b88e8b889fde3, type: 3}
-  difficultyIdealDistance: 320000006400000096000000c8000000fa0000002c0100005e01000090010000c2010000f4010000
-  goodEnoughThershold: 10
-  rewardConst: 100
 --- !u!114 &806108051
 MonoBehaviour:
   m_ObjectHideFlags: 0

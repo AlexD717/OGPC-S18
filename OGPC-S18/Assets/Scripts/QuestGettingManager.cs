@@ -18,10 +18,9 @@ public class QuestGetttingManager : MonoBehaviour
         completed,
     }
 
-    [SerializeField] private Quest[] quests;
-    [SerializeField] private GameObject questButtonPrefab;
-    private GameObject dockedPort;
-    private GameObject dockCanvas;
+    [Header("Quest Generation")]
+    [SerializeField] private float questRefreshTimeLenght; // Amount of time it takes before quest refresh
+    private Dictionary<string, float> nextQuestRefreshDictionary = new Dictionary<string, float>();
 
     [Header("Random Quest Generation")]
     public int[] difficultyIdealDistance = new int[] { 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 };
@@ -29,11 +28,23 @@ public class QuestGetttingManager : MonoBehaviour
     [SerializeField] private float rewardConst;
     private List<GameObject> validQuestPortList = new List<GameObject>();
 
+    [Header("References")]
+    [SerializeField] private Quest[] quests;
+    [SerializeField] private GameObject questButtonPrefab;
+    private GameObject dockedPort;
+    private GameObject dockCanvas;
+
     private QuestActiveManager questActiveManager;
 
     private void Start()
     {
         questActiveManager = FindFirstObjectByType<QuestActiveManager>();
+
+        // Populate nextQuestRefreshDictionary
+        foreach (Port port in FindObjectsByType<Port>(FindObjectsSortMode.None))
+        {
+            nextQuestRefreshDictionary.Add(port.nameText.text, 0f);
+        }
     }
 
     public void PlayerDocked(Port port, GameObject _dockCanvas)
@@ -42,18 +53,33 @@ public class QuestGetttingManager : MonoBehaviour
         dockCanvas = _dockCanvas;
     }
 
-    public void AddQuestsToMenu(Transform questMenu)
+    public void AddQuestsToMenu(Transform questMenu, Port dockedPort)
     {
         // Add quests to the Quests Menu
         // Up to 4 quests can be added, one must be reserved for story quests
         Transform questLocation = questMenu.GetChild(2);
+
+        bool questRefresh = false;
+        float nextQuestRefreshTime = 0f;
+        nextQuestRefreshDictionary.TryGetValue(dockedPort.nameText.text, out nextQuestRefreshTime);
         
-        bool questsAlreadyAdded = false;
-        if (questLocation.childCount > 0) { questsAlreadyAdded = true; }
+        if (nextQuestRefreshTime <= Time.time)
+        {
+            questRefresh = true;
+            nextQuestRefreshTime = Time.time + questRefreshTimeLenght;
+            nextQuestRefreshDictionary[dockedPort.nameText.text] = nextQuestRefreshTime;
+            
+            // Completly clear quest menu panel
+            for (int i = 0; i < questLocation.childCount; i++)
+            {
+                Destroy(questLocation.GetChild(0).gameObject);
+            }
+        }
 
         // Add story quests
+        // TODO make code to add story quests
 
-        if (questsAlreadyAdded)
+        if (!questRefresh)
         {
             return;
         }
@@ -62,7 +88,7 @@ public class QuestGetttingManager : MonoBehaviour
 
         // Add random quests
         validQuestPortList = GameObject.FindGameObjectsWithTag("Port").ToList();
-        validQuestPortList.Remove(dockedPort);
+        validQuestPortList.Remove(dockedPort.gameObject);
         for (int i = 0; i < Mathf.Clamp(4 - questLocation.childCount, 0, 3); i++)
         {
             Quest randomQuest = GenerateRandomQuest();
@@ -72,7 +98,7 @@ public class QuestGetttingManager : MonoBehaviour
             questButton.transform.GetChild(1).GetComponent<TMPro.TextMeshProUGUI>().text = "Reward: " + randomQuest.reward.ToString("F0");
             questButton.transform.GetChild(2).GetComponent<TMPro.TextMeshProUGUI>().text = "Difficulty: " + randomQuest.difficulty.ToString("F0");
 
-            questButton.GetComponent<Button>().onClick.AddListener(() => RandomQuestSelected(randomQuest)); // When button clicked run this function
+            questButton.GetComponent<Button>().onClick.AddListener(() => RandomQuestSelected(randomQuest, questButton)); // When button clicked run this function
         }
     }
 
@@ -156,7 +182,7 @@ public class QuestGetttingManager : MonoBehaviour
         return validPorts[Random.Range(0, validPorts.Count - 1)];
     }
 
-    private void RandomQuestSelected(Quest selectedQuest)
+    private void RandomQuestSelected(Quest selectedQuest, GameObject questButton)
     {
         /* Show menu to confirm quest selection
          * Displays more detailed information about the quest
@@ -186,7 +212,7 @@ public class QuestGetttingManager : MonoBehaviour
         
         Button acceptQuestButton = selectedQuestPanel.GetChild(6).GetComponent<Button>();
         acceptQuestButton.onClick.RemoveAllListeners();
-        acceptQuestButton.onClick.AddListener(() => QuestAccepted(selectedQuest, selectedQuestPanel.gameObject));
+        acceptQuestButton.onClick.AddListener(() => QuestAccepted(selectedQuest, selectedQuestPanel.gameObject, questButton));
         if (!questActiveManager.canAcceptQuest())
         {
             acceptQuestButton.interactable = false;
@@ -198,7 +224,7 @@ public class QuestGetttingManager : MonoBehaviour
         questPanel.SetActive(false);
     }
 
-    private void QuestAccepted(Quest acceptedQuest, GameObject selectedQuestPanel)
+    private void QuestAccepted(Quest acceptedQuest, GameObject selectedQuestPanel, GameObject thisButton)
     {
         if (!questActiveManager.canAcceptQuest())
         {
@@ -209,6 +235,8 @@ public class QuestGetttingManager : MonoBehaviour
         questActiveManager.questAccepted(acceptedQuest);
         Debug.Log("Quest Accepted");
         selectedQuestPanel.SetActive(false);
+        
+        Destroy(thisButton); // Can't accept the same quest twice :)
     }
 
     private void FillChildText(Transform menu, int childIndex, string text)

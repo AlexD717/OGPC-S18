@@ -106,7 +106,7 @@ public class Port : MonoBehaviour
         dockCanvas.SetActive(true);
         SelectMenu(0);
         questManager.PlayerDocked(this, dockCanvas);
-        portManager.PlayerDocked(playerDockPositions, dockPanelMenus);
+        portManager.PlayerDocked(playerDockPositions, dockPanelMenus, this);
         playerDocked = true;
         rangeSprite.enabled = false;
         nameText.enabled = false;
