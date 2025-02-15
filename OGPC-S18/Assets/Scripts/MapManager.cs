@@ -75,15 +75,25 @@ public class MapManager : MonoBehaviour
         worldToMapScalar = DetermineMapScaleFactor();
         map.SetActive(false);
         mapOn = false;
-        AddIslandsToMap();
-        AddPortsToMap();
+
+        AddObjectsToMap();
 
         screenOrig = Camera.main.ScreenToWorldPoint(Vector2.zero);
         screenBounds = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height));
     }
-    private void AddIslandsToMap()
+
+    private void AddObjectsToMap()
     {
         islands = GameObject.FindGameObjectsWithTag("Island");
+        ports = GameObject.FindGameObjectsWithTag("Port");
+
+        iconScaleFactor = (islands[0].GetComponent<PolygonCollider2D>().bounds.size.x / worldSize.x) * map.GetComponent<RectTransform>().rect.width;
+        playerIcon.GetComponent<RectTransform>().localScale = playerIcon.GetComponent<RectTransform>().localScale * iconScaleFactor;
+        AddIslandsToMap();
+        AddPortsToMap();
+    }
+    private void AddIslandsToMap()
+    {
         islandIcons = new GameObject[islands.Length];
         Image iconImage;
         RectTransform islandRect;
@@ -91,8 +101,6 @@ public class MapManager : MonoBehaviour
         Vector3 islandSize;
         Quaternion islandRotation;
 
-        islandSize = islands[0].GetComponent<PolygonCollider2D>().bounds.size;
-        iconScaleFactor = (islandSize.x / worldSize.x) * map.GetComponent<RectTransform>().rect.width / 100;
 
         Vector2 islandCoords;
         for (int i = 0; i < islands.Length; i++)
@@ -112,12 +120,10 @@ public class MapManager : MonoBehaviour
             islandIcons[i].transform.localRotation = islandRotation;
             islandRect.localScale = new Vector3(islandRect.localScale.x * iconScaleFactor,islandRect.localScale.y * iconScaleFactor, 1f);
         }
-        playerIcon.GetComponent<RectTransform>().localScale = playerIcon.GetComponent<RectTransform>().localScale * iconScaleFactor;
     }
     
     private void AddPortsToMap()
     {
-        ports = GameObject.FindGameObjectsWithTag("Port");
         portIcons = new GameObject[ports.Length];
         Vector2 portCoords;
         Quaternion portRotation;
@@ -150,9 +156,12 @@ public class MapManager : MonoBehaviour
     {
         if (mapZoomInput.ReadValue<float>() != 0)
         {
+            panLocation = panLocation / mapZoomScale;
             mapZoomScale = mapZoomScale + mapZoomSensitivity * mapZoomInput.ReadValue<float>();
             mapZoomScale = Mathf.Clamp(mapZoomScale, mapZoomLimits.x, mapZoomLimits.y);
             IconManager.localScale = new Vector3(mapZoomScale,mapZoomScale,1f);
+            panLocation = panLocation * mapZoomScale;
+
         }
     }
 
@@ -186,9 +195,9 @@ public class MapManager : MonoBehaviour
         float yFactor;
         float realFactor;
         Vector2 mapSize = new Vector2(mapRect.rect.width,mapRect.rect.height);
-        xFactor = worldSize.x/mapSize.x;
-        yFactor = worldSize.y/mapSize.y;
-        realFactor = 1 / Mathf.Max(xFactor,yFactor);
+        xFactor = mapSize.x/worldSize.x;
+        yFactor = mapSize.y/worldSize.y;
+        realFactor = Mathf.Min(xFactor,yFactor);
 
         return realFactor;
     }

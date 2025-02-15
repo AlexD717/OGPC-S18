@@ -282,7 +282,7 @@ RectTransform:
   m_GameObject: {fileID: 177628065}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.375, y: 0.5, z: 1}
+  m_LocalScale: {x: 0.075, y: 0.1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1997816395}
@@ -290,7 +290,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &177628067
 MonoBehaviour:
@@ -368,11 +368,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6675712426695899993, guid: 03c45e262c5cf4642b6477e0dcb34888, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 100
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6675712426695899993, guid: 03c45e262c5cf4642b6477e0dcb34888, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 100
+      value: 0.8828125
       objectReference: {fileID: 0}
     - target: {fileID: 6675712426695899993, guid: 03c45e262c5cf4642b6477e0dcb34888, type: 3}
       propertyPath: m_LocalScale.x
@@ -1552,6 +1552,8 @@ MonoBehaviour:
   stallAngle: 45
   currentAccelerationMod: 3
   currentMaxSpeedMod: 0.1
+  cargoCapacity: 50
+  cargoEffectOnSpeed: 5
   sail: {fileID: 1263568185}
   player: {fileID: 703202724}
   compass: {fileID: 870582552}
@@ -1879,7 +1881,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   worldSize: {x: 100, y: 100}
   mapZoomLimits: {x: 0.25, y: 1}
-  mapZoomSensitivity: 1
+  mapZoomSensitivity: 0.1
   mapPanSensitivity: 1
   map: {fileID: 1117752311}
   islandIconReference: {fileID: 1425195521}
@@ -3109,11 +3111,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2008751500430864526, guid: 4509cf964100a634b9cccdc93d367088, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 100
+      value: 1.6683047
       objectReference: {fileID: 0}
     - target: {fileID: 2008751500430864526, guid: 4509cf964100a634b9cccdc93d367088, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 100
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2008751500430864526, guid: 4509cf964100a634b9cccdc93d367088, type: 3}
       propertyPath: m_LocalScale.x

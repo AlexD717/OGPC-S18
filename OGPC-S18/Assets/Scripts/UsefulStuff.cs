@@ -12,9 +12,20 @@ public class UsefulStuff
         return num;
     }
 
-    public static Vector2 Polar2Vector(float ang, float mag) //Turns polar coords into a vector
+    public static Vector2 Polar2Vector(float angle, float magnitude) //Turns polar coords into a vector
     {
-        return new Vector2(mag*Mathf.Sin(ang*Mathf.Deg2Rad),mag*Mathf.Cos(ang*Mathf.Deg2Rad));
+        return new Vector2(magnitude*Mathf.Sin(angle*Mathf.Deg2Rad),magnitude*Mathf.Cos(angle*Mathf.Deg2Rad));
+    }
+
+    public static Vector2 RotateVector(Vector2 vector, float angle)
+    {
+        float newMagnitude;
+        float newAngle;
+
+        newMagnitude = vector.magnitude;
+        newAngle = Vector2.SignedAngle(vector, Vector2.right) + angle;
+
+        return Polar2Vector(newAngle, newMagnitude);
     }
 
     public static void GamePaused(bool pause)
