@@ -25,8 +25,9 @@ public class WindManager : MonoBehaviour
     [SerializeField] private float scalar; //Multiplier for the magnitude to help adjust strength
     [SerializeField] private int updateInterval; // Updates values every "this many frames"
 
-    float[] magDeltas;
-    float[] angDeltas;
+    private float[] magDeltas;
+    private float[] angDeltas;
+    private Vector2 windVector;
 
     private void Start()
     {
@@ -43,6 +44,7 @@ public class WindManager : MonoBehaviour
             magDeltas[i] = 0f;
             angDeltas[i] = 0f;
         }
+        windVector = UsefulStuff.Convert.Polar2Vector(UsefulStuff.Convert.Bearing2Angle(windDirection), windSpeed);
     }
 
     private void UpdateWind() 
@@ -59,6 +61,8 @@ public class WindManager : MonoBehaviour
         windDirection = windDirection + angDeltas[^1];
         if (windDirection < 0) {windDirection = (360 + windDirection)%360;}
         windSpeed = Mathf.Clamp(windSpeed + scalar*magDeltas[^1], 0, scalar*maxWindspeed);
+    
+        windVector = UsefulStuff.Convert.Polar2Vector(UsefulStuff.Convert.Bearing2Angle(windDirection), windSpeed);
     }
 
     private void UpdateUI()
@@ -81,13 +85,8 @@ public class WindManager : MonoBehaviour
         UpdateUI();
     }
 
-    public float GetWindDirection()
+    public Vector2 GetWindVector()
     {
-        return windDirection;
-    }
-
-    public float GetWindSpeed()
-    {
-        return windSpeed;
+        return windVector;
     }
 }

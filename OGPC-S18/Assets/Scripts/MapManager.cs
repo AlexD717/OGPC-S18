@@ -26,13 +26,15 @@ public class MapManager : MonoBehaviour
     private InputAction mapToggle;
     private bool mapOn;
 
-    private Vector2 screenBounds;
+    private Vector2 screenSize;
     private Vector2 screenOrig;
     private InputActionMap boatActionMap;
 
     private RectTransform mapRect;
     GameObject[] islands;
+    bool[] islandsDiscovered;
     GameObject[] ports;
+    bool[] portsDiscovered;
 
     GameObject[] islandIcons;
     Vector3[] islandIconsBaseRef; //For storing default location and scale
@@ -77,11 +79,74 @@ public class MapManager : MonoBehaviour
         mapOn = false;
 
         AddObjectsToMap();
+        islandsDiscovered = new bool[islands.Length];
+        portsDiscovered = new bool[ports.Length];
+        for (int i = 0; i < islands.Length; i++)
+        {
+            islandsDiscovered[i] = false;
+        }
+        for (int i = 0; i < ports.Length; i++)
+        {
+            portsDiscovered[i] = false;
+        }
 
         screenOrig = Camera.main.ScreenToWorldPoint(Vector2.zero);
-        screenBounds = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height));
-    }
+        screenSize = 2 * Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height));
 
+        Debug.Log("screenSize: " + screenSize.x.ToString() + " " + screenSize.y.ToString());
+        UsefulStuff.Debugging.LogArrays.Bool(islandsDiscovered);
+    }
+    private float DetermineMapScaleFactor()
+    {
+        float xFactor;
+        float yFactor;
+        float realFactor;
+        Vector2 mapSize = new Vector2(mapRect.rect.width,mapRect.rect.height);
+        xFactor = mapSize.x/worldSize.x;
+        yFactor = mapSize.y/worldSize.y;
+        realFactor = Mathf.Min(xFactor,yFactor);
+
+        return realFactor;
+    }
+    private bool IslandInPlayerView(GameObject island)
+    {
+        PolygonCollider2D islandCollider = island.GetComponent<PolygonCollider2D>();
+        Vector2 islandPosition = island.transform.localPosition; //local and global position are the same
+        float islandScale = island.transform.localScale.x; //local and global are same
+        return ColliderInPlayerView(islandCollider, islandPosition, islandScale);
+    }
+    private bool PortInPlayerView(GameObject port)
+    {
+        PolygonCollider2D portCollider = port.transform.GetChild(2).GetComponent<PolygonCollider2D>();
+        Vector2 portPosition = port.transform.localPosition; //local and global position are the same
+        float portScale = port.transform.localScale.x; //local and global are same
+        return ColliderInPlayerView(portCollider, portPosition, portScale);
+    }
+    private bool ColliderInPlayerView(PolygonCollider2D collider, Vector2 absolutePosition, float absoluteScale)//absolute is coonsidering all scaling of parent objects, as appears to the world 
+    {
+        Vector2[] colliderPoints;
+        Vector2 colliderPointLocation;        
+
+        colliderPoints = collider.points;
+        foreach (Vector2 point in colliderPoints)
+        {
+            colliderPointLocation = UsefulStuff.Convert.Vector32Vector2(absolutePosition) + (point * absoluteScale);
+            if (PointInPlayerView(colliderPointLocation))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    private bool PointInPlayerView(Vector2 objectPosition)
+    {
+        UsefulStuff.Debugging.Vectors.LogVector2("Point", objectPosition);
+        Vector2 relativeLocation;
+        Vector2 playerPosition = new Vector2(player.transform.position.x, player.transform.position.y);
+        relativeLocation = UsefulStuff.LinearAlgebra.RotateVector(objectPosition - playerPosition, player.transform.localRotation.eulerAngles.z);
+
+        return (Mathf.Abs(relativeLocation.x) <= screenSize.x / 2f && Mathf.Abs(relativeLocation.y) <= screenSize.y / 2f);
+    }
     private void AddObjectsToMap()
     {
         islands = GameObject.FindGameObjectsWithTag("Island");
@@ -119,6 +184,9 @@ public class MapManager : MonoBehaviour
             islandIcons[i].transform.localPosition = worldToMapScalar * islandCoords * mapZoomScale;
             islandIcons[i].transform.localRotation = islandRotation;
             islandRect.localScale = new Vector3(islandRect.localScale.x * iconScaleFactor,islandRect.localScale.y * iconScaleFactor, 1f);
+            
+            islandIcons[i].SetActive(false);
+            Debug.Log("island " + i.ToString() + " " + islandIcons[i].activeSelf.ToString());
         }
     }
     
@@ -149,6 +217,8 @@ public class MapManager : MonoBehaviour
             portIcons[i].transform.localPosition = worldToMapScalar * portCoords * mapZoomScale;
             portIcons[i].transform.localRotation = portRotation;
             portRect.localScale = new Vector3(portRect.localScale.x * iconScaleFactor,portRect.localScale.y * iconScaleFactor, 1f);
+
+            portIcons[i].SetActive(false);
         }
     }
 
@@ -188,20 +258,25 @@ public class MapManager : MonoBehaviour
         ZoomMap();
         PanMap();
     }
-
-    private float DetermineMapScaleFactor()
+    private void DiscoverObjects()
     {
-        float xFactor;
-        float yFactor;
-        float realFactor;
-        Vector2 mapSize = new Vector2(mapRect.rect.width,mapRect.rect.height);
-        xFactor = mapSize.x/worldSize.x;
-        yFactor = mapSize.y/worldSize.y;
-        realFactor = Mathf.Min(xFactor,yFactor);
-
-        return realFactor;
+        for (int i = 0; i < islands.Length; i++)
+        {
+            if (!islandsDiscovered[i] && IslandInPlayerView(islands[i]))
+            {
+                islandsDiscovered[i] = true;
+                islandIcons[i].SetActive(true);
+            }
+        }
+        for (int i = 0; i < ports.Length; i++)
+        {
+            if (!portsDiscovered[i] && PortInPlayerView(ports[i]))
+            {
+                portsDiscovered[i] = true;
+                portIcons[i].SetActive(true);
+            }
+        }
     }
-
     private void ToggleMap()
     {
         mapOn = !mapOn;
@@ -209,8 +284,9 @@ public class MapManager : MonoBehaviour
         playerIcon.transform.localRotation = player.transform.rotation;
         panLocation = playerIcon.transform.localPosition;
         mapZoomScale = 1f;
+        UsefulStuff.Debugging.Vectors.LogVector2("Camera Bounds", UsefulStuff.Convert.Vector32Vector2(player.transform.position) + (screenSize/2));
+        UsefulStuff.Game.GamePaused(mapOn);
         map.SetActive(mapOn);
-        UsefulStuff.GamePaused(mapOn);
     }
     private void Update()
     {
@@ -229,7 +305,10 @@ public class MapManager : MonoBehaviour
         if (mapOn) 
         {
             UpdateMap();
-            
+        }
+        else
+        {
+            DiscoverObjects();
         }
     }
 }

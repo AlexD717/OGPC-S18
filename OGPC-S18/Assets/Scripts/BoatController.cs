@@ -17,8 +17,6 @@ public class BoatController : MonoBehaviour
     [SerializeField] private float stallAngle;
     [SerializeField] private float currentAccelerationMod;
     [SerializeField] private float currentMaxSpeedMod;
-    [SerializeField] private float cargoCapacity;
-    [SerializeField] private float cargoEffectOnSpeed;
 
     [Header("References")]
     [SerializeField] private Transform sail;
@@ -52,8 +50,6 @@ public class BoatController : MonoBehaviour
     private float boatWaterSpeed;
     private float boatHeading;
     private Vector2 boatWaterVector;
-    private float currentCargoLoad = 0f;
-
     private float boatVelocityMagnitude;
     private int debugTimer = 0;
     private bool logDebug = false;
@@ -80,7 +76,7 @@ public class BoatController : MonoBehaviour
         rudderController = GetComponent<RudderController>();
         rudderController.SetRudderMoveSpeed(rudderMoveSpeed);
         
-        rb.linearVelocity = rb.linearVelocity + UsefulStuff.Polar2Vector(currentManager.currentDirection, currentManager.currentSpeed * currentMaxSpeedMod);
+        rb.linearVelocity = rb.linearVelocity + UsefulStuff.Convert.Polar2Vector(currentManager.currentDirection, currentManager.currentSpeed * currentMaxSpeedMod);
 
         debugTimer = debugTicksInterval - 1;
     }
@@ -149,7 +145,8 @@ public class BoatController : MonoBehaviour
 
     private void RotateSailToMatchWind()
     {
-        relativeWindDirection = (windManager.GetWindDirection() + transform.localRotation.eulerAngles.z) % 360;
+        float windDirection = UsefulStuff.Convert.Angle2Bearing(UsefulStuff.Convert.Vector2Polar(windManager.GetWindVector())[0]);
+        relativeWindDirection = (windDirection + transform.localRotation.eulerAngles.z) % 360;
 
         float windSailRotation;
         if (relativeWindDirection > 0 && relativeWindDirection < 180)
@@ -188,10 +185,10 @@ public class BoatController : MonoBehaviour
             }
         }
 
-        float speedMagnitude = sailAngleSpeedMod * windManager.GetWindSpeed() * speedAccelerationMod;
+        float speedMagnitude = sailAngleSpeedMod * windManager.GetWindVector().magnitude * speedAccelerationMod;
 
         // Makes sure boat doesn't exceed maximum speed relative to current
-        if (boatWaterSpeed < maxSpeed/100 * windManager.GetWindSpeed() * ((1-cargoEffectOnSpeed) + cargoEffectOnSpeed * (1f-currentCargoLoad / cargoCapacity)))
+        if (boatWaterSpeed < maxSpeed/100 * windManager.GetWindVector().magnitude)
             rb.AddRelativeForceY(speedMagnitude);
     }
 
@@ -210,7 +207,7 @@ public class BoatController : MonoBehaviour
 
     private void BoatRotation()
     {
-        float rudderPosition = UsefulStuff.Round(rudderController.GetRudderPosition(),4);
+        float rudderPosition = UsefulStuff.Miscellaneous.Round(rudderController.GetRudderPosition(),4);
 
         if (logDebug) 
         {
