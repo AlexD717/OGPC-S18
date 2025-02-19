@@ -34,7 +34,6 @@ public class UsefulStuff
 
             xValue = magnitude*Mathf.Cos(angle*Mathf.Deg2Rad);
             yValue = magnitude*Mathf.Sin(angle*Mathf.Deg2Rad);
-
             result = new Vector2(xValue, yValue);
 
             return result;
@@ -64,25 +63,25 @@ public class UsefulStuff
             else {return 360 -(angle-90);}
         }
     }
-    public class Debugging
+    public class Debug
     {
         public class Vectors
         {
             public static void LogVector2(string header, Vector2 vector)
             {
-                Debug.Log(header + " " + vector.x.ToString() + " " + vector.y.ToString());
+                UnityEngine.Debug.Log(header + " " + vector.x.ToString() + " " + vector.y.ToString());
             }
-            public static void LogVector2(Vector2 vector)
+            public static void LogVector2(Vector2 vector)//Overloading
             {
-                Debug.Log(vector.x.ToString() + " " + vector.y.ToString());
+                UnityEngine.Debug.Log(vector.x.ToString() + " " + vector.y.ToString());
             }
             public static void LogVector3(string header, Vector3 vector)
             {
-                Debug.Log(header + " " + vector.x.ToString() + " " + vector.y.ToString() + " " + vector.z.ToString());
+                UnityEngine.Debug.Log(header + " " + vector.x.ToString() + " " + vector.y.ToString() + " " + vector.z.ToString());
             }
             public static void LogVector3(Vector3 vector)
             {
-                Debug.Log(vector.x.ToString() + " " + vector.y.ToString() + " " + vector.z.ToString());
+                UnityEngine.Debug.Log(vector.x.ToString() + " " + vector.y.ToString() + " " + vector.z.ToString());
             }
         }
         public class LogArrays
@@ -94,7 +93,7 @@ public class UsefulStuff
                 {
                     result = result + "(" + vector.x.ToString() + ", " + vector.y.ToString() + ") ";
                 }
-                Debug.Log(result);
+                UnityEngine.Debug.Log(result);
             }
             public static void Bool(bool[] booleans, string header = null)
             {
@@ -103,11 +102,10 @@ public class UsefulStuff
                 {
                     result = result + boolean.ToString() + " ";
                 }
-                Debug.Log(result);
+                UnityEngine.Debug.Log(result);
             }
         }
     }
-
     public class LinearAlgebra
     {
         public static Vector2 RotateVector(Vector2 oldVector, float angle)
@@ -152,5 +150,25 @@ public class UsefulStuff
             if (pause) { Time.timeScale = 0f;}
             else { Time.timeScale = 1f;}
         }
+    }
+    public class Timer
+    {
+        int period;
+        int currentStep;
+
+        Timer(int period)
+        {
+            this.period = period;
+        }
+        public void Update()
+        {
+            currentStep++;
+            currentStep %= period;
+        }
+        public bool Execute()
+        {
+            return currentStep == 0;
+        }
+
     }
 }

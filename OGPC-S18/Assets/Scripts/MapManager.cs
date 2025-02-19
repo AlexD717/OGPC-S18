@@ -92,9 +92,6 @@ public class MapManager : MonoBehaviour
 
         screenOrig = Camera.main.ScreenToWorldPoint(Vector2.zero);
         screenSize = 2 * Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height));
-
-        Debug.Log("screenSize: " + screenSize.x.ToString() + " " + screenSize.y.ToString());
-        UsefulStuff.Debugging.LogArrays.Bool(islandsDiscovered);
     }
     private float DetermineMapScaleFactor()
     {
@@ -140,7 +137,6 @@ public class MapManager : MonoBehaviour
     }
     private bool PointInPlayerView(Vector2 objectPosition)
     {
-        UsefulStuff.Debugging.Vectors.LogVector2("Point", objectPosition);
         Vector2 relativeLocation;
         Vector2 playerPosition = new Vector2(player.transform.position.x, player.transform.position.y);
         relativeLocation = UsefulStuff.LinearAlgebra.RotateVector(objectPosition - playerPosition, player.transform.localRotation.eulerAngles.z);
@@ -186,10 +182,8 @@ public class MapManager : MonoBehaviour
             islandRect.localScale = new Vector3(islandRect.localScale.x * iconScaleFactor,islandRect.localScale.y * iconScaleFactor, 1f);
             
             islandIcons[i].SetActive(false);
-            Debug.Log("island " + i.ToString() + " " + islandIcons[i].activeSelf.ToString());
         }
     }
-    
     private void AddPortsToMap()
     {
         portIcons = new GameObject[ports.Length];
@@ -284,7 +278,6 @@ public class MapManager : MonoBehaviour
         playerIcon.transform.localRotation = player.transform.rotation;
         panLocation = playerIcon.transform.localPosition;
         mapZoomScale = 1f;
-        UsefulStuff.Debugging.Vectors.LogVector2("Camera Bounds", UsefulStuff.Convert.Vector32Vector2(player.transform.position) + (screenSize/2));
         UsefulStuff.Game.GamePaused(mapOn);
         map.SetActive(mapOn);
     }

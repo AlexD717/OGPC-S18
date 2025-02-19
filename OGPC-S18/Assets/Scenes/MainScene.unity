@@ -1552,8 +1552,6 @@ MonoBehaviour:
   stallAngle: 45
   currentAccelerationMod: 3
   currentMaxSpeedMod: 0.1
-  cargoCapacity: 50
-  cargoEffectOnSpeed: 5
   sail: {fileID: 1263568185}
   player: {fileID: 703202724}
   compass: {fileID: 870582552}
@@ -1670,7 +1668,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3868320402575240516, guid: 9e0ee1631593008429d3b842f58fcebb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 22.6
+      value: 34.44864
       objectReference: {fileID: 0}
     - target: {fileID: 3868320402575240516, guid: 9e0ee1631593008429d3b842f58fcebb, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1704,9 +1702,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 120
       objectReference: {fileID: 0}
+    - target: {fileID: 6514742905796842136, guid: 9e0ee1631593008429d3b842f58fcebb, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7041686297908031658, guid: 9e0ee1631593008429d3b842f58fcebb, type: 3}
+      propertyPath: m_Name
+      value: Collider
+      objectReference: {fileID: 0}
     - target: {fileID: 8584749577235315376, guid: 9e0ee1631593008429d3b842f58fcebb, type: 3}
       propertyPath: portName
       value: Something
+      objectReference: {fileID: 0}
+    - target: {fileID: 8585852631599440724, guid: 9e0ee1631593008429d3b842f58fcebb, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[0].x
+      value: -0.06828895
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1879,8 +1889,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a0d72c07c3d08a4f82339aa309a0c54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  worldSize: {x: 100, y: 100}
-  mapZoomLimits: {x: 0.25, y: 1}
+  worldSize: {x: 1000, y: 1000}
+  mapZoomLimits: {x: 0.25, y: 10}
   mapZoomSensitivity: 0.1
   mapPanSensitivity: 1
   map: {fileID: 1117752311}
@@ -2339,7 +2349,7 @@ Transform:
   m_GameObject: {fileID: 1154212137}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 26.149694, y: 29.85136, z: 2.4902518}
+  m_LocalPosition: {x: 26.149694, y: 41.7, z: 2.4902518}
   m_LocalScale: {x: 40, y: 40, z: 40}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -2712,6 +2722,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1462608446}
   m_CullTransparentMesh: 1
+--- !u!4 &1483751333 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4825311866191100496, guid: 912cbb5dd625ae74383e13552f53304f, type: 3}
+  m_PrefabInstance: {fileID: 1680535024}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1513588337
 GameObject:
   m_ObjectHideFlags: 0
@@ -3345,6 +3360,7 @@ Transform:
   m_Children:
   - {fileID: 1154212139}
   - {fileID: 1684086639}
+  - {fileID: 1483751333}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1632876166
@@ -3588,6 +3604,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1672924468}
   m_CullTransparentMesh: 1
+--- !u!1001 &1680535024
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1609202320}
+    m_Modifications:
+    - target: {fileID: 4825311866191100496, guid: 912cbb5dd625ae74383e13552f53304f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -45.84657
+      objectReference: {fileID: 0}
+    - target: {fileID: 4825311866191100496, guid: 912cbb5dd625ae74383e13552f53304f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 57.717457
+      objectReference: {fileID: 0}
+    - target: {fileID: 4825311866191100496, guid: 912cbb5dd625ae74383e13552f53304f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 4.9805036
+      objectReference: {fileID: 0}
+    - target: {fileID: 4825311866191100496, guid: 912cbb5dd625ae74383e13552f53304f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4825311866191100496, guid: 912cbb5dd625ae74383e13552f53304f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4825311866191100496, guid: 912cbb5dd625ae74383e13552f53304f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4825311866191100496, guid: 912cbb5dd625ae74383e13552f53304f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4825311866191100496, guid: 912cbb5dd625ae74383e13552f53304f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4825311866191100496, guid: 912cbb5dd625ae74383e13552f53304f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4825311866191100496, guid: 912cbb5dd625ae74383e13552f53304f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7211549064564563179, guid: 912cbb5dd625ae74383e13552f53304f, type: 3}
+      propertyPath: m_Name
+      value: Island
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 912cbb5dd625ae74383e13552f53304f, type: 3}
 --- !u!4 &1684086639 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3868320402575240516, guid: 9e0ee1631593008429d3b842f58fcebb, type: 3}
@@ -3614,7 +3687,6 @@ GameObject:
   - component: {fileID: 1993186923}
   - component: {fileID: 1993186922}
   - component: {fileID: 1993186924}
-  - component: {fileID: 1993186925}
   m_Layer: 0
   m_Name: Cinemachine Camera
   m_TagString: Untagged
@@ -3699,19 +3771,6 @@ MonoBehaviour:
     RotationDamping: {x: 1, y: 1, z: 1}
     QuaternionDamping: 1
   FollowOffset: {x: 0, y: 0, z: -10}
---- !u!114 &1993186925
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1993186921}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4afa82ae3200b82408d605c3dbdd1e38, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Damping: 3
 --- !u!1 &1997816394
 GameObject:
   m_ObjectHideFlags: 0
