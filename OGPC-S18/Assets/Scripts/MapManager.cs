@@ -117,14 +117,12 @@ public class MapManager : MonoBehaviour
         PolygonCollider2D portCollider = port.transform.GetChild(2).gameObject.GetComponent<PolygonCollider2D>();
         Vector2 portPosition = port.transform.localPosition; //local and global position are the same
         float portScale = port.transform.localScale.x; //local and global are same
-        Debug.Log(port.name);
         return ColliderInPlayerView(portCollider, portPosition, portScale);
     }
     private bool ColliderInPlayerView(PolygonCollider2D collider, Vector2 absolutePosition, float absoluteScale)//absolute is coonsidering all scaling of parent objects, as appears to the world 
     {
         Vector2[] colliderPoints;
         Vector2 colliderPointLocation;
-        UsefulStuff.Debugging.LogArrays.Vector2(collider.points);        
         colliderPoints = collider.points;
         foreach (Vector2 point in colliderPoints)
         {
