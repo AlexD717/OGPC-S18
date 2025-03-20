@@ -53,7 +53,7 @@ public class MapManager : MonoBehaviour
         mapZoomInput.Enable();
         mapPanInput = inputs.FindActionMap("Map").FindAction("MapPan");
         mapPanInput.Enable();
-        mapReset = inputs.FindActionMap("Map").FindAction("mapReset");
+        mapReset = inputs.FindActionMap("Map").FindAction("MapReset");
         mapReset.Enable(); 
         boatActionMap = inputs.FindActionMap("Player");
         boatActionMap.Enable();

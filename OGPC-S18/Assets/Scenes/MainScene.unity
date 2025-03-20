@@ -1654,10 +1654,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8862feff7c7de754cbc84217bb305edc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  questRefreshTimeLenght: 300
+  questRefreshTimeLenght: 0
   difficultyIdealDistance: 0a000000140000001e00000028000000320000003c00000046000000500000005a00000064000000
-  goodEnoughThershold: 15
-  rewardConst: 1
+  goodEnoughThershold: 0
+  rewardConst: 0
   quests:
   - {fileID: 11400000, guid: b94bb12de4daa184b8c4489f14078503, type: 2}
   questButtonPrefab: {fileID: 2753785917654110327, guid: 3c40f35e0fe03384299b88e8b889fde3, type: 3}
@@ -1674,12 +1674,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   worldSize: {x: 100, y: 100}
+  mapZoomLimits: {x: 0.2, y: 5}
+  mapZoomSensitivity: 1
+  mapPanSensitivity: 1
   map: {fileID: 1117752311}
   islandIconReference: {fileID: 1425195521}
-  portIconReference: {fileID: 1787571035}
+  portIconPrefab: {fileID: 1787571035}
   player: {fileID: 703202723}
   playerIcon: {fileID: 177628065}
   inputs: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  background: {fileID: 2087232201}
 --- !u!114 &806108052
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2079,7 +2083,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1117752312
 MonoBehaviour:
   m_ObjectHideFlags: 0
