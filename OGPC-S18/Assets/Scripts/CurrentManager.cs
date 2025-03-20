@@ -48,7 +48,7 @@ public class CurrentManager : MonoBehaviour
             angDeltas[i] = 0f;
         }
 
-        currentVector = UsefulStuff.Polar2Vector(currentDirection,currentSpeed);
+        currentVector = UsefulStuff.Convert.PolarToVector(currentDirection,currentSpeed);
     }
 
     private void UpdateCurrent() 
@@ -65,7 +65,7 @@ public class CurrentManager : MonoBehaviour
         currentDirection = currentDirection + angDeltas[^1];
         currentSpeed = Mathf.Clamp(currentSpeed + magDeltas[^1],0,maxCurrentSpeed);
 
-        currentVector = UsefulStuff.Polar2Vector(currentDirection,currentSpeed);
+        currentVector = UsefulStuff.Convert.PolarToVector(currentDirection,currentSpeed);
     }
 
     private void UpdateUI()

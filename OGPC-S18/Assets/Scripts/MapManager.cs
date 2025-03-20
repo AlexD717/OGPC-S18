@@ -128,7 +128,7 @@ public class MapManager : MonoBehaviour
         colliderPoints = collider.points;
         foreach (Vector2 point in colliderPoints)
         {
-            colliderPointLocation = UsefulStuff.Convert.Vector32Vector2(absolutePosition) + (point * absoluteScale);
+            colliderPointLocation = UsefulStuff.Convert.Vector3ToVector2(absolutePosition) + (point * absoluteScale);
             if (PointInPlayerView(colliderPointLocation)) {return true;}
         }
         return false;
