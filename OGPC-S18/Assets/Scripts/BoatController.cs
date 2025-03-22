@@ -77,7 +77,7 @@ public class BoatController : MonoBehaviour
         rudderController = GetComponent<RudderController>();
         rudderController.SetRudderMoveSpeed(rudderMoveSpeed);
         
-        rb.linearVelocity = rb.linearVelocity + UsefulStuff.Polar2Vector(currentManager.currentDirection, currentManager.currentSpeed * currentMaxSpeedMod);
+        rb.linearVelocity = rb.linearVelocity + UsefulStuff.Convert.PolarToVector(currentManager.currentDirection, currentManager.currentSpeed * currentMaxSpeedMod);
 
         debugTimer = debugTicksInterval - 1;
     }
@@ -207,7 +207,7 @@ public class BoatController : MonoBehaviour
 
     private void BoatRotation()
     {
-        float rudderPosition = UsefulStuff.Round(rudderController.GetRudderPosition(),4);
+        float rudderPosition = UsefulStuff.Misc.Round(rudderController.GetRudderPosition(),4);
 
         if (logDebug) 
         {
