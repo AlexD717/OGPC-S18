@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
+using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour
 {
@@ -8,7 +9,26 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI countdownText;
     [SerializeField] private InputActionAsset inpuActions;
 
+    [SerializeField] private Button continueButton;
+    private Image buttonSlider;
+    [SerializeField] float timeToWaitOnContinueButton;
+    private float timeWaitedOnContinueButton = 0;
+    [SerializeField] private GameObject winScreen;
+    [SerializeField] private GameObject loseScreen;
+
     private bool playerLost = false;
+    private bool gameEnded = false;
+    private bool showEndScreen = false;
+
+    private void Start()
+    {
+        winScreen.gameObject.SetActive(false);
+        loseScreen.gameObject.SetActive(false);
+        continueButton.gameObject.SetActive(false);
+
+        buttonSlider = continueButton.transform.GetChild(0).gameObject.GetComponent<Image>();
+        continueButton.onClick.AddListener(ShowEndScreen);
+    }
 
     public void PlayerReachedEndPort()
     {
@@ -17,6 +37,19 @@ public class LevelManager : MonoBehaviour
 
     private void Update()
     {
+        if (showEndScreen) { return; }
+
+        if (gameEnded)
+        {
+            timeWaitedOnContinueButton += Time.unscaledDeltaTime;
+            buttonSlider.fillAmount = timeWaitedOnContinueButton / timeToWaitOnContinueButton;
+            if (buttonSlider.fillAmount >= 1)
+            {
+                ShowEndScreen();
+            }
+            return;
+        }
+
         countdown -= Time.deltaTime;
         if (countdown <= 0f)
         {
@@ -31,7 +64,7 @@ public class LevelManager : MonoBehaviour
 
     private void PlayerWon()
     {
-        Debug.Log("YOU WON!");
+        Debug.Log("You Won!");
         EndGame();
     }
 
@@ -43,8 +76,37 @@ public class LevelManager : MonoBehaviour
         EndGame();
     }
 
+    private void ShowEndScreen()
+    {
+        showEndScreen = true;
+        foreach (Transform child in winScreen.GetComponentInParent<Transform>())
+        {
+            child.gameObject.SetActive(false);
+        }
+        if (playerLost)
+        {
+            loseScreen.SetActive(true);
+            foreach (Transform child in loseScreen.transform)
+            {
+                child.gameObject.SetActive(true);
+            }
+        }
+        else
+        {
+            winScreen.SetActive(true);
+            foreach (Transform child in winScreen.transform)
+            {
+                child.gameObject.SetActive(true);
+            }
+        }
+    }
+
     private void EndGame()
     {
+        gameEnded = true;
+
+        continueButton.gameObject.SetActive(true);
+
         Time.timeScale = 0f;
 
         // Disables new input collection
