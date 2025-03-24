@@ -15,6 +15,7 @@ public class EndPort : MonoBehaviour
     [SerializeField] private Transform playerDockPositionsParent;
     private Transform[] playerDockPositions;
     private BoatController boatController;
+    private LevelManager levelManager;
 
     [SerializeField] private InputActionAsset inputActions;
     private InputAction interact;
@@ -38,6 +39,7 @@ public class EndPort : MonoBehaviour
         nameText.text = portName;
 
         boatController = GameObject.FindGameObjectWithTag("Player").GetComponent<BoatController>();
+        levelManager = GameObject.FindFirstObjectByType<LevelManager>();
     }
 
     private void OnEnable()
@@ -73,6 +75,7 @@ public class EndPort : MonoBehaviour
         playerDocked = true;
         rangeSprite.enabled = false;
         nameText.enabled = false;
+        levelManager.PlayerReachedEndPort();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

@@ -46,10 +46,10 @@ public class Port : MonoBehaviour
         nameText = worldCanvas.GetChild(0).GetComponent<TextMeshProUGUI>();
         nameText.text = portName;
 
-        dockedTextIndicator = dockCanvas.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
+        dockedTextIndicator = dockCanvas.transform.GetChild(2).GetComponent<TextMeshProUGUI>();
         dockedTextIndicator.text = "Docked at " + nameText.text;
 
-        selectedQuestPanel = dockCanvas.transform.GetChild(2).gameObject;
+        selectedQuestPanel = dockCanvas.transform.GetChild(1).gameObject;
         selectedQuestPanel.SetActive(false); // Deactivates accepeted quest menu
 
         // Gets all the menus under dockPanel and puts them in the panelMenus array
