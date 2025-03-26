@@ -28,6 +28,13 @@ public class LevelManager : MonoBehaviour
 
         buttonSlider = continueButton.transform.GetChild(0).gameObject.GetComponent<Image>();
         continueButton.onClick.AddListener(ShowEndScreen);
+
+        // Enables input collection
+        inpuActions.FindActionMap("Player").Enable();
+        inpuActions.FindActionMap("Map").Enable();
+
+        // Resets Time
+        Time.timeScale = 1f;
     }
 
     public void PlayerReachedEndPort()
