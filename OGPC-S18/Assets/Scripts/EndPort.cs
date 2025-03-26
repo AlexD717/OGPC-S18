@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Port : MonoBehaviour
+public class EndPort : MonoBehaviour
 {
     [SerializeField] private string portName;
 
@@ -14,6 +14,8 @@ public class Port : MonoBehaviour
 
     [SerializeField] private Transform playerDockPositionsParent;
     private Transform[] playerDockPositions;
+    private BoatController boatController;
+    private LevelManager levelManager;
 
     [SerializeField] private InputActionAsset inputActions;
     private InputAction interact;
@@ -21,20 +23,10 @@ public class Port : MonoBehaviour
     [SerializeField] private RectTransform worldCanvas;
     [HideInInspector] public TextMeshProUGUI nameText;
 
-    private PortManager portManager;
-
-    [SerializeField] private GameObject dockCanvas;
-    private GameObject selectedQuestPanel;
-    private Transform dockPanel;
-    private GameObject[] dockPanelMenus;
-    private TextMeshProUGUI dockedTextIndicator;
-
     private void Start()
     {
         rangeSprite = range.GetComponent<SpriteRenderer>();
         rangeSprite.enabled = false;
-
-        portManager = FindFirstObjectByType<PortManager>();
 
         playerDockPositions = new Transform[playerDockPositionsParent.childCount];
         for (int i = 0; i < playerDockPositionsParent.childCount; i++)
@@ -46,25 +38,8 @@ public class Port : MonoBehaviour
         nameText = worldCanvas.GetChild(0).GetComponent<TextMeshProUGUI>();
         nameText.text = portName;
 
-        dockedTextIndicator = dockCanvas.transform.GetChild(2).GetComponent<TextMeshProUGUI>();
-        dockedTextIndicator.text = "Docked at " + nameText.text;
-
-        selectedQuestPanel = dockCanvas.transform.GetChild(1).gameObject;
-        selectedQuestPanel.SetActive(false); // Deactivates accepeted quest menu
-
-        // Gets all the menus under dockPanel and puts them in the panelMenus array
-        dockPanel = dockCanvas.transform.GetChild(0);
-        dockPanelMenus = new GameObject[dockPanel.childCount];
-        for (int i = 0; i < dockPanel.childCount; i++)
-        {
-            dockPanelMenus[i] = dockPanel.GetChild(i).gameObject;
-        }
-        dockCanvas.SetActive(false);
-        SelectMenu(0);
-        /*
-         *  panelMenus[0] = Main Menu
-         *  paznelMenus[1] = Quests
-        */
+        boatController = GameObject.FindGameObjectWithTag("Player").GetComponent<BoatController>();
+        levelManager = GameObject.FindFirstObjectByType<LevelManager>();
     }
 
     private void OnEnable()
@@ -89,11 +64,7 @@ public class Port : MonoBehaviour
                 if (!playerDocked)
                 {
                     Dock();
-
-                }
-                else
-                {
-                    UnDock();
+                    boatController.Dock(UsefulStuff.GetClosestPosition(playerDockPositions, boatController.gameObject));
                 }
             }
         }
@@ -101,21 +72,10 @@ public class Port : MonoBehaviour
 
     private void Dock()
     {
-        dockCanvas.SetActive(true);
-        SelectMenu(0);
-        portManager.PlayerDocked(playerDockPositions, dockPanelMenus, this);
         playerDocked = true;
         rangeSprite.enabled = false;
         nameText.enabled = false;
-    }
-
-    private void UnDock()
-    {
-        dockCanvas.SetActive(false);
-        portManager.PlayerUndocked();
-        playerDocked = false;
-        rangeSprite.enabled = true;
-        nameText.enabled = true;
+        levelManager.PlayerReachedEndPort();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -136,23 +96,5 @@ public class Port : MonoBehaviour
 
             rangeSprite.enabled = false;
         }
-    }
-
-    // Makes only one panel active
-    public void SelectMenu(int childMenuIndex)
-    {
-        for (int i = 0; i < dockPanelMenus.Length; i++)
-        {
-            if (i == childMenuIndex)
-            {
-                dockPanelMenus[i].SetActive(true);
-            }
-            else
-            {
-                dockPanelMenus[i].SetActive(false);
-            }
-        }
-
-        selectedQuestPanel.SetActive(false);
     }
 }

@@ -1,6 +1,4 @@
 using UnityEngine;
-using System;
-using System.Collections.Generic;
 
 public class UsefulStuff
 {
@@ -16,6 +14,7 @@ public class UsefulStuff
             return num;
         }
     }
+
     public class Convert
     {
         public static Vector2 Vector3ToVector2(Vector3 vector) //Truncates the z value
@@ -150,5 +149,23 @@ public class UsefulStuff
             if (pause) { Time.timeScale = 0f;}
             else { Time.timeScale = 1f;}
         }
+    }
+
+    public static Transform GetClosestPosition(Transform[] positions, GameObject startPoint)
+    {
+        float smallestDistance = Mathf.Infinity;
+        Transform closestPos = null;
+
+        foreach (Transform position in positions)
+        {
+            float distanceBetween = Vector2.Distance(position.position, startPoint.transform.position);
+            if (distanceBetween < smallestDistance)
+            {
+                smallestDistance = distanceBetween;
+                closestPos = position;
+            }
+        }
+
+        return closestPos;
     }
 }
