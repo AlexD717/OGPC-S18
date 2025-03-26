@@ -22,7 +22,6 @@ public class Port : MonoBehaviour
     [HideInInspector] public TextMeshProUGUI nameText;
 
     private PortManager portManager;
-    private QuestGetttingManager questManager;
 
     [SerializeField] private GameObject dockCanvas;
     private GameObject selectedQuestPanel;
@@ -36,7 +35,6 @@ public class Port : MonoBehaviour
         rangeSprite.enabled = false;
 
         portManager = FindFirstObjectByType<PortManager>();
-        questManager = FindFirstObjectByType<QuestGetttingManager>();
 
         playerDockPositions = new Transform[playerDockPositionsParent.childCount];
         for (int i = 0; i < playerDockPositionsParent.childCount; i++)
@@ -105,7 +103,6 @@ public class Port : MonoBehaviour
     {
         dockCanvas.SetActive(true);
         SelectMenu(0);
-        questManager.PlayerDocked(this, dockCanvas);
         portManager.PlayerDocked(playerDockPositions, dockPanelMenus, this);
         playerDocked = true;
         rangeSprite.enabled = false;
@@ -158,5 +155,4 @@ public class Port : MonoBehaviour
 
         selectedQuestPanel.SetActive(false);
     }
-
 }
