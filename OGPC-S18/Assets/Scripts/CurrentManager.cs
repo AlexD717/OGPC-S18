@@ -70,8 +70,6 @@ public class CurrentManager : MonoBehaviour
 
     private void UpdateUI()
     {
-        currentSpeedText.text = $"Current speed: {currentSpeed.ToString("F1")}";
-        currentBearingText.text = $"Current Bearing: {currentDirection.ToString("F1")}";
         currentIndicator.rotation = Quaternion.Euler(0, 0, 90 - (currentDirection+player.eulerAngles.z));
         currentIndicator.localScale = new Vector3(currentSpeed/maxCurrentSpeed, currentSpeed/maxCurrentSpeed, 1f);
     }
