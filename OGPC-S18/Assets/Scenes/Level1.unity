@@ -973,20 +973,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 283facd922126b24f83dd8af77d3ee0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  windBearingText: {fileID: 0}
-  windSpeedText: {fileID: 0}
   windIndicator: {fileID: 222996966}
   player: {fileID: 703202724}
   windDirection: 0
   windSpeed: 20
-  maxWindspeed: 0
+  maxWindspeed: 20
   stabilityLevels: 5
   randomMagRange: 0.01
   randomAngRange: 0.01
   maxMagDeltaStep: 0.01
   maxAngDeltaStep: 0.1
   stepMultiple: 1
-  scalar: 0
+  scalar: 1
   updateInterval: 100
 --- !u!1 &178164481
 GameObject:
@@ -2432,7 +2430,6 @@ MonoBehaviour:
   sail: {fileID: 1263568185}
   player: {fileID: 703202724}
   compass: {fileID: 870582552}
-  boatHeadingText: {fileID: 0}
   boatSpeedText: {fileID: 41876431}
   inputActions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   debugTicksInterval: 500
@@ -3373,13 +3370,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f6fddfd53319e84a9553be02cfca19c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentBearingText: {fileID: 0}
-  currentSpeedText: {fileID: 0}
   currentIndicator: {fileID: 965439466}
   player: {fileID: 703202724}
   currentDirection: 0
   currentSpeed: 5
-  maxCurrentSpeed: 0
+  maxCurrentSpeed: 10
   stabilityLevels: 5
   RandomMagRange: 0.01
   RandomAngRange: 0.01
