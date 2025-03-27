@@ -977,17 +977,17 @@ MonoBehaviour:
   windSpeedText: {fileID: 624586064}
   windIndicator: {fileID: 222996966}
   player: {fileID: 703202724}
-  windDirection: 0
+  windHeading: 0
   windSpeed: 20
-  maxWindspeed: 20
   stabilityLevels: 5
   randomMagRange: 0.01
   randomAngRange: 0.01
   maxMagDeltaStep: 0.01
   maxAngDeltaStep: 0.1
   stepMultiple: 1
-  scalar: 1
   updateInterval: 100
+  windSpeedRange: {x: 10, y: 25}
+  windHeadingRange: {x: -45, y: 45}
 --- !u!1 &178164481
 GameObject:
   m_ObjectHideFlags: 0
@@ -3654,9 +3654,8 @@ MonoBehaviour:
   currentSpeedText: {fileID: 1570743260}
   currentIndicator: {fileID: 965439466}
   player: {fileID: 703202724}
-  currentDirection: 180
-  currentSpeed: 5
-  maxCurrentSpeed: 10
+  currentHeading: 0
+  currentSpeed: 1
   stabilityLevels: 5
   RandomMagRange: 0.01
   RandomAngRange: 0.01
@@ -3664,6 +3663,8 @@ MonoBehaviour:
   maxAngDeltaStep: 0.1
   stepMultiple: 1
   updateInterval: 100
+  currentSpeedRange: {x: 0, y: 2}
+  currentHeadingRange: {x: 0, y: 360}
 --- !u!1 &1084810671
 GameObject:
   m_ObjectHideFlags: 0
@@ -6330,7 +6331,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06433580f9c85f14a86c12fa3770aadf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  countdown: 10
+  countdown: 120
   countdownText: {fileID: 62666453}
   inpuActions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   continueButton: {fileID: 1398973335}

@@ -1,5 +1,7 @@
 using UnityEngine;
 using TMPro;
+using UnityEditor.Experimental.GraphView;
+using UnityEditor;
 
 public class WindManager : MonoBehaviour
 {
@@ -11,20 +13,19 @@ public class WindManager : MonoBehaviour
     [SerializeField] private Transform player;
 
     [Header("Starting Wind Condition")]
-    [SerializeField] private float windDirection; // starting wind direction, 0 is North, 90 is East, 180 is South, and 270 is West
+    [SerializeField] private float windHeading; // starting wind direction, 0 is North, 90 is East, 180 is South, and 270 is West
     [SerializeField] private float windSpeed; // starting windspeed
 
     [Header("Wind Generation Variables")]
-    [SerializeField] private int maxWindspeed; // Maximum windspeed
     [SerializeField] private int stabilityLevels; // increases amount of deltas, increasing stability in strength and direction, minval = 2
     [SerializeField] private float randomMagRange; // Maximum variance from zero in random distribution for lowest delta
     [SerializeField] private float randomAngRange; // Maximum variance from zero in random distribution for lowest delta
     [SerializeField] private float maxMagDeltaStep; //Maximum delta for magnitude, increases for each delta
     [SerializeField] private float maxAngDeltaStep; //Maximum delta for angle, increases for each delta
     [SerializeField] private float stepMultiple; //Multiplier for the step, controlling how much each step increases
-    [SerializeField] private float scalar; //Multiplier for the magnitude to help adjust strength
     [SerializeField] private int updateInterval; // Updates values every "this many frames"
-
+    [SerializeField] private Vector2 windSpeedRange; //Clamps on wind range
+    [SerializeField] private Vector2 windHeadingRange; //Clamps on wind direction
     float[] magDeltas;
     float[] angDeltas;
 
@@ -45,6 +46,8 @@ public class WindManager : MonoBehaviour
         }
     }
 
+
+
     private void UpdateWind() 
     {
         magDeltas[0] = Random.Range(-1 * randomMagRange, randomMagRange);
@@ -56,19 +59,21 @@ public class WindManager : MonoBehaviour
             angDeltas[i] = Mathf.Clamp(angDeltas[i] + angDeltas[i-1], -stepMultiple * i * maxAngDeltaStep, stepMultiple * i*maxAngDeltaStep); //adding the delta(+ or -) to the next delta to get the new ROC
         }
 
-        windDirection = windDirection + angDeltas[^1];
-        if (windDirection < 0) {windDirection = (360 + windDirection)%360;}
-        windSpeed = Mathf.Clamp(windSpeed + scalar*magDeltas[^1], 0, scalar*maxWindspeed);
-    }
+        windHeading = (windHeading + angDeltas[^1]+360)%360;
+        windHeading = UsefulStuff.Misc.ClampAngle(windHeading, windHeadingRange.x, windHeadingRange.y);
+        if (windHeading == windHeadingRange.x || windHeading == windHeadingRange.y) {for (int i=0; i < angDeltas.Length;i++) {angDeltas[i] = 0f;}}
+        
+        windSpeed = Mathf.Clamp(windSpeed + magDeltas[^1], windSpeedRange.x, windSpeedRange.y); 
+        if (windSpeed == windSpeedRange.x || windSpeed == windSpeedRange.y) {for (int i=0; i < magDeltas.Length;i++) {magDeltas[i] = 0f;}}
 
+    }
     private void UpdateUI()
     {
-        windSpeedText.text = $"Wind Speed: {windSpeed.ToString("F1")}";
-        windBearingText.text = $"Wind Bearing: {windDirection.ToString("F1")}";
-        windIndicator.rotation = Quaternion.Euler(0, 0, 90 - (windDirection+player.eulerAngles.z));
-        windIndicator.localScale = new Vector3(windSpeed / maxWindspeed, windSpeed/maxWindspeed, 1f);
+        windSpeedText.text = $"Wind Speed: {windSpeed:F1}";
+        windBearingText.text = $"Wind Bearing: {windHeading:F1}";
+        windIndicator.rotation = Quaternion.Euler(0, 0, 90 - (windHeading+player.eulerAngles.z));
+        windIndicator.localScale = new Vector3(windSpeed / windSpeedRange.y, windSpeed/windSpeedRange.y, 1f);
     }
-
     int count = 0;
     private void Update()
     {
@@ -83,7 +88,7 @@ public class WindManager : MonoBehaviour
 
     public float GetWindDirection()
     {
-        return windDirection;
+        return windHeading;
     }
 
     public float GetWindSpeed()

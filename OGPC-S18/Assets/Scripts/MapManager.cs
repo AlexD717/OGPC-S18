@@ -105,46 +105,12 @@ public class MapManager : MonoBehaviour
 
         return realFactor;
     }
-    private bool IslandInPlayerView(GameObject island)
-    {
-        PolygonCollider2D islandCollider = island.GetComponent<PolygonCollider2D>();
-        Vector2 islandPosition = island.transform.localPosition; //local and global position are the same
-        float islandScale = island.transform.localScale.x; //local and global are same
-        return ColliderInPlayerView(islandCollider, islandPosition, islandScale);
-    }
-    private bool PortInPlayerView(GameObject port)
-    {
-        PolygonCollider2D portCollider = port.transform.GetChild(2).gameObject.GetComponent<PolygonCollider2D>();
-        Vector2 portPosition = port.transform.localPosition; //local and global position are the same
-        float portScale = port.transform.localScale.x; //local and global are same
-        return ColliderInPlayerView(portCollider, portPosition, portScale);
-    }
-    private bool ColliderInPlayerView(PolygonCollider2D collider, Vector2 absolutePosition, float absoluteScale)//absolute is coonsidering all scaling of parent objects, as appears to the world 
-    {
-        Vector2[] colliderPoints;
-        Vector2 colliderPointLocation;
-        colliderPoints = collider.points;
-        foreach (Vector2 point in colliderPoints)
-        {
-            colliderPointLocation = UsefulStuff.Convert.Vector3ToVector2(absolutePosition) + (point * absoluteScale);
-            if (PointInPlayerView(colliderPointLocation)) {return true;}
-        }
-        return false;
-    }
-    private bool PointInPlayerView(Vector2 objectPosition)
-    {
-        Vector2 relativeLocation;
-        Vector2 playerPosition = new Vector2(player.transform.position.x, player.transform.position.y);
-        relativeLocation = UsefulStuff.LinearAlgebra.RotateVector(objectPosition - playerPosition, player.transform.localRotation.eulerAngles.z);
-
-        return (Mathf.Abs(relativeLocation.x) <= screenSize.x / 2f && Mathf.Abs(relativeLocation.y) <= screenSize.y / 2f);
-    }
     private void AddObjectsToMap()
     {
         islands = GameObject.FindGameObjectsWithTag("Island");
         ports = GameObject.FindGameObjectsWithTag("Port");
 
-        iconScaleFactor = (islands[0].GetComponent<PolygonCollider2D>().bounds.size.x / worldSize.x) * map.GetComponent<RectTransform>().rect.width;
+        iconScaleFactor = islands[0].GetComponent<PolygonCollider2D>().bounds.size.x / worldSize.x * map.GetComponent<RectTransform>().rect.width;
         playerIcon.GetComponent<RectTransform>().localScale = playerIcon.GetComponent<RectTransform>().localScale * iconScaleFactor;
         AddIslandsToMap();
         AddPortsToMap();
@@ -152,14 +118,13 @@ public class MapManager : MonoBehaviour
     private void AddIslandsToMap()
     {
         islandIcons = new GameObject[islands.Length];
-        Image iconImage;
-        RectTransform islandRect;
-        SpriteRenderer islandSprite;
-        Vector3 islandSize;
-        Quaternion islandRotation;
-
-
         Vector2 islandCoords;
+        Quaternion islandRotation;
+        RectTransform islandRect;
+
+        Image iconImage;
+        SpriteRenderer islandSprite;
+
         for (int i = 0; i < islands.Length; i++)
         {
             islandCoords = islands[i].transform.position;
@@ -170,14 +135,11 @@ public class MapManager : MonoBehaviour
             islandSprite = islands[i].GetComponent<SpriteRenderer>();
             iconImage.sprite = islandSprite.sprite;
             iconImage.color = islandSprite.color;
-            islandSize = islands[i].GetComponent<PolygonCollider2D>().bounds.size;
 
             islandRect = islandIcons[i].GetComponent<RectTransform>();
             islandIcons[i].transform.localPosition = worldToMapScalar * islandCoords * mapZoomScale;
             islandIcons[i].transform.localRotation = islandRotation;
             islandRect.localScale = new Vector3(islandRect.localScale.x * iconScaleFactor,islandRect.localScale.y * iconScaleFactor, 1f);
-            
-            islandIcons[i].SetActive(false);
         }
     }
     private void AddPortsToMap()
@@ -189,7 +151,6 @@ public class MapManager : MonoBehaviour
 
         Image iconImage;
         SpriteRenderer portSprite;
-        Vector3 portSize;
 
         for (int i = 0; i < ports.Length; i++)
         {
@@ -201,14 +162,11 @@ public class MapManager : MonoBehaviour
             portSprite = ports[i].transform.GetChild(0).GetComponent<SpriteRenderer>();
             iconImage.sprite = portSprite.sprite;
             iconImage.color = portSprite.color;
-            portSize = ports[i].transform.GetChild(2).GetComponent<PolygonCollider2D>().bounds.size;
             
             portRect = portIcons[i].GetComponent<RectTransform>();
             portIcons[i].transform.localPosition = worldToMapScalar * portCoords * mapZoomScale;
             portIcons[i].transform.localRotation = portRotation;
             portRect.localScale = new Vector3(portRect.localScale.x * iconScaleFactor,portRect.localScale.y * iconScaleFactor, 1f);
-
-            portIcons[i].SetActive(false);
         }
     }
 
@@ -248,25 +206,6 @@ public class MapManager : MonoBehaviour
         ZoomMap();
         PanMap();
     }
-    private void DiscoverObjects()
-    {
-        for (int i = 0; i < islands.Length; i++)
-        {
-            if (!islandsDiscovered[i] && IslandInPlayerView(islands[i]))
-            {
-                islandsDiscovered[i] = true;
-                islandIcons[i].SetActive(true);
-            }
-        }
-        for (int i = 0; i < ports.Length; i++)
-        {
-            if (!portsDiscovered[i] && PortInPlayerView(ports[i]))
-            {
-                portsDiscovered[i] = true;
-                portIcons[i].SetActive(true);
-            }
-        }
-    }
     private void ToggleMap()
     {
         mapOn = !mapOn;
@@ -294,10 +233,6 @@ public class MapManager : MonoBehaviour
         if (mapOn) 
         {
             UpdateMap();
-        }
-        else
-        {
-            DiscoverObjects();
         }
     }
 }

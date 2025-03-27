@@ -12,11 +12,10 @@ public class CurrentManager : MonoBehaviour
 
 
     [Header("Starting Current Condition")]
-    [SerializeField] public float currentDirection; // starting current direction, 0 is North, 90 is East, 180 is South, and 270 is West
+    [SerializeField] public float currentHeading; // starting current direction, 0 is North, 90 is East, 180 is South, and 270 is West
     [SerializeField] public float currentSpeed; // starting current speed
 
     [Header("Current Generation Variables")]
-    [SerializeField] private int maxCurrentSpeed; // Maximum speed of current
     [SerializeField] private int stabilityLevels; // increases amount of deltas, increasing stability in strength and direction, minval = 2
     [SerializeField] private float RandomMagRange; // Maximum variance from zero in random distribution for lowest delta
     [SerializeField] private float RandomAngRange; // Maximum variance from zero in random distribution for lowest delta
@@ -24,6 +23,8 @@ public class CurrentManager : MonoBehaviour
     [SerializeField] private float maxAngDeltaStep; //Maximum delta for angle, increases for each delta
     [SerializeField] private float stepMultiple; //Multiplier for the step, controlling how much each step increases
     [SerializeField] private int updateInterval; // Updates values every "this many frames"
+    [SerializeField] private Vector2 currentSpeedRange; //Clamps on wind range
+    [SerializeField] private Vector2 currentHeadingRange; //Clamps on wind direction
 
 
 
@@ -48,7 +49,7 @@ public class CurrentManager : MonoBehaviour
             angDeltas[i] = 0f;
         }
 
-        currentVector = UsefulStuff.Convert.PolarToVector(currentDirection,currentSpeed);
+        currentVector = UsefulStuff.Convert.PolarToVector(currentHeading,currentSpeed);
     }
 
     private void UpdateCurrent() 
@@ -62,18 +63,25 @@ public class CurrentManager : MonoBehaviour
             angDeltas[i] = Mathf.Clamp(angDeltas[i] + angDeltas[i-1], -stepMultiple * i * maxAngDeltaStep, stepMultiple * i*maxAngDeltaStep); //adding the delta(+ or -) to the next delta to get the new ROC
         }
 
-        currentDirection = currentDirection + angDeltas[^1];
-        currentSpeed = Mathf.Clamp(currentSpeed + magDeltas[^1],0,maxCurrentSpeed);
+        currentHeading = (currentHeading + angDeltas[^1]+360)%360;
+        
+        currentHeading = UsefulStuff.Misc.ClampAngle(currentHeading, currentHeadingRange.x, currentHeadingRange.y);
+        if (currentHeading == currentHeadingRange.x || currentHeading == currentHeadingRange.y) {for (int i=0; i < angDeltas.Length;i++) {angDeltas[i] = 0f;}}
 
-        currentVector = UsefulStuff.Convert.PolarToVector(currentDirection,currentSpeed);
+        currentSpeed = Mathf.Clamp(currentSpeed + magDeltas[^1], currentSpeedRange.x, currentSpeedRange.y);
+        if (currentSpeed == currentSpeedRange.x || currentSpeed == currentSpeedRange.y) {for (int i=0; i < magDeltas.Length;i++) {magDeltas[i] = 0f;}}
+
+
+
+        currentVector = UsefulStuff.Convert.PolarToVector(currentHeading,currentSpeed);
     }
 
     private void UpdateUI()
     {
         currentSpeedText.text = $"Current speed: {currentSpeed.ToString("F1")}";
-        currentBearingText.text = $"Current Bearing: {currentDirection.ToString("F1")}";
-        currentIndicator.rotation = Quaternion.Euler(0, 0, 90 - (currentDirection+player.eulerAngles.z));
-        currentIndicator.localScale = new Vector3(currentSpeed/maxCurrentSpeed, currentSpeed/maxCurrentSpeed, 1f);
+        currentBearingText.text = $"Current Bearing: {currentHeading.ToString("F1")}";
+        currentIndicator.rotation = Quaternion.Euler(0, 0, 90 - (currentHeading+player.eulerAngles.z));
+        currentIndicator.localScale = new Vector3(currentSpeed/currentSpeedRange.y, currentSpeed/currentSpeedRange.y, 1f);
     }
 
 
@@ -89,8 +97,14 @@ public class CurrentManager : MonoBehaviour
         UpdateUI();
     }
 
-    public Vector2 GetCurrentVector()
+    public float GetCurrentDirection()
     {
-        return currentVector;
+        return currentHeading;
+    }
+
+    public float GetCurrentSpeed()
+    {
+        return currentSpeed;
     }
 }
+
