@@ -10,7 +10,7 @@ public class LevelSelectButtonManager : MonoBehaviour
         foreach (Transform button in transform)
         {
             level++;
-            int levelNum = level; // So that when the level variable updates the levelNum varible will be the same
+            int levelNum = level; // So that when the level variable updates the levelNum variable will be the same
             button.GetComponent<Button>().onClick.AddListener(() => LoadLevel(levelNum));
             button.GetChild(0).GetComponent<TextMeshProUGUI>().text = "Level " + level.ToString();
         }
