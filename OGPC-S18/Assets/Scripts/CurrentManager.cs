@@ -5,8 +5,6 @@ public class CurrentManager : MonoBehaviour
 {
 
     [Header("References")]
-    [SerializeField] private TextMeshProUGUI currentBearingText;
-    [SerializeField] private TextMeshProUGUI currentSpeedText;
     [SerializeField] private Transform currentIndicator;
     [SerializeField] private Transform player;
 

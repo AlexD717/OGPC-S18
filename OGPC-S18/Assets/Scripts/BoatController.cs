@@ -22,7 +22,6 @@ public class BoatController : MonoBehaviour
     [SerializeField] private Transform sail;
     [SerializeField] private Transform player;
     [SerializeField] private Transform compass;
-    [SerializeField] private TextMeshProUGUI boatHeadingText;
     [SerializeField] private TextMeshProUGUI boatSpeedText;
     [SerializeField] private InputActionAsset inputActions;
 
@@ -162,7 +161,6 @@ public class BoatController : MonoBehaviour
 
     private void UpdateUI()
     {
-        boatHeadingText.text = $"Boat Heading: {boatHeading.ToString("F1")}";
         boatSpeedText.text = $"Boat Speed: {boatSpeed.ToString("F1")}";
         compass.rotation = Quaternion.Euler(0,0,90 - player.eulerAngles.z);
     }

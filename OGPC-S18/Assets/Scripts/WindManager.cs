@@ -4,9 +4,6 @@ using TMPro;
 public class WindManager : MonoBehaviour
 {
     [Header("References")]
-
-    [SerializeField] private TextMeshProUGUI windBearingText;
-    [SerializeField] private TextMeshProUGUI windSpeedText;
     [SerializeField] private Transform windIndicator;
     [SerializeField] private Transform player;
 
@@ -64,7 +61,9 @@ public class WindManager : MonoBehaviour
     private void UpdateUI()
     {
         windIndicator.rotation = Quaternion.Euler(0, 0, 90 - (windDirection+player.eulerAngles.z));
-        windIndicator.localScale = new Vector3(windSpeed / maxWindspeed, windSpeed/maxWindspeed, 1f);
+        Debug.Log("Windspeed: " + windSpeed.ToString());
+        Debug.Log("maxWindSpeed: " + maxWindspeed.ToString());
+        windIndicator.localScale = new Vector3(windSpeed/maxWindspeed, windSpeed/maxWindspeed, 1f);
     }
 
     int count = 0;
