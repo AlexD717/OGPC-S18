@@ -57,7 +57,7 @@ public class BoatController : MonoBehaviour
 
     private void OnEnable()
     {
-        var playerControls = inputActions.FindActionMap("Player");
+        InputActionMap playerControls = inputActions.FindActionMap("Player");
         sailToggle = playerControls.FindAction("SailToggle");
 
         sailToggle.Enable();
@@ -77,7 +77,7 @@ public class BoatController : MonoBehaviour
         rudderController = GetComponent<RudderController>();
         rudderController.SetRudderMoveSpeed(rudderMoveSpeed);
         
-        rb.linearVelocity = rb.linearVelocity + UsefulStuff.Convert.PolarToVector(currentManager.currentDirection, currentManager.currentSpeed * currentMaxSpeedMod);
+        rb.linearVelocity = rb.linearVelocity + UsefulStuff.Convert.PolarToVector(currentManager.GetCurrentDirection(), currentManager.GetCurrentSpeed() * currentMaxSpeedMod);
 
         debugTimer = debugTicksInterval - 1;
     }
@@ -134,8 +134,7 @@ public class BoatController : MonoBehaviour
         boatSpeed = rb.linearVelocity.magnitude;
         boatVelocityMagnitude = rb.linearVelocity.magnitude;
 
-        Vector2 currentVector = currentManager.GetCurrentVector() * currentMaxSpeedMod;
-        boatWaterVector = rb.linearVelocity - currentVector;
+        boatWaterVector = rb.linearVelocity - UsefulStuff.Convert.PolarToVector(currentManager.GetCurrentDirection(), currentManager.GetCurrentSpeed() * currentMaxSpeedMod);
         boatWaterSpeed = boatWaterVector.magnitude;
         if (logDebug)
         {
