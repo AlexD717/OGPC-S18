@@ -68,7 +68,7 @@ public class CurrentManager : MonoBehaviour
         currentHeading = UsefulStuff.Misc.ClampAngle(currentHeading, currentHeadingRange.x, currentHeadingRange.y);
         if (currentHeading == currentHeadingRange.x || currentHeading == currentHeadingRange.y) {for (int i=0; i < angDeltas.Length;i++) {angDeltas[i] = 0f;}}
 
-        currentSpeed = Mathf.Clamp(currentSpeed + magDeltas[^1],currentHeadingRange.x,currentHeadingRange.y);
+        currentSpeed = Mathf.Clamp(currentSpeed + magDeltas[^1], currentSpeedRange.x, currentSpeedRange.y);
         if (currentSpeed == currentSpeedRange.x || currentSpeed == currentSpeedRange.y) {for (int i=0; i < magDeltas.Length;i++) {magDeltas[i] = 0f;}}
 
 
