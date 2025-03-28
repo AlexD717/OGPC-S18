@@ -216,7 +216,7 @@ public class MapManager : MonoBehaviour
         UsefulStuff.Game.GamePaused(mapOn);
         map.SetActive(mapOn);
         
-        // Send data to player tracker for analisys.
+        // Send data to player tracker for analysis.
         PlayerPositionTracker playerPosTracker = FindFirstObjectByType<PlayerPositionTracker>();
         if (playerPosTracker != null) { playerPosTracker.PlayerToggledMap(mapOn); }
     }
