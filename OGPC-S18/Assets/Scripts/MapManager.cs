@@ -66,6 +66,7 @@ public class MapManager : MonoBehaviour
         mapPanInput.Disable();
         mapReset.Disable();
     }
+
     private void Start()
     {
         map.SetActive(true); // allows reference of its components
@@ -93,6 +94,7 @@ public class MapManager : MonoBehaviour
         screenOrig = Camera.main.ScreenToWorldPoint(Vector2.zero);
         screenSize = 2 * Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height));
     }
+
     private float DetermineMapScaleFactor()
     {
         float xFactor;
@@ -105,6 +107,7 @@ public class MapManager : MonoBehaviour
 
         return realFactor;
     }
+
     private void AddObjectsToMap()
     {
         islands = GameObject.FindGameObjectsWithTag("Island");
@@ -115,6 +118,7 @@ public class MapManager : MonoBehaviour
         AddIslandsToMap();
         AddPortsToMap();
     }
+
     private void AddIslandsToMap()
     {
         islandIcons = new GameObject[islands.Length];
@@ -139,9 +143,10 @@ public class MapManager : MonoBehaviour
             islandRect = islandIcons[i].GetComponent<RectTransform>();
             islandIcons[i].transform.localPosition = worldToMapScalar * islandCoords * mapZoomScale;
             islandIcons[i].transform.localRotation = islandRotation;
-            islandRect.localScale = new Vector3(islandRect.localScale.x * iconScaleFactor,islandRect.localScale.y * iconScaleFactor, 1f);
+            islandRect.localScale = new Vector3(islandRect.localScale.x * iconScaleFactor, islandRect.localScale.y * iconScaleFactor, 1f);
         }
     }
+
     private void AddPortsToMap()
     {
         portIcons = new GameObject[ports.Length];
@@ -166,7 +171,23 @@ public class MapManager : MonoBehaviour
             portRect = portIcons[i].GetComponent<RectTransform>();
             portIcons[i].transform.localPosition = worldToMapScalar * portCoords * mapZoomScale;
             portIcons[i].transform.localRotation = portRotation;
-            portRect.localScale = new Vector3(portRect.localScale.x * iconScaleFactor,portRect.localScale.y * iconScaleFactor, 1f);
+
+            // Keeps icon size the same but changes lenght to get correct aspect ratio
+            Image portImage = portIcons[i].GetComponent<Image>();
+            if (portImage != null)
+            {
+                Sprite sprite = portImage.sprite;
+                float height = portImage.rectTransform.rect.height;
+
+                float newWidth = height * sprite.rect.width / sprite.rect.height; // Calculates new width to maintain aspect ratio
+                portRect.sizeDelta = new Vector2(newWidth, height);
+            }
+            else
+            {
+                Debug.Log("ERROR: NO IMAGE ON PORT");
+            }
+
+            portRect.localScale = new Vector3(portRect.localScale.x * iconScaleFactor, portRect.localScale.y * iconScaleFactor, 1f);
         }
     }
 
