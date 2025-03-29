@@ -440,6 +440,7 @@ MonoBehaviour:
   inputActions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   panSensitivity: 5
   zoomSensitivity: 1000
+  zoomLimits: {x: 18, y: 280}
 --- !u!1 &62666451
 GameObject:
   m_ObjectHideFlags: 0
@@ -1582,7 +1583,7 @@ MonoBehaviour:
   Lens:
     FieldOfView: 34
     OrthographicSize: 100
-    NearClipPlane: 0.3
+    NearClipPlane: -0.1
     FarClipPlane: 1000
     Dutch: 0
     ModeOverride: 0

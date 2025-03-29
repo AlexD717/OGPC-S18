@@ -19,12 +19,16 @@ public class MapManager : MonoBehaviour
 
     [SerializeField] private float panSensitivity;
     [SerializeField] private float zoomSensitivity;
+    [SerializeField] private Vector2 zoomLimits;
     private Vector2 originalPosition;
     private float originalZoom;
 
     private void Start()
     {
         mapActive = false;
+
+        originalPosition = mapCamera.transform.position;
+        originalZoom = mapCamera.Lens.OrthographicSize;
     }
 
     private void OnEnable()
@@ -56,7 +60,6 @@ public class MapManager : MonoBehaviour
         if (mapToggle.triggered)
         {
             mapActive = !mapActive;
-            Debug.Log(mapActive);
             SwitchCameras(mapActive);
 
             if (mapActive) 
@@ -75,6 +78,16 @@ public class MapManager : MonoBehaviour
 
         PanCamera();
         ZoomCamera();
+        if (mapReset.triggered)
+        {
+            ResetCamera();
+        }
+    }
+
+    private void ResetCamera()
+    {
+        mapCamera.transform.position = originalPosition;
+        mapCamera.Lens.OrthographicSize = originalZoom;
     }
 
     private void PanCamera()
@@ -92,13 +105,14 @@ public class MapManager : MonoBehaviour
     {
         float zoomValue = mapZoom.ReadValue<float>();
 
-        mapCamera.Lens.OrthographicSize += (zoomValue * Time.unscaledDeltaTime * zoomSensitivity);
+        mapCamera.Lens.OrthographicSize = Mathf.Clamp(mapCamera.Lens.OrthographicSize + (zoomValue * Time.unscaledDeltaTime * zoomSensitivity), zoomLimits.x, zoomLimits.y);
     }
 
     private void SwitchCameras(bool mapActive)
     {
         if (mapActive)
         {
+            ResetCamera();
             playerCamera.gameObject.SetActive(false);
             mapCamera.gameObject.SetActive(true);
         }
