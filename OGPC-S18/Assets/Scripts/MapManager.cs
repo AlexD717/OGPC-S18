@@ -215,6 +215,10 @@ public class MapManager : MonoBehaviour
         mapZoomScale = 1f;
         UsefulStuff.Game.GamePaused(mapOn);
         map.SetActive(mapOn);
+        
+        // Send data to player tracker for analysis.
+        PlayerPositionTracker playerPosTracker = FindFirstObjectByType<PlayerPositionTracker>();
+        if (playerPosTracker != null) { playerPosTracker.PlayerToggledMap(mapOn); }
     }
     private void Update()
     {

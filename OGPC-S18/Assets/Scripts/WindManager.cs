@@ -1,7 +1,5 @@
 using UnityEngine;
 using TMPro;
-using UnityEditor.Experimental.GraphView;
-using UnityEditor;
 
 public class WindManager : MonoBehaviour
 {
