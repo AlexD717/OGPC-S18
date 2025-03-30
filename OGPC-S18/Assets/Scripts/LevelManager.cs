@@ -69,13 +69,13 @@ public class LevelManager : MonoBehaviour
         UpdateCountdownDisplay();
     }
 
-    private void PlayerWon()
+    public void PlayerWon()
     {
         Debug.Log("You Won!");
         EndGame();
     }
 
-    private void PlayerLost()
+    public void PlayerLost()
     {
         playerLost = true;
         Debug.Log("You Lost!");

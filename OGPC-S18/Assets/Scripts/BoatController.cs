@@ -51,7 +51,6 @@ public class BoatController : MonoBehaviour
     private float boatHeading;
     private Vector2 boatWaterVector;
 
-    private float boatVelocityMagnitude;
     private int debugTimer = 0;
     private bool logDebug = false;
 
@@ -132,7 +131,6 @@ public class BoatController : MonoBehaviour
     {
         boatHeading = (360-rb.transform.localEulerAngles.z)%360;
         boatSpeed = rb.linearVelocity.magnitude;
-        boatVelocityMagnitude = rb.linearVelocity.magnitude;
 
         boatWaterVector = rb.linearVelocity - UsefulStuff.Convert.PolarToVector(currentManager.GetCurrentDirection(), currentManager.GetCurrentSpeed() * currentMaxSpeedMod);
         boatWaterSpeed = boatWaterVector.magnitude;
