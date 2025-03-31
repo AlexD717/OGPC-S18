@@ -29,8 +29,10 @@ public class Port : MonoBehaviour
     private GameObject[] dockPanelMenus;
     private TextMeshProUGUI dockedTextIndicator;
 
+    GameObject player;
     private void Start()
     {
+        player = GameObject.FindWithTag("Player");
         rangeSprite = range.GetComponent<SpriteRenderer>();
         rangeSprite.enabled = false;
 
@@ -69,7 +71,7 @@ public class Port : MonoBehaviour
 
     private void OnEnable()
     {
-        var playerControls = inputActions.FindActionMap("Player");
+        InputActionMap playerControls = inputActions.FindActionMap("Player");
         interact = playerControls.FindAction("Interact");
 
         interact.Enable();
@@ -82,19 +84,16 @@ public class Port : MonoBehaviour
 
     private void Update()
     {
-        if (playerWithinRange)
+        nameText.transform.rotation = Quaternion.Euler(0,0,player.transform.rotation.eulerAngles.z);
+        if (playerWithinRange && interact.triggered)
         {
-            if (interact.triggered)
+            if (playerDocked)
             {
-                if (!playerDocked)
-                {
-                    Dock();
-
-                }
-                else
-                {
-                    UnDock();
-                }
+                UnDock();
+            }
+            else
+            {
+                Dock();
             }
         }
     }
