@@ -22,6 +22,8 @@ public class EndPort : MonoBehaviour
 
     [SerializeField] private RectTransform worldCanvas;
     [HideInInspector] public TextMeshProUGUI nameText;
+    GameObject player;
+
 
     private void Start()
     {
@@ -39,12 +41,13 @@ public class EndPort : MonoBehaviour
         nameText.text = portName;
 
         boatController = GameObject.FindGameObjectWithTag("Player").GetComponent<BoatController>();
-        levelManager = GameObject.FindFirstObjectByType<LevelManager>();
+        levelManager = FindFirstObjectByType<LevelManager>();
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     private void OnEnable()
     {
-        var playerControls = inputActions.FindActionMap("Player");
+        InputActionMap playerControls = inputActions.FindActionMap("Player");
         interact = playerControls.FindAction("Interact");
 
         interact.Enable();
@@ -57,15 +60,13 @@ public class EndPort : MonoBehaviour
 
     private void Update()
     {
-        if (playerWithinRange)
+        nameText.transform.rotation = Quaternion.Euler(0,0,player.transform.rotation.eulerAngles.z);
+        if (playerWithinRange && interact.triggered)
         {
-            if (interact.triggered)
+            if (!playerDocked)
             {
-                if (!playerDocked)
-                {
-                    Dock();
-                    boatController.Dock(UsefulStuff.GetClosestPosition(playerDockPositions, boatController.gameObject));
-                }
+                Dock();
+                boatController.Dock(UsefulStuff.GetClosestPosition(playerDockPositions, boatController.gameObject));
             }
         }
     }
