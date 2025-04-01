@@ -1,4 +1,6 @@
+using System.Runtime.CompilerServices;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -28,10 +30,14 @@ public class Port : MonoBehaviour
     private Transform dockPanel;
     private GameObject[] dockPanelMenus;
     private TextMeshProUGUI dockedTextIndicator;
-
+    private TextMeshProUGUI saveTimerText;
+    public bool portSaved{ get {return portSaved;} private set { portSaved = value;}}
+    [SerializeField] private float timeToSavePort = 5f;
+    private float playerDockedTime = 0f;
     GameObject player;
     private void Start()
     {
+        portSaved = false;
         player = GameObject.FindWithTag("Player");
         rangeSprite = range.GetComponent<SpriteRenderer>();
         rangeSprite.enabled = false;
@@ -50,6 +56,9 @@ public class Port : MonoBehaviour
 
         dockedTextIndicator = dockCanvas.transform.GetChild(2).GetComponent<TextMeshProUGUI>();
         dockedTextIndicator.text = "Docked at " + nameText.text;
+
+        saveTimerText = dockCanvas.transform.GetChild(3).GetComponent<TextMeshProUGUI>();
+        saveTimerText.text = "Saved in " + timeToSavePort.ToString("F2") + "s";
 
         selectedQuestPanel = dockCanvas.transform.GetChild(1).gameObject;
         selectedQuestPanel.SetActive(false); // Deactivates accepeted quest menu
@@ -96,8 +105,21 @@ public class Port : MonoBehaviour
                 Dock();
             }
         }
+        if (playerDocked && !portSaved)
+        {
+            playerDockedTime += Time.deltaTime;
+            playerDockedTime = Mathf.Clamp(playerDockedTime, 0, timeToSavePort);
+            if (playerDockedTime > timeToSavePort)
+            {
+                portSaved = true;
+                saveTimerText.text = "Saved!"; //Save the port
+            }
+            else
+            {
+                saveTimerText.text = "Saved in " + (timeToSavePort - playerDockedTime).ToString("F2") + "s";//Count down time remaining
+            }
+        }
     }
-
     private void Dock()
     {
         dockCanvas.SetActive(true);
