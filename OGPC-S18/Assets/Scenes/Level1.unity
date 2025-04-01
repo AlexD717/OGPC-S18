@@ -843,6 +843,14 @@ PrefabInstance:
       propertyPath: speedometer
       value: 
       objectReference: {fileID: 1035614337}
+    - target: {fileID: 3478364201261687757, guid: c7bb4ef6e2bca0b42aea85a267fcb8ca, type: 3}
+      propertyPath: maxShipHealth
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3478364201261687757, guid: c7bb4ef6e2bca0b42aea85a267fcb8ca, type: 3}
+      propertyPath: damageFromCollisions
+      value: 90
+      objectReference: {fileID: 0}
     - target: {fileID: 3529538503143038197, guid: c7bb4ef6e2bca0b42aea85a267fcb8ca, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -319.1324

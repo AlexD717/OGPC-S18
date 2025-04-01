@@ -125,8 +125,7 @@ public class LevelManager : MonoBehaviour
 
         // Fill in extra information
         Transform dataGrid = winScreen.transform.GetChild(2);
-        
-
+    
         // Fill in score depending on how much time is left
         dataGrid.GetChild(4).GetComponent<TextMeshProUGUI>().text = countdownText.text; // Says time remaining
         float timeRemainingScore = CalculateTimeScore(countdown);
@@ -178,7 +177,6 @@ public class LevelManager : MonoBehaviour
 
     private void UpdateCountdownDisplay()
     {
-        float minutesFloat = countdown / 60f;
         int minutes = (int)Mathf.Floor(countdown / 60f);
         int seconds = (int)Mathf.Floor(countdown - minutes * 60);
         float milliSeconds = countdown - Mathf.Floor(countdown);
