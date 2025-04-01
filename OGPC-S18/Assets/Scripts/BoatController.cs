@@ -95,7 +95,7 @@ public class BoatController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Island") || collision.gameObject.transform.parent.gameObject.CompareTag("Port"))
+        if (collision.gameObject.CompareTag("Island") || collision.gameObject.transform.parent.gameObject.CompareTag("Port") || collision.gameObject.transform.parent.gameObject.CompareTag("EndPort"))
         {
             // Boat is colliding with an island or obstacle
             shipHealth -= (float)damageFromCollisions;

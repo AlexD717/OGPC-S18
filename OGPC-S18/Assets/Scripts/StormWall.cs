@@ -38,5 +38,10 @@ public class StormWall : MonoBehaviour
         {
             other.GetComponent<BoatController>().shipHealth -= Time.deltaTime * damagePerSecond;
         }
+        else if (other.CompareTag("EndPort"))
+        {
+            LevelManager levelManager = FindFirstObjectByType<LevelManager>();
+            levelManager.PlayerLost();
+        }
     }
 }
