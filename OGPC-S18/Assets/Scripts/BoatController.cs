@@ -39,7 +39,7 @@ public class BoatController : MonoBehaviour
     private float relativeWindDirection;
     private float boatWaterSpeed;
     private Vector2 boatWaterVector;
-    private int shipHealth;
+    public float shipHealth;
     private LevelManager levelManager;
 
     private void OnEnable()
@@ -57,7 +57,7 @@ public class BoatController : MonoBehaviour
 
     private void Start()
     {
-        shipHealth = maxShipHealth;
+        shipHealth = (float)maxShipHealth;
         windManager = FindFirstObjectByType<WindManager>();
         currentManager = FindFirstObjectByType<CurrentManager>();
         rb = GetComponent<Rigidbody2D>();
@@ -98,8 +98,7 @@ public class BoatController : MonoBehaviour
         if (collision.gameObject.CompareTag("Island") || collision.gameObject.transform.parent.gameObject.CompareTag("Port"))
         {
             // Boat is colliding with an island or obstacle
-            shipHealth -= damageFromCollisions;
-            Debug.Log("Boat collided with " + collision.gameObject.name + ". Ship health: " + shipHealth);
+            shipHealth -= (float)damageFromCollisions;
         }
     }
     private void FixedUpdate()
