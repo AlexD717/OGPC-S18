@@ -8,8 +8,8 @@ using Unity.Mathematics;
 
 public class LevelManager : MonoBehaviour
 {
-    [SerializeField] private float countdown;
-    [SerializeField] private TextMeshProUGUI countdownText;
+    [SerializeField] private float timeTaken;
+    [SerializeField] private TextMeshProUGUI timeTakenText;
     [SerializeField] private InputActionAsset inputActions;
     [SerializeField] private Button continueButton;
     private Image buttonSlider;
@@ -59,17 +59,11 @@ public class LevelManager : MonoBehaviour
             }
             return;
         }
-
-        countdown -= Time.deltaTime;
-        if (countdown <= 0f)
+        else
         {
-            if (!playerLost)
-            {
-                PlayerLost();
-            }
-            return;
+            timeTaken += Time.deltaTime;
+            UpdatetimeTakenDisplay();
         }
-        UpdateCountdownDisplay();
     }
 
     public void PlayerWon()
@@ -82,7 +76,6 @@ public class LevelManager : MonoBehaviour
     {
         playerLost = true;
         Debug.Log("You Lost!");
-        countdownText.text = "0.00";
         EndGame();
     }
 
@@ -127,8 +120,8 @@ public class LevelManager : MonoBehaviour
         Transform dataGrid = winScreen.transform.GetChild(2);
     
         // Fill in score depending on how much time is left
-        dataGrid.GetChild(4).GetComponent<TextMeshProUGUI>().text = countdownText.text; // Says time remaining
-        float timeRemainingScore = CalculateTimeScore(countdown);
+        dataGrid.GetChild(4).GetComponent<TextMeshProUGUI>().text = timeTakenText.text; // Says time remaining
+        float timeRemainingScore = CalculateTimeScore(timeTaken);
         dataGrid.GetChild(5).GetComponent<TextMeshProUGUI>().text = timeRemainingScore.ToString();
 
         dataGrid.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = savedPorts.ToString() + "/" + ports.Length.ToString(); // Says saved ports out of total ports
@@ -175,18 +168,18 @@ public class LevelManager : MonoBehaviour
         inputActions.FindActionMap("Map").Disable();
     }
 
-    private void UpdateCountdownDisplay()
+    private void UpdatetimeTakenDisplay()
     {
-        int minutes = (int)Mathf.Floor(countdown / 60f);
-        int seconds = (int)Mathf.Floor(countdown - minutes * 60);
-        float milliSeconds = countdown - Mathf.Floor(countdown);
+        int minutes = (int)Mathf.Floor(timeTaken / 60f);
+        int seconds = (int)Mathf.Floor(timeTaken - minutes * 60);
+        float milliSeconds = timeTaken - Mathf.Floor(timeTaken);
         if (minutes > 0)
         {
-            countdownText.text = $"{minutes.ToString("D2")}:{seconds.ToString("D2")}";
+            timeTakenText.text = $"{minutes.ToString("D2")}:{seconds.ToString("D2")}";
         }
         else
         {
-            countdownText.text = (seconds + milliSeconds).ToString("F2");
+            timeTakenText.text = (seconds + milliSeconds).ToString("F2");
         }
     }
 }
