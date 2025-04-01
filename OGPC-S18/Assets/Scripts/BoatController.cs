@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
+using UnityEngine.UI;
 
 public class BoatController : MonoBehaviour
 {
@@ -22,8 +23,7 @@ public class BoatController : MonoBehaviour
     [SerializeField] private Transform sail;
     [SerializeField] private Transform player;
     [SerializeField] private Transform compass;
-    [SerializeField] private TextMeshProUGUI boatHeadingText;
-    [SerializeField] private TextMeshProUGUI boatSpeedText;
+    [SerializeField] private Scrollbar speedometer;
     [SerializeField] private InputActionAsset inputActions;
 
     [Header("Debug Settings")]
@@ -159,9 +159,15 @@ public class BoatController : MonoBehaviour
 
     private void UpdateUI()
     {
-        boatHeadingText.text = $"Boat Heading: {boatHeading.ToString("F1")}";
-        boatSpeedText.text = $"Boat Speed: {boatSpeed.ToString("F1")}";
         compass.rotation = Quaternion.Euler(0,0,90 - player.eulerAngles.z);
+        if (sailEnabled)
+        {
+            speedometer.size = boatWaterSpeed / maxSpeed;
+        }
+        else
+        {
+            speedometer.size = boatWaterSpeed / maxSpeedUnderOars;
+        }
     }
 
     private void AddWind2Boat()

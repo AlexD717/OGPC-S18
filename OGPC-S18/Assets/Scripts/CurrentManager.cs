@@ -5,8 +5,6 @@ public class CurrentManager : MonoBehaviour
 {
 
     [Header("References")]
-    [SerializeField] private TextMeshProUGUI currentBearingText;
-    [SerializeField] private TextMeshProUGUI currentSpeedText;
     [SerializeField] private Transform currentIndicator;
     [SerializeField] private Transform player;
 
@@ -78,8 +76,6 @@ public class CurrentManager : MonoBehaviour
 
     private void UpdateUI()
     {
-        currentSpeedText.text = $"Current speed: {currentSpeed.ToString("F1")}";
-        currentBearingText.text = $"Current Bearing: {currentHeading.ToString("F1")}";
         currentIndicator.rotation = Quaternion.Euler(0, 0, 90 - (currentHeading+player.eulerAngles.z));
         currentIndicator.localScale = new Vector3(currentSpeed/currentSpeedRange.y, currentSpeed/currentSpeedRange.y, 1f);
     }

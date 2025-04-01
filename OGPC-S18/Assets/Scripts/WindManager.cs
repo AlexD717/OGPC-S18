@@ -5,8 +5,6 @@ public class WindManager : MonoBehaviour
 {
     [Header("References")]
 
-    [SerializeField] private TextMeshProUGUI windBearingText;
-    [SerializeField] private TextMeshProUGUI windSpeedText;
     [SerializeField] private Transform windIndicator;
     [SerializeField] private Transform player;
 
@@ -67,8 +65,6 @@ public class WindManager : MonoBehaviour
     }
     private void UpdateUI()
     {
-        windSpeedText.text = $"Wind Speed: {windSpeed:F1}";
-        windBearingText.text = $"Wind Bearing: {windHeading:F1}";
         windIndicator.rotation = Quaternion.Euler(0, 0, 90 - (windHeading+player.eulerAngles.z));
         windIndicator.localScale = new Vector3(windSpeed / windSpeedRange.y, windSpeed/windSpeedRange.y, 1f);
     }
