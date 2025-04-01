@@ -83,13 +83,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   portName: Something
-  range: {fileID: 1907916127142764638}
   playerDockPositionsParent: {fileID: 383428477439939439}
   inputActions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   worldCanvas: {fileID: 8304038454675778215}
   nameText: {fileID: 0}
   dockCanvas: {fileID: 4976201908680733392}
-  timeToSavePort: 5
+  timeToSavePort: 0
 --- !u!58 &7056585914427181172
 CircleCollider2D:
   m_ObjectHideFlags: 0

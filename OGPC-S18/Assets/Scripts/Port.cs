@@ -10,8 +10,6 @@ public class Port : MonoBehaviour
 
     private bool playerWithinRange = false;
     private bool playerDocked = false;
-
-    [SerializeField] private GameObject range;
     private SpriteRenderer rangeSprite;
 
     [SerializeField] private Transform playerDockPositionsParent;
@@ -31,15 +29,14 @@ public class Port : MonoBehaviour
     private GameObject[] dockPanelMenus;
     private TextMeshProUGUI dockedTextIndicator;
     private TextMeshProUGUI saveTimerText;
-    public bool portSaved{ get {return portSaved;} private set { portSaved = value;}}
+    public bool portSaved { get; private set; } = false;
     [SerializeField] private float timeToSavePort = 5f;
     private float playerDockedTime = 0f;
     GameObject player;
     private void Start()
     {
-        portSaved = false;
         player = GameObject.FindWithTag("Player");
-        rangeSprite = range.GetComponent<SpriteRenderer>();
+        rangeSprite = transform.GetChild(1).GetComponent<SpriteRenderer>();
         rangeSprite.enabled = false;
 
         portManager = FindFirstObjectByType<PortManager>();
@@ -109,7 +106,7 @@ public class Port : MonoBehaviour
         {
             playerDockedTime += Time.deltaTime;
             playerDockedTime = Mathf.Clamp(playerDockedTime, 0, timeToSavePort);
-            if (playerDockedTime > timeToSavePort)
+            if (playerDockedTime >= timeToSavePort)
             {
                 portSaved = true;
                 saveTimerText.text = "Saved!"; //Save the port
@@ -118,6 +115,10 @@ public class Port : MonoBehaviour
             {
                 saveTimerText.text = "Saved in " + (timeToSavePort - playerDockedTime).ToString("F2") + "s";//Count down time remaining
             }
+        }
+        if (playerDocked && portSaved)
+        {
+            Debug.Log("Port saved!");
         }
     }
     private void Dock()
