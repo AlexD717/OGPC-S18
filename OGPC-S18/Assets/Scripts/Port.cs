@@ -1,6 +1,4 @@
-using System.Runtime.CompilerServices;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -30,9 +28,10 @@ public class Port : MonoBehaviour
     private TextMeshProUGUI dockedTextIndicator;
     private TextMeshProUGUI saveTimerText;
     public bool portSaved { get; private set; } = false;
-    [SerializeField] private float timeToSavePort = 5f;
+    [SerializeField] private float timeToSavePort;
     private float playerDockedTime = 0f;
     GameObject player;
+
     private void Start()
     {
         player = GameObject.FindWithTag("Player");
