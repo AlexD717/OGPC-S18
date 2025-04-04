@@ -7,14 +7,14 @@ public class LevelManager : MonoBehaviour
 {
     [SerializeField] private float countdown;
     [SerializeField] private TextMeshProUGUI countdownText;
-    [SerializeField] private InputActionAsset inpuActions;
-
+    [SerializeField] private InputActionAsset inputActions;
     [SerializeField] private Button continueButton;
     private Image buttonSlider;
     [SerializeField] float timeToWaitOnContinueButton;
     private float timeWaitedOnContinueButton = 0;
     [SerializeField] private GameObject winScreen;
     [SerializeField] private GameObject loseScreen;
+    [SerializeField] private int scoreFromSavedPorts;
 
     private bool playerLost = false;
     private bool gameEnded = false;
@@ -30,8 +30,8 @@ public class LevelManager : MonoBehaviour
         continueButton.onClick.AddListener(ShowEndScreen);
 
         // Enables input collection
-        inpuActions.FindActionMap("Player").Enable();
-        inpuActions.FindActionMap("Map").Enable();
+        inputActions.FindActionMap("Player").Enable();
+        inputActions.FindActionMap("Map").Enable();
 
         // Resets Time
         Time.timeScale = 1f;
@@ -104,6 +104,19 @@ public class LevelManager : MonoBehaviour
 
     private void ShowWinScreen()
     {
+        // Figures out how many ports exist and how many are saved
+        Port[] ports = FindObjectsByType<Port>(FindObjectsSortMode.None);
+        int savedPorts = 0;
+        // Count how many ports are saved
+        foreach (Port port in ports)
+        {
+            if (port.portSaved)
+            {
+                savedPorts++;
+            }
+        }
+
+        // Shows win screen
         winScreen.SetActive(true);
         foreach (Transform child in winScreen.transform)
         {
@@ -112,14 +125,34 @@ public class LevelManager : MonoBehaviour
 
         // Fill in extra information
         Transform dataGrid = winScreen.transform.GetChild(2);
+
         // Fill in score depending on how much time is left
         dataGrid.GetChild(4).GetComponent<TextMeshProUGUI>().text = countdownText.text; // Says time remaining
-        float timeRemainingScore = Mathf.Round(Mathf.Log(countdown, 1.7f) * 250);
+        float timeRemainingScore = CalculateTimeScore(countdown);
         dataGrid.GetChild(5).GetComponent<TextMeshProUGUI>().text = timeRemainingScore.ToString();
 
+        dataGrid.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = savedPorts.ToString() + "/" + ports.Length.ToString(); // Says saved ports out of total ports
+        int savedPortsScore = CalculateSavedPortScore(savedPorts, ports.Length);
+        dataGrid.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = savedPortsScore.ToString(); // Says saved ports score
+        
         // Fill in total score
-        float totalScore = timeRemainingScore;
+        float totalScore = timeRemainingScore + savedPortsScore;
         winScreen.transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = "Total Score: " + totalScore.ToString();
+    }
+
+    private int CalculateTimeScore(float timeRemaining)
+    {
+        // Calculate score based on time remaining
+        float timeScore = Mathf.Round(Mathf.Log(timeRemaining, 1.7f) * 250);
+        return (int)timeScore;
+    }
+
+    private int CalculateSavedPortScore(int savedPorts, int totalPorts)
+    {
+        // Calculate score based on saved ports
+        if (totalPorts == 0) { return 0; } // Avoid division by zero
+        float portScore = (float)savedPorts/(float)totalPorts * (float)scoreFromSavedPorts;
+        return (int)portScore;
     }
 
     private void ShowLoseScreen()
@@ -140,8 +173,8 @@ public class LevelManager : MonoBehaviour
         Time.timeScale = 0f;
 
         // Disables new input collection
-        inpuActions.FindActionMap("Player").Disable();
-        inpuActions.FindActionMap("Map").Disable();
+        inputActions.FindActionMap("Player").Disable();
+        inputActions.FindActionMap("Map").Disable();
     }
 
     private void UpdateCountdownDisplay()

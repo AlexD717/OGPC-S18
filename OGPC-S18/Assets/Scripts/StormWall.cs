@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class StormWall : MonoBehaviour
 {
-    [Header("stormWall Configurables")]
+    [Header("StormWall Configurables")]
     [SerializeField] Vector2 startPosition;
     [SerializeField] float startRotation;
     [SerializeField] Vector2 startVelocity;

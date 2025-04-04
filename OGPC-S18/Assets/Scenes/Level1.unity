@@ -356,6 +356,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 180
       objectReference: {fileID: 0}
+    - target: {fileID: 4495474314969207744, guid: c92cfd2cef454f0458a3f329e66c8fe6, type: 3}
+      propertyPath: startPosition.y
+      value: -600
+      objectReference: {fileID: 0}
     - target: {fileID: 8388477392746395577, guid: c92cfd2cef454f0458a3f329e66c8fe6, type: 3}
       propertyPath: m_Name
       value: StormWall
@@ -861,8 +865,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: -2653645562509224319, guid: c7bb4ef6e2bca0b42aea85a267fcb8ca, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c7bb4ef6e2bca0b42aea85a267fcb8ca, type: 3}

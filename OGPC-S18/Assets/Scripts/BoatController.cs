@@ -5,7 +5,8 @@ using TMPro;
 public class BoatController : MonoBehaviour
 {
     [Header("Ship Data")]
-    [SerializeField] private float maxSpeed; //Make less than 100
+    [SerializeField] private float absoluteMaxSpeed; // Speed boat can never go above of
+    [SerializeField] private float relativeToWindMaxSpeed; // Percentage of wind that can be captured
     [SerializeField] private float maxSpeedUnderOars;
     [SerializeField] private float oarAcceleration;
     [SerializeField] private float speedAccelerationMod;
@@ -185,7 +186,7 @@ public class BoatController : MonoBehaviour
         float speedMagnitude = sailAngleSpeedMod * windManager.GetWindSpeed() * speedAccelerationMod;
 
         // Makes sure boat doesn't exceed maximum speed relative to current
-        if (boatWaterSpeed < maxSpeed/100 * windManager.GetWindSpeed())
+        if (boatWaterSpeed < absoluteMaxSpeed && boatWaterSpeed < relativeToWindMaxSpeed * windManager.GetWindSpeed())
             rb.AddRelativeForceY(speedMagnitude);
     }
 

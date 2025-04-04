@@ -8,8 +8,6 @@ public class Port : MonoBehaviour
 
     private bool playerWithinRange = false;
     private bool playerDocked = false;
-
-    [SerializeField] private GameObject range;
     private SpriteRenderer rangeSprite;
 
     [SerializeField] private Transform playerDockPositionsParent;
@@ -28,12 +26,16 @@ public class Port : MonoBehaviour
     private Transform dockPanel;
     private GameObject[] dockPanelMenus;
     private TextMeshProUGUI dockedTextIndicator;
-
+    private TextMeshProUGUI saveTimerText;
+    public bool portSaved { get; private set; } = false;
+    [SerializeField] private float timeToSavePort;
+    private float playerDockedTime = 0f;
     GameObject player;
+
     private void Start()
     {
         player = GameObject.FindWithTag("Player");
-        rangeSprite = range.GetComponent<SpriteRenderer>();
+        rangeSprite = transform.GetChild(1).GetComponent<SpriteRenderer>();
         rangeSprite.enabled = false;
 
         portManager = FindFirstObjectByType<PortManager>();
@@ -50,6 +52,9 @@ public class Port : MonoBehaviour
 
         dockedTextIndicator = dockCanvas.transform.GetChild(2).GetComponent<TextMeshProUGUI>();
         dockedTextIndicator.text = "Docked at " + nameText.text;
+
+        saveTimerText = dockCanvas.transform.GetChild(3).GetComponent<TextMeshProUGUI>();
+        saveTimerText.text = "Saved in " + timeToSavePort.ToString("F2") + "s";
 
         selectedQuestPanel = dockCanvas.transform.GetChild(1).gameObject;
         selectedQuestPanel.SetActive(false); // Deactivates accepeted quest menu
@@ -96,8 +101,25 @@ public class Port : MonoBehaviour
                 Dock();
             }
         }
+        if (playerDocked && !portSaved)
+        {
+            playerDockedTime += Time.deltaTime;
+            playerDockedTime = Mathf.Clamp(playerDockedTime, 0, timeToSavePort);
+            if (playerDockedTime >= timeToSavePort)
+            {
+                portSaved = true;
+                saveTimerText.text = "Saved!"; //Save the port
+            }
+            else
+            {
+                saveTimerText.text = "Saved in " + (timeToSavePort - playerDockedTime).ToString("F2") + "s";//Count down time remaining
+            }
+        }
+        if (playerDocked && portSaved)
+        {
+            Debug.Log("Port saved!");
+        }
     }
-
     private void Dock()
     {
         dockCanvas.SetActive(true);
