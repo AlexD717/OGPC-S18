@@ -24,7 +24,7 @@ public class WindParticleSpawner : MonoBehaviour
 
     private void SpawnWindParticle()
     {
-        Vector2 spawnPosition = RandomSpawnPosition();
+        Vector3 spawnPosition = RandomSpawnPosition();
         GameObject windParticleObject = Instantiate(windParticlePrefab, spawnPosition, Quaternion.identity);
         //windParticleObject.transform.SetParent(transform);
         WindParticle windParticle = windParticleObject.GetComponent<WindParticle>();
@@ -32,7 +32,7 @@ public class WindParticleSpawner : MonoBehaviour
         windParticle.windSpeed = windManager.GetWindSpeed();
     }
 
-    private Vector2 RandomSpawnPosition()
+    private Vector3 RandomSpawnPosition()
     {
         float x = Random.Range(xSpawn.x, xSpawn.y);
         float y = Random.Range(ySpawn.x, ySpawn.y);

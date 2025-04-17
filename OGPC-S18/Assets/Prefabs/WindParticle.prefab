@@ -81,7 +81,7 @@ MonoBehaviour:
   windYOffsetMult: 30
   speedConstant: 2
   timeAliveRange: {x: 0.6, y: 1}
-  lenghtRange: {x: 0.1, y: 0.2}
+  lengthRange: {x: 0.1, y: 0.2}
   windAngle: 0
   windSpeed: 0
 --- !u!96 &4653983251162899454

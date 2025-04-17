@@ -6,7 +6,7 @@ public class WindParticle : MonoBehaviour
     [SerializeField] private float windYOffsetMult;
     [SerializeField] private float speedConstant;
     [SerializeField] private Vector2 timeAliveRange;
-    [SerializeField] private Vector2 lenghtRange;
+    [SerializeField] private Vector2 lengthRange;
     private float timeAlive;
     private float startTime;
 
@@ -18,7 +18,7 @@ public class WindParticle : MonoBehaviour
     private void Start()
     {
         trailRenderer = GetComponent<TrailRenderer>();
-        trailRenderer.time = Random.Range(lenghtRange.x, lenghtRange.y);
+        trailRenderer.time = Random.Range(lengthRange.x, lengthRange.y);
 
         timeAlive = Random.Range(timeAliveRange.x, timeAliveRange.y);
         startTime = Time.time;
