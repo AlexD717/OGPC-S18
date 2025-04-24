@@ -22,14 +22,15 @@ public class WindManager : MonoBehaviour
     [SerializeField] private float maxAngDeltaStep; //Maximum delta for angle, increases for each delta
     [SerializeField] private float stepMultiple; //Multiplier for the step, controlling how much each step increases
     [SerializeField] private int updateInterval; // Updates values every "this many frames"
+    int frameCount = 0; // Frame counter
     [SerializeField] private Vector2 windSpeedRange; //Clamps on wind range
     [SerializeField] private Vector2 windHeadingRange; //Clamps on wind direction
     float[] magDeltas;
     float[] angDeltas;
 
+
     private void Start()
     {
-        
         //Generation Variable/Array Stuff
         if (stabilityLevels < 2) {stabilityLevels = 2;}
     
@@ -44,8 +45,6 @@ public class WindManager : MonoBehaviour
         }
     }
 
-
-
     private void UpdateWind() 
     {
         magDeltas[0] = Random.Range(-1 * randomMagRange, randomMagRange);
@@ -57,7 +56,7 @@ public class WindManager : MonoBehaviour
             angDeltas[i] = Mathf.Clamp(angDeltas[i] + angDeltas[i-1], -stepMultiple * i * maxAngDeltaStep, stepMultiple * i*maxAngDeltaStep); //adding the delta(+ or -) to the next delta to get the new ROC
         }
 
-        windHeading = (windHeading + angDeltas[^1]+360)%360;
+        windHeading = (windHeading + angDeltas[^1] + 360) % 360;
         windHeading = UsefulStuff.Misc.ClampAngle(windHeading, windHeadingRange.x, windHeadingRange.y);
         if (windHeading == windHeadingRange.x || windHeading == windHeadingRange.y) {for (int i=0; i < angDeltas.Length;i++) {angDeltas[i] = 0f;}}
         
@@ -65,6 +64,7 @@ public class WindManager : MonoBehaviour
         if (windSpeed == windSpeedRange.x || windSpeed == windSpeedRange.y) {for (int i=0; i < magDeltas.Length;i++) {magDeltas[i] = 0f;}}
 
     }
+
     private void UpdateUI()
     {
         windSpeedText.text = $"Wind Speed: {windSpeed:F1}";
@@ -72,13 +72,13 @@ public class WindManager : MonoBehaviour
         windIndicator.rotation = Quaternion.Euler(0, 0, 90 - (windHeading+player.eulerAngles.z));
         windIndicator.localScale = new Vector3(windSpeed / windSpeedRange.y, windSpeed/windSpeedRange.y, 1f);
     }
-    int count = 0;
+
     private void Update()
     {
-        count++;
-        if (count == updateInterval)
+        frameCount++;
+        if (frameCount == updateInterval)
         {
-            count = 0;
+            frameCount = 0;
             UpdateWind();
         }
         UpdateUI();
@@ -87,6 +87,12 @@ public class WindManager : MonoBehaviour
     public float GetWindDirection()
     {
         return windHeading;
+    }
+
+    // Returns the wind direction in radians with 0 being east and normal math stuff
+    public float GetWindRadAngle()
+    {
+        return (90 - windHeading) % 360 * Mathf.Deg2Rad;
     }
 
     public float GetWindSpeed()
