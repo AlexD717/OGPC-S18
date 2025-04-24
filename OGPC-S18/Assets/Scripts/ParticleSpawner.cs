@@ -53,7 +53,6 @@ public class ParticleSpawner : MonoBehaviour
         Debug.Log("Water Particle Spawned");
         Vector3 spawnPosition = RandomSpawnPosition();
         GameObject waterParticleObject = Instantiate(waterParticlePrefab, spawnPosition, Quaternion.identity);
-        waterParticleObject.transform.SetParent(transform);
         WaterParticle waterParticle = waterParticleObject.GetComponent<WaterParticle>();
         waterParticle.currentAngle = currentManager.GetCurrentRadAngle();
         waterParticle.currentSpeed = currentManager.GetCurrentSpeed();

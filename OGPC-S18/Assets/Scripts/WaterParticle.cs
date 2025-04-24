@@ -3,7 +3,8 @@ using UnityEngine;
 public class WaterParticle : MonoBehaviour
 {
     [SerializeField] private AnimationCurve waterYOffset;
-    [SerializeField] private float waterYOffsetMult;
+    [SerializeField] private Vector2 waterYOffsetMultRange;
+    private float waterYOffsetMult;
     [SerializeField] private float speedConstant;
     [SerializeField] private Vector2 timeAliveRange;
     private float timeAlive;
@@ -21,6 +22,8 @@ public class WaterParticle : MonoBehaviour
     {
         timeAlive = Random.Range(timeAliveRange.x, timeAliveRange.y);
         startTime = Time.time;
+
+        waterYOffsetMult = Random.Range(waterYOffsetMultRange.x, waterYOffsetMultRange.y);
 
         Invoke("Disapear", timeAlive);
 
