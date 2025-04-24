@@ -46,10 +46,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   windParticlePrefab: {fileID: 6457244986911265293, guid: 0c90db650607f9d4ea76927b804888a0, type: 3}
-  spawnInterval: 0.5
+  windSpawnInterval: 0.4
+  waterParticlePrefab: {fileID: 5000774685348299085, guid: df3b4b28b5250d64092f7765a0f9a60f, type: 3}
+  waterSpawnInterval: 0.05
   xSpawn: {x: -60, y: 60}
   ySpawn: {x: -40, y: 40}
   windManager: {fileID: 0}
+  currentManager: {fileID: 0}
 --- !u!114 &826993736605808227
 MonoBehaviour:
   m_ObjectHideFlags: 0

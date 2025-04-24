@@ -10,7 +10,6 @@ public class CurrentManager : MonoBehaviour
     [SerializeField] private Transform currentIndicator;
     [SerializeField] private Transform player;
 
-
     [Header("Starting Current Condition")]
     [SerializeField] public float currentHeading; // starting current direction, 0 is North, 90 is East, 180 is South, and 270 is West
     [SerializeField] public float currentSpeed; // starting current speed
@@ -25,8 +24,6 @@ public class CurrentManager : MonoBehaviour
     [SerializeField] private int updateInterval; // Updates values every "this many frames"
     [SerializeField] private Vector2 currentSpeedRange; //Clamps on wind range
     [SerializeField] private Vector2 currentHeadingRange; //Clamps on wind direction
-
-
 
     float[] magDeltas;
     float[] angDeltas;
@@ -100,6 +97,12 @@ public class CurrentManager : MonoBehaviour
     public float GetCurrentDirection()
     {
         return currentHeading;
+    }
+
+    // Returns the wind direction in radians with 0 being east and normal math stuff
+    public float GetCurrentRadAngle()
+    {
+        return (90 - currentHeading) % 360 * Mathf.Deg2Rad;
     }
 
     public float GetCurrentSpeed()
