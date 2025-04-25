@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      PhoenixLogo_0: 7822376671836545103
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

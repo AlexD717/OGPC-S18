@@ -79,7 +79,6 @@ public class LevelManager : MonoBehaviour
     {
         playerLost = true;
         Debug.Log("You Lost!");
-        countdownText.text = "0.00";
         EndGame();
     }
 

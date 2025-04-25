@@ -19,6 +19,8 @@ public class BoatController : MonoBehaviour
     [SerializeField] private float currentAccelerationMod;
     [SerializeField] private float currentMaxSpeedMod;
 
+
+
     [Header("References")]
     [SerializeField] private Transform sail;
     [SerializeField] private Transform player;
@@ -26,9 +28,6 @@ public class BoatController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI boatHeadingText;
     [SerializeField] private TextMeshProUGUI boatSpeedText;
     [SerializeField] private InputActionAsset inputActions;
-
-    [Header("Debug Settings")]
-    [SerializeField] private int debugTicksInterval; //gives debug message only every n gameticks
 
     private enum BoatState
     {
@@ -52,8 +51,7 @@ public class BoatController : MonoBehaviour
     private float boatHeading;
     private Vector2 boatWaterVector;
 
-    private int debugTimer = 0;
-    private bool logDebug = false;
+    private LevelManager levelManager;
 
     private void OnEnable()
     {
@@ -77,22 +75,46 @@ public class BoatController : MonoBehaviour
         rudderController = GetComponent<RudderController>();
         rudderController.SetRudderMoveSpeed(rudderMoveSpeed);
         
+        levelManager = FindFirstObjectByType<LevelManager>();
+
         rb.linearVelocity = rb.linearVelocity + UsefulStuff.Convert.PolarToVector(currentManager.GetCurrentDirection(), currentManager.GetCurrentSpeed() * currentMaxSpeedMod);
 
-        debugTimer = debugTicksInterval - 1;
+        currentHealth = maxHealth;
+
+    }
+    
+    private void DamageBoat(int damage)
+    {
+        currentHealth -= damage;
+        if (currentHealth <= 0)
+        {
+            levelManager.PlayerLost();
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Island") && collisionCooldownTimer == 0)
+        {
+            collisionCooldownTimer = collisionCooldown;
+            Debug.Log("Collision with Island");
+            DamageBoat((int)collisionDamage);
+            if (currentHealth <= 0)
+            {
+                levelManager.PlayerLost();
+            }
+        }
     }
 
     private void Update()
     {
-        debugTimer++;
-        if (debugTimer == debugTicksInterval)
+        if (collisionCooldownTimer > 0)
         {
-            logDebug = true;
-            debugTimer = 0;
+            collisionCooldownTimer -= Time.deltaTime;
+            collisionCooldownTimer = Mathf.Max(collisionCooldownTimer, 0);
         }
 
         UpdateUI();
-        logDebug = false;
 
         if (boatState != BoatState.sailing)
         {
@@ -135,11 +157,6 @@ public class BoatController : MonoBehaviour
 
         boatWaterVector = rb.linearVelocity - UsefulStuff.Convert.PolarToVector(currentManager.GetCurrentDirection(), currentManager.GetCurrentSpeed() * currentMaxSpeedMod);
         boatWaterSpeed = boatWaterVector.magnitude;
-        if (logDebug)
-        {
-            Debug.Log($"Boats True Speed: {boatSpeed.ToString()}");
-            Debug.Log("Boat Heading: " + boatHeading.ToString());
-        }
     }
 
     private void RotateSailToMatchWind()
@@ -199,18 +216,12 @@ public class BoatController : MonoBehaviour
     private void AddCurrent2Boat()
     {
         rb.AddForce(-boatWaterVector * currentAccelerationMod);
-
-        if (logDebug) {Debug.Log("BoatWaterSpeed: " + boatWaterVector.magnitude.ToString());}
     }
 
     private void BoatRotation()
     {
         float rudderPosition = UsefulStuff.Misc.Round(rudderController.GetRudderPosition(),4);
 
-        if (logDebug) 
-        {
-            Debug.Log("Rudder Position: " + rudderPosition);
-        }
         float rudderAngle = rudderPosition * maxRudderAngle;
 
         float targetPosition = transform.eulerAngles.z + rudderAngle;

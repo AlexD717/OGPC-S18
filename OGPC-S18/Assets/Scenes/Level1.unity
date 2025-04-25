@@ -1582,6 +1582,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 703219597721281031}
     - target: {fileID: 8650813640594932961, guid: 9c93eb8aeee652f4fb93fed4cf7ad965, type: 3}
+      propertyPath: maxHealth
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8650813640594932961, guid: 9c93eb8aeee652f4fb93fed4cf7ad965, type: 3}
       propertyPath: boatSpeedText
       value: 
       objectReference: {fileID: 7226521759105998243}
@@ -1589,6 +1593,14 @@ PrefabInstance:
       propertyPath: boatHeadingText
       value: 
       objectReference: {fileID: 3507775143554296883}
+    - target: {fileID: 8650813640594932961, guid: 9c93eb8aeee652f4fb93fed4cf7ad965, type: 3}
+      propertyPath: collisionDamage
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8650813640594932961, guid: 9c93eb8aeee652f4fb93fed4cf7ad965, type: 3}
+      propertyPath: collisionCooldown
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8948939780204026237, guid: 9c93eb8aeee652f4fb93fed4cf7ad965, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
