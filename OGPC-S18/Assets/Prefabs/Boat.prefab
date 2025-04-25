@@ -340,6 +340,7 @@ GameObject:
   - component: {fileID: 2644085175241061045}
   - component: {fileID: 3237222159886041559}
   - component: {fileID: 2925792463990336642}
+  - component: {fileID: 4406050366531981294}
   m_Layer: 0
   m_Name: Boat
   m_TagString: Player
@@ -409,7 +410,6 @@ MonoBehaviour:
   boatHeadingText: {fileID: 0}
   boatSpeedText: {fileID: 0}
   inputActions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
-  debugTicksInterval: 500
 --- !u!50 &2644085175241061045
 Rigidbody2D:
   serializedVersion: 5
@@ -599,3 +599,18 @@ TrailRenderer:
   m_Autodestruct: 0
   m_Emitting: 1
   m_ApplyActiveColorSpace: 1
+--- !u!114 &4406050366531981294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7903215555601454814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a4443bb77b200344896fd20827aa389, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  collisionDamage: 40
+  collisionCooldown: 1

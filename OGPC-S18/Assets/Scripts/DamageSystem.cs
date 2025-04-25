@@ -17,12 +17,13 @@ public class DamageSystem : MonoBehaviour
         levelManager = FindFirstObjectByType<LevelManager>();
     }
 
-    void OCollisionEnter2D(Collision2D other)
+    void OnCollisionEnter2D(Collision2D other)
     {
         if (collisionCooldownTimer <= 0)
         {
             if (other.gameObject.CompareTag("Island"))
             {
+                Debug.Log("Collided with island!");
                 DamageShip(collisionDamage);
                 collisionCooldownTimer = collisionCooldown;
             }

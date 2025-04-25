@@ -79,40 +79,10 @@ public class BoatController : MonoBehaviour
 
         rb.linearVelocity = rb.linearVelocity + UsefulStuff.Convert.PolarToVector(currentManager.GetCurrentDirection(), currentManager.GetCurrentSpeed() * currentMaxSpeedMod);
 
-        currentHealth = maxHealth;
-
     }
-    
-    private void DamageBoat(int damage)
-    {
-        currentHealth -= damage;
-        if (currentHealth <= 0)
-        {
-            levelManager.PlayerLost();
-        }
-    }
-
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        if (other.gameObject.CompareTag("Island") && collisionCooldownTimer == 0)
-        {
-            collisionCooldownTimer = collisionCooldown;
-            Debug.Log("Collision with Island");
-            DamageBoat((int)collisionDamage);
-            if (currentHealth <= 0)
-            {
-                levelManager.PlayerLost();
-            }
-        }
-    }
-
     private void Update()
     {
-        if (collisionCooldownTimer > 0)
-        {
-            collisionCooldownTimer -= Time.deltaTime;
-            collisionCooldownTimer = Mathf.Max(collisionCooldownTimer, 0);
-        }
+
 
         UpdateUI();
 
