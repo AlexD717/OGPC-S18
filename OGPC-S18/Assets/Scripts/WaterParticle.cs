@@ -17,9 +17,14 @@ public class WaterParticle : MonoBehaviour
 
     private bool disapearing = false;
 
+    [SerializeField] private GameObject graphic;
+    private Transform player;
+
 
     private void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+
         timeAlive = Random.Range(timeAliveRange.x, timeAliveRange.y);
         startTime = Time.time;
 
@@ -55,6 +60,9 @@ public class WaterParticle : MonoBehaviour
                 Destroy(gameObject);
             }
         }
+
+        // Rotate particle
+        //graphic.transform.rotation = player.transform.rotation;
     }
 
     private void Disapear()

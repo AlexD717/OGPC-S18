@@ -7,6 +7,7 @@ public class Hurricane : MonoBehaviour
     [SerializeField] private float stormRadius;
     [SerializeField] private float eyeRadius;
     [SerializeField] private AnimationCurve windDistributionCurve;
+    [SerializeField] private float densityConst;
 
     [Header("References")]
     [SerializeField] private GameObject windParticle;
@@ -21,5 +22,20 @@ public class Hurricane : MonoBehaviour
         {
             waypoints.Add(waypoint);
         }
+
+        // Spawn particles in a circle around the eye
+        float pos = eyeRadius;
+        while (pos < stormRadius)
+        {
+            SpawnParticle(pos);
+            pos += windDistributionCurve.Evaluate((pos - eyeRadius) / (stormRadius-eyeRadius)) * densityConst;
+        }
+    }
+
+    private void SpawnParticle(float radiusOfParticle)
+    {
+        GameObject newParticle = Instantiate(windParticle, transform.position + new Vector3(0, radiusOfParticle, 0), Quaternion.identity);
+        HurricaneWindParticle hurricaneWindParticle = newParticle.GetComponent<HurricaneWindParticle>();
+        hurricaneWindParticle.rotateSpeed = Random.Range(0.5f, 1.5f);
     }
 }
