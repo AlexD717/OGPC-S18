@@ -8,6 +8,7 @@ public class Hurricane : MonoBehaviour
     [SerializeField] private float eyeRadius;
     [SerializeField] private AnimationCurve windDistributionCurve;
     [SerializeField] private float densityConst;
+    [SerializeField] private Vector2 particleSpeedRange;
 
     [Header("References")]
     [SerializeField] private GameObject windParticle;
@@ -28,7 +29,11 @@ public class Hurricane : MonoBehaviour
         while (pos < stormRadius)
         {
             SpawnParticle(pos);
-            pos += windDistributionCurve.Evaluate((pos - eyeRadius) / (stormRadius-eyeRadius)) * densityConst;
+            float windDistributionCurveValue = windDistributionCurve.Evaluate((pos - eyeRadius) / (stormRadius - eyeRadius));
+            float step = windDistributionCurveValue * densityConst;
+            step = Mathf.Clamp(step, 0.1f, Mathf.Infinity);
+
+            pos += step;
         }
     }
 
@@ -36,6 +41,15 @@ public class Hurricane : MonoBehaviour
     {
         GameObject newParticle = Instantiate(windParticle, transform.position + new Vector3(0, radiusOfParticle, 0), Quaternion.identity);
         HurricaneWindParticle hurricaneWindParticle = newParticle.GetComponent<HurricaneWindParticle>();
-        hurricaneWindParticle.rotateSpeed = Random.Range(0.5f, 1.5f);
+        hurricaneWindParticle.rotateSpeed = Random.Range(particleSpeedRange.x, particleSpeedRange.y);
+        hurricaneWindParticle.transform.SetParent(transform);
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(transform.position, eyeRadius);
+        Gizmos.color = Color.gray;
+        Gizmos.DrawWireSphere(transform.position, stormRadius);
     }
 }
