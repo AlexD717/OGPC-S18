@@ -92,7 +92,6 @@ public class WindManager : MonoBehaviour
             {
                 if (closestHurricane.IsPlayerInHurricane())
                 {
-                    Debug.Log("Player is in Hurricane");
                     windHeading = closestHurricane.GetWindDirection();
                     windSpeed = closestHurricane.GetWindSpeed();
                     return;
