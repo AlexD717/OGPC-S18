@@ -45,7 +45,7 @@ public class Hurricane : MonoBehaviour
     {
         GameObject newParticle = Instantiate(windParticle, transform.position + new Vector3(0, radiusOfParticle, 0), Quaternion.identity);
         HurricaneWindParticle hurricaneWindParticle = newParticle.GetComponent<HurricaneWindParticle>();
-        hurricaneWindParticle.moveSpeed = Random.Range(particleSpeedRange.x * 1000f, particleSpeedRange.y * 1000f);
+        hurricaneWindParticle.moveSpeed = Random.Range(particleSpeedRange.x * 10f, particleSpeedRange.y * 10f);
         hurricaneWindParticle.transform.SetParent(transform);
     }
 
