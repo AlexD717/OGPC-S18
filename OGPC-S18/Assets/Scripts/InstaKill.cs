@@ -6,8 +6,7 @@ public class InstaKill : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            LevelManager levelManager = FindFirstObjectByType<LevelManager>();
-            levelManager.PlayerLost();
+            other.gameObject.GetComponent<BoatHealth>().TakeDamage(Mathf.Infinity);
         }
     }
 }

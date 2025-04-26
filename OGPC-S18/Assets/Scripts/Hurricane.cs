@@ -7,6 +7,9 @@ public class Hurricane : MonoBehaviour
     [SerializeField] private float stormRadius;
     [SerializeField] private float eyeRadius;
     [SerializeField] private float instaKillRadius;
+    [SerializeField] private float damage;
+    [SerializeField] private float damageInterval;
+    private float nextDamageTime = 0f;
     [SerializeField] private AnimationCurve windDistributionCurve;
     [SerializeField] private float densityConst;
     [SerializeField] private Vector2 particleSpeedRange;
@@ -17,9 +20,14 @@ public class Hurricane : MonoBehaviour
     [SerializeField] private Transform waypointsParent;
     [SerializeField] private CircleCollider2D instaKillCollider;
     private List<Transform> waypoints;
+    private GameObject player;
+    private BoatHealth boatHealth;
 
     private void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
+        boatHealth = player.GetComponent<BoatHealth>();
+
         List<Transform> tempChildren = new List<Transform>();
         foreach (Transform waypoint in waypointsParent)
         {
@@ -58,6 +66,13 @@ public class Hurricane : MonoBehaviour
 
     private void Update()
     {
+        // Deal Damage to player
+        float distanceToPlayer = Vector2.Distance(player.transform.position, transform.position);
+        if (distanceToPlayer <= stormRadius)
+        {
+            PlayerInHurricane(distanceToPlayer);
+        }
+
         // Move hurricane
         if (waypoints.Count == 0) { return; }
 
@@ -73,6 +88,17 @@ public class Hurricane : MonoBehaviour
         }
 
         transform.position = Vector2.MoveTowards(transform.position, nextWaypoint.position, hurricaneSpeed * Time.deltaTime);
+    }
+
+    private void PlayerInHurricane(float distanceToCenter)
+    {
+        if (Time.time > nextDamageTime)
+        {
+            nextDamageTime = Time.time + damageInterval;
+            float damageToDeal = damage * (1 - (distanceToCenter - eyeRadius) / (stormRadius - eyeRadius));
+            Mathf.Clamp(damageToDeal, 0, Mathf.Infinity);
+            boatHealth.TakeDamage(damageToDeal);
+        }
     }
 
     private void OnDrawGizmosSelected()
