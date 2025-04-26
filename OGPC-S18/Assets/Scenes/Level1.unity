@@ -589,7 +589,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 20
+  m_Radius: 0.1
 --- !u!114 &1513561272
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -628,12 +628,12 @@ Transform:
   m_GameObject: {fileID: 1588286590}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -48.4, y: -1, z: 0}
+  m_LocalPosition: {x: -20.2, y: -16.7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 634675130}
   - {fileID: 1513561270}
+  - {fileID: 634675130}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1588286592
@@ -648,8 +648,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3278d43aa3326fd438c697b9aa746a7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stormRadius: 100
-  eyeRadius: 15
+  stormRadius: 70
+  eyeRadius: 10
+  instaKillRadius: 13
   windDistributionCurve:
     serializedVersion: 2
     m_Curve:
@@ -663,21 +664,22 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 2
-      outSlope: 2
+      time: 1.359296
+      value: 0.35798135
+      inSlope: 0.4202144
+      outSlope: 0.4202144
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0
+      inWeight: 0.07560992
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  densityConst: 1
-  particleSpeedRange: {x: 30, y: 40}
+  densityConst: 0.5
+  particleSpeedRange: {x: 7, y: 10}
   windParticle: {fileID: 6457244986911265293, guid: d8558762eba11bb47940539d25f62d6f, type: 3}
   waypointsParent: {fileID: 634675130}
+  instaKillCollider: {fileID: 1513561271}
 --- !u!1 &1609202319
 GameObject:
   m_ObjectHideFlags: 0
