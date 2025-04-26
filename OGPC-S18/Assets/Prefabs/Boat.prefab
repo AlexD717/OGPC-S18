@@ -403,13 +403,15 @@ MonoBehaviour:
   stallAngle: 45
   currentAccelerationMod: 1
   currentMaxSpeedMod: 0.05
+  maxShipHealth: 100
+  damageFromCollisions: 100
   sail: {fileID: 1041678637182527571}
   player: {fileID: 8948939780204026237}
   compass: {fileID: 0}
+  inputActions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   boatHeadingText: {fileID: 0}
   boatSpeedText: {fileID: 0}
-  inputActions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
-  debugTicksInterval: 500
+  shipHealth: 0
 --- !u!50 &2644085175241061045
 Rigidbody2D:
   serializedVersion: 5
