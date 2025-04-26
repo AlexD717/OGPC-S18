@@ -75,6 +75,30 @@ public class WindManager : MonoBehaviour
         if (frameCount == updateInterval)
         {
             frameCount = 0;
+
+            Hurricane[] hurricanes = FindObjectsByType<Hurricane>(FindObjectsSortMode.None);
+            Hurricane closestHurricane = null;
+            float closestDistance = Mathf.Infinity;
+            foreach (Hurricane hurricane in hurricanes)
+            {
+                float distance = Vector2.Distance(hurricane.transform.position, player.position);
+                if (distance < closestDistance)
+                {
+                    closestDistance = distance;
+                    closestHurricane = hurricane;
+                }
+            }
+            if (closestHurricane != null)
+            {
+                if (closestHurricane.IsPlayerInHurricane())
+                {
+                    Debug.Log("Player is in Hurricane");
+                    windHeading = closestHurricane.GetWindDirection();
+                    windSpeed = closestHurricane.GetWindSpeed();
+                    return;
+                }
+            }
+
             UpdateWind();
         }
         UpdateUI();

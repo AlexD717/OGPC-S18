@@ -14,6 +14,7 @@ public class Hurricane : MonoBehaviour
     [SerializeField] private float densityConst;
     [SerializeField] private Vector2 particleSpeedRange;
     [SerializeField] private float hurricaneSpeed;
+    [SerializeField] private float hurricaneWindSpeed;
 
     [Header("References")]
     [SerializeField] private GameObject windParticle;
@@ -22,6 +23,7 @@ public class Hurricane : MonoBehaviour
     private List<Transform> waypoints;
     private GameObject player;
     private BoatHealth boatHealth;
+    private float distanceToPlayer;
 
     private void Start()
     {
@@ -67,10 +69,10 @@ public class Hurricane : MonoBehaviour
     private void Update()
     {
         // Deal Damage to player
-        float distanceToPlayer = Vector2.Distance(player.transform.position, transform.position);
+        distanceToPlayer = Vector2.Distance(player.transform.position, transform.position);
         if (distanceToPlayer <= stormRadius)
         {
-            PlayerInHurricane(distanceToPlayer);
+            PlayerInHurricane();
         }
 
         // Move hurricane
@@ -90,15 +92,47 @@ public class Hurricane : MonoBehaviour
         transform.position = Vector2.MoveTowards(transform.position, nextWaypoint.position, hurricaneSpeed * Time.deltaTime);
     }
 
-    private void PlayerInHurricane(float distanceToCenter)
+    public bool IsPlayerInHurricane()
+    {
+        return distanceToPlayer <= stormRadius;
+    }
+
+    private void PlayerInHurricane()
     {
         if (Time.time > nextDamageTime)
         {
             nextDamageTime = Time.time + damageInterval;
-            float damageToDeal = damage * (1 - (distanceToCenter - eyeRadius) / (stormRadius - eyeRadius));
+            float damageToDeal = damage * (1 - (distanceToPlayer - eyeRadius) / (stormRadius - eyeRadius));
             Mathf.Clamp(damageToDeal, 0, Mathf.Infinity);
             boatHealth.TakeDamage(damageToDeal);
         }
+    }
+
+    public float GetWindDirection()
+    {
+        // Get child's position relative to the parent (local space)
+        Vector3 localPos = transform.InverseTransformPoint(player.transform.position);
+
+        // Convert to 2D (e.g., x-y plane)
+        Vector2 pos2D = new Vector2(localPos.x, localPos.y);
+
+        // Radius
+        float r = pos2D.magnitude;
+
+        // Angle in radians
+        float theta = Mathf.Atan2(pos2D.y, pos2D.x);
+
+        // Convert to degrees (optional)
+        float thetaDeg = theta * Mathf.Rad2Deg;
+
+        //Debug.Log($"Polar Coordinates — Radius: {r}, Angle: {theta} rad ({thetaDeg}°)");
+
+        return (360 - thetaDeg) % 360;
+    }
+
+    public float GetWindSpeed()
+    {
+        return hurricaneWindSpeed * (2 - (distanceToPlayer - eyeRadius) / (stormRadius - eyeRadius));
     }
 
     private void OnDrawGizmosSelected()
