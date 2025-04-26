@@ -18,8 +18,6 @@ public class BoatController : MonoBehaviour
     [SerializeField] private float stallAngle;
     [SerializeField] private float currentAccelerationMod;
     [SerializeField] private float currentMaxSpeedMod;
-    [SerializeField] private int maxShipHealth;
-    [SerializeField] private int damageFromCollisions;
 
     [Header("References")]
     [SerializeField] private Transform sail;
@@ -44,8 +42,6 @@ public class BoatController : MonoBehaviour
     private float relativeWindDirection;
     private float boatWaterSpeed;
     private Vector2 boatWaterVector;
-    [HideInInspector] public float shipHealth;
-    private LevelManager levelManager;
 
     private void OnEnable()
     {
@@ -62,26 +58,17 @@ public class BoatController : MonoBehaviour
 
     private void Start()
     {
-        shipHealth = (float)maxShipHealth;
         windManager = FindFirstObjectByType<WindManager>();
         currentManager = FindFirstObjectByType<CurrentManager>();
         rb = GetComponent<Rigidbody2D>();
         rudderController = GetComponent<RudderController>();
         rudderController.SetRudderMoveSpeed(rudderMoveSpeed);
-        levelManager = FindFirstObjectByType<LevelManager>();
         
         rb.linearVelocity = rb.linearVelocity + UsefulStuff.Convert.PolarToVector(currentManager.GetCurrentDirection(), currentManager.GetCurrentSpeed() * currentMaxSpeedMod);
-
-    
     }
 
     private void Update()
     {
-        if (shipHealth <= 0)
-        {
-            levelManager.PlayerLost();
-            return;
-        }
         UpdateUI();
         if (!boatSailing)
         {
@@ -98,15 +85,6 @@ public class BoatController : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Island") || collision.gameObject.transform.parent.gameObject.CompareTag("Port") || collision.gameObject.transform.parent.gameObject.CompareTag("EndPort"))
-        {
-            // Boat is colliding with an island or obstacle
-            shipHealth -= (float)damageFromCollisions;
-            Debug.Log("Boat collided with an island or obstacle. New health: " + shipHealth);
-        }
-    }
 
     private void FixedUpdate()
     {
@@ -210,6 +188,11 @@ public class BoatController : MonoBehaviour
             //Increase linear resistance
             rb.linearDamping = Mathf.Abs(rudderPosition) * maxRotationResistance + baseResistance;
         }
+    }
+
+    public float GetBoatSpeed()
+    {
+        return boatSpeed;
     }
 
     public void Dock(Transform dockTransform)

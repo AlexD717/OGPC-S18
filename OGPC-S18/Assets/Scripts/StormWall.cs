@@ -36,7 +36,7 @@ public class StormWall : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            other.GetComponent<BoatController>().shipHealth -= Time.deltaTime * damagePerSecond;
+            other.GetComponent<BoatHealth>().TakeDamage(Time.deltaTime * damagePerSecond);
         }
         else if (other.CompareTag("EndPort"))
         {
