@@ -9,12 +9,14 @@ public class BoatHealth : MonoBehaviour
     [SerializeField] private float speedDamageMult;
     private BoatController boatController;
     private LevelManager levelManager;
+    private Animator animator;
 
     [SerializeField] private List<string> collisionTagsToTakeDamage;
 
     private void Start()
     {
         boatController = GetComponent<BoatController>();
+        animator = GetComponent<Animator>();
         levelManager = FindFirstObjectByType<LevelManager>();
         shipHealth = maxShipHealth;
     }
@@ -33,6 +35,8 @@ public class BoatHealth : MonoBehaviour
     {
         shipHealth -= damage;
         Debug.Log($"Ship took {damage} damage. Current health: {shipHealth}");
+        
+        animator.SetTrigger("TookDamage");
 
         if (shipHealth <= 0)
         {
