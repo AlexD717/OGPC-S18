@@ -10,6 +10,7 @@ public class Hurricane : MonoBehaviour
     [SerializeField] private AnimationCurve windDistributionCurve;
     [SerializeField] private float densityConst;
     [SerializeField] private Vector2 particleSpeedRange;
+    [SerializeField] private float hurricaneSpeed;
 
     [Header("References")]
     [SerializeField] private GameObject windParticle;
@@ -17,13 +18,19 @@ public class Hurricane : MonoBehaviour
     [SerializeField] private CircleCollider2D instaKillCollider;
     private List<Transform> waypoints;
 
-
     private void Start()
     {
-        waypoints = new List<Transform>();
+        List<Transform> tempChildren = new List<Transform>();
         foreach (Transform waypoint in waypointsParent)
         {
+            tempChildren.Add(waypoint);
+        }
+
+        waypoints = new List<Transform>();
+        foreach (Transform waypoint in tempChildren)
+        {
             waypoints.Add(waypoint);
+            waypoint.transform.SetParent(null);
         }
 
         // Spawn particles in a circle around the eye
@@ -47,6 +54,25 @@ public class Hurricane : MonoBehaviour
         HurricaneWindParticle hurricaneWindParticle = newParticle.GetComponent<HurricaneWindParticle>();
         hurricaneWindParticle.moveSpeed = Random.Range(particleSpeedRange.x * 10f, particleSpeedRange.y * 10f);
         hurricaneWindParticle.transform.SetParent(transform);
+    }
+
+    private void Update()
+    {
+        // Move hurricane
+        if (waypoints.Count == 0) { return; }
+
+        Transform nextWaypoint = waypoints[0];
+        if (Vector2.Distance(transform.position, nextWaypoint.position) < 0.2f)
+        {
+            waypoints.RemoveAt(0);
+            if (waypoints.Count == 0)
+            {
+                Debug.Log("Hurricane has reached the last waypoint");
+            }
+            return;
+        }
+
+        transform.position = Vector2.MoveTowards(transform.position, nextWaypoint.position, hurricaneSpeed * Time.deltaTime);
     }
 
     private void OnDrawGizmosSelected()

@@ -75,6 +75,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   densityConst: 0.5
   particleSpeedRange: {x: 10, y: 20}
+  hurricaneSpeed: 5
   windParticle: {fileID: 6457244986911265293, guid: d8558762eba11bb47940539d25f62d6f, type: 3}
   waypointsParent: {fileID: 5347093421265488088}
   instaKillCollider: {fileID: 2679747882103350986}
@@ -134,7 +135,7 @@ Transform:
   m_GameObject: {fileID: 3022486497310273789}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 36.9, y: 73.3, z: 0}
+  m_LocalPosition: {x: 62, y: 76.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -200,7 +201,7 @@ Transform:
   m_GameObject: {fileID: 5658646760343637002}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2, y: 124.8, z: 0}
+  m_LocalPosition: {x: 9.4, y: 136.7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
