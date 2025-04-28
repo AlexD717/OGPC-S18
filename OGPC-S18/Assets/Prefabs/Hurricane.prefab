@@ -79,6 +79,36 @@ MonoBehaviour:
   particleSpeedRange: {x: 10, y: 20}
   hurricaneSpeed: 5
   hurricaneWindSpeed: 30
+  hurricaneColor:
+    serializedVersion: 2
+    key0: {r: 0.23270428, g: 0.23270428, b: 0.23270428, a: 1}
+    key1: {r: 0.6855345, g: 0.6855345, b: 0.6855345, a: 1}
+    key2: {r: 0, g: 0, b: 0, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 8096
+    ctime1: 65535
+    ctime2: 0
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_ColorSpace: -1
+    m_NumColorKeys: 2
+    m_NumAlphaKeys: 2
   windParticle: {fileID: 6457244986911265293, guid: d8558762eba11bb47940539d25f62d6f, type: 3}
   waypointsParent: {fileID: 5347093421265488088}
   instaKillCollider: {fileID: 2679747882103350986}
