@@ -1227,6 +1227,62 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3943873451533215520, guid: ed1cd7b19b3f61940910eb6210a529fb, type: 3}
+      propertyPath: windColor.ctime0
+      value: 2956
+      objectReference: {fileID: 0}
+    - target: {fileID: 3943873451533215520, guid: ed1cd7b19b3f61940910eb6210a529fb, type: 3}
+      propertyPath: windColor.key0.b
+      value: 0.13207549
+      objectReference: {fileID: 0}
+    - target: {fileID: 3943873451533215520, guid: ed1cd7b19b3f61940910eb6210a529fb, type: 3}
+      propertyPath: windColor.key0.g
+      value: 0.13207549
+      objectReference: {fileID: 0}
+    - target: {fileID: 3943873451533215520, guid: ed1cd7b19b3f61940910eb6210a529fb, type: 3}
+      propertyPath: windColor.key0.r
+      value: 0.13207549
+      objectReference: {fileID: 0}
+    - target: {fileID: 3943873451533215520, guid: ed1cd7b19b3f61940910eb6210a529fb, type: 3}
+      propertyPath: windColor.key1.b
+      value: 0.5283019
+      objectReference: {fileID: 0}
+    - target: {fileID: 3943873451533215520, guid: ed1cd7b19b3f61940910eb6210a529fb, type: 3}
+      propertyPath: windColor.key1.g
+      value: 0.5283019
+      objectReference: {fileID: 0}
+    - target: {fileID: 3943873451533215520, guid: ed1cd7b19b3f61940910eb6210a529fb, type: 3}
+      propertyPath: windColor.key1.r
+      value: 0.5283019
+      objectReference: {fileID: 0}
+    - target: {fileID: 3943873451533215520, guid: ed1cd7b19b3f61940910eb6210a529fb, type: 3}
+      propertyPath: hurricaneColor.ctime0
+      value: 8096
+      objectReference: {fileID: 0}
+    - target: {fileID: 3943873451533215520, guid: ed1cd7b19b3f61940910eb6210a529fb, type: 3}
+      propertyPath: hurricaneColor.key0.b
+      value: 0.23270428
+      objectReference: {fileID: 0}
+    - target: {fileID: 3943873451533215520, guid: ed1cd7b19b3f61940910eb6210a529fb, type: 3}
+      propertyPath: hurricaneColor.key0.g
+      value: 0.23270428
+      objectReference: {fileID: 0}
+    - target: {fileID: 3943873451533215520, guid: ed1cd7b19b3f61940910eb6210a529fb, type: 3}
+      propertyPath: hurricaneColor.key0.r
+      value: 0.23270428
+      objectReference: {fileID: 0}
+    - target: {fileID: 3943873451533215520, guid: ed1cd7b19b3f61940910eb6210a529fb, type: 3}
+      propertyPath: hurricaneColor.key1.b
+      value: 0.6855345
+      objectReference: {fileID: 0}
+    - target: {fileID: 3943873451533215520, guid: ed1cd7b19b3f61940910eb6210a529fb, type: 3}
+      propertyPath: hurricaneColor.key1.g
+      value: 0.6855345
+      objectReference: {fileID: 0}
+    - target: {fileID: 3943873451533215520, guid: ed1cd7b19b3f61940910eb6210a529fb, type: 3}
+      propertyPath: hurricaneColor.key1.r
+      value: 0.6855345
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

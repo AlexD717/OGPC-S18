@@ -15,6 +15,7 @@ public class Hurricane : MonoBehaviour
     [SerializeField] private Vector2 particleSpeedRange;
     [SerializeField] private float hurricaneSpeed;
     [SerializeField] private float hurricaneWindSpeed;
+    [SerializeField] private Gradient hurricaneColor;
 
     [Header("References")]
     [SerializeField] private GameObject windParticle;
@@ -63,6 +64,7 @@ public class Hurricane : MonoBehaviour
         GameObject newParticle = Instantiate(windParticle, transform.position + new Vector3(0, radiusOfParticle, 0), Quaternion.identity);
         HurricaneWindParticle hurricaneWindParticle = newParticle.GetComponent<HurricaneWindParticle>();
         hurricaneWindParticle.moveSpeed = Random.Range(particleSpeedRange.x * 10f, particleSpeedRange.y * 10f);
+        hurricaneWindParticle.particleColor = hurricaneColor.Evaluate((radiusOfParticle-eyeRadius)/(stormRadius-eyeRadius));
         hurricaneWindParticle.transform.SetParent(transform);
     }
 

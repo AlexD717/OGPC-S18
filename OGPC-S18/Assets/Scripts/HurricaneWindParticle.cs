@@ -9,6 +9,7 @@ public class HurricaneWindParticle : MonoBehaviour
     [SerializeField] private float loopTime;
     private float randomStartTime;
 
+    [HideInInspector] public Color particleColor;
     [HideInInspector] public float moveSpeed;
     private Transform parent;
 
@@ -20,6 +21,8 @@ public class HurricaneWindParticle : MonoBehaviour
     {
         trailRenderer = GetComponent<TrailRenderer>();
         trailRenderer.time = Random.Range(particleLenghtRange.x, particleLenghtRange.y);
+        trailRenderer.colorGradient = ColorToGradient(particleColor);
+
 
         parent = transform.parent;
         radius = Vector2.Distance(transform.position, parent.position);
@@ -36,5 +39,26 @@ public class HurricaneWindParticle : MonoBehaviour
         float radiusOffset = dirOffset.Evaluate(((Time.time + randomStartTime) % loopTime) / loopTime) * dirOffsetMult;
         Vector2 offset = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * (radius + radiusOffset);
         transform.position = (Vector2)parent.position + offset;
+    }
+
+    private Gradient ColorToGradient(Color color)
+    {
+        Gradient gradient = new Gradient();
+
+        GradientColorKey[] colorKeys = new GradientColorKey[2];
+        colorKeys[0].color = color;
+        colorKeys[1].color = color;
+        colorKeys[0].time = 0f;
+        colorKeys[1].time = 1f;
+
+        GradientAlphaKey[] alphaKeys = new GradientAlphaKey[2];
+        alphaKeys[0].alpha = 1f;
+        alphaKeys[1].alpha = 1f;
+        alphaKeys[0].time = 0f;
+        alphaKeys[1].time = 1f;
+
+        gradient.colorKeys = colorKeys;
+        gradient.alphaKeys = alphaKeys;
+        return gradient;
     }
 }
