@@ -5,8 +5,6 @@ public class WindManager : MonoBehaviour
 {
     [Header("References")]
 
-    [SerializeField] private TextMeshProUGUI windBearingText;
-    [SerializeField] private TextMeshProUGUI windSpeedText;
     [SerializeField] private Transform windIndicator;
     [SerializeField] private Transform player;
 
@@ -67,8 +65,6 @@ public class WindManager : MonoBehaviour
 
     private void UpdateUI()
     {
-        windSpeedText.text = $"Wind Speed: {windSpeed:F1}";
-        windBearingText.text = $"Wind Bearing: {windHeading:F1}";
         windIndicator.rotation = Quaternion.Euler(0, 0, 90 - (windHeading+player.eulerAngles.z));
         windIndicator.localScale = new Vector3(windSpeed / windSpeedRange.y, windSpeed/windSpeedRange.y, 1f);
     }
@@ -79,6 +75,29 @@ public class WindManager : MonoBehaviour
         if (frameCount == updateInterval)
         {
             frameCount = 0;
+
+            Hurricane[] hurricanes = FindObjectsByType<Hurricane>(FindObjectsSortMode.None);
+            Hurricane closestHurricane = null;
+            float closestDistance = Mathf.Infinity;
+            foreach (Hurricane hurricane in hurricanes)
+            {
+                float distance = Vector2.Distance(hurricane.transform.position, player.position);
+                if (distance < closestDistance)
+                {
+                    closestDistance = distance;
+                    closestHurricane = hurricane;
+                }
+            }
+            if (closestHurricane != null)
+            {
+                if (closestHurricane.IsPlayerInHurricane())
+                {
+                    windHeading = closestHurricane.GetWindDirection();
+                    windSpeed = closestHurricane.GetWindSpeed();
+                    return;
+                }
+            }
+
             UpdateWind();
         }
         UpdateUI();

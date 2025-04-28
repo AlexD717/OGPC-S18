@@ -50,7 +50,6 @@ public class ParticleSpawner : MonoBehaviour
 
     private void SpawnWaterParticle()
     {
-        Debug.Log("Water Particle Spawned");
         Vector3 spawnPosition = RandomSpawnPosition();
         GameObject waterParticleObject = Instantiate(waterParticlePrefab, spawnPosition, Quaternion.identity);
         WaterParticle waterParticle = waterParticleObject.GetComponent<WaterParticle>();

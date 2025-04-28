@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
@@ -72,6 +73,7 @@ public class LevelManager : MonoBehaviour
     public void PlayerWon()
     {
         Debug.Log("You Won!");
+        
         EndGame();
     }
 
@@ -138,6 +140,12 @@ public class LevelManager : MonoBehaviour
         // Fill in total score
         float totalScore = timeRemainingScore + savedPortsScore;
         winScreen.transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = "Total Score: " + totalScore.ToString();
+
+        // Save the informatios
+        string sceneName = SceneManager.GetActiveScene().name;
+        char levelChar = sceneName[sceneName.Length - 1]; // Gets the last character of the scene name
+        int levelNum = int.Parse(levelChar.ToString());
+        PlayerPrefsManager.LevelCompleted(levelNum, totalScore);
     }
 
     private int CalculateTimeScore(float timeRemaining)

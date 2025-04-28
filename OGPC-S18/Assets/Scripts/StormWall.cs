@@ -8,6 +8,7 @@ public class StormWall : MonoBehaviour
     [SerializeField] Vector2 startVelocity;
     [SerializeField] Vector2 startAcceleration;
     [SerializeField] bool stormWallFacesDirectionOfTravel = true;
+    [SerializeField] float damagePerSecond = 25f; // Damage per second to the player
     private Rigidbody2D stormWallRigidBody;
 
     private GameObject stormWall;
@@ -31,9 +32,13 @@ public class StormWall : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerStay2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
+        {
+            other.GetComponent<BoatHealth>().TakeDamage(Time.deltaTime * damagePerSecond);
+        }
+        else if (other.CompareTag("EndPort"))
         {
             LevelManager levelManager = FindFirstObjectByType<LevelManager>();
             levelManager.PlayerLost();
