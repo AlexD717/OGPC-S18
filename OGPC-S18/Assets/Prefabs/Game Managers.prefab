@@ -44,8 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 283facd922126b24f83dd8af77d3ee0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  windBearingText: {fileID: 0}
-  windSpeedText: {fileID: 0}
   windIndicator: {fileID: 0}
   player: {fileID: 0}
   windHeading: 0
@@ -103,8 +101,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f6fddfd53319e84a9553be02cfca19c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentBearingText: {fileID: 0}
-  currentSpeedText: {fileID: 0}
   currentIndicator: {fileID: 0}
   player: {fileID: 0}
   currentHeading: 0
@@ -243,7 +239,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06433580f9c85f14a86c12fa3770aadf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  countdown: 120
+  countdown: 60
   countdownText: {fileID: 0}
   inputActions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   continueButton: {fileID: 0}
@@ -301,6 +297,7 @@ MonoBehaviour:
   panSensitivity: 5
   zoomSensitivity: 1000
   zoomLimits: {x: 18, y: 280}
+  cameraZoomsOutOnPlayerPosition: 1
 --- !u!1 &9193759913618306606
 GameObject:
   m_ObjectHideFlags: 0

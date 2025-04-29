@@ -23,12 +23,19 @@ public class MapManager : MonoBehaviour
     private Vector2 originalPosition;
     private float originalZoom;
 
+    [SerializeField] private bool cameraZoomsOutOnPlayerPosition;
+    private GameObject player;
+
     private void Start()
     {
         mapActive = false;
 
         originalPosition = mapCamera.transform.position;
         originalZoom = mapCamera.Lens.OrthographicSize;
+
+        player = GameObject.FindGameObjectWithTag("Player");
+
+        ResetCamera();
     }
 
     private void OnEnable()
@@ -86,7 +93,14 @@ public class MapManager : MonoBehaviour
 
     private void ResetCamera()
     {
-        mapCamera.transform.position = originalPosition;
+        if (cameraZoomsOutOnPlayerPosition)
+        {
+            mapCamera.transform.position = new Vector2(player.transform.position.x, player.transform.position.y);
+        }
+        else
+        {
+            mapCamera.transform.position = originalPosition;
+        }
         mapCamera.Lens.OrthographicSize = originalZoom;
     }
 
