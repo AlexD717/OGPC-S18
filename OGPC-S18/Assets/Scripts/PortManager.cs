@@ -11,7 +11,7 @@ public class PortManager : MonoBehaviour
         boatController = player.GetComponent<BoatController>();
     }
 
-    public void PlayerDocked(Transform[] playerDockPositions, GameObject[] dockPanelMenus, Port dockedPort)
+    public void PlayerDocked(Transform[] playerDockPositions, Port dockedPort)
     {
         boatController.Dock(UsefulStuff.GetClosestPosition(playerDockPositions, boatController.gameObject));
     }
