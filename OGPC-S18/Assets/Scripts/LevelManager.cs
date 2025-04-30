@@ -104,7 +104,7 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    private void ShowWinScreen()
+    private int[] FindNumberOfSavedPorts()
     {
         // Figures out how many ports exist and how many are saved
         Port[] ports = FindObjectsByType<Port>(FindObjectsSortMode.None);
@@ -117,6 +117,16 @@ public class LevelManager : MonoBehaviour
                 savedPorts++;
             }
         }
+        return new int[] {savedPorts+1, ports.Length+1}; // +1 to account for the end port
+    }
+
+
+    private void ShowWinScreen()
+    {
+        // Figures out how many ports exist and how many are saved
+        int[] savedPortsAndTotal = FindNumberOfSavedPorts();
+        int savedPorts = savedPortsAndTotal[0];
+        int totalPorts = savedPortsAndTotal[1];
 
         // Shows win screen
         winScreen.SetActive(true);
@@ -133,8 +143,8 @@ public class LevelManager : MonoBehaviour
         float timeRemainingScore = CalculateTimeScore(countdown);
         dataGrid.GetChild(5).GetComponent<TextMeshProUGUI>().text = timeRemainingScore.ToString();
 
-        dataGrid.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = savedPorts.ToString() + "/" + ports.Length.ToString(); // Says saved ports out of total ports
-        int savedPortsScore = CalculateSavedPortScore(savedPorts, ports.Length);
+        dataGrid.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = savedPorts.ToString() + "/" + totalPorts.ToString(); // Says saved ports out of total ports
+        int savedPortsScore = CalculateSavedPortScore(savedPorts, totalPorts);
         dataGrid.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = savedPortsScore.ToString(); // Says saved ports score
         
         // Fill in total score
@@ -170,6 +180,13 @@ public class LevelManager : MonoBehaviour
         {
             child.gameObject.SetActive(true);
         }
+        // Fill in extra information
+        Transform dataGrid = loseScreen.transform.GetChild(2);
+        TextMeshProUGUI portsSavedText = dataGrid.GetChild(1).GetComponent<TextMeshProUGUI>();
+        int[] savedPortsAndTotal = FindNumberOfSavedPorts();
+        int savedPorts = savedPortsAndTotal[0];
+        int totalPorts = savedPortsAndTotal[1];
+        portsSavedText.text = savedPorts.ToString() + "/" + totalPorts.ToString();
     }
 
     private void EndGame()
