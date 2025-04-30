@@ -361,11 +361,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8535043020824373214, guid: eff394a8dcccfdc41be159d983dad9b1, type: 3}
   m_PrefabInstance: {fileID: 1507097327}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1583314509 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4587925146006587121, guid: f5235c0e6a34bb04e985b9a9420c3abf, type: 3}
-  m_PrefabInstance: {fileID: 5292423628038404066}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1609202319
 GameObject:
   m_ObjectHideFlags: 0
@@ -1072,10 +1067,6 @@ PrefabInstance:
       propertyPath: playerCamera
       value: 
       objectReference: {fileID: 3602041479372130177}
-    - target: {fileID: 915748085393450230, guid: 4e21a6f1d65cc784d91aadd6e7606f92, type: 3}
-      propertyPath: particleSpawner
-      value: 
-      objectReference: {fileID: 1583314509}
     - target: {fileID: 2543927802153225673, guid: 4e21a6f1d65cc784d91aadd6e7606f92, type: 3}
       propertyPath: countdown
       value: 75
@@ -1210,7 +1201,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1889137677933600400, guid: 2754d7b44e9371141a8bb95a8001ff01, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3398763104438345263, guid: 2754d7b44e9371141a8bb95a8001ff01, type: 3}
       propertyPath: m_Name

@@ -26,8 +26,6 @@ public class MapManager : MonoBehaviour
     [SerializeField] private bool cameraZoomsOutOnPlayerPosition;
     private GameObject player;
 
-    [SerializeField] private GameObject particleSpawner;
-
     private void Start()
     {
         mapActive = false;
@@ -36,8 +34,6 @@ public class MapManager : MonoBehaviour
         originalZoom = mapCamera.Lens.OrthographicSize;
 
         player = GameObject.FindGameObjectWithTag("Player");
-
-        particleSpawner.SetActive(true);
 
         ResetCamera();
     }
@@ -76,14 +72,12 @@ public class MapManager : MonoBehaviour
             if (mapActive) 
             { 
                 playerActionMap.Disable();
-                particleSpawner.SetActive(false);
-                UsefulStuff.Game.GamePaused(true);
+                Time.timeScale = 0f; 
             }
             else 
             {
                 playerActionMap.Enable();
-                particleSpawner.SetActive(true);
-                UsefulStuff.Game.GamePaused(false); 
+                Time.timeScale = 1f; 
             }
         }
 
