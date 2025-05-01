@@ -117,7 +117,7 @@ public class LevelManager : MonoBehaviour
                 savedPorts++;
             }
         }
-        return new int[] {savedPorts+1, ports.Length+1}; // +1 to account for the end port
+        return new int[] {savedPorts, ports.Length};
     }
 
 
