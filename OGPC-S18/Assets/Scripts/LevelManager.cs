@@ -182,11 +182,18 @@ public class LevelManager : MonoBehaviour
         }
         // Fill in extra information
         Transform dataGrid = loseScreen.transform.GetChild(2);
+
         TextMeshProUGUI portsSavedText = dataGrid.GetChild(1).GetComponent<TextMeshProUGUI>();
         int[] savedPortsAndTotal = FindNumberOfSavedPorts();
         int savedPorts = savedPortsAndTotal[0];
         int totalPorts = savedPortsAndTotal[1];
         portsSavedText.text = savedPorts.ToString() + "/" + totalPorts.ToString();
+
+        TextMeshProUGUI distanceRemainingToEndPort = dataGrid.GetChild(3).GetComponent<TextMeshProUGUI>();
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        GameObject endPort = GameObject.FindGameObjectWithTag("EndPort");
+        float distanceToEndPort = Vector2.Distance(player.transform.position, endPort.transform.position);
+        distanceRemainingToEndPort.text = distanceToEndPort.ToString("F2") + " m";
     }
 
     private void EndGame()
