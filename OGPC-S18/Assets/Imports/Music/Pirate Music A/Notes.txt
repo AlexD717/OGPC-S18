@@ -1,0 +1,18 @@
+	Pirate Music Album - 050418
+	Artist: GWriterStudio
+1. To The Sea
+2. Journey
+3. Lower The Sail
+4. Through The Storm
+5. Sailors
+6. Dark Sea
+7. Finding Path
+8. Monster Fight
+9. Heroic Adventure
+10. Great Sails
+
+Please use .wav for looping sound in Unity without problems.
+Remove .mp3 if not needded
+
+Have Questions contact me via gmail:
+gwriterstudio@gmail.com
