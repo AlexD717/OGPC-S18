@@ -21,7 +21,7 @@ public class Hurricane : MonoBehaviour
     [SerializeField] private GameObject windParticle;
     [SerializeField] private Transform waypointsParent;
     [SerializeField] private CircleCollider2D instaKillCollider;
-    private List<Transform> waypoints;
+    private List<Vector2> waypoints;
     private GameObject player;
     private BoatHealth boatHealth;
     private float distanceToPlayer;
@@ -31,18 +31,7 @@ public class Hurricane : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         boatHealth = player.GetComponent<BoatHealth>();
 
-        List<Transform> tempChildren = new List<Transform>();
-        foreach (Transform waypoint in waypointsParent)
-        {
-            tempChildren.Add(waypoint);
-        }
-
-        waypoints = new List<Transform>();
-        foreach (Transform waypoint in tempChildren)
-        {
-            waypoints.Add(waypoint);
-            waypoint.transform.SetParent(null);
-        }
+        ResetWaypoints();
 
         // Spawn particles in a circle around the eye
         float pos = eyeRadius;
@@ -57,6 +46,15 @@ public class Hurricane : MonoBehaviour
         }
 
         instaKillCollider.radius = instaKillRadius;
+    }
+
+    public void ResetWaypoints()
+    {
+        waypoints = new List<Vector2>();
+        foreach (Transform waypoint in waypointsParent)
+        {
+            waypoints.Add(waypoint.transform.position);
+        }
     }
 
     private void SpawnParticle(float radiusOfParticle)
@@ -80,8 +78,8 @@ public class Hurricane : MonoBehaviour
         // Move hurricane
         if (waypoints.Count == 0) { return; }
 
-        Transform nextWaypoint = waypoints[0];
-        if (Vector2.Distance(transform.position, nextWaypoint.position) < 0.2f)
+        Vector2 nextWaypoint = waypoints[0];
+        if (Vector2.Distance(transform.position, nextWaypoint) < 0.2f)
         {
             waypoints.RemoveAt(0);
             if (waypoints.Count == 0)
@@ -91,7 +89,7 @@ public class Hurricane : MonoBehaviour
             return;
         }
 
-        transform.position = Vector2.MoveTowards(transform.position, nextWaypoint.position, hurricaneSpeed * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, nextWaypoint, hurricaneSpeed * Time.deltaTime);
     }
 
     public bool IsPlayerInHurricane()

@@ -10,15 +10,20 @@ public class TutorialManager : MonoBehaviour
     private float waitTime;
     private int onDeathPopUpIndex = 0;
     private Vector2 lastSavePos;
+    private Vector2 hurricanePos;
     [SerializeField] private InputActionAsset inputActions;
     private InputActionMap playerInputActions;
     private InputActionMap mapInputActions;
     [SerializeField] private TutorialTarget tutorialTarget;
     [SerializeField] private GameObject firstPort;
+    [SerializeField] private GameObject hurricane;
+    [SerializeField] private LevelManager levelManager;
+    [SerializeField] private GameObject endPortArrow;
 
     private GameObject player;
 
     private bool firstFrame = true;
+    private bool playerDockedToEndPort = false;
 
     private void Start()
     {
@@ -26,6 +31,9 @@ public class TutorialManager : MonoBehaviour
         mapInputActions = inputActions.FindActionMap("Map");
         playerInputActions.Enable();
         mapInputActions.Enable();
+        endPortArrow.SetActive(false);
+        hurricane.SetActive(false);
+        levelManager.gameObject.SetActive(false);
 
         popUps = new GameObject[instructionsParent.transform.childCount];
         for (int i = 0; i < instructionsParent.transform.childCount; i++)
@@ -35,6 +43,9 @@ public class TutorialManager : MonoBehaviour
 
         player = GameObject.FindGameObjectWithTag("Player");
         player.GetComponent<BoatHealth>().tutorialLevel = true;
+        levelManager.tutorialLevel = true;
+
+        hurricanePos = hurricane.transform.position;
     }
 
     void Update()
@@ -114,6 +125,7 @@ public class TutorialManager : MonoBehaviour
                 // Teach the player to disable the map
                 if (mapInputActions.FindAction("MapToggle").triggered)
                 {
+                    mapInputActions.FindAction("MapToggle").Disable();
                     playerInputActions.FindAction("Rotation").Enable();
                     popUpIndex++;
                 }
@@ -224,7 +236,7 @@ public class TutorialManager : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
                     playerInputActions.FindAction("SailToggle").Disable();
-                    waitTime = 5f;
+                    waitTime = 3f;
                     popUpIndex++;
                 }
                 break;
@@ -257,7 +269,14 @@ public class TutorialManager : MonoBehaviour
                 Time.timeScale = 0f;
                 if (Input.GetKeyDown(KeyCode.Tab))
                 {
-                    lastSavePos = player.transform.position;
+                    if (player.transform.position.x > 0)
+                    {
+                        lastSavePos = new Vector2(56.2f, 117.2f);
+                    }
+                    else
+                    {
+                        lastSavePos = new Vector2(-38.7f, 135.9f);
+                    }
                     popUpIndex++;
                 }
                 break;
@@ -340,7 +359,127 @@ public class TutorialManager : MonoBehaviour
                 // Tell the player how to undock from the port
                 if (playerInputActions.FindAction("Interact").triggered)
                 {
+                    waitTime = 1.5f;
                     popUpIndex++;
+                }
+                break;
+
+            case 27:
+                // Let the player leave the port
+                mapInputActions.FindAction("MapToggle").Disable();
+                if (waitTime > 0f)
+                {
+                    waitTime -= Time.deltaTime;
+                }
+                else
+                {
+                    popUpIndex++;
+                    Time.timeScale = 0f;
+                }
+                break;
+
+            case 28:
+                // Storm approaches
+                mapInputActions.FindAction("MapToggle").Disable();
+                if (Input.GetKeyDown(KeyCode.Tab))
+                {
+                    hurricane.SetActive(true);
+                    levelManager.gameObject.SetActive(true);
+                    Time.timeScale = 1f;
+                    Invoke("NextPopUpIndex", 1f);
+                }
+                break;
+
+            case 29:
+                // Open map to see whats happening
+                Time.timeScale = 0f;
+                mapInputActions.FindAction("MapToggle").Enable();
+                if (mapInputActions.FindAction("MapToggle").triggered)
+                {
+                    mapInputActions.FindAction("MapToggle").Disable();
+                    popUpIndex++;
+                }
+                break;
+
+            case 30:
+                // Storm dramatic text
+                if (Input.GetKeyDown(KeyCode.Tab))
+                {
+                    popUpIndex++;
+                }
+                break;
+
+            case 31:
+                // Plan where to go
+                if (Input.GetKeyDown(KeyCode.Tab))
+                {
+                    popUpIndex++;
+                }
+                break;
+
+            case 32:
+                // Dont see port
+                endPortArrow.SetActive(true);
+                if (Input.GetKeyDown(KeyCode.Tab))
+                {
+                    mapInputActions.FindAction("MapToggle").Enable();
+                    popUpIndex++;
+                }
+                break;
+
+            case 33:
+                // close map and resume
+                if (mapInputActions.FindAction("MapToggle").triggered)
+                {
+                    lastSavePos = new Vector2(20.9f, 146.4f);
+                    endPortArrow.SetActive(false);
+                    popUpIndex++;
+                }
+                break;
+
+            case 34:
+                // sail to the port
+                instructionsParent.GetComponent<Image>().enabled = false;
+                onDeathPopUpIndex = popUpIndex + 1; // Set the index to the next pop-up
+                if (playerDockedToEndPort)
+                {
+                    instructionsParent.GetComponent<Image>().enabled = true;
+                    tutorialTarget.target = Vector2.zero; // Disable the arrow
+                    onDeathPopUpIndex = 0; // Reset the onDeathPopUpIndex
+                    popUpIndex += 2;
+                }
+                break;
+
+            case 35:
+                // Player died on the way to the port
+                Time.timeScale = 0f;
+                instructionsParent.GetComponent<Image>().enabled = true;
+                if (Input.GetKeyDown(KeyCode.Tab))
+                {
+                    Time.timeScale = 1f;
+                    hurricane.transform.position = hurricanePos;
+                    hurricane.GetComponent<Hurricane>().ResetWaypoints();
+                    levelManager.SetCountdown(45f);
+                    player.transform.position = lastSavePos;
+                    popUpIndex--;
+                }
+                break;
+
+            case 36:
+                // Player got to end port
+                Time.timeScale = 0f;
+                if (Input.GetKeyDown(KeyCode.Tab))
+                {
+                    popUpIndex++;
+                }
+                break;
+
+            case 37:
+                // Player told they are on their own
+                if (Input.GetKeyDown(KeyCode.Tab))
+                {
+                    Debug.Log("Loading Main Menu");
+                    Loader.LoadByName("MainMenu");
                 }
                 break;
 
@@ -350,14 +489,25 @@ public class TutorialManager : MonoBehaviour
         }
     }
 
+    private void NextPopUpIndex()
+    {
+        popUpIndex++;
+    }
+
     public void PlayerDied()
     {
         Debug.Log($"Player died. On death popUpIndex is {onDeathPopUpIndex}");
         if (onDeathPopUpIndex != 0)
         {
             popUpIndex = onDeathPopUpIndex;
+            player.GetComponent<BoatHealth>().ResetHealth();
             player.GetComponent<Rigidbody2D>().angularVelocity = 0f;
             player.GetComponent<Rigidbody2D>().linearVelocity = Vector3.zero;
         }
+    }
+
+    public void PlayerReachedEndPort()
+    {
+        playerDockedToEndPort = true;
     }
 }

@@ -20,12 +20,14 @@ public class LevelManager : MonoBehaviour
     private bool playerLost = false;
     private bool gameEnded = false;
     private bool showEndScreen = false;
+    public bool tutorialLevel = false;
 
     private void Start()
     {
         winScreen.gameObject.SetActive(false);
         loseScreen.gameObject.SetActive(false);
         continueButton.gameObject.SetActive(false);
+        countdownText.gameObject.SetActive(true);
 
         buttonSlider = continueButton.transform.GetChild(0).gameObject.GetComponent<Image>();
         continueButton.onClick.AddListener(ShowEndScreen);
@@ -35,12 +37,26 @@ public class LevelManager : MonoBehaviour
         inputActions.FindActionMap("Map").Enable();
 
         // Resets Time
-        Time.timeScale = 1f;
+        if (!tutorialLevel)
+        {
+            Time.timeScale = 1f;
+        }
     }
 
     public void PlayerReachedEndPort()
     {
-        PlayerWon();
+        if (tutorialLevel)
+        {
+            TutorialManager tutorialManager = FindFirstObjectByType<TutorialManager>();
+            if (tutorialManager != null)
+            {
+                tutorialManager.PlayerReachedEndPort();
+            }
+        }
+        else
+        {
+            PlayerWon();
+        }
     }
 
     private void Update()
@@ -223,5 +239,11 @@ public class LevelManager : MonoBehaviour
         {
             countdownText.text = (seconds + milliSeconds).ToString("F2");
         }
+    }
+
+    public void SetCountdown(float countdown)
+    {
+        this.countdown = countdown;
+        countdownText.text = countdown.ToString("F2");
     }
 }

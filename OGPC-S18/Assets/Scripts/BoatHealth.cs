@@ -54,7 +54,21 @@ public class BoatHealth : MonoBehaviour
 
         if (shipHealth <= 0)
         {
-            levelManager.PlayerLost();
+            if (tutorialLevel)
+            {
+                TutorialManager tutorialManager = FindFirstObjectByType<TutorialManager>();
+                tutorialManager.PlayerDied();
+            }
+            else
+            {
+                levelManager.PlayerLost();
+            }
         }
+    }
+
+    public void ResetHealth()
+    {
+        shipHealth = maxShipHealth;
+        Debug.Log("Ship health reset to max.");
     }
 }

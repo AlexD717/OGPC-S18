@@ -24,7 +24,6 @@ public class EndPort : MonoBehaviour
     [HideInInspector] public TextMeshProUGUI nameText;
     GameObject player;
 
-
     private void Start()
     {
         rangeSprite = range.GetComponent<SpriteRenderer>();
@@ -41,7 +40,6 @@ public class EndPort : MonoBehaviour
         nameText.text = portName;
 
         boatController = GameObject.FindGameObjectWithTag("Player").GetComponent<BoatController>();
-        levelManager = FindFirstObjectByType<LevelManager>();
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
@@ -76,6 +74,7 @@ public class EndPort : MonoBehaviour
         playerDocked = true;
         rangeSprite.enabled = false;
         nameText.enabled = false;
+        levelManager = FindFirstObjectByType<LevelManager>();
         levelManager.PlayerReachedEndPort();
     }
 
