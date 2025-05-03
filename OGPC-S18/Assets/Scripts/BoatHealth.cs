@@ -49,7 +49,11 @@ public class BoatHealth : MonoBehaviour
     {
         shipHealth -= damage;
         Debug.Log($"Ship took {damage} damage. Current health: {shipHealth}");
-        
+
+        // Play damage sound effect
+        SFXManager sFXManager = FindFirstObjectByType<SFXManager>();
+        sFXManager.BoatTookDamage();
+
         animator.SetTrigger("TookDamage");
 
         if (shipHealth <= 0)

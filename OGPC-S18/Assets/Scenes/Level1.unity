@@ -119,6 +119,45 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &159577926 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6638050331999101322, guid: 4e21a6f1d65cc784d91aadd6e7606f92, type: 3}
+  m_PrefabInstance: {fileID: 1712391102165027479}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &159577928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 159577926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6bfed35bfcbbce40a9a30ec334f94b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boatTookDamage:
+  - {fileID: 8300000, guid: b1cb12820a4ba924e90c005ef9cb3dc9, type: 3}
+  - {fileID: 8300000, guid: 3cfff6b70b471b64bba538e03ae1eead, type: 3}
+  - {fileID: 8300000, guid: b3931a9dd8f76a049a5572650514368e, type: 3}
+  - {fileID: 8300000, guid: b7ec554c90128684ea9062bd617c0bdb, type: 3}
+  - {fileID: 8300000, guid: 0f68acd1590b6064b819af2db8500d0e, type: 3}
+  - {fileID: 8300000, guid: a11a0cc6b4ca24946814be389ddfa227, type: 3}
+  - {fileID: 8300000, guid: 953d3b2f1ef12f8409ac4d29534f1c33, type: 3}
+  - {fileID: 8300000, guid: 2510214ed4c204747a69d32062f11f55, type: 3}
+  - {fileID: 8300000, guid: 7da64aba8bff1b242a60923a3c840b5a, type: 3}
+  - {fileID: 8300000, guid: a0808daceb0930d43bd5b854475513bc, type: 3}
+  - {fileID: 8300000, guid: d88f681b6eee48d48a9ef0d46db55259, type: 3}
+  - {fileID: 8300000, guid: d5e7e647821284d4c81304555c4483c8, type: 3}
+  - {fileID: 8300000, guid: 98a028d7110771943a9f3e3200600ffb, type: 3}
+  - {fileID: 8300000, guid: ddb74c77eda673b40b585b4ed8d4aae2, type: 3}
+  - {fileID: 8300000, guid: d5e7e647821284d4c81304555c4483c8, type: 3}
+  playerWon:
+  - {fileID: 8300000, guid: 6e043eea10b8ced4e800b30e4574df03, type: 3}
+  - {fileID: 8300000, guid: 1b0018f4fba45864abe2ca826f4c9af3, type: 3}
+  - {fileID: 8300000, guid: 7221768bd63ae67498d3a4f3ed71e235, type: 3}
+  - {fileID: 8300000, guid: 446fb7e460da91c44ba91482cbe9b201, type: 3}
+  - {fileID: 8300000, guid: 9f17170efda880847b2cbc86e9fc025b, type: 3}
 --- !u!1001 &238388261
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1174,7 +1213,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6638050331999101322, guid: 4e21a6f1d65cc784d91aadd6e7606f92, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 159577928}
   m_SourcePrefab: {fileID: 100100000, guid: 4e21a6f1d65cc784d91aadd6e7606f92, type: 3}
 --- !u!114 &1712391102165027480 stripped
 MonoBehaviour:
@@ -1818,7 +1860,6 @@ SceneRoots:
   - {fileID: 7225119678893711827}
   - {fileID: 1844477116870309132}
   - {fileID: 1220278227703762034}
-  - {fileID: 1712391102165027479}
   - {fileID: 5292423628038404066}
   - {fileID: 3100683377281274864}
   - {fileID: 1609202320}
@@ -1827,3 +1868,4 @@ SceneRoots:
   - {fileID: 877426552}
   - {fileID: 1679288769}
   - {fileID: 238388261}
+  - {fileID: 1712391102165027479}
