@@ -130,13 +130,14 @@ GameObject:
   - component: {fileID: 17590207}
   - component: {fileID: 17590209}
   - component: {fileID: 17590208}
+  - component: {fileID: 17590210}
   m_Layer: 5
   m_Name: DockToPort
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &17590207
 RectTransform:
   m_ObjectHideFlags: 0
@@ -176,7 +177,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Dock to the port by pressing "e"
+  m_text: "To dock at the port, press <b>'E'</b>. It's like parking... but with way
+    more water. \n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b89409ac1c9afae4a806db2d8efb8826, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: b89409ac1c9afae4a806db2d8efb8826, type: 2}
@@ -203,12 +205,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40
+  m_fontSize: 20
   m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 18
-  m_fontSizeMax: 40
+  m_fontSizeMin: 15
+  m_fontSizeMax: 20
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
@@ -255,6 +257,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 17590206}
   m_CullTransparentMesh: 1
+--- !u!114 &17590210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 17590206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c0e65068b95e8b428256a78c40252f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typingSpeed: 0.03
+  typingPeriodPause: 0.15
 --- !u!1 &81660596
 GameObject:
   m_ObjectHideFlags: 0
@@ -266,13 +282,14 @@ GameObject:
   - component: {fileID: 81660597}
   - component: {fileID: 81660599}
   - component: {fileID: 81660598}
+  - component: {fileID: 81660600}
   m_Layer: 5
   m_Name: PortsExplanation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &81660597
 RectTransform:
   m_ObjectHideFlags: 0
@@ -312,8 +329,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Throughout the map you might encounter some ports. Saving those ports will
-    give you bonus points (tab to continue)
+  m_text: "As you explore, you\u2019ll come across ports. They\u2019re like pit stops,
+    but without the snacks. If you save them, you get bonus points. Yeah, I know,
+    it\u2019s not a fortune, but hey, at least it\u2019s something! <i> (tab to coninue)
+    </i>"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b89409ac1c9afae4a806db2d8efb8826, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: b89409ac1c9afae4a806db2d8efb8826, type: 2}
@@ -340,12 +359,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 33.45
+  m_fontSize: 20
   m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 18
-  m_fontSizeMax: 40
+  m_fontSizeMin: 15
+  m_fontSizeMax: 20
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
@@ -392,6 +411,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 81660596}
   m_CullTransparentMesh: 1
+--- !u!114 &81660600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 81660596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c0e65068b95e8b428256a78c40252f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typingSpeed: 0.03
+  typingPeriodPause: 0.15
 --- !u!1 &223779999
 GameObject:
   m_ObjectHideFlags: 0
@@ -403,13 +436,14 @@ GameObject:
   - component: {fileID: 223780000}
   - component: {fileID: 223780002}
   - component: {fileID: 223780001}
+  - component: {fileID: 223780003}
   m_Layer: 5
   m_Name: MapTurnOnInstructions
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &223780000
 RectTransform:
   m_ObjectHideFlags: 0
@@ -449,7 +483,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Press "q" or "m" to open the map view
+  m_text: "Alright, first things first: You need to figure out where you're going.
+    Press <b>'Q'</b> or <b>'M'</b> to open the map. It\u2019s like a treasure map,
+    but, you know, with less treasure and more... water."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b89409ac1c9afae4a806db2d8efb8826, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: b89409ac1c9afae4a806db2d8efb8826, type: 2}
@@ -476,12 +512,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40
+  m_fontSize: 20
   m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 18
-  m_fontSizeMax: 40
+  m_fontSizeMin: 15
+  m_fontSizeMax: 20
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
@@ -528,6 +564,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 223779999}
   m_CullTransparentMesh: 1
+--- !u!114 &223780003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 223779999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c0e65068b95e8b428256a78c40252f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typingSpeed: 0.03
+  typingPeriodPause: 0.15
 --- !u!1 &230611104
 GameObject:
   m_ObjectHideFlags: 0
@@ -539,13 +589,14 @@ GameObject:
   - component: {fileID: 230611105}
   - component: {fileID: 230611107}
   - component: {fileID: 230611106}
+  - component: {fileID: 230611108}
   m_Layer: 5
   m_Name: WaitForDockedToBeSaved
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &230611105
 RectTransform:
   m_ObjectHideFlags: 0
@@ -585,7 +636,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Wait for the dock to be saved
+  m_text: Just wait for the port to be saved...
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b89409ac1c9afae4a806db2d8efb8826, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: b89409ac1c9afae4a806db2d8efb8826, type: 2}
@@ -612,12 +663,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40
+  m_fontSize: 20
   m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 18
-  m_fontSizeMax: 40
+  m_fontSizeMin: 15
+  m_fontSizeMax: 20
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
@@ -664,6 +715,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 230611104}
   m_CullTransparentMesh: 1
+--- !u!114 &230611108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 230611104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c0e65068b95e8b428256a78c40252f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typingSpeed: 0.03
+  typingPeriodPause: 0.15
 --- !u!1 &243374545
 GameObject:
   m_ObjectHideFlags: 0
@@ -858,6 +923,9 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 473786224}
+  - {fileID: 1201201672}
+  - {fileID: 1170372925}
   - {fileID: 223780000}
   - {fileID: 1045367449}
   - {fileID: 1615340695}
@@ -867,6 +935,7 @@ RectTransform:
   - {fileID: 844430336}
   - {fileID: 497779011}
   - {fileID: 327678994}
+  - {fileID: 1737844271}
   - {fileID: 1794577716}
   - {fileID: 518145706}
   - {fileID: 1290666125}
@@ -875,6 +944,7 @@ RectTransform:
   - {fileID: 1481278375}
   - {fileID: 81660597}
   - {fileID: 1430149857}
+  - {fileID: 958372914}
   - {fileID: 452312794}
   - {fileID: 17590207}
   - {fileID: 1638979210}
@@ -882,10 +952,10 @@ RectTransform:
   - {fileID: 2120010891}
   m_Father: {fileID: 243374549}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -175, y: -125}
-  m_SizeDelta: {x: 350, y: 250}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: 0, y: 45}
+  m_SizeDelta: {x: 0, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &313460436
 MonoBehaviour:
@@ -936,13 +1006,14 @@ GameObject:
   - component: {fileID: 327678994}
   - component: {fileID: 327678996}
   - component: {fileID: 327678995}
+  - component: {fileID: 327678997}
   m_Layer: 5
   m_Name: DontCrashIntoIsland
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &327678994
 RectTransform:
   m_ObjectHideFlags: 0
@@ -982,8 +1053,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Now follow the white arrow and avoid crashing into the island that's in
-    front of you
+  m_text: "See that white arrow? Follow it! But avoid crashing into the island in
+    front of you. Unless, of course, you really want to get a close-up of the island...
+    and by \u2018close-up,\u2019 I mean \u2018face-first. <i> (tab to continue) </i>"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b89409ac1c9afae4a806db2d8efb8826, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: b89409ac1c9afae4a806db2d8efb8826, type: 2}
@@ -1010,12 +1082,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 39.45
+  m_fontSize: 20
   m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 18
-  m_fontSizeMax: 40
+  m_fontSizeMin: 15
+  m_fontSizeMax: 20
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
@@ -1062,6 +1134,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 327678993}
   m_CullTransparentMesh: 1
+--- !u!114 &327678997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 327678993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c0e65068b95e8b428256a78c40252f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typingSpeed: 0.03
+  typingPeriodPause: 0.15
 --- !u!1 &387760357
 GameObject:
   m_ObjectHideFlags: 0
@@ -1104,13 +1190,14 @@ GameObject:
   - component: {fileID: 452312794}
   - component: {fileID: 452312796}
   - component: {fileID: 452312795}
+  - component: {fileID: 452312797}
   m_Layer: 5
   m_Name: CrashedOnTheWayToPort
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &452312794
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1150,7 +1237,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: You Crashed. Press tab to try again
+  m_text: You crashed again? Well, that was fast. Press <b>'Tab'</b> to try again.
+    And this time, maybe take it slow. The island's not going anywhere.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b89409ac1c9afae4a806db2d8efb8826, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: b89409ac1c9afae4a806db2d8efb8826, type: 2}
@@ -1177,12 +1265,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40
+  m_fontSize: 20
   m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 18
-  m_fontSizeMax: 40
+  m_fontSizeMin: 15
+  m_fontSizeMax: 20
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
@@ -1229,6 +1317,175 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 452312793}
   m_CullTransparentMesh: 1
+--- !u!114 &452312797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 452312793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c0e65068b95e8b428256a78c40252f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typingSpeed: 0.03
+  typingPeriodPause: 0.15
+--- !u!1 &473786223
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 473786224}
+  - component: {fileID: 473786226}
+  - component: {fileID: 473786225}
+  - component: {fileID: 473786227}
+  m_Layer: 5
+  m_Name: AdventureGreetings
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &473786224
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 473786223}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 313460435}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: -20, y: -20}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &473786225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 473786223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: "Listen up! We don\u2019t have much time. Our island\u2019s behind us,
+    and the storm is closing in fast. We barely made it out, but now we have to get
+    to <b>Titanport</b> and warn them. There are too many people there to let them
+    all face this alone. We <i>can\u2019t</i> let them go down without a fight. <i>(tab
+    to continue) </i>"
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: b89409ac1c9afae4a806db2d8efb8826, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: b89409ac1c9afae4a806db2d8efb8826, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294961831
+  m_fontColor: {r: 0.6556604, g: 0.9159564, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 20
+  m_fontSizeBase: 20
+  m_fontWeight: 400
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 15
+  m_fontSizeMax: 20
+  m_fontStyle: 0
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 256
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_TextWrappingMode: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 0
+  m_ActiveFontFeatures: 6e72656b
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_EmojiFallbackSupport: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &473786226
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 473786223}
+  m_CullTransparentMesh: 1
+--- !u!114 &473786227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 473786223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c0e65068b95e8b428256a78c40252f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typingSpeed: 0.03
+  typingPeriodPause: 0.15
 --- !u!114 &487207275 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6387579026827939504, guid: 4e21a6f1d65cc784d91aadd6e7606f92, type: 3}
@@ -1251,13 +1508,14 @@ GameObject:
   - component: {fileID: 497779011}
   - component: {fileID: 497779013}
   - component: {fileID: 497779012}
+  - component: {fileID: 497779014}
   m_Layer: 5
   m_Name: SailLimit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &497779011
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1297,8 +1555,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Depending on the angle the wind is coming from your boat will be more or
-    less efficient (tab to continue)
+  m_text: "Now, depending on the angle the wind is coming from, your boat will be
+    more or less efficient. Obviously, you can\u2019t sail directly into the wind\u2014that\u2019s
+    just asking for trouble. <i>(tab to continue) </i>"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b89409ac1c9afae4a806db2d8efb8826, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: b89409ac1c9afae4a806db2d8efb8826, type: 2}
@@ -1325,12 +1584,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 33.45
+  m_fontSize: 20
   m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 18
-  m_fontSizeMax: 40
+  m_fontSizeMin: 15
+  m_fontSizeMax: 20
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
@@ -1377,6 +1636,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 497779010}
   m_CullTransparentMesh: 1
+--- !u!114 &497779014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 497779010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c0e65068b95e8b428256a78c40252f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typingSpeed: 0.03
+  typingPeriodPause: 0.15
 --- !u!1 &518145705
 GameObject:
   m_ObjectHideFlags: 0
@@ -1388,13 +1661,14 @@ GameObject:
   - component: {fileID: 518145706}
   - component: {fileID: 518145708}
   - component: {fileID: 518145707}
+  - component: {fileID: 518145709}
   m_Layer: 5
   m_Name: IslandPassCongradulations
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &518145706
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1434,7 +1708,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Congradulations on passing the island! (tab to continue)
+  m_text: "Congrats on making it past the island! You didn\u2019t sink! Yet. But
+    hey, we\u2019re getting somewhere now! <i> (tab to continue) </i>"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b89409ac1c9afae4a806db2d8efb8826, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: b89409ac1c9afae4a806db2d8efb8826, type: 2}
@@ -1461,12 +1736,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40
+  m_fontSize: 20
   m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 18
-  m_fontSizeMax: 40
+  m_fontSizeMin: 15
+  m_fontSizeMax: 20
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
@@ -1513,6 +1788,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 518145705}
   m_CullTransparentMesh: 1
+--- !u!114 &518145709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 518145705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c0e65068b95e8b428256a78c40252f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typingSpeed: 0.03
+  typingPeriodPause: 0.15
 --- !u!1 &562873478 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 79045104933699514, guid: 9e0ee1631593008429d3b842f58fcebb, type: 3}
@@ -1529,13 +1818,14 @@ GameObject:
   - component: {fileID: 844430336}
   - component: {fileID: 844430338}
   - component: {fileID: 844430337}
+  - component: {fileID: 844430339}
   m_Layer: 5
   m_Name: SailAutoAdjusts
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &844430336
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1575,8 +1865,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: As you rotate the boat the sail will automatically adjust to the most optimal
-    position (tab to continue)
+  m_text: "As you rotate the boat, the sail will automatically adjust to the most
+    optimal position. It\u2019s like magic, but with more wind and less wizardry.
+    <i> (tab to continue) </i>"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b89409ac1c9afae4a806db2d8efb8826, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: b89409ac1c9afae4a806db2d8efb8826, type: 2}
@@ -1603,12 +1894,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 33.45
+  m_fontSize: 20
   m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 18
-  m_fontSizeMax: 40
+  m_fontSizeMin: 15
+  m_fontSizeMax: 20
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
@@ -1655,6 +1946,156 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 844430335}
   m_CullTransparentMesh: 1
+--- !u!114 &844430339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 844430335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c0e65068b95e8b428256a78c40252f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typingSpeed: 0.03
+  typingPeriodPause: 0.15
+--- !u!1 &958372913
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 958372914}
+  - component: {fileID: 958372916}
+  - component: {fileID: 958372915}
+  m_Layer: 5
+  m_Name: SailToPort
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &958372914
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 958372913}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 313460435}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: -20, y: -20}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &958372915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 958372913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: 
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: b89409ac1c9afae4a806db2d8efb8826, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: b89409ac1c9afae4a806db2d8efb8826, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294961831
+  m_fontColor: {r: 0.6556604, g: 0.9159564, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 20
+  m_fontSizeBase: 20
+  m_fontWeight: 400
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 15
+  m_fontSizeMax: 20
+  m_fontStyle: 0
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 256
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_TextWrappingMode: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 0
+  m_ActiveFontFeatures: 6e72656b
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_EmojiFallbackSupport: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &958372916
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 958372913}
+  m_CullTransparentMesh: 1
 --- !u!1 &979859243
 GameObject:
   m_ObjectHideFlags: 0
@@ -1666,13 +2107,14 @@ GameObject:
   - component: {fileID: 979859244}
   - component: {fileID: 979859246}
   - component: {fileID: 979859245}
+  - component: {fileID: 979859247}
   m_Layer: 5
   m_Name: DisableMap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &979859244
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1712,7 +2154,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Disable the map by pressing "q" or "m"
+  m_text: "Okay, ready to get back to sailing? Press <b>'Q'</b> or <b>'M'</b> again
+    to close the map. You can\u2019t be on the map forever."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b89409ac1c9afae4a806db2d8efb8826, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: b89409ac1c9afae4a806db2d8efb8826, type: 2}
@@ -1739,12 +2182,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40
+  m_fontSize: 20
   m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 18
-  m_fontSizeMax: 40
+  m_fontSizeMin: 15
+  m_fontSizeMax: 20
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
@@ -1791,6 +2234,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 979859243}
   m_CullTransparentMesh: 1
+--- !u!114 &979859247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 979859243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c0e65068b95e8b428256a78c40252f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typingSpeed: 0.03
+  typingPeriodPause: 0.15
 --- !u!1 &1045367448
 GameObject:
   m_ObjectHideFlags: 0
@@ -1802,13 +2259,14 @@ GameObject:
   - component: {fileID: 1045367449}
   - component: {fileID: 1045367451}
   - component: {fileID: 1045367450}
+  - component: {fileID: 1045367452}
   m_Layer: 5
   m_Name: MapMoveAroundInstructions
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1045367449
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1848,7 +2306,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Use "wasd" or arrow keys to pan around the map
+  m_text: "Now, you\u2019re going to want to get a good look at your surroundings.
+    Use <b>'WASD'</b> or the arrow keys to pan around."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b89409ac1c9afae4a806db2d8efb8826, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: b89409ac1c9afae4a806db2d8efb8826, type: 2}
@@ -1875,12 +2334,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40
+  m_fontSize: 20
   m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 18
-  m_fontSizeMax: 40
+  m_fontSizeMin: 15
+  m_fontSizeMax: 20
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
@@ -1927,6 +2386,330 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1045367448}
   m_CullTransparentMesh: 1
+--- !u!114 &1045367452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1045367448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c0e65068b95e8b428256a78c40252f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typingSpeed: 0.03
+  typingPeriodPause: 0.15
+--- !u!1 &1170372924
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1170372925}
+  - component: {fileID: 1170372927}
+  - component: {fileID: 1170372926}
+  - component: {fileID: 1170372928}
+  m_Layer: 5
+  m_Name: AdventureGreetings (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1170372925
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1170372924}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 313460435}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: -20, y: -20}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1170372926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1170372924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: "There\u2019s no turning back once we\u2019re out here. You\u2019re in
+    the deep end now. And trust me\u2014this is no poolside float. But hey, what\u2019s
+    the worst that could happen? Other than, you know, a giant storm swallowing us
+    whole\u2026 Just kidding. Probably. <i> (tab to continue) </i>"
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: b89409ac1c9afae4a806db2d8efb8826, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: b89409ac1c9afae4a806db2d8efb8826, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294961831
+  m_fontColor: {r: 0.6556604, g: 0.9159564, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 20
+  m_fontSizeBase: 20
+  m_fontWeight: 400
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 15
+  m_fontSizeMax: 20
+  m_fontStyle: 0
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 256
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_TextWrappingMode: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 0
+  m_ActiveFontFeatures: 6e72656b
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_EmojiFallbackSupport: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &1170372927
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1170372924}
+  m_CullTransparentMesh: 1
+--- !u!114 &1170372928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1170372924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c0e65068b95e8b428256a78c40252f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typingSpeed: 0.03
+  typingPeriodPause: 0.15
+--- !u!1 &1201201671
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1201201672}
+  - component: {fileID: 1201201674}
+  - component: {fileID: 1201201673}
+  - component: {fileID: 1201201675}
+  m_Layer: 5
+  m_Name: AdventureGreetings (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1201201672
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1201201671}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 313460435}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: -20, y: -20}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1201201673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1201201671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: "I know you\u2019ve never sailed before\u2014and, honestly, I\u2019m starting
+    to wonder why <i>I\u2019m</i> trusting you with this\u2014but here we are. I\u2019ll
+    teach you the basics, but don\u2019t expect to be Captain Jack Sparrow after
+    five minutes. It\u2019s not much, but it\u2019s all you\u2019ll need for now.
+    You\u2019ve got to trust yourself, keep your focus, and just... don\u2019t crash
+    into anything too big. No pressure, right? <i>(tab to continue) </i>"
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: b89409ac1c9afae4a806db2d8efb8826, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: b89409ac1c9afae4a806db2d8efb8826, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294961831
+  m_fontColor: {r: 0.6556604, g: 0.9159564, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 17.05
+  m_fontSizeBase: 20
+  m_fontWeight: 400
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 15
+  m_fontSizeMax: 20
+  m_fontStyle: 0
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 256
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_TextWrappingMode: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 0
+  m_ActiveFontFeatures: 6e72656b
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_EmojiFallbackSupport: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &1201201674
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1201201671}
+  m_CullTransparentMesh: 1
+--- !u!114 &1201201675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1201201671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c0e65068b95e8b428256a78c40252f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typingSpeed: 0.03
+  typingPeriodPause: 0.15
 --- !u!4 &1264705270 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8535043020824373214, guid: eff394a8dcccfdc41be159d983dad9b1, type: 3}
@@ -1943,13 +2726,14 @@ GameObject:
   - component: {fileID: 1290666125}
   - component: {fileID: 1290666127}
   - component: {fileID: 1290666126}
+  - component: {fileID: 1290666128}
   m_Layer: 5
   m_Name: ToggleSailUseCase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1290666125
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1989,8 +2773,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Sometimes you need to travel in the direction the wind is coming from,
-    which is impossible with a sail (tab to continue)
+  m_text: "Sometimes, you\u2019ll need to travel in the direction the wind is coming
+    from, which is... well, not possible with a sail. <i> (tab to continue) </i>"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b89409ac1c9afae4a806db2d8efb8826, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: b89409ac1c9afae4a806db2d8efb8826, type: 2}
@@ -2017,12 +2801,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 33.45
+  m_fontSize: 20
   m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 18
-  m_fontSizeMax: 40
+  m_fontSizeMin: 15
+  m_fontSizeMax: 20
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
@@ -2069,6 +2853,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1290666124}
   m_CullTransparentMesh: 1
+--- !u!114 &1290666128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1290666124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c0e65068b95e8b428256a78c40252f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typingSpeed: 0.03
+  typingPeriodPause: 0.15
 --- !u!1001 &1311329690
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2146,13 +2944,14 @@ GameObject:
   - component: {fileID: 1430149857}
   - component: {fileID: 1430149859}
   - component: {fileID: 1430149858}
+  - component: {fileID: 1430149860}
   m_Layer: 5
   m_Name: GoToPort
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1430149857
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2192,7 +2991,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Follow the arrow to get to a port
+  m_text: "Follow the arrow to reach a port. Don\u2019t take a detour unless you\u2019re
+    into crashing into things. Just saying. <i> (tab to continue) </i>"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b89409ac1c9afae4a806db2d8efb8826, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: b89409ac1c9afae4a806db2d8efb8826, type: 2}
@@ -2219,12 +3019,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40
+  m_fontSize: 20
   m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 18
-  m_fontSizeMax: 40
+  m_fontSizeMin: 15
+  m_fontSizeMax: 20
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
@@ -2271,6 +3071,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1430149856}
   m_CullTransparentMesh: 1
+--- !u!114 &1430149860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1430149856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c0e65068b95e8b428256a78c40252f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typingSpeed: 0.03
+  typingPeriodPause: 0.15
 --- !u!1 &1463717674
 GameObject:
   m_ObjectHideFlags: 0
@@ -2282,13 +3096,14 @@ GameObject:
   - component: {fileID: 1463717675}
   - component: {fileID: 1463717677}
   - component: {fileID: 1463717676}
+  - component: {fileID: 1463717678}
   m_Layer: 5
   m_Name: ToggleSailInstructions
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1463717675
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2328,8 +3143,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: You can toggle the sail by pressing space. In that case you just travel
-    in the direction you are facing (toggle the sail)
+  m_text: "Now, press <b>'Space'</b> to toggle the sail off. This way, you can just
+    go wherever you\u2019re facing. Think of it like \u2018cruise control,\u2019
+    but with more manual labor. Don\u2019t worry, the boat will handle it. You\u2019re
+    just along for the ride."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b89409ac1c9afae4a806db2d8efb8826, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: b89409ac1c9afae4a806db2d8efb8826, type: 2}
@@ -2356,12 +3173,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 33.45
+  m_fontSize: 20
   m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 18
-  m_fontSizeMax: 40
+  m_fontSizeMin: 15
+  m_fontSizeMax: 20
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
@@ -2408,6 +3225,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1463717674}
   m_CullTransparentMesh: 1
+--- !u!114 &1463717678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1463717674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c0e65068b95e8b428256a78c40252f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typingSpeed: 0.03
+  typingPeriodPause: 0.15
 --- !u!1 &1481278374
 GameObject:
   m_ObjectHideFlags: 0
@@ -2419,13 +3250,14 @@ GameObject:
   - component: {fileID: 1481278375}
   - component: {fileID: 1481278377}
   - component: {fileID: 1481278376}
+  - component: {fileID: 1481278378}
   m_Layer: 5
   m_Name: TurnSailBackOn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1481278375
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2465,7 +3297,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: To turn the sail back on just press space again (toggle the sail)
+  m_text: Press <b>'Space'</b> again to turn the sail back on. You know, in case
+    you decide you want to actually sail instead of, you know, floating around aimlessly.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b89409ac1c9afae4a806db2d8efb8826, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: b89409ac1c9afae4a806db2d8efb8826, type: 2}
@@ -2492,12 +3325,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40
+  m_fontSize: 20
   m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 18
-  m_fontSizeMax: 40
+  m_fontSizeMin: 15
+  m_fontSizeMax: 20
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
@@ -2544,6 +3377,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1481278374}
   m_CullTransparentMesh: 1
+--- !u!114 &1481278378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1481278374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c0e65068b95e8b428256a78c40252f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typingSpeed: 0.03
+  typingPeriodPause: 0.15
 --- !u!1 &1609202319
 GameObject:
   m_ObjectHideFlags: 0
@@ -2595,7 +3442,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1609805138
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2635,8 +3482,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: You can toggle the sail by pressing space. In that case you just travel
-    in the direction you are facing (toggle the sail)
+  m_text: "Now, press <b>'Space'</b> to toggle the sail off. This way, you can just
+    go wherever you\u2019re facing. Think of it like \u2018cruise control,\u2019
+    but with more manual labor. Don\u2019t worry, the boat will handle it. You\u2019re
+    just along for the ride."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b89409ac1c9afae4a806db2d8efb8826, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: b89409ac1c9afae4a806db2d8efb8826, type: 2}
@@ -2663,12 +3512,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 33.45
+  m_fontSize: 20
   m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 18
-  m_fontSizeMax: 40
+  m_fontSizeMin: 15
+  m_fontSizeMax: 20
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
@@ -2726,13 +3575,14 @@ GameObject:
   - component: {fileID: 1615340695}
   - component: {fileID: 1615340697}
   - component: {fileID: 1615340696}
+  - component: {fileID: 1615340698}
   m_Layer: 5
   m_Name: MapZoom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1615340695
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2772,7 +3622,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Use the scroll wheel to zoom the map in and out
+  m_text: "To zoom in or out, use the scroll wheel. Zoom in for a closer look, or
+    zoom out if you want to see the bigger picture\u2014your tiny boat in the vast
+    ocean."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b89409ac1c9afae4a806db2d8efb8826, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: b89409ac1c9afae4a806db2d8efb8826, type: 2}
@@ -2799,12 +3651,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40
+  m_fontSize: 20
   m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 18
-  m_fontSizeMax: 40
+  m_fontSizeMin: 15
+  m_fontSizeMax: 20
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
@@ -2851,6 +3703,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1615340694}
   m_CullTransparentMesh: 1
+--- !u!114 &1615340698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1615340694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c0e65068b95e8b428256a78c40252f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typingSpeed: 0.03
+  typingPeriodPause: 0.15
 --- !u!1 &1638979209
 GameObject:
   m_ObjectHideFlags: 0
@@ -2862,13 +3728,14 @@ GameObject:
   - component: {fileID: 1638979210}
   - component: {fileID: 1638979212}
   - component: {fileID: 1638979211}
+  - component: {fileID: 1638979213}
   m_Layer: 5
   m_Name: DockWaitingTimeExplanation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1638979210
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2908,8 +3775,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Ports take some time to be saved, shown by the text at the top (tab to
-    continue)
+  m_text: "Ports take a bit of time to be saved. You\u2019ll see a message at the
+    top when it\u2019s done. It\u2019s like a slow-loading achievement, but you\u2019ll
+    get there. Eventually. <i> (tab to continue) </i>"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b89409ac1c9afae4a806db2d8efb8826, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: b89409ac1c9afae4a806db2d8efb8826, type: 2}
@@ -2936,12 +3804,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40
+  m_fontSize: 20
   m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 18
-  m_fontSizeMax: 40
+  m_fontSizeMin: 15
+  m_fontSizeMax: 20
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
@@ -2988,6 +3856,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1638979209}
   m_CullTransparentMesh: 1
+--- !u!114 &1638979213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1638979209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c0e65068b95e8b428256a78c40252f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typingSpeed: 0.03
+  typingPeriodPause: 0.15
 --- !u!1 &1683236203
 GameObject:
   m_ObjectHideFlags: 0
@@ -2999,13 +3881,14 @@ GameObject:
   - component: {fileID: 1683236204}
   - component: {fileID: 1683236206}
   - component: {fileID: 1683236205}
+  - component: {fileID: 1683236207}
   m_Layer: 5
   m_Name: RotateTheBoat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1683236204
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3045,7 +3928,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Rotate the boat by pressing "a/d" or left/right arrow keys
+  m_text: "Now, to turn the boat, press <b>'A/D'</b> or the left/right arrow keys.
+    Try not to crash just yet. Get a feel for how the boat turns. It\u2019s not like
+    riding a bike\u2014there\u2019s no training wheels. Just you, the open sea, and...
+    hopefully no sharks."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b89409ac1c9afae4a806db2d8efb8826, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: b89409ac1c9afae4a806db2d8efb8826, type: 2}
@@ -3072,12 +3958,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40
+  m_fontSize: 20
   m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 18
-  m_fontSizeMax: 40
+  m_fontSizeMin: 15
+  m_fontSizeMax: 20
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
@@ -3124,6 +4010,156 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1683236203}
   m_CullTransparentMesh: 1
+--- !u!114 &1683236207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1683236203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c0e65068b95e8b428256a78c40252f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typingSpeed: 0.03
+  typingPeriodPause: 0.15
+--- !u!1 &1737844270
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1737844271}
+  - component: {fileID: 1737844274}
+  - component: {fileID: 1737844273}
+  m_Layer: 5
+  m_Name: SailAroundIsland
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1737844271
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1737844270}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 313460435}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: -20, y: -20}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1737844273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1737844270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: 
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: b89409ac1c9afae4a806db2d8efb8826, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: b89409ac1c9afae4a806db2d8efb8826, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294961831
+  m_fontColor: {r: 0.6556604, g: 0.9159564, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 20
+  m_fontSizeBase: 20
+  m_fontWeight: 400
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 15
+  m_fontSizeMax: 20
+  m_fontStyle: 0
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 256
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_TextWrappingMode: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 0
+  m_ActiveFontFeatures: 6e72656b
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_EmojiFallbackSupport: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &1737844274
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1737844270}
+  m_CullTransparentMesh: 1
 --- !u!1 &1794577715
 GameObject:
   m_ObjectHideFlags: 0
@@ -3135,13 +4171,14 @@ GameObject:
   - component: {fileID: 1794577716}
   - component: {fileID: 1794577718}
   - component: {fileID: 1794577717}
+  - component: {fileID: 1794577719}
   m_Layer: 5
   m_Name: CrashedIntoIsland
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1794577716
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3181,7 +4218,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: You crashed into the island. Press tab to try again
+  m_text: "You crashed into the island. Nice work. You\u2019ve earned yourself a
+    \u2018reality check.\u2019 Press <b>'Tab'</b> to try again. You\u2019re not going
+    to win this race if you\u2019re hugging the shore!"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b89409ac1c9afae4a806db2d8efb8826, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: b89409ac1c9afae4a806db2d8efb8826, type: 2}
@@ -3208,12 +4247,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40
+  m_fontSize: 20
   m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 18
-  m_fontSizeMax: 40
+  m_fontSizeMin: 15
+  m_fontSizeMax: 20
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
@@ -3260,6 +4299,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1794577715}
   m_CullTransparentMesh: 1
+--- !u!114 &1794577719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1794577715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c0e65068b95e8b428256a78c40252f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typingSpeed: 0.03
+  typingPeriodPause: 0.15
 --- !u!1001 &1909973269
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3418,7 +4471,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2105767096
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3458,7 +4511,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Rotate the boat by pressing "a/d" or left/right arrow keys
+  m_text: "Now, to turn the boat, press <b>'A/D'</b> or the left/right arrow keys.
+    Try not to crash just yet. Get a feel for how the boat turns. It\u2019s not like
+    riding a bike\u2014there\u2019s no training wheels. Just you, the open sea, and...
+    hopefully no sharks."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b89409ac1c9afae4a806db2d8efb8826, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: b89409ac1c9afae4a806db2d8efb8826, type: 2}
@@ -3485,12 +4541,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40
+  m_fontSize: 20
   m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 18
-  m_fontSizeMax: 40
+  m_fontSizeMin: 15
+  m_fontSizeMax: 20
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
@@ -3635,13 +4691,14 @@ GameObject:
   - component: {fileID: 2120010891}
   - component: {fileID: 2120010893}
   - component: {fileID: 2120010892}
+  - component: {fileID: 2120010894}
   m_Layer: 5
   m_Name: Undock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2120010891
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3681,7 +4738,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Now undock from the port by pressing "e"
+  m_text: Now, to undock from the port, press <b>'E'</b> again. You're free to go!
+    Just, uh, try not to crash into anything else. That would be awkward.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b89409ac1c9afae4a806db2d8efb8826, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: b89409ac1c9afae4a806db2d8efb8826, type: 2}
@@ -3708,12 +4766,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40
+  m_fontSize: 20
   m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 18
-  m_fontSizeMax: 40
+  m_fontSizeMin: 15
+  m_fontSizeMax: 20
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
@@ -3760,6 +4818,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2120010890}
   m_CullTransparentMesh: 1
+--- !u!114 &2120010894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2120010890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c0e65068b95e8b428256a78c40252f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typingSpeed: 0.03
+  typingPeriodPause: 0.15
 --- !u!1001 &11165193213756936
 PrefabInstance:
   m_ObjectHideFlags: 0

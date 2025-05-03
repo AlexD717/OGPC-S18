@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class TutorialManager : MonoBehaviour
 {
@@ -54,6 +55,35 @@ public class TutorialManager : MonoBehaviour
         switch (popUpIndex)
         {
             case 0:
+                // Introduction 1
+                Time.timeScale = 0f;
+                mapInputActions.FindAction("MapToggle").Disable();
+                if (Input.GetKeyDown(KeyCode.Tab))
+                {
+                    popUpIndex++;
+                }
+                break;
+
+            case 1:
+                // Introduction 2
+                Time.timeScale = 0f;
+                if (Input.GetKeyDown(KeyCode.Tab))
+                {
+                    popUpIndex++;
+                }
+                break;
+
+            case 2:
+                // Introduction 3
+                Time.timeScale = 0f;
+                if (Input.GetKeyDown(KeyCode.Tab))
+                {
+                    mapInputActions.FindAction("MapToggle").Enable();
+                    popUpIndex++;
+                }
+                break;
+
+            case 3:
                 Time.timeScale = 0f;
                 // Teach the player that they can open the map
                 if (mapInputActions.FindAction("MapToggle").triggered)
@@ -63,7 +93,7 @@ public class TutorialManager : MonoBehaviour
                 }
                 break;
 
-            case 1:
+            case 4:
                 // Teach the player that they can pan around the map
                 if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
                 {
@@ -71,7 +101,7 @@ public class TutorialManager : MonoBehaviour
                 }
                 break;
 
-            case 2:
+            case 5:
                 // Teach the player that they can zoom in and out
                 if (Mathf.Abs(mapInputActions.FindAction("MapZoom").ReadValue<float>()) > 0.1f)
                 {
@@ -80,7 +110,7 @@ public class TutorialManager : MonoBehaviour
                 }
                 break;
 
-            case 3:
+            case 6:
                 // Teach the player to disable the map
                 if (mapInputActions.FindAction("MapToggle").triggered)
                 {
@@ -89,7 +119,7 @@ public class TutorialManager : MonoBehaviour
                 }
                 break;
 
-            case 4:
+            case 7:
                 // Teach the player that they can rotate the boat
                 playerInputActions.FindAction("SailToggle").Disable(); // Gets enabled after map close
                 Time.timeScale = 0f;
@@ -101,7 +131,7 @@ public class TutorialManager : MonoBehaviour
                 
                 break;
 
-            case 5:
+            case 8:
                 // waits for the player to experiment with rotating the boat
                 Time.timeScale = 1f;
                 if (waitTime > 0f)
@@ -114,7 +144,7 @@ public class TutorialManager : MonoBehaviour
                 }
                 break;
 
-            case 6:
+            case 9:
                 // Teach the player that the sail auto adjusts
                 Time.timeScale = 0f;
                 if (Input.GetKeyDown(KeyCode.Tab))
@@ -123,8 +153,17 @@ public class TutorialManager : MonoBehaviour
                 }
                 break;
 
-            case 7:
+            case 10:
                 // Teach the player that the sail is more or less effective at certain angles
+                if (Input.GetKeyDown(KeyCode.Tab))
+                {
+                    popUpIndex++;
+                }
+                break;
+
+            case 11:
+                // Tell the player why they shouldn't crash into the island
+                tutorialTarget.target = new Vector2(0, 160f);
                 if (Input.GetKeyDown(KeyCode.Tab))
                 {
                     Time.timeScale = 1f;
@@ -132,20 +171,22 @@ public class TutorialManager : MonoBehaviour
                 }
                 break;
 
-            case 8:
-                // Teach the player to not crash into the island
+            case 12:
+                // Have the player try and sail around the island
+                instructionsParent.GetComponent<Image>().enabled = false;
                 onDeathPopUpIndex = popUpIndex + 1; // Set the index to the next pop-up
                 float yPositionToPass = 112f;
-                tutorialTarget.target = new Vector2(0, 160f);
                 if (player.transform.position.y > yPositionToPass)
                 {
+                    instructionsParent.GetComponent<Image>().enabled = true;
                     tutorialTarget.target = Vector2.zero; // Disable the arrow
                     popUpIndex += 2;
                 }
                 break;
 
-            case 9:
+            case 13:
                 // Player crashed into the island
+                instructionsParent.GetComponent<Image>().enabled = true;
                 Time.timeScale = 0f;
                 if (Input.GetKeyDown(KeyCode.Tab))
                 {
@@ -155,7 +196,7 @@ public class TutorialManager : MonoBehaviour
                 }
                 break;
 
-            case 10:
+            case 14:
                 // Congratulate the player for passing the island
                 Time.timeScale = 0f;
                 onDeathPopUpIndex = 0; // Reset the onDeathPopUpIndex
@@ -166,7 +207,7 @@ public class TutorialManager : MonoBehaviour
                 }
                 break;
 
-            case 11:
+            case 15:
                 // Explain why the player might want to toggle the sail
                 Time.timeScale = 0f;
                 if (Input.GetKeyDown(KeyCode.Tab))
@@ -177,7 +218,7 @@ public class TutorialManager : MonoBehaviour
                 }
                 break;
 
-            case 12:
+            case 16:
                 // Teach the player that they can toggle the sail
                 Time.timeScale = 0f;
                 if (Input.GetKeyDown(KeyCode.Space))
@@ -188,7 +229,7 @@ public class TutorialManager : MonoBehaviour
                 }
                 break;
 
-            case 13:
+            case 17:
                 // Let the player experiment without the sail
                 Time.timeScale = 1f;
                 if (waitTime > 0f)
@@ -202,7 +243,7 @@ public class TutorialManager : MonoBehaviour
                 }
                 break;
 
-            case 14:
+            case 18:
                 // Tell the player how to turn off the sail
                 Time.timeScale = 0f;
                 if (playerInputActions.FindAction("SailToggle").triggered)
@@ -211,24 +252,34 @@ public class TutorialManager : MonoBehaviour
                 }
                 break;
 
-            case 15:
+            case 19:
                 // Explain the purpose of ports
                 Time.timeScale = 0f;
                 if (Input.GetKeyDown(KeyCode.Tab))
                 {
-                    playerInputActions.FindAction("Interact").Disable();
                     lastSavePos = player.transform.position;
                     popUpIndex++;
                 }
                 break;
 
-            case 16:
+            case 20:
+                // tell the player to go to the port
+                tutorialTarget.target = firstPort.transform.position;
+                if (Input.GetKeyDown(KeyCode.Tab))
+                {
+                    playerInputActions.FindAction("Interact").Disable();
+                    popUpIndex++;
+                }
+                break;
+
+            case 21:
                 // tell the player to go to the port
                 Time.timeScale = 1f;
-                tutorialTarget.target = firstPort.transform.position;
                 onDeathPopUpIndex = popUpIndex + 1; // Set the index to the next pop-up
+                instructionsParent.GetComponent<Image>().enabled = false;
                 if (Vector2.Distance(player.transform.position, firstPort.transform.position) < 15f)
                 {
+                    instructionsParent.GetComponent<Image>().enabled = true;
                     tutorialTarget.target = Vector2.zero; // Disable the arrow
                     playerInputActions.FindAction("Interact").Enable();
                     onDeathPopUpIndex = 0; // Reset the onDeathPopUpIndex
@@ -236,9 +287,10 @@ public class TutorialManager : MonoBehaviour
                 }
                 break;
 
-            case 17:
+            case 22:
                 // Player crashed on the way to the port
                 Time.timeScale = 0f;
+                instructionsParent.GetComponent<Image>().enabled = true;
                 if (Input.GetKeyDown(KeyCode.Tab))
                 {
                     Time.timeScale = 1f;
@@ -247,7 +299,7 @@ public class TutorialManager : MonoBehaviour
                 }
                 break;
 
-            case 18:
+            case 23:
                 // Teach the player how to dock to the port
                 Time.timeScale = 0f;
                 if (playerInputActions.FindAction("Interact").triggered)
@@ -257,7 +309,7 @@ public class TutorialManager : MonoBehaviour
                 }
                 break;
 
-            case 19:
+            case 24:
                 // Tell the player that it takes some time for the port to be saved
                 Time.timeScale = 0f;
                 if (Input.GetKeyDown(KeyCode.Tab))
@@ -267,7 +319,7 @@ public class TutorialManager : MonoBehaviour
                 }
                 break;
 
-            case 20:
+            case 25:
                 // Wait for the port to be saved
                 Time.timeScale = 1f;
                 playerInputActions.Disable();
@@ -284,7 +336,7 @@ public class TutorialManager : MonoBehaviour
                 }
                 break;
 
-            case 21:
+            case 26:
                 // Tell the player how to undock from the port
                 if (playerInputActions.FindAction("Interact").triggered)
                 {
