@@ -102,6 +102,9 @@ public class LevelManager : MonoBehaviour
         Debug.Log("You Lost!");
         countdownText.text = "0.00";
 
+        SFXManager sFXManager = FindFirstObjectByType<SFXManager>();
+        sFXManager.PlayerLost();
+
         EndGame();
     }
 

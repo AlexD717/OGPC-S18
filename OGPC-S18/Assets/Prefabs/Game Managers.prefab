@@ -205,6 +205,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2736646016890330524}
+  - component: {fileID: 3763641354558370019}
   m_Layer: 0
   m_Name: SFX Manager
   m_TagString: Untagged
@@ -227,6 +228,69 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7469316624510331701}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3763641354558370019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6638050331999101322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6bfed35bfcbbce40a9a30ec334f94b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sfxIntervalBeforeRandomSFX: 8
+  minSFXInterval: 0.5
+  clipsDuringSailing:
+  - {fileID: 8300000, guid: 1b0018f4fba45864abe2ca826f4c9af3, type: 3}
+  - {fileID: 8300000, guid: 29df6283ca178c04ca3402bc4f01cc98, type: 3}
+  - {fileID: 8300000, guid: f36bd861722d565499def39999f8e3d4, type: 3}
+  - {fileID: 8300000, guid: 18b2523ad8103e145a66c2982852f0e8, type: 3}
+  - {fileID: 8300000, guid: 97fc6f1ce3cf2a94bbde894e51337449, type: 3}
+  - {fileID: 8300000, guid: c3e141f6ffbfeaf41a536858427801f5, type: 3}
+  - {fileID: 8300000, guid: 17000c6dd456366449c65b294fd45e65, type: 3}
+  - {fileID: 8300000, guid: db0b1bc1fea4517479dc370ac2a440e5, type: 3}
+  - {fileID: 8300000, guid: 311c6ff5f2d10d34aa63eaa48ad2ea79, type: 3}
+  boatTookDamage:
+  - {fileID: 8300000, guid: b1cb12820a4ba924e90c005ef9cb3dc9, type: 3}
+  - {fileID: 8300000, guid: 3cfff6b70b471b64bba538e03ae1eead, type: 3}
+  - {fileID: 8300000, guid: b3931a9dd8f76a049a5572650514368e, type: 3}
+  - {fileID: 8300000, guid: b7ec554c90128684ea9062bd617c0bdb, type: 3}
+  - {fileID: 8300000, guid: 0f68acd1590b6064b819af2db8500d0e, type: 3}
+  - {fileID: 8300000, guid: a11a0cc6b4ca24946814be389ddfa227, type: 3}
+  - {fileID: 8300000, guid: 953d3b2f1ef12f8409ac4d29534f1c33, type: 3}
+  - {fileID: 8300000, guid: 2510214ed4c204747a69d32062f11f55, type: 3}
+  - {fileID: 8300000, guid: 7da64aba8bff1b242a60923a3c840b5a, type: 3}
+  - {fileID: 8300000, guid: a0808daceb0930d43bd5b854475513bc, type: 3}
+  - {fileID: 8300000, guid: d88f681b6eee48d48a9ef0d46db55259, type: 3}
+  - {fileID: 8300000, guid: d5e7e647821284d4c81304555c4483c8, type: 3}
+  - {fileID: 8300000, guid: 98a028d7110771943a9f3e3200600ffb, type: 3}
+  - {fileID: 8300000, guid: ddb74c77eda673b40b585b4ed8d4aae2, type: 3}
+  - {fileID: 8300000, guid: 4febbc4721f747e439faccbb85364e4d, type: 3}
+  playerWon:
+  - {fileID: 8300000, guid: 6e043eea10b8ced4e800b30e4574df03, type: 3}
+  - {fileID: 8300000, guid: 1b0018f4fba45864abe2ca826f4c9af3, type: 3}
+  - {fileID: 8300000, guid: 7221768bd63ae67498d3a4f3ed71e235, type: 3}
+  - {fileID: 8300000, guid: 446fb7e460da91c44ba91482cbe9b201, type: 3}
+  - {fileID: 8300000, guid: 9f17170efda880847b2cbc86e9fc025b, type: 3}
+  - {fileID: 8300000, guid: e7eb56bde3d2a1d4d878f64eaa2daedc, type: 3}
+  - {fileID: 8300000, guid: b6614a52bd3217f4291020fc76491cc0, type: 3}
+  playerLost:
+  - {fileID: 8300000, guid: 2510214ed4c204747a69d32062f11f55, type: 3}
+  - {fileID: 8300000, guid: 7da64aba8bff1b242a60923a3c840b5a, type: 3}
+  - {fileID: 8300000, guid: d5e7e647821284d4c81304555c4483c8, type: 3}
+  - {fileID: 8300000, guid: 98a028d7110771943a9f3e3200600ffb, type: 3}
+  playerDocked:
+  - {fileID: 8300000, guid: 7a310f0f1f9045c458da15775a56c8c7, type: 3}
+  - {fileID: 8300000, guid: 221c63ab2c62cf34793022d7b6215f5f, type: 3}
+  - {fileID: 8300000, guid: abaafdf9513000840aeb720f1ea545a5, type: 3}
+  - {fileID: 8300000, guid: 8d1bde9bf11986b4ebfc415dac656f55, type: 3}
+  - {fileID: 8300000, guid: df83c4aae1579634aa7c7d6f438f68c6, type: 3}
+  - {fileID: 8300000, guid: ba37cb3f82e286643b0e52d3c4b1fa98, type: 3}
+  playerUndocked:
+  - {fileID: 8300000, guid: d874675cd415ec34988953b8f57939d2, type: 3}
+  - {fileID: 8300000, guid: 6278a773316a3594a8d855e6efc8b292, type: 3}
 --- !u!1 &7807027552736960388
 GameObject:
   m_ObjectHideFlags: 0
