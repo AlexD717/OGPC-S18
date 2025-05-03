@@ -106,6 +106,7 @@ public class TutorialManager : MonoBehaviour
 
             case 4:
                 // Teach the player that they can pan around the map
+                endPortArrow.SetActive(false);
                 if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
                 {
                     popUpIndex++;
@@ -403,6 +404,7 @@ public class TutorialManager : MonoBehaviour
 
             case 30:
                 // Storm dramatic text
+                endPortArrow.SetActive(false);
                 if (Input.GetKeyDown(KeyCode.Tab))
                 {
                     popUpIndex++;
@@ -432,7 +434,6 @@ public class TutorialManager : MonoBehaviour
                 if (mapInputActions.FindAction("MapToggle").triggered)
                 {
                     lastSavePos = new Vector2(20.9f, 146.4f);
-                    endPortArrow.SetActive(false);
                     popUpIndex++;
                 }
                 break;

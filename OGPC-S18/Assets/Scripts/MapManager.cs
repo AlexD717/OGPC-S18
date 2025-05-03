@@ -26,8 +26,12 @@ public class MapManager : MonoBehaviour
     [SerializeField] private bool cameraZoomsOutOnPlayerPosition;
     private GameObject player;
 
+    private GameObject[] showInMapOnly;
+
     private void Start()
     {
+        showInMapOnly = GameObject.FindGameObjectsWithTag("ShowInMapOnly");
+
         mapActive = false;
 
         originalPosition = mapCamera.transform.position;
@@ -36,6 +40,7 @@ public class MapManager : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
 
         ResetCamera();
+        HideMapOnlyObjects();
     }
 
     private void OnEnable()
@@ -69,15 +74,17 @@ public class MapManager : MonoBehaviour
             mapActive = !mapActive;
             SwitchCameras(mapActive);
 
-            if (mapActive) 
-            { 
+            if (mapActive)
+            {
                 playerActionMap.Disable();
-                Time.timeScale = 0f; 
+                Time.timeScale = 0f;
+                ShowMapOnlyObjects();
             }
-            else 
+            else
             {
                 playerActionMap.Enable();
-                Time.timeScale = 1f; 
+                Time.timeScale = 1f;
+                HideMapOnlyObjects();
             }
         }
 
@@ -134,6 +141,22 @@ public class MapManager : MonoBehaviour
         {
             playerCamera.gameObject.SetActive(true);
             mapCamera.gameObject.SetActive(false);
+        }
+    }
+
+    private void HideMapOnlyObjects()
+    {
+        foreach (GameObject obj in showInMapOnly)
+        {
+            obj.SetActive(false);
+        }
+    }
+
+    private void ShowMapOnlyObjects()
+    {
+        foreach (GameObject obj in showInMapOnly)
+        {
+            obj.SetActive(true);
         }
     }
 }
