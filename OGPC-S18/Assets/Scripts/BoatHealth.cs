@@ -29,6 +29,12 @@ public class BoatHealth : MonoBehaviour
         {
             if (tutorialLevel)
             {
+                Debug.Log($"Boat collided with {collision.gameObject.name} in tutorial level. Ignoring collision for tutorial purposes.");
+                TutorialManager tutorialManager = FindFirstObjectByType<TutorialManager>();
+                if (tutorialManager != null)
+                {
+                    tutorialManager.PlayerDied();
+                }
                 // Ignore collisions with tutorial objects
                 return;
             }

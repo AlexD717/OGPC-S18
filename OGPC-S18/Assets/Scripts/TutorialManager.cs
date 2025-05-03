@@ -7,6 +7,8 @@ public class TutorialManager : MonoBehaviour
     private GameObject[] popUps;
     private int popUpIndex = 0;
     private float waitTime;
+    private int onDeathPopUpIndex = 0;
+    private Vector2 lastSavePos;
     [SerializeField] private InputActionAsset inputActions;
     private InputActionMap playerInputActions;
     private InputActionMap mapInputActions;
@@ -45,8 +47,6 @@ public class TutorialManager : MonoBehaviour
             firstFrame = false;
         }
 
-        Debug.Log(popUpIndex);
-
         // Only show the active pop-up
         for (int i = 0; i < popUps.Length; i++)
             popUps[i].SetActive(i == popUpIndex);
@@ -58,7 +58,7 @@ public class TutorialManager : MonoBehaviour
                 // Teach the player that they can open the map
                 if (mapInputActions.FindAction("MapToggle").triggered)
                 {
-                    Time.timeScale = 1f;
+                    mapInputActions.FindAction("MapToggle").Disable();
                     popUpIndex++;
                 }
                 break;
@@ -75,6 +75,7 @@ public class TutorialManager : MonoBehaviour
                 // Teach the player that they can zoom in and out
                 if (Mathf.Abs(mapInputActions.FindAction("MapZoom").ReadValue<float>()) > 0.1f)
                 {
+                    mapInputActions.FindAction("MapToggle").Enable();
                     popUpIndex++;
                 }
                 break;
@@ -133,18 +134,31 @@ public class TutorialManager : MonoBehaviour
 
             case 8:
                 // Teach the player to not crash into the island
-                float yPositionToPass = 150f;
-                tutorialTarget.target = new Vector2(0, yPositionToPass + 5f);
+                onDeathPopUpIndex = popUpIndex + 1; // Set the index to the next pop-up
+                float yPositionToPass = 112f;
+                tutorialTarget.target = new Vector2(0, 160f);
                 if (player.transform.position.y > yPositionToPass)
                 {
                     tutorialTarget.target = Vector2.zero; // Disable the arrow
-                    popUpIndex++;
+                    popUpIndex += 2;
                 }
                 break;
 
             case 9:
+                // Player crashed into the island
+                Time.timeScale = 0f;
+                if (Input.GetKeyDown(KeyCode.Tab))
+                {
+                    Time.timeScale = 1f;
+                    player.transform.position = new Vector3(0, 50, 0);
+                    popUpIndex--;
+                }
+                break;
+
+            case 10:
                 // Congratulate the player for passing the island
                 Time.timeScale = 0f;
+                onDeathPopUpIndex = 0; // Reset the onDeathPopUpIndex
                 if (Input.GetKeyDown(KeyCode.Tab))
                 {
                     Time.timeScale = 1f;
@@ -152,7 +166,7 @@ public class TutorialManager : MonoBehaviour
                 }
                 break;
 
-            case 10:
+            case 11:
                 // Explain why the player might want to toggle the sail
                 Time.timeScale = 0f;
                 if (Input.GetKeyDown(KeyCode.Tab))
@@ -163,17 +177,18 @@ public class TutorialManager : MonoBehaviour
                 }
                 break;
 
-            case 11:
+            case 12:
                 // Teach the player that they can toggle the sail
                 Time.timeScale = 0f;
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
+                    playerInputActions.FindAction("SailToggle").Disable();
                     waitTime = 5f;
                     popUpIndex++;
                 }
                 break;
 
-            case 12:
+            case 13:
                 // Let the player experiment without the sail
                 Time.timeScale = 1f;
                 if (waitTime > 0f)
@@ -182,40 +197,67 @@ public class TutorialManager : MonoBehaviour
                 }
                 else
                 {
-                    popUpIndex++;
-                }
-                break;
-
-            case 13:
-                // Explain the purpose of ports
-                Time.timeScale = 0f;
-                if (Input.GetKeyDown(KeyCode.Tab))
-                {
+                    playerInputActions.FindAction("SailToggle").Enable();
                     popUpIndex++;
                 }
                 break;
 
             case 14:
-                // tell the player to go to the port
-                Time.timeScale = 1f;
-                tutorialTarget.target = firstPort.transform.position;
-                if (Vector2.Distance(player.transform.position, firstPort.transform.position) < 15f)
+                // Tell the player how to turn off the sail
+                Time.timeScale = 0f;
+                if (playerInputActions.FindAction("SailToggle").triggered)
                 {
-                    tutorialTarget.target = Vector2.zero; // Disable the arrow
                     popUpIndex++;
                 }
                 break;
 
             case 15:
-                // Teach the player how to dock to the port
+                // Explain the purpose of ports
                 Time.timeScale = 0f;
-                if (playerInputActions.FindAction("Interact").triggered)
+                if (Input.GetKeyDown(KeyCode.Tab))
                 {
+                    playerInputActions.FindAction("Interact").Disable();
+                    lastSavePos = player.transform.position;
                     popUpIndex++;
                 }
                 break;
 
             case 16:
+                // tell the player to go to the port
+                Time.timeScale = 1f;
+                tutorialTarget.target = firstPort.transform.position;
+                onDeathPopUpIndex = popUpIndex + 1; // Set the index to the next pop-up
+                if (Vector2.Distance(player.transform.position, firstPort.transform.position) < 15f)
+                {
+                    tutorialTarget.target = Vector2.zero; // Disable the arrow
+                    playerInputActions.FindAction("Interact").Enable();
+                    onDeathPopUpIndex = 0; // Reset the onDeathPopUpIndex
+                    popUpIndex += 2;
+                }
+                break;
+
+            case 17:
+                // Player crashed on the way to the port
+                Time.timeScale = 0f;
+                if (Input.GetKeyDown(KeyCode.Tab))
+                {
+                    Time.timeScale = 1f;
+                    player.transform.position = lastSavePos;
+                    popUpIndex--;
+                }
+                break;
+
+            case 18:
+                // Teach the player how to dock to the port
+                Time.timeScale = 0f;
+                if (playerInputActions.FindAction("Interact").triggered)
+                {
+                    playerInputActions.FindAction("Interact").Disable();
+                    popUpIndex++;
+                }
+                break;
+
+            case 19:
                 // Tell the player that it takes some time for the port to be saved
                 Time.timeScale = 0f;
                 if (Input.GetKeyDown(KeyCode.Tab))
@@ -225,7 +267,7 @@ public class TutorialManager : MonoBehaviour
                 }
                 break;
 
-            case 17:
+            case 20:
                 // Wait for the port to be saved
                 Time.timeScale = 1f;
                 playerInputActions.Disable();
@@ -242,7 +284,7 @@ public class TutorialManager : MonoBehaviour
                 }
                 break;
 
-            case 18:
+            case 21:
                 // Tell the player how to undock from the port
                 if (playerInputActions.FindAction("Interact").triggered)
                 {
@@ -253,6 +295,17 @@ public class TutorialManager : MonoBehaviour
             default:
                 instructionsParent.SetActive(false);
                 break;
+        }
+    }
+
+    public void PlayerDied()
+    {
+        Debug.Log($"Player died. On death popUpIndex is {onDeathPopUpIndex}");
+        if (onDeathPopUpIndex != 0)
+        {
+            popUpIndex = onDeathPopUpIndex;
+            player.GetComponent<Rigidbody2D>().angularVelocity = 0f;
+            player.GetComponent<Rigidbody2D>().linearVelocity = Vector3.zero;
         }
     }
 }

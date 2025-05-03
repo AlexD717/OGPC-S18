@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class TutorialTarget : MonoBehaviour
 {
-    public Vector2 target;
+    [HideInInspector] public Vector2 target;
     private GameObject arrow;
 
     private void Start()
