@@ -13,6 +13,8 @@ public class BoatHealth : MonoBehaviour
 
     [SerializeField] private List<string> collisionTagsToTakeDamage;
 
+    public bool tutorialLevel = false;
+
     private void Start()
     {
         boatController = GetComponent<BoatController>();
@@ -25,6 +27,12 @@ public class BoatHealth : MonoBehaviour
     {
         if (collisionTagsToTakeDamage.Contains(collision.gameObject.tag) || collisionTagsToTakeDamage.Contains(collision.transform.parent.gameObject.tag))
         {
+            if (tutorialLevel)
+            {
+                // Ignore collisions with tutorial objects
+                return;
+            }
+
             // Boat is colliding with an object that should deal damage
             Debug.Log($"Boat collided with {collision.gameObject.name}");
             TakeDamage(baseDamageFromCollisions + boatController.GetBoatSpeed() * speedDamageMult);

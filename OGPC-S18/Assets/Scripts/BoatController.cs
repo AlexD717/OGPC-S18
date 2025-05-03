@@ -49,6 +49,7 @@ public class BoatController : MonoBehaviour
         sailToggle = playerControls.FindAction("SailToggle");
 
         sailToggle.Enable();
+        Debug.Log("SailToggle enabled");
     }
 
     private void OnDisable()
@@ -84,7 +85,6 @@ public class BoatController : MonoBehaviour
             RotateSailToMatchWind();
         }
     }
-
 
     private void FixedUpdate()
     {
