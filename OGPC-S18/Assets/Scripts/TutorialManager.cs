@@ -6,10 +6,12 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] private GameObject instructionsParent;
     private GameObject[] popUps;
     private int popUpIndex = 0;
+    private float waitTime;
     [SerializeField] private InputActionAsset inputActions;
     private InputActionMap playerInputActions;
     private InputActionMap mapInputActions;
     [SerializeField] private TutorialTarget tutorialTarget;
+    [SerializeField] private GameObject firstPort;
 
     private GameObject player;
 
@@ -92,12 +94,26 @@ public class TutorialManager : MonoBehaviour
                 Time.timeScale = 0f;
                 if (Mathf.Abs(playerInputActions.FindAction("Rotation").ReadValue<float>()) > 0.1f)
                 {
+                    waitTime = 5f;
                     popUpIndex++;
-                    Time.timeScale = 1f;
                 }
+                
                 break;
 
             case 5:
+                // waits for the player to experiment with rotating the boat
+                Time.timeScale = 1f;
+                if (waitTime > 0f)
+                {
+                    waitTime -= Time.deltaTime;
+                }
+                else
+                {
+                    popUpIndex++;
+                }
+                break;
+
+            case 6:
                 // Teach the player that the sail auto adjusts
                 Time.timeScale = 0f;
                 if (Input.GetKeyDown(KeyCode.Tab))
@@ -106,7 +122,7 @@ public class TutorialManager : MonoBehaviour
                 }
                 break;
 
-            case 6:
+            case 7:
                 // Teach the player that the sail is more or less effective at certain angles
                 if (Input.GetKeyDown(KeyCode.Tab))
                 {
@@ -115,10 +131,10 @@ public class TutorialManager : MonoBehaviour
                 }
                 break;
 
-            case 7:
+            case 8:
                 // Teach the player to not crash into the island
                 float yPositionToPass = 150f;
-                tutorialTarget.target = new Vector2(0, yPositionToPass);
+                tutorialTarget.target = new Vector2(0, yPositionToPass + 5f);
                 if (player.transform.position.y > yPositionToPass)
                 {
                     tutorialTarget.target = Vector2.zero; // Disable the arrow
@@ -126,11 +142,110 @@ public class TutorialManager : MonoBehaviour
                 }
                 break;
 
-            case 8:
+            case 9:
                 // Congratulate the player for passing the island
+                Time.timeScale = 0f;
                 if (Input.GetKeyDown(KeyCode.Tab))
                 {
+                    Time.timeScale = 1f;
+                    popUpIndex++;
+                }
+                break;
+
+            case 10:
+                // Explain why the player might want to toggle the sail
+                Time.timeScale = 0f;
+                if (Input.GetKeyDown(KeyCode.Tab))
+                {
+                    Time.timeScale = 1f;
                     playerInputActions.FindAction("SailToggle").Enable();
+                    popUpIndex++;
+                }
+                break;
+
+            case 11:
+                // Teach the player that they can toggle the sail
+                Time.timeScale = 0f;
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    waitTime = 5f;
+                    popUpIndex++;
+                }
+                break;
+
+            case 12:
+                // Let the player experiment without the sail
+                Time.timeScale = 1f;
+                if (waitTime > 0f)
+                {
+                    waitTime -= Time.deltaTime;
+                }
+                else
+                {
+                    popUpIndex++;
+                }
+                break;
+
+            case 13:
+                // Explain the purpose of ports
+                Time.timeScale = 0f;
+                if (Input.GetKeyDown(KeyCode.Tab))
+                {
+                    popUpIndex++;
+                }
+                break;
+
+            case 14:
+                // tell the player to go to the port
+                Time.timeScale = 1f;
+                tutorialTarget.target = firstPort.transform.position;
+                if (Vector2.Distance(player.transform.position, firstPort.transform.position) < 15f)
+                {
+                    tutorialTarget.target = Vector2.zero; // Disable the arrow
+                    popUpIndex++;
+                }
+                break;
+
+            case 15:
+                // Teach the player how to dock to the port
+                Time.timeScale = 0f;
+                if (playerInputActions.FindAction("Interact").triggered)
+                {
+                    popUpIndex++;
+                }
+                break;
+
+            case 16:
+                // Tell the player that it takes some time for the port to be saved
+                Time.timeScale = 0f;
+                if (Input.GetKeyDown(KeyCode.Tab))
+                {
+                    waitTime = 2.6f;
+                    popUpIndex++;
+                }
+                break;
+
+            case 17:
+                // Wait for the port to be saved
+                Time.timeScale = 1f;
+                playerInputActions.Disable();
+                mapInputActions.Disable();
+                if (waitTime > 0f)
+                {
+                    waitTime -= Time.deltaTime;
+                }
+                else
+                {
+                    playerInputActions.Enable();
+                    mapInputActions.Enable();
+                    popUpIndex++;
+                }
+                break;
+
+            case 18:
+                // Tell the player how to undock from the port
+                if (playerInputActions.FindAction("Interact").triggered)
+                {
                     popUpIndex++;
                 }
                 break;
