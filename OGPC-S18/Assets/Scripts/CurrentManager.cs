@@ -44,7 +44,7 @@ public class CurrentManager : MonoBehaviour
             angDeltas[i] = 0f;
         }
 
-        currentVector = UsefulStuff.Convert.PolarToVector(currentHeading,currentSpeed);
+        currentVector = VectorUtilities.PolarToVector(currentHeading,currentSpeed);
     }
 
     private void UpdateCurrent() 
@@ -60,7 +60,7 @@ public class CurrentManager : MonoBehaviour
 
         currentHeading = (currentHeading + angDeltas[^1]+360)%360;
         
-        currentHeading = UsefulStuff.Misc.ClampAngle(currentHeading, currentHeadingRange.x, currentHeadingRange.y);
+        currentHeading = MathUtilities.ClampAngle(currentHeading, currentHeadingRange.x, currentHeadingRange.y);
         if (currentHeading == currentHeadingRange.x || currentHeading == currentHeadingRange.y) {for (int i=0; i < angDeltas.Length;i++) {angDeltas[i] = 0f;}}
 
         currentSpeed = Mathf.Clamp(currentSpeed + magDeltas[^1], currentSpeedRange.x, currentSpeedRange.y);
@@ -68,7 +68,7 @@ public class CurrentManager : MonoBehaviour
 
 
 
-        currentVector = UsefulStuff.Convert.PolarToVector(currentHeading,currentSpeed);
+        currentVector = VectorUtilities.PolarToVector(currentHeading,currentSpeed);
     }
 
     private void UpdateUI()

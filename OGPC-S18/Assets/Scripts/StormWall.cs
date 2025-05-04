@@ -28,7 +28,7 @@ public class StormWall : MonoBehaviour
         stormWallRigidBody.linearVelocity += startAcceleration * Time.deltaTime;
         if (stormWallFacesDirectionOfTravel)
         {
-            stormWall.transform.rotation = Quaternion.Euler(0, 0, UsefulStuff.Convert.VectorToPolar(stormWallRigidBody.linearVelocity)[0] + 90f);
+            stormWall.transform.rotation = Quaternion.Euler(0, 0, VectorUtilities.VectorToPolar(stormWallRigidBody.linearVelocity)[0] + 90f);
         }
     }
 

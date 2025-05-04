@@ -1,0 +1,29 @@
+fileFormatVersion: 2
+guid: 9a785045d0541784e8b9c03ab605fae2
+timeCreated: 1526032838
+licenseType: Store
+AudioImporter:
+  serializedVersion: 6
+  defaultSettings:
+    loadType: 0
+    sampleRateSetting: 0
+    sampleRateOverride: 44100
+    compressionFormat: 1
+    quality: 1
+    conversionMode: 0
+  platformSettingOverrides: {}
+  forceToMono: 0
+  normalize: 1
+  preloadAudioData: 1
+  loadInBackground: 0
+  3D: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 118488
+  packageName: Pirate Music Album - 050418
+  packageVersion: 1.0
+  assetPath: Assets/Pirate Music Album - 050418/wav - 1411kbps/3. Lower The Sail.wav
+  uploadId: 245295

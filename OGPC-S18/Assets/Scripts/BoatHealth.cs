@@ -13,6 +13,8 @@ public class BoatHealth : MonoBehaviour
 
     [SerializeField] private List<string> collisionTagsToTakeDamage;
 
+    public bool tutorialLevel = false;
+
     private void Start()
     {
         boatController = GetComponent<BoatController>();
@@ -25,6 +27,18 @@ public class BoatHealth : MonoBehaviour
     {
         if (collisionTagsToTakeDamage.Contains(collision.gameObject.tag) || collisionTagsToTakeDamage.Contains(collision.transform.parent.gameObject.tag))
         {
+            if (tutorialLevel)
+            {
+                Debug.Log($"Boat collided with {collision.gameObject.name} in tutorial level. Ignoring collision for tutorial purposes.");
+                TutorialManager tutorialManager = FindFirstObjectByType<TutorialManager>();
+                if (tutorialManager != null)
+                {
+                    tutorialManager.PlayerDied();
+                }
+                // Ignore collisions with tutorial objects
+                return;
+            }
+
             // Boat is colliding with an object that should deal damage
             Debug.Log($"Boat collided with {collision.gameObject.name}");
             TakeDamage(baseDamageFromCollisions + boatController.GetBoatSpeed() * speedDamageMult);
@@ -35,12 +49,30 @@ public class BoatHealth : MonoBehaviour
     {
         shipHealth -= damage;
         Debug.Log($"Ship took {damage} damage. Current health: {shipHealth}");
-        
+
+        // Play damage sound effect
+        SFXManager sFXManager = FindFirstObjectByType<SFXManager>();
+        sFXManager.BoatTookDamage();
+
         animator.SetTrigger("TookDamage");
 
         if (shipHealth <= 0)
         {
-            levelManager.PlayerLost();
+            if (tutorialLevel)
+            {
+                TutorialManager tutorialManager = FindFirstObjectByType<TutorialManager>();
+                tutorialManager.PlayerDied();
+            }
+            else
+            {
+                levelManager.PlayerLost();
+            }
         }
+    }
+
+    public void ResetHealth()
+    {
+        shipHealth = maxShipHealth;
+        Debug.Log("Ship health reset to max.");
     }
 }

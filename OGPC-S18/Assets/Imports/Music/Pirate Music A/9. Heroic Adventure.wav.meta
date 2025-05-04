@@ -1,0 +1,29 @@
+fileFormatVersion: 2
+guid: fc1b39fcaf3fd2d46b12969492d90f98
+timeCreated: 1526032976
+licenseType: Store
+AudioImporter:
+  serializedVersion: 6
+  defaultSettings:
+    loadType: 0
+    sampleRateSetting: 0
+    sampleRateOverride: 44100
+    compressionFormat: 1
+    quality: 1
+    conversionMode: 0
+  platformSettingOverrides: {}
+  forceToMono: 0
+  normalize: 1
+  preloadAudioData: 1
+  loadInBackground: 0
+  3D: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 118488
+  packageName: Pirate Music Album - 050418
+  packageVersion: 1.0
+  assetPath: Assets/Pirate Music Album - 050418/wav - 1411kbps/9. Heroic Adventure.wav
+  uploadId: 245295

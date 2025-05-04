@@ -23,12 +23,38 @@ public class MapManager : MonoBehaviour
     private Vector2 originalPosition;
     private float originalZoom;
 
+    [SerializeField] private bool cameraZoomsOutOnPlayerPosition;
+    [SerializeField] private bool startInMapView = true;
+    private GameObject player;
+
+    private GameObject[] showInMapOnly;
+
+    private GameObject canvas;
+
     private void Start()
     {
-        mapActive = false;
+        player = GameObject.FindGameObjectWithTag("Player");
+        canvas = transform.GetChild(0).gameObject;
 
         originalPosition = mapCamera.transform.position;
         originalZoom = mapCamera.Lens.OrthographicSize;
+
+        showInMapOnly = GameObject.FindGameObjectsWithTag("ShowInMapOnly");
+        if (startInMapView)
+        {
+            mapActive = true;
+            canvas.SetActive(true);
+            playerActionMap.Disable();
+            Time.timeScale = 0f;
+            ShowMapOnlyObjects();
+        }
+        else
+        {
+            mapActive = false;
+            canvas.SetActive(false);
+            HideMapOnlyObjects();
+        }
+        SwitchCameras(mapActive);
     }
 
     private void OnEnable()
@@ -59,18 +85,23 @@ public class MapManager : MonoBehaviour
     {
         if (mapToggle.triggered)
         {
+            canvas.SetActive(false);
+
             mapActive = !mapActive;
             SwitchCameras(mapActive);
+            ResetCamera();
 
-            if (mapActive) 
-            { 
+            if (mapActive)
+            {
                 playerActionMap.Disable();
-                Time.timeScale = 0f; 
+                Time.timeScale = 0f;
+                ShowMapOnlyObjects();
             }
-            else 
+            else
             {
                 playerActionMap.Enable();
-                Time.timeScale = 1f; 
+                Time.timeScale = 1f;
+                HideMapOnlyObjects();
             }
         }
 
@@ -86,7 +117,21 @@ public class MapManager : MonoBehaviour
 
     private void ResetCamera()
     {
-        mapCamera.transform.position = originalPosition;
+        if (startInMapView)
+        {
+            mapCamera.transform.position = originalPosition;
+            startInMapView = false;
+            return;
+        }
+
+        if (cameraZoomsOutOnPlayerPosition)
+        {
+            mapCamera.transform.position = new Vector2(player.transform.position.x, player.transform.position.y);
+        }
+        else
+        {
+            mapCamera.transform.position = originalPosition;
+        }
         mapCamera.Lens.OrthographicSize = originalZoom;
     }
 
@@ -112,7 +157,6 @@ public class MapManager : MonoBehaviour
     {
         if (mapActive)
         {
-            ResetCamera();
             playerCamera.gameObject.SetActive(false);
             mapCamera.gameObject.SetActive(true);
         }
@@ -120,6 +164,22 @@ public class MapManager : MonoBehaviour
         {
             playerCamera.gameObject.SetActive(true);
             mapCamera.gameObject.SetActive(false);
+        }
+    }
+
+    private void HideMapOnlyObjects()
+    {
+        foreach (GameObject obj in showInMapOnly)
+        {
+            obj.SetActive(false);
+        }
+    }
+
+    private void ShowMapOnlyObjects()
+    {
+        foreach (GameObject obj in showInMapOnly)
+        {
+            obj.SetActive(true);
         }
     }
 }

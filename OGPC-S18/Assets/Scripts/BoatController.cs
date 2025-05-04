@@ -49,6 +49,7 @@ public class BoatController : MonoBehaviour
         sailToggle = playerControls.FindAction("SailToggle");
 
         sailToggle.Enable();
+        Debug.Log("SailToggle enabled");
     }
 
     private void OnDisable()
@@ -64,7 +65,7 @@ public class BoatController : MonoBehaviour
         rudderController = GetComponent<RudderController>();
         rudderController.SetRudderMoveSpeed(rudderMoveSpeed);
         
-        rb.linearVelocity = rb.linearVelocity + UsefulStuff.Convert.PolarToVector(currentManager.GetCurrentDirection(), currentManager.GetCurrentSpeed() * currentMaxSpeedMod);
+        rb.linearVelocity = rb.linearVelocity + VectorUtilities.PolarToVector(currentManager.GetCurrentDirection(), currentManager.GetCurrentSpeed() * currentMaxSpeedMod);
     }
 
     private void Update()
@@ -84,7 +85,6 @@ public class BoatController : MonoBehaviour
             RotateSailToMatchWind();
         }
     }
-
 
     private void FixedUpdate()
     {
@@ -106,7 +106,7 @@ public class BoatController : MonoBehaviour
 
     private void UpdateBoatData()
     {
-        boatWaterVector = rb.linearVelocity - UsefulStuff.Convert.PolarToVector(currentManager.GetCurrentDirection(), currentManager.GetCurrentSpeed() * currentMaxSpeedMod);
+        boatWaterVector = rb.linearVelocity - VectorUtilities.PolarToVector(currentManager.GetCurrentDirection(), currentManager.GetCurrentSpeed() * currentMaxSpeedMod);
         boatWaterSpeed = boatWaterVector.magnitude;
 
         boatHeading = (360 - rb.transform.localEulerAngles.z) % 360;
@@ -174,7 +174,7 @@ public class BoatController : MonoBehaviour
 
     private void BoatRotation()
     {
-        float rudderPosition = UsefulStuff.Misc.Round(rudderController.GetRudderPosition(),4);
+        float rudderPosition = MathUtilities.Round(rudderController.GetRudderPosition(),4);
 
         float rudderAngle = rudderPosition * maxRudderAngle;
 

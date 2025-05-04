@@ -20,12 +20,14 @@ public class LevelManager : MonoBehaviour
     private bool playerLost = false;
     private bool gameEnded = false;
     private bool showEndScreen = false;
+    public bool tutorialLevel = false;
 
     private void Start()
     {
         winScreen.gameObject.SetActive(false);
         loseScreen.gameObject.SetActive(false);
         continueButton.gameObject.SetActive(false);
+        countdownText.gameObject.SetActive(true);
 
         buttonSlider = continueButton.transform.GetChild(0).gameObject.GetComponent<Image>();
         continueButton.onClick.AddListener(ShowEndScreen);
@@ -35,12 +37,26 @@ public class LevelManager : MonoBehaviour
         inputActions.FindActionMap("Map").Enable();
 
         // Resets Time
-        Time.timeScale = 1f;
+        if (!tutorialLevel)
+        {
+            Time.timeScale = 1f;
+        }
     }
 
     public void PlayerReachedEndPort()
     {
-        PlayerWon();
+        if (tutorialLevel)
+        {
+            TutorialManager tutorialManager = FindFirstObjectByType<TutorialManager>();
+            if (tutorialManager != null)
+            {
+                tutorialManager.PlayerReachedEndPort();
+            }
+        }
+        else
+        {
+            PlayerWon();
+        }
     }
 
     private void Update()
@@ -73,7 +89,10 @@ public class LevelManager : MonoBehaviour
     public void PlayerWon()
     {
         Debug.Log("You Won!");
-        
+
+        SFXManager sFXManager = FindFirstObjectByType<SFXManager>();
+        sFXManager.PlayerWon();
+
         EndGame();
     }
 
@@ -82,6 +101,10 @@ public class LevelManager : MonoBehaviour
         playerLost = true;
         Debug.Log("You Lost!");
         countdownText.text = "0.00";
+
+        SFXManager sFXManager = FindFirstObjectByType<SFXManager>();
+        sFXManager.PlayerLost();
+
         EndGame();
     }
 
@@ -104,7 +127,7 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    private void ShowWinScreen()
+    private int[] FindNumberOfSavedPorts()
     {
         // Figures out how many ports exist and how many are saved
         Port[] ports = FindObjectsByType<Port>(FindObjectsSortMode.None);
@@ -117,6 +140,16 @@ public class LevelManager : MonoBehaviour
                 savedPorts++;
             }
         }
+        return new int[] {savedPorts, ports.Length};
+    }
+
+
+    private void ShowWinScreen()
+    {
+        // Figures out how many ports exist and how many are saved
+        int[] savedPortsAndTotal = FindNumberOfSavedPorts();
+        int savedPorts = savedPortsAndTotal[0];
+        int totalPorts = savedPortsAndTotal[1];
 
         // Shows win screen
         winScreen.SetActive(true);
@@ -133,8 +166,8 @@ public class LevelManager : MonoBehaviour
         float timeRemainingScore = CalculateTimeScore(countdown);
         dataGrid.GetChild(5).GetComponent<TextMeshProUGUI>().text = timeRemainingScore.ToString();
 
-        dataGrid.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = savedPorts.ToString() + "/" + ports.Length.ToString(); // Says saved ports out of total ports
-        int savedPortsScore = CalculateSavedPortScore(savedPorts, ports.Length);
+        dataGrid.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = savedPorts.ToString() + "/" + totalPorts.ToString(); // Says saved ports out of total ports
+        int savedPortsScore = CalculateSavedPortScore(savedPorts, totalPorts);
         dataGrid.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = savedPortsScore.ToString(); // Says saved ports score
         
         // Fill in total score
@@ -170,6 +203,20 @@ public class LevelManager : MonoBehaviour
         {
             child.gameObject.SetActive(true);
         }
+        // Fill in extra information
+        Transform dataGrid = loseScreen.transform.GetChild(2);
+
+        TextMeshProUGUI portsSavedText = dataGrid.GetChild(1).GetComponent<TextMeshProUGUI>();
+        int[] savedPortsAndTotal = FindNumberOfSavedPorts();
+        int savedPorts = savedPortsAndTotal[0];
+        int totalPorts = savedPortsAndTotal[1];
+        portsSavedText.text = savedPorts.ToString() + "/" + totalPorts.ToString();
+
+        TextMeshProUGUI distanceRemainingToEndPort = dataGrid.GetChild(3).GetComponent<TextMeshProUGUI>();
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        GameObject endPort = GameObject.FindGameObjectWithTag("EndPort");
+        float distanceToEndPort = Vector2.Distance(player.transform.position, endPort.transform.position);
+        distanceRemainingToEndPort.text = distanceToEndPort.ToString("F2") + " m";
     }
 
     private void EndGame()
@@ -199,5 +246,11 @@ public class LevelManager : MonoBehaviour
         {
             countdownText.text = (seconds + milliSeconds).ToString("F2");
         }
+    }
+
+    public void SetCountdown(float countdown)
+    {
+        this.countdown = countdown;
+        countdownText.text = countdown.ToString("F2");
     }
 }
