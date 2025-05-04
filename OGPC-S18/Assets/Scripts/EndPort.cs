@@ -64,7 +64,7 @@ public class EndPort : MonoBehaviour
             if (!playerDocked)
             {
                 Dock();
-                boatController.Dock(UsefulStuff.GetClosestPosition(playerDockPositions, boatController.gameObject));
+                boatController.Dock(TransformUtilities.GetClosestPosition(playerDockPositions, boatController.gameObject));
             }
         }
     }

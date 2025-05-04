@@ -55,7 +55,7 @@ public class WindManager : MonoBehaviour
         }
 
         windHeading = (windHeading + angDeltas[^1] + 360) % 360;
-        windHeading = UsefulStuff.Misc.ClampAngle(windHeading, windHeadingRange.x, windHeadingRange.y);
+        windHeading = MathUtilities.ClampAngle(windHeading, windHeadingRange.x, windHeadingRange.y);
         if (windHeading == windHeadingRange.x || windHeading == windHeadingRange.y) {for (int i=0; i < angDeltas.Length;i++) {angDeltas[i] = 0f;}}
         
         windSpeed = Mathf.Clamp(windSpeed + magDeltas[^1], windSpeedRange.x, windSpeedRange.y); 

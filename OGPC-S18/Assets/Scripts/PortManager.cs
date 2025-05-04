@@ -15,7 +15,7 @@ public class PortManager : MonoBehaviour
 
     public void PlayerDocked(Transform[] playerDockPositions, Port dockedPort)
     {
-        boatController.Dock(UsefulStuff.GetClosestPosition(playerDockPositions, boatController.gameObject));
+        boatController.Dock(TransformUtilities.GetClosestPosition(playerDockPositions, boatController.gameObject));
 
         sfxManager.PlayerDocked();
     }
