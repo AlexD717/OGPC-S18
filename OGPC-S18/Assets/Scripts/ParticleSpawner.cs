@@ -50,6 +50,11 @@ public class ParticleSpawner : MonoBehaviour
         }
     }
 
+    public void SetParticlesVisible(bool isVisible)
+    {
+        particlesParentObject.SetActive(isVisible);
+    }
+
     private void SpawnWindParticle()
     {
         Vector3 spawnPosition = RandomSpawnPosition();

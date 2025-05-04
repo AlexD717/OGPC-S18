@@ -22,6 +22,7 @@ public class MapManager : MonoBehaviour
     [SerializeField] private Vector2 zoomLimits;
     private Vector2 originalPosition;
     private float originalZoom;
+    private ParticleSpawner particleSpawner;
 
     private void Start()
     {
@@ -29,13 +30,15 @@ public class MapManager : MonoBehaviour
 
         originalPosition = mapCamera.transform.position;
         originalZoom = mapCamera.Lens.OrthographicSize;
+
+        particleSpawner = FindFirstObjectByType<ParticleSpawner>();
     }
 
     private void OnEnable()
     {
         playerActionMap = inputActions.FindActionMap("Player");
 
-        var mapControls = inputActions.FindActionMap("Map");
+        InputActionMap mapControls = inputActions.FindActionMap("Map");
         mapToggle = mapControls.FindAction("MapToggle");
         mapReset = mapControls.FindAction("MapReset");
         mapPan = mapControls.FindAction("MapPan");
@@ -61,6 +64,7 @@ public class MapManager : MonoBehaviour
         {
             mapActive = !mapActive;
             SwitchCameras(mapActive);
+            particleSpawner.SetParticlesVisible(!mapActive);
 
             if (mapActive) 
             { 
