@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: f8819f3ac3961ff4cb8ed118a72f4731
+guid: e036c9efd597b844caa0bb94a35f4763
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7028842072390148906
-    second: Level1_0
+      213: 4685316083316556938
+    second: shark-dive-5_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Level1_0
+      name: shark-dive-5_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 1566
-        height: 881
+        x: 275
+        y: 664
+        width: 228
+        height: 394
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a23a22bdf967b8160800000000000000
-      internalID: 7028842072390148906
+      spriteID: a8402866726950140800000000000000
+      internalID: 4685316083316556938
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Level1_0: 7028842072390148906
+      shark-dive-5_0: 4685316083316556938
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
