@@ -1516,11 +1516,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 872746331847168851, guid: 18c0a10366d409a4ea71af73f5b6781f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -25
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 872746331847168851, guid: 18c0a10366d409a4ea71af73f5b6781f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 198.2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3862821245273503973, guid: 18c0a10366d409a4ea71af73f5b6781f, type: 3}
       propertyPath: near clip plane
@@ -1536,11 +1536,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7697140361229428195, guid: 18c0a10366d409a4ea71af73f5b6781f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 123.482956
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7697140361229428195, guid: 18c0a10366d409a4ea71af73f5b6781f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 67.52694
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7697140361229428195, guid: 18c0a10366d409a4ea71af73f5b6781f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1576,11 +1576,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8427521323321989111, guid: 18c0a10366d409a4ea71af73f5b6781f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -123.482956
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8427521323321989111, guid: 18c0a10366d409a4ea71af73f5b6781f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -67.52694
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8503671736571831997, guid: 18c0a10366d409a4ea71af73f5b6781f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8503671736571831997, guid: 18c0a10366d409a4ea71af73f5b6781f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
