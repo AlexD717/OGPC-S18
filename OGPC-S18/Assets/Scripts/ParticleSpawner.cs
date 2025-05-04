@@ -19,6 +19,17 @@ public class ParticleSpawner : MonoBehaviour
     [Header("References")]
     [SerializeField] private WindManager windManager;
     [SerializeField] private CurrentManager currentManager;
+    private Transform windParticleParentTransform;
+    private Transform waterParticleParentTransform;
+    private GameObject particlesParentObject;
+    private void Start()
+    {
+        particlesParentObject = new GameObject("ParticlesParent");
+        windParticleParentTransform = new GameObject("WindParticles").transform;
+        waterParticleParentTransform = new GameObject("WaterParticles").transform;
+        windParticleParentTransform.SetParent(particlesParentObject.transform);
+        waterParticleParentTransform.SetParent(particlesParentObject.transform);
+    }
 
     private void Update()
     {
@@ -42,7 +53,7 @@ public class ParticleSpawner : MonoBehaviour
     private void SpawnWindParticle()
     {
         Vector3 spawnPosition = RandomSpawnPosition();
-        GameObject windParticleObject = Instantiate(windParticlePrefab, spawnPosition, Quaternion.identity);
+        GameObject windParticleObject = Instantiate(windParticlePrefab, spawnPosition, Quaternion.identity, windParticleParentTransform);
         WindParticle windParticle = windParticleObject.GetComponent<WindParticle>();
         windParticle.windAngle = windManager.GetWindRadAngle();
         windParticle.windSpeed = windManager.GetWindSpeed();
@@ -51,7 +62,7 @@ public class ParticleSpawner : MonoBehaviour
     private void SpawnWaterParticle()
     {
         Vector3 spawnPosition = RandomSpawnPosition();
-        GameObject waterParticleObject = Instantiate(waterParticlePrefab, spawnPosition, Quaternion.identity);
+        GameObject waterParticleObject = Instantiate(waterParticlePrefab, spawnPosition, Quaternion.identity, waterParticleParentTransform);
         WaterParticle waterParticle = waterParticleObject.GetComponent<WaterParticle>();
         waterParticle.currentAngle = currentManager.GetCurrentRadAngle();
         waterParticle.currentSpeed = currentManager.GetCurrentSpeed();

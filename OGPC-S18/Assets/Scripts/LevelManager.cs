@@ -104,7 +104,7 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    private void ShowWinScreen()
+    private int[] PortsSavedAndPresent()
     {
         // Figures out how many ports exist and how many are saved
         Port[] ports = FindObjectsByType<Port>(FindObjectsSortMode.None);
@@ -117,6 +117,11 @@ public class LevelManager : MonoBehaviour
                 savedPorts++;
             }
         }
+        return new int[2] { savedPorts, ports.Length + 1 }; // Says saved ports out of total ports, +1 for endport
+    }
+
+    private void ShowWinScreen()
+    {
 
         // Shows win screen
         winScreen.SetActive(true);
@@ -124,7 +129,9 @@ public class LevelManager : MonoBehaviour
         {
             child.gameObject.SetActive(true);
         }
-
+        int[] portsData = PortsSavedAndPresent();
+        int savedPorts = portsData[0]+1; //+1 for saved endport
+        int totalPorts = portsData[1];
         // Fill in extra information
         Transform dataGrid = winScreen.transform.GetChild(2);
 
@@ -133,8 +140,9 @@ public class LevelManager : MonoBehaviour
         float timeRemainingScore = CalculateTimeScore(countdown);
         dataGrid.GetChild(5).GetComponent<TextMeshProUGUI>().text = timeRemainingScore.ToString();
 
-        dataGrid.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = savedPorts.ToString() + "/" + ports.Length.ToString(); // Says saved ports out of total ports
-        int savedPortsScore = CalculateSavedPortScore(savedPorts, ports.Length);
+
+        dataGrid.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = savedPorts.ToString() + "/" + totalPorts.ToString(); // Says saved ports out of total ports
+        int savedPortsScore = CalculateSavedPortScore(savedPorts, totalPorts);
         dataGrid.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = savedPortsScore.ToString(); // Says saved ports score
         
         // Fill in total score
@@ -170,6 +178,10 @@ public class LevelManager : MonoBehaviour
         {
             child.gameObject.SetActive(true);
         }
+        int[] portsData = PortsSavedAndPresent();
+        int savedPorts = portsData[0];
+        int totalPorts = portsData[1];
+        loseScreen.transform.GetChild(2).GetChild(1).GetComponent<TextMeshProUGUI>().text = savedPorts.ToString() + "/" + totalPorts.ToString();
     }
 
     private void EndGame()
