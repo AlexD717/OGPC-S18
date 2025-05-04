@@ -119,7 +119,6 @@ public class MapManager : MonoBehaviour
     {
         if (startInMapView)
         {
-            mapCamera.transform.position = originalPosition;
             startInMapView = false;
             return;
         }
