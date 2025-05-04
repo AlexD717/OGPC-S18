@@ -9,6 +9,7 @@ TagManager:
   - Storm
   - EndPort
   - ShowInMapOnly
+  - HideInMap
   layers:
   - Default
   - TransparentFX
