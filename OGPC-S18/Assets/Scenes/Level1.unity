@@ -1446,6 +1446,10 @@ PrefabInstance:
       value: 450
       objectReference: {fileID: 0}
     - target: {fileID: 3943873451533215520, guid: ed1cd7b19b3f61940910eb6210a529fb, type: 3}
+      propertyPath: windParticle
+      value: 
+      objectReference: {fileID: 6457244986911265293, guid: d8558762eba11bb47940539d25f62d6f, type: 3}
+    - target: {fileID: 3943873451533215520, guid: ed1cd7b19b3f61940910eb6210a529fb, type: 3}
       propertyPath: hurricaneSpeed
       value: 13
       objectReference: {fileID: 0}
@@ -1507,10 +1511,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 348188337385483953, guid: 18c0a10366d409a4ea71af73f5b6781f, type: 3}
-      propertyPath: Lens.NearClipPlane
-      value: 0.01
-      objectReference: {fileID: 0}
-    - target: {fileID: 348188337385483953, guid: 18c0a10366d409a4ea71af73f5b6781f, type: 3}
       propertyPath: Lens.OrthographicSize
       value: 206.6
       objectReference: {fileID: 0}
@@ -1524,7 +1524,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3862821245273503973, guid: 18c0a10366d409a4ea71af73f5b6781f, type: 3}
       propertyPath: near clip plane
-      value: 0.01
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 3862821245273503973, guid: 18c0a10366d409a4ea71af73f5b6781f, type: 3}
       propertyPath: orthographic size

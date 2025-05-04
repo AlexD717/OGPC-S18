@@ -478,7 +478,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6bfed35bfcbbce40a9a30ec334f94b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sfxIntervalBeforeRandomSFX: 8
+  sfxIntervalBeforeRandomSFX: 10
   minSFXInterval: 0.5
   clipsDuringSailing:
   - {fileID: 8300000, guid: 1b0018f4fba45864abe2ca826f4c9af3, type: 3}

@@ -28,6 +28,7 @@ public class MapManager : MonoBehaviour
     private GameObject player;
 
     private GameObject[] showInMapOnly;
+    private GameObject[] hideInMap;
 
     private GameObject canvas;
 
@@ -40,19 +41,20 @@ public class MapManager : MonoBehaviour
         originalZoom = mapCamera.Lens.OrthographicSize;
 
         showInMapOnly = GameObject.FindGameObjectsWithTag("ShowInMapOnly");
+        hideInMap = GameObject.FindGameObjectsWithTag("HideInMap");
         if (startInMapView)
         {
             mapActive = true;
             canvas.SetActive(true);
             playerActionMap.Disable();
             Time.timeScale = 0f;
-            ShowMapOnlyObjects();
+            ToggleVisibilityBasedOnMap(true);
         }
         else
         {
             mapActive = false;
             canvas.SetActive(false);
-            HideMapOnlyObjects();
+            ToggleVisibilityBasedOnMap(false);
         }
         SwitchCameras(mapActive);
     }
@@ -95,13 +97,13 @@ public class MapManager : MonoBehaviour
             {
                 playerActionMap.Disable();
                 Time.timeScale = 0f;
-                ShowMapOnlyObjects();
+                ToggleVisibilityBasedOnMap(true);
             }
             else
             {
                 playerActionMap.Enable();
                 Time.timeScale = 1f;
-                HideMapOnlyObjects();
+                ToggleVisibilityBasedOnMap(false);
             }
         }
 
@@ -119,7 +121,6 @@ public class MapManager : MonoBehaviour
     {
         if (startInMapView)
         {
-            mapCamera.transform.position = originalPosition;
             startInMapView = false;
             return;
         }
@@ -167,19 +168,29 @@ public class MapManager : MonoBehaviour
         }
     }
 
-    private void HideMapOnlyObjects()
+    private void ToggleVisibilityBasedOnMap(bool mapOn)
     {
-        foreach (GameObject obj in showInMapOnly)
+        if (mapOn)
         {
-            obj.SetActive(false);
+            foreach (GameObject obj in showInMapOnly)
+            {
+                obj.SetActive(true);
+            }
+            foreach (GameObject obj in hideInMap)
+            {
+                obj.SetActive(false);
+            }
         }
-    }
-
-    private void ShowMapOnlyObjects()
-    {
-        foreach (GameObject obj in showInMapOnly)
+        else
         {
-            obj.SetActive(true);
+            foreach (GameObject obj in showInMapOnly)
+            {
+                obj.SetActive(false);
+            }
+            foreach (GameObject obj in hideInMap)
+            {
+                obj.SetActive(true);
+            }
         }
     }
 }
