@@ -4,7 +4,7 @@ public class SFXManager : MonoBehaviour
 {
     [SerializeField] private float sfxIntervalBeforeRandomSFX = 8f;
     [SerializeField] private float minSFXInterval = 0.5f; // Minimum interval between sound effects
-    private float nextSFXTime = 0f;
+    private float nextSFXTime;
 
     [SerializeField] private AudioClip[] clipsDuringSailing;
     [SerializeField] private AudioClip[] boatTookDamage;
@@ -18,6 +18,8 @@ public class SFXManager : MonoBehaviour
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
+
+        nextSFXTime = Time.time;
     }
 
     private void Update()

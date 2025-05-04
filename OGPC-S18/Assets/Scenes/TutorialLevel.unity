@@ -7077,6 +7077,10 @@ PrefabInstance:
       propertyPath: playerCamera
       value: 
       objectReference: {fileID: 3602041479372130177}
+    - target: {fileID: 915748085393450230, guid: 4e21a6f1d65cc784d91aadd6e7606f92, type: 3}
+      propertyPath: startInMapView
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2543927802153225673, guid: 4e21a6f1d65cc784d91aadd6e7606f92, type: 3}
       propertyPath: countdown
       value: 45
