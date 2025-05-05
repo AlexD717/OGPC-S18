@@ -29,6 +29,7 @@ public class ParticleSpawner : MonoBehaviour
         particlesParent = new GameObject("ParticlesParent");
         windParticlesParent = new GameObject("WindParticlesParent").transform;
         waterParticlesParent = new GameObject("WaterParticlesParent").transform;
+        particlesParent.tag = "HideInMap";
 
         windParticlesParent.parent = particlesParent.transform;
         waterParticlesParent.parent = particlesParent.transform;
