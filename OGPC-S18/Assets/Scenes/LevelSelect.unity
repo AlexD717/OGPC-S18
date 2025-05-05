@@ -601,6 +601,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5505037150619177460, guid: 53b48771f587d6943bc6897a90ad7b98, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 5049059679262521404, guid: 83d55fabad79c4d4abbd238bedbc96c4, type: 3}
     - target: {fileID: 5911827614192544121, guid: 53b48771f587d6943bc6897a90ad7b98, type: 3}
       propertyPath: m_text
       value: Play Level 4
