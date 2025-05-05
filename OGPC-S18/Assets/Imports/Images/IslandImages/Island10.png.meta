@@ -1,10 +1,19 @@
 fileFormatVersion: 2
-guid: 3d5d059707ca8b348ade758f167383fc
+guid: eb20cdba39b60a9498777796617862e5
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 924060377066941179
-    second: IslandImage_14_0
+      213: 8187040609182634189
+    second: Island10_0
+  - first:
+      213: -847177405430876046
+    second: Island10_1
+  - first:
+      213: 2936612597167891597
+    second: Island10_2
+  - first:
+      213: -8391995108606894572
+    second: Island10_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +122,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: IslandImage_14_0
+      name: Island10_0
       rect:
         serializedVersion: 2
-        x: 255
-        y: 313
-        width: 716
-        height: 714
+        x: 256
+        y: 247
+        width: 688
+        height: 755
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +137,74 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: bfaa61e540ce2dc00800000000000000
-      internalID: 924060377066941179
+      spriteID: dc05708ae063e9170800000000000000
+      internalID: 8187040609182634189
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Island10_1
+      rect:
+        serializedVersion: 2
+        x: 940
+        y: 669
+        width: 8
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2783e8763a83e34f0800000000000000
+      internalID: -847177405430876046
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Island10_2
+      rect:
+        serializedVersion: 2
+        x: 641
+        y: 217
+        width: 15
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d8421292991f0c820800000000000000
+      internalID: 2936612597167891597
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Island10_3
+      rect:
+        serializedVersion: 2
+        x: 624
+        y: 200
+        width: 16
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 41e9ba259e4a98b80800000000000000
+      internalID: -8391995108606894572
       vertices: []
       indices: 
       edges: []
@@ -147,8 +222,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      IslandImage_14_0: 924060377066941179
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

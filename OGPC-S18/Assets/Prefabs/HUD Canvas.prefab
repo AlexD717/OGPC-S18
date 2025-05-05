@@ -4704,7 +4704,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Extra Ports Saved
+  m_text: Ports Saved
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b89409ac1c9afae4a806db2d8efb8826, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: b89409ac1c9afae4a806db2d8efb8826, type: 2}
@@ -5480,7 +5480,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Extra Ports Saved
+  m_text: Ports Saved
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b89409ac1c9afae4a806db2d8efb8826, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: b89409ac1c9afae4a806db2d8efb8826, type: 2}

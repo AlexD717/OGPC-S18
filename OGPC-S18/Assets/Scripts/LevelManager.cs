@@ -206,6 +206,7 @@ public class LevelManager : MonoBehaviour
         int[] savedPortsAndTotal = FindNumberOfSavedPorts();
         int savedPorts = savedPortsAndTotal[0];
         int totalPorts = savedPortsAndTotal[1];
+
         // Fill in extra information
         Transform dataGrid = loseScreen.transform.GetChild(2);
 
