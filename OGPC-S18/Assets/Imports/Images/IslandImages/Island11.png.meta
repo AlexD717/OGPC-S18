@@ -1,13 +1,22 @@
 fileFormatVersion: 2
-guid: 0effa18c42e535b46817d3b490d39843
+guid: cd5a88f82f4fbf7418c231c138d92890
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 973886892321260545
-    second: Island12 1_0
+      213: 6979152585615912664
+    second: Island11 (1)_0
   - first:
-      213: 7171769827136610168
-    second: Island12 1_1
+      213: -7884984063899021853
+    second: Island11 (1)_1
+  - first:
+      213: -8147300489280151455
+    second: Island11 (1)_2
+  - first:
+      213: 8367861770126640111
+    second: Island11 (1)_3
+  - first:
+      213: -4893574525080466715
+    second: Island11 (1)_4
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -116,13 +125,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Island12 1_0
+      name: Island11 (1)_0
       rect:
         serializedVersion: 2
-        x: 738
-        y: 1021
-        width: 14
-        height: 7
+        x: 0
+        y: 0
+        width: 4096
+        height: 4096
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -131,20 +140,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 104c73cf7f0f38d00800000000000000
-      internalID: 973886892321260545
+      spriteID: 8dea2eaac4eead060800000000000000
+      internalID: 6979152585615912664
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Island12 1_1
+      name: Island11 (1)_1
       rect:
         serializedVersion: 2
-        x: 332
-        y: 48
-        width: 470
-        height: 893
+        x: 2934
+        y: 4066
+        width: 59
+        height: 30
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,8 +162,74 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 87f975df8ae378360800000000000000
-      internalID: 7171769827136610168
+      spriteID: 3edcea335c8e29290800000000000000
+      internalID: -7884984063899021853
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Island11 (1)_2
+      rect:
+        serializedVersion: 2
+        x: 2963
+        y: 4054
+        width: 32
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 160271a0f59feee80800000000000000
+      internalID: -8147300489280151455
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Island11 (1)_3
+      rect:
+        serializedVersion: 2
+        x: 2978
+        y: 4061
+        width: 37
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fe348f1f1fd902470800000000000000
+      internalID: 8367861770126640111
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Island11 (1)_4
+      rect:
+        serializedVersion: 2
+        x: 1897
+        y: 153
+        width: 553
+        height: 312
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5ea8dae85e7861cb0800000000000000
+      internalID: -4893574525080466715
       vertices: []
       indices: 
       edges: []
@@ -173,8 +248,11 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Island12 1_0: 973886892321260545
-      Island12 1_1: 7171769827136610168
+      Island11 (1)_0: 6979152585615912664
+      Island11 (1)_1: -7884984063899021853
+      Island11 (1)_2: -8147300489280151455
+      Island11 (1)_3: 8367861770126640111
+      Island11 (1)_4: -4893574525080466715
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
