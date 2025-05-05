@@ -140,7 +140,7 @@ public class LevelManager : MonoBehaviour
                 savedPorts++;
             }
         }
-        return new int[] {savedPorts, ports.Length};
+        return new int[] {savedPorts, ports.Length+1};// +1 for the end port
     }
 
 
@@ -148,7 +148,7 @@ public class LevelManager : MonoBehaviour
     {
         // Figures out how many ports exist and how many are saved
         int[] savedPortsAndTotal = FindNumberOfSavedPorts();
-        int savedPorts = savedPortsAndTotal[0];
+        int savedPorts = savedPortsAndTotal[0]+1; // +1 for the end port
         int totalPorts = savedPortsAndTotal[1];
 
         // Shows win screen
@@ -203,13 +203,14 @@ public class LevelManager : MonoBehaviour
         {
             child.gameObject.SetActive(true);
         }
+        int[] savedPortsAndTotal = FindNumberOfSavedPorts();
+        int savedPorts = savedPortsAndTotal[0];
+        int totalPorts = savedPortsAndTotal[1];
         // Fill in extra information
         Transform dataGrid = loseScreen.transform.GetChild(2);
 
         TextMeshProUGUI portsSavedText = dataGrid.GetChild(1).GetComponent<TextMeshProUGUI>();
-        int[] savedPortsAndTotal = FindNumberOfSavedPorts();
-        int savedPorts = savedPortsAndTotal[0];
-        int totalPorts = savedPortsAndTotal[1];
+
         portsSavedText.text = savedPorts.ToString() + "/" + totalPorts.ToString();
 
         TextMeshProUGUI distanceRemainingToEndPort = dataGrid.GetChild(3).GetComponent<TextMeshProUGUI>();

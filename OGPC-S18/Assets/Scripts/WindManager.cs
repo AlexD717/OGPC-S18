@@ -1,5 +1,4 @@
 using UnityEngine;
-using TMPro;
 
 public class WindManager : MonoBehaviour
 {

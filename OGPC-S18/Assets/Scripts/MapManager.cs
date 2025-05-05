@@ -63,7 +63,7 @@ public class MapManager : MonoBehaviour
     {
         playerActionMap = inputActions.FindActionMap("Player");
 
-        var mapControls = inputActions.FindActionMap("Map");
+        InputActionMap mapControls = inputActions.FindActionMap("Map");
         mapToggle = mapControls.FindAction("MapToggle");
         mapReset = mapControls.FindAction("MapReset");
         mapPan = mapControls.FindAction("MapPan");
