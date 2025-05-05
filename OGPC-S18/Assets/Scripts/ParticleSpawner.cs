@@ -20,6 +20,20 @@ public class ParticleSpawner : MonoBehaviour
     [SerializeField] private WindManager windManager;
     [SerializeField] private CurrentManager currentManager;
 
+    private GameObject particlesParent;
+    private Transform windParticlesParent;
+    private Transform waterParticlesParent;
+
+    private void Start()
+    {
+        particlesParent = new GameObject("ParticlesParent");
+        windParticlesParent = new GameObject("WindParticlesParent").transform;
+        waterParticlesParent = new GameObject("WaterParticlesParent").transform;
+
+        windParticlesParent.parent = particlesParent.transform;
+        waterParticlesParent.parent = particlesParent.transform;
+    }
+
     private void Update()
     {
         if (Time.time >= windNextSpawnTime)
@@ -42,7 +56,7 @@ public class ParticleSpawner : MonoBehaviour
     private void SpawnWindParticle()
     {
         Vector3 spawnPosition = RandomSpawnPosition();
-        GameObject windParticleObject = Instantiate(windParticlePrefab, spawnPosition, Quaternion.identity);
+        GameObject windParticleObject = Instantiate(windParticlePrefab, spawnPosition, Quaternion.identity, windParticlesParent);
         WindParticle windParticle = windParticleObject.GetComponent<WindParticle>();
         windParticle.windAngle = windManager.GetWindRadAngle();
         windParticle.windSpeed = windManager.GetWindSpeed();
@@ -51,7 +65,7 @@ public class ParticleSpawner : MonoBehaviour
     private void SpawnWaterParticle()
     {
         Vector3 spawnPosition = RandomSpawnPosition();
-        GameObject waterParticleObject = Instantiate(waterParticlePrefab, spawnPosition, Quaternion.identity);
+        GameObject waterParticleObject = Instantiate(waterParticlePrefab, spawnPosition, Quaternion.identity, waterParticlesParent);
         WaterParticle waterParticle = waterParticleObject.GetComponent<WaterParticle>();
         waterParticle.currentAngle = currentManager.GetCurrentRadAngle();
         waterParticle.currentSpeed = currentManager.GetCurrentSpeed();
