@@ -167,7 +167,7 @@ public class LevelManager : MonoBehaviour
         dataGrid.GetChild(5).GetComponent<TextMeshProUGUI>().text = timeRemainingScore.ToString();
 
         dataGrid.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = savedPorts.ToString() + "/" + totalPorts.ToString(); // Says saved ports out of total ports
-        int savedPortsScore = CalculateSavedPortScore(savedPorts, totalPorts);
+        int savedPortsScore = CalculateSavedPortScore(savedPorts-1, totalPorts); //For the score, we don't count the end port
         dataGrid.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = savedPortsScore.ToString(); // Says saved ports score
         
         // Fill in total score
