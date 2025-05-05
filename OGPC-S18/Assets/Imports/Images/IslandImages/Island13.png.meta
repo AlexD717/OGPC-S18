@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: 7f24aa60f38db554f8a2b7b0e9c7048b
+guid: 38a0a941a88e971479073ff6ad4e74ca
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1605509463054152604
-    second: IslandImage_10_0
+      213: 4184465926640788106
+    second: Island13_0
+  - first:
+      213: 3441988204166706936
+    second: Island13_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +116,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: IslandImage_10_0
+      name: Island13_0
       rect:
         serializedVersion: 2
-        x: 298
-        y: 13
-        width: 536
-        height: 967
+        x: 164
+        y: 201
+        width: 781
+        height: 772
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +131,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c93fedca95ae74610800000000000000
-      internalID: 1605509463054152604
+      spriteID: a82662c0795321a30800000000000000
+      internalID: 4184465926640788106
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Island13_1
+      rect:
+        serializedVersion: 2
+        x: 308
+        y: 186
+        width: 21
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8f6f076090664cf20800000000000000
+      internalID: 3441988204166706936
       vertices: []
       indices: 
       edges: []
@@ -147,8 +172,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      IslandImage_10_0: 1605509463054152604
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
