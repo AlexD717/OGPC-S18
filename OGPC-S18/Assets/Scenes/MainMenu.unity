@@ -498,9 +498,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bgMusic:
-  - {fileID: 8300000, guid: 82e8c0ec8d61a9c4bbb8892907534ede, type: 3}
   - {fileID: 8300000, guid: ba947731bb3309245b8b0ba023189eba, type: 3}
-  - {fileID: 8300000, guid: 67559eeaac401394fb17f74470e73ce1, type: 3}
   - {fileID: 8300000, guid: a06d7f5c3bdce8442bce6cf9415c9b16, type: 3}
   - {fileID: 8300000, guid: 7c39bad13dec7184eafdd5c9c6f515f1, type: 3}
   - {fileID: 8300000, guid: 9a785045d0541784e8b9c03ab605fae2, type: 3}
@@ -524,7 +522,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.2
+  m_Volume: 0.6
   m_Pitch: 1
   Loop: 0
   Mute: 0

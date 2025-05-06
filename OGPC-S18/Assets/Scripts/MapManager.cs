@@ -20,8 +20,9 @@ public class MapManager : MonoBehaviour
     [SerializeField] private float panSensitivity;
     [SerializeField] private float zoomSensitivity;
     [SerializeField] private Vector2 zoomLimits;
+    [SerializeField] private float zoomAmount;
+    [SerializeField] private bool keepOriginalZoomAmount = true;
     private Vector2 originalPosition;
-    private float originalZoom;
 
     [SerializeField] private bool cameraZoomsOutOnPlayerPosition;
     [SerializeField] private bool startInMapView = true;
@@ -38,7 +39,10 @@ public class MapManager : MonoBehaviour
         canvas = transform.GetChild(0).gameObject;
 
         originalPosition = mapCamera.transform.position;
-        originalZoom = mapCamera.Lens.OrthographicSize;
+        if (keepOriginalZoomAmount)
+        {
+            zoomAmount = mapCamera.Lens.OrthographicSize;
+        }
 
         showInMapOnly = GameObject.FindGameObjectsWithTag("ShowInMapOnly");
         hideInMap = GameObject.FindGameObjectsWithTag("HideInMap");
@@ -133,7 +137,7 @@ public class MapManager : MonoBehaviour
         {
             mapCamera.transform.position = originalPosition;
         }
-        mapCamera.Lens.OrthographicSize = originalZoom;
+        mapCamera.Lens.OrthographicSize = zoomAmount;
     }
 
     private void PanCamera()
