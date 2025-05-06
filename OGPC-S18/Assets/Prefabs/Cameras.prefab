@@ -153,6 +153,7 @@ GameObject:
   m_Component:
   - component: {fileID: 872746331847168851}
   - component: {fileID: 348188337385483953}
+  - component: {fileID: 2801360157192367664}
   m_Layer: 0
   m_Name: Map Cinemachine Camera
   m_TagString: Untagged
@@ -218,6 +219,19 @@ MonoBehaviour:
       BarrelClipping: 0.25
       Anamorphism: 0
   BlendHint: 0
+--- !u!114 &2801360157192367664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5705903535132033994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 292c53765e7cbf049ae7502874617ebc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nearClipPlane: -0.1
 --- !u!1 &6651425003773810461
 GameObject:
   m_ObjectHideFlags: 0
