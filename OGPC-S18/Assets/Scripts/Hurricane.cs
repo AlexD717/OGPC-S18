@@ -82,7 +82,7 @@ public class Hurricane : MonoBehaviour
         Vector2 nextWaypoint = waypoints[waypointIndex];
         if (Vector2.Distance(transform.position, nextWaypoint) < 0.2f)
         {
-            if (waypointIndex == waypoints.Count)
+            if (waypointIndex == waypoints.Count - 1)
             {
                 if (loopWaypoints) { waypointIndex = 0; }
                 else { Debug.Log("Hurricane reached final waypoint."); }
