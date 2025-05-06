@@ -20,12 +20,14 @@ public class Hurricane : MonoBehaviour
     [Header("References")]
     [SerializeField] private GameObject windParticle;
     [SerializeField] private Transform waypointsParent;
+    [SerializeField] private bool loopWaypoints;
     [SerializeField] private CircleCollider2D instaKillCollider;
     private List<Vector2> waypoints;
+    private int waypointIndex = 0;
     private GameObject player;
     private BoatHealth boatHealth;
     private float distanceToPlayer;
-
+    
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -76,17 +78,19 @@ public class Hurricane : MonoBehaviour
         }
 
         // Move hurricane
-        if (waypoints.Count == 0) { return; }
 
-        Vector2 nextWaypoint = waypoints[0];
+        Vector2 nextWaypoint = waypoints[waypointIndex];
         if (Vector2.Distance(transform.position, nextWaypoint) < 0.2f)
         {
-            waypoints.RemoveAt(0);
-            if (waypoints.Count == 0)
+            if (waypointIndex == waypoints.Count)
             {
-                Debug.Log("Hurricane has reached the last waypoint");
+                if (loopWaypoints) { waypointIndex = 0; }
+                else { Debug.Log("Hurricane reached final waypoint."); }
             }
-            return;
+            else
+            {
+                waypointIndex += 1;
+            }
         }
 
         transform.position = Vector2.MoveTowards(transform.position, nextWaypoint, hurricaneSpeed * Time.deltaTime);
