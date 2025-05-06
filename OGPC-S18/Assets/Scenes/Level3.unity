@@ -132,12 +132,20 @@ PrefabInstance:
       value: IslandImage_8
       objectReference: {fileID: 0}
     - target: {fileID: 8838479373802884897, guid: 76c7c301e91716f48900d2610343f059, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 6.475
+      objectReference: {fileID: 0}
+    - target: {fileID: 8838479373802884897, guid: 76c7c301e91716f48900d2610343f059, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 6.7720003
+      objectReference: {fileID: 0}
+    - target: {fileID: 8838479373802884897, guid: 76c7c301e91716f48900d2610343f059, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -224
+      value: -244.6
       objectReference: {fileID: 0}
     - target: {fileID: 8838479373802884897, guid: 76c7c301e91716f48900d2610343f059, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 297
+      value: 316
       objectReference: {fileID: 0}
     - target: {fileID: 8838479373802884897, guid: 76c7c301e91716f48900d2610343f059, type: 3}
       propertyPath: m_LocalPosition.z
@@ -145,7 +153,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8838479373802884897, guid: 76c7c301e91716f48900d2610343f059, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.9656126
       objectReference: {fileID: 0}
     - target: {fileID: 8838479373802884897, guid: 76c7c301e91716f48900d2610343f059, type: 3}
       propertyPath: m_LocalRotation.x
@@ -157,7 +165,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8838479373802884897, guid: 76c7c301e91716f48900d2610343f059, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0.25998548
       objectReference: {fileID: 0}
     - target: {fileID: 8838479373802884897, guid: 76c7c301e91716f48900d2610343f059, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -169,7 +177,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8838479373802884897, guid: 76c7c301e91716f48900d2610343f059, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: 30.138
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -719,7 +727,7 @@ PrefabInstance:
       objectReference: {fileID: 3602041479372130177}
     - target: {fileID: 2543927802153225673, guid: 4e21a6f1d65cc784d91aadd6e7606f92, type: 3}
       propertyPath: countdown
-      value: 1000
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 2543927802153225673, guid: 4e21a6f1d65cc784d91aadd6e7606f92, type: 3}
       propertyPath: winScreen
@@ -751,7 +759,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6387579026827939504, guid: 4e21a6f1d65cc784d91aadd6e7606f92, type: 3}
       propertyPath: windHeading
-      value: 225
+      value: 135
       objectReference: {fileID: 0}
     - target: {fileID: 6387579026827939504, guid: 4e21a6f1d65cc784d91aadd6e7606f92, type: 3}
       propertyPath: windIndicator
@@ -767,11 +775,11 @@ PrefabInstance:
       objectReference: {fileID: 5092024124662579737}
     - target: {fileID: 6387579026827939504, guid: 4e21a6f1d65cc784d91aadd6e7606f92, type: 3}
       propertyPath: windHeadingRange.x
-      value: 200
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 6387579026827939504, guid: 4e21a6f1d65cc784d91aadd6e7606f92, type: 3}
       propertyPath: windHeadingRange.y
-      value: 250
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 7469316624510331701, guid: 4e21a6f1d65cc784d91aadd6e7606f92, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1040,11 +1048,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2620215992890632056, guid: ed1cd7b19b3f61940910eb6210a529fb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -79
+      value: -64
       objectReference: {fileID: 0}
     - target: {fileID: 2620215992890632056, guid: ed1cd7b19b3f61940910eb6210a529fb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -8
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 2620215992890632056, guid: ed1cd7b19b3f61940910eb6210a529fb, type: 3}
       propertyPath: m_LocalPosition.z
