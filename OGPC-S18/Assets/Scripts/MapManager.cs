@@ -122,11 +122,7 @@ public class MapManager : MonoBehaviour
 
         if (resetLevel.triggered)
         {
-            LevelManager levelManager = FindFirstObjectByType<LevelManager>();
-            if (levelManager != null)
-            {
-                levelManager.RestartLevel();
-            }
+            Loader.RestartLevel();
         }
     }
 

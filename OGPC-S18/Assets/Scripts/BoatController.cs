@@ -86,8 +86,7 @@ public class BoatController : MonoBehaviour
         }
         if (resetLevel.triggered)
         {
-            LevelManager levelManager = FindFirstObjectByType<LevelManager>();
-            levelManager.RestartLevel();
+            Loader.RestartLevel();
         }
     }
 
