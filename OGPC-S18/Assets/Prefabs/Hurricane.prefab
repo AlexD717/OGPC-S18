@@ -51,7 +51,7 @@ MonoBehaviour:
   stormRadius: 70
   eyeRadius: 10
   instaKillRadius: 13
-  damage: 10
+  damage: 5
   damageInterval: 0.5
   windDistributionCurve:
     serializedVersion: 2
@@ -113,6 +113,7 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   windParticle: {fileID: 6457244986911265293, guid: d8558762eba11bb47940539d25f62d6f, type: 3}
   waypointsParent: {fileID: 5347093421265488088}
+  loopWaypoints: 0
   instaKillCollider: {fileID: 2679747882103350986}
 --- !u!82 &2382707069937357703
 AudioSource:
