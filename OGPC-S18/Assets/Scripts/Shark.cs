@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Shark : MonoBehaviour
 {
@@ -7,7 +8,10 @@ public class Shark : MonoBehaviour
     [SerializeField] private float swimSpeed;
     [SerializeField] private float attackSpeed;
     [SerializeField] private float rotationSpeed;
+
+    [Header("References")]
     [SerializeField] private Transform waypointParent;
+    [SerializeField] private InputActionAsset inputActions;
 
     private Transform currentWaypoint;
     private int currentWaypointIndex = 0;
@@ -81,6 +85,19 @@ public class Shark : MonoBehaviour
     private void JumpOutOfWater()
     {
         animator.SetTrigger("Attack");
+    }
+
+    public void BoatHidden()
+    {
+        inputActions.FindActionMap("Player").Disable(); // Disable player input
+        foreach (SpriteRenderer spriteRenderer in player.GetComponentsInChildren<SpriteRenderer>(true))
+        {
+            spriteRenderer.enabled = false;
+        }
+        foreach (ParticleSystem particleSystem in player.GetComponentsInChildren<ParticleSystem>(true))
+        {
+            particleSystem.gameObject.SetActive(false);
+        }
     }
 
     public void AttackFinished()

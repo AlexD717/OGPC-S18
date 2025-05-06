@@ -1,0 +1,494 @@
+fileFormatVersion: 2
+guid: 6c40a424db67c254888aa4b16ad86bfb
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 1108938408058487968
+    second: shark-attack-08_0
+  - first:
+      213: 8878821623639776572
+    second: shark-attack-08_1
+  - first:
+      213: -4958495162936068743
+    second: shark-attack-08_2
+  - first:
+      213: 534679452632863419
+    second: shark-attack-08_3
+  - first:
+      213: -1063719981878762999
+    second: shark-attack-08_4
+  - first:
+      213: -5346480749256606801
+    second: shark-attack-08_5
+  - first:
+      213: 7330467988763129491
+    second: shark-attack-08_6
+  - first:
+      213: 4012152118046766349
+    second: shark-attack-08_7
+  - first:
+      213: -8915111976994507778
+    second: shark-attack-08_8
+  - first:
+      213: 5647657176674746293
+    second: shark-attack-08_9
+  - first:
+      213: 3513327630213848398
+    second: shark-attack-08_10
+  - first:
+      213: -2546338403954587839
+    second: shark-attack-08_11
+  - first:
+      213: 3521020932869818046
+    second: shark-attack-08_12
+  - first:
+      213: 9060757615292443923
+    second: shark-attack-08_13
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: shark-attack-08_0
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 873
+        width: 108
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0a40d125b9db36f00800000000000000
+      internalID: 1108938408058487968
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shark-attack-08_1
+      rect:
+        serializedVersion: 2
+        x: 458
+        y: 885
+        width: 31
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c3d1b158939e73b70800000000000000
+      internalID: 8878821623639776572
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shark-attack-08_2
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 904
+        width: 26
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 975f3b8abe2ef2bb0800000000000000
+      internalID: -4958495162936068743
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shark-attack-08_3
+      rect:
+        serializedVersion: 2
+        x: 857
+        y: 875
+        width: 126
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bb2d1ea11209b6700800000000000000
+      internalID: 534679452632863419
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shark-attack-08_4
+      rect:
+        serializedVersion: 2
+        x: 248
+        y: 280
+        width: 728
+        height: 553
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 902a1a3ff48ec31f0800000000000000
+      internalID: -1063719981878762999
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shark-attack-08_5
+      rect:
+        serializedVersion: 2
+        x: 956
+        y: 679
+        width: 62
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fab781ed51c7dc5b0800000000000000
+      internalID: -5346480749256606801
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shark-attack-08_6
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 628
+        width: 137
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 396399b1ccd0bb560800000000000000
+      internalID: 7330467988763129491
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shark-attack-08_7
+      rect:
+        serializedVersion: 2
+        x: 1036
+        y: 514
+        width: 97
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d05320518170ea730800000000000000
+      internalID: 4012152118046766349
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shark-attack-08_8
+      rect:
+        serializedVersion: 2
+        x: 245
+        y: 378
+        width: 47
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef3796624e8274480800000000000000
+      internalID: -8915111976994507778
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shark-attack-08_9
+      rect:
+        serializedVersion: 2
+        x: 1033
+        y: 336
+        width: 72
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5bf32e49742806e40800000000000000
+      internalID: 5647657176674746293
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shark-attack-08_10
+      rect:
+        serializedVersion: 2
+        x: 215
+        y: 177
+        width: 91
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e4d16728dd8d1c030800000000000000
+      internalID: 3513327630213848398
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shark-attack-08_11
+      rect:
+        serializedVersion: 2
+        x: 589
+        y: 168
+        width: 32
+        height: 115
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1470a5276b699acd0800000000000000
+      internalID: -2546338403954587839
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shark-attack-08_12
+      rect:
+        serializedVersion: 2
+        x: 820
+        y: 249
+        width: 41
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eb68b6e12ed2dd030800000000000000
+      internalID: 3521020932869818046
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shark-attack-08_13
+      rect:
+        serializedVersion: 2
+        x: 803
+        y: 72
+        width: 46
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 31deb6f8b074ebd70800000000000000
+      internalID: 9060757615292443923
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      shark-attack-08_0: 1108938408058487968
+      shark-attack-08_1: 8878821623639776572
+      shark-attack-08_10: 3513327630213848398
+      shark-attack-08_11: -2546338403954587839
+      shark-attack-08_12: 3521020932869818046
+      shark-attack-08_13: 9060757615292443923
+      shark-attack-08_2: -4958495162936068743
+      shark-attack-08_3: 534679452632863419
+      shark-attack-08_4: -1063719981878762999
+      shark-attack-08_5: -5346480749256606801
+      shark-attack-08_6: 7330467988763129491
+      shark-attack-08_7: 4012152118046766349
+      shark-attack-08_8: -8915111976994507778
+      shark-attack-08_9: 5647657176674746293
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
