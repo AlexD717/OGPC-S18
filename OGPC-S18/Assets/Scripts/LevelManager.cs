@@ -22,6 +22,13 @@ public class LevelManager : MonoBehaviour
     private bool showEndScreen = false;
     public bool tutorialLevel = false;
 
+    public void RestartLevel()
+    {
+        // Reloads the current scene
+        string sceneName = SceneManager.GetActiveScene().name;
+        SceneManager.LoadScene(sceneName);
+    }
+
     private void Start()
     {
         winScreen.gameObject.SetActive(false);
