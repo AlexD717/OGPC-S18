@@ -10,8 +10,8 @@ public class TypingEffect : MonoBehaviour
     private float textScale;
     [SerializeField] private float typingSpeed = 0.03f;  // Time between each character
     [SerializeField] private float typingPeriodPause = 0.15f;  // Pause time after typing a period
-
-    private void Start()
+    
+    private void OnEnable()
     {
         textMeshPro = GetComponent<TextMeshProUGUI>();  // Get the TextMeshProUGUI component
         fullText = textMeshPro.text;  // Store the full text from the component
@@ -23,6 +23,11 @@ public class TypingEffect : MonoBehaviour
         StartCoroutine(TypeText());
     }
 
+    private void OnDisable()
+    {
+        textMeshPro.text = fullText;
+    }
+   
     private IEnumerator TypeText()
     {
         textMeshPro.text = "";  // Clear any initial text

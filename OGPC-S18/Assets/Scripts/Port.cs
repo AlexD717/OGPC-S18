@@ -98,11 +98,8 @@ public class Port : MonoBehaviour
                 saveTimerText.text = "Saved in " + (timeToSavePort - playerDockedTime).ToString("F2") + "s";//Count down time remaining
             }
         }
-        if (playerDocked && portSaved)
-        {
-            Debug.Log("Port saved!");
-        }
     }
+
     private void Dock()
     {
         dockCanvas.SetActive(true);
