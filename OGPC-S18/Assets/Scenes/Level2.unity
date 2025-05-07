@@ -1875,6 +1875,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 348188337385483953, guid: 18c0a10366d409a4ea71af73f5b6781f, type: 3}
+      propertyPath: Lens.NearClipPlane
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 348188337385483953, guid: 18c0a10366d409a4ea71af73f5b6781f, type: 3}
       propertyPath: Lens.OrthographicSize
       value: 190
       objectReference: {fileID: 0}
@@ -1886,13 +1890,17 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 282
       objectReference: {fileID: 0}
+    - target: {fileID: 2801360157192367664, guid: 18c0a10366d409a4ea71af73f5b6781f, type: 3}
+      propertyPath: nearClipPlane
+      value: -5
+      objectReference: {fileID: 0}
     - target: {fileID: 3862821245273503973, guid: 18c0a10366d409a4ea71af73f5b6781f, type: 3}
       propertyPath: orthographic
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3862821245273503973, guid: 18c0a10366d409a4ea71af73f5b6781f, type: 3}
       propertyPath: near clip plane
-      value: -10
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 3862821245273503973, guid: 18c0a10366d409a4ea71af73f5b6781f, type: 3}
       propertyPath: orthographic size
