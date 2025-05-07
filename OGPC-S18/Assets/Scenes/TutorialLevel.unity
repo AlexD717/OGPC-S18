@@ -1630,7 +1630,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "Now, depending on the angle the wind is coming from, your boat will be
     more or less efficient. Obviously, you can\u2019t sail directly into the wind\u2014that\u2019s
-    just asking for trouble. <i>(tab to continue) </i>"
+    just asking for trouble. Additionally, the current can also push you around.
+    <i>(tab to continue) </i>"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b89409ac1c9afae4a806db2d8efb8826, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: b89409ac1c9afae4a806db2d8efb8826, type: 2}
@@ -7553,6 +7554,10 @@ PrefabInstance:
       propertyPath: Target.TrackingTarget
       value: 
       objectReference: {fileID: 5017783297470243651}
+    - target: {fileID: 3862821245273503973, guid: 18c0a10366d409a4ea71af73f5b6781f, type: 3}
+      propertyPath: near clip plane
+      value: -10
+      objectReference: {fileID: 0}
     - target: {fileID: 4849072697067961186, guid: 18c0a10366d409a4ea71af73f5b6781f, type: 3}
       propertyPath: m_Name
       value: Cameras
