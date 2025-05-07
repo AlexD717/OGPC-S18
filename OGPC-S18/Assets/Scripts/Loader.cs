@@ -25,6 +25,13 @@ public static class Loader
         };
     }
 
+    public static void RestartLevel()
+    {
+        // Reloads the current scene
+        string sceneName = SceneManager.GetActiveScene().name;
+        SceneManager.LoadScene(sceneName);
+    }
+
     public static void LoaderCallback()
     {
         if (onLoaderCallback != null)

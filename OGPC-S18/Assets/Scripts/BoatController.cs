@@ -33,7 +33,6 @@ public class BoatController : MonoBehaviour
 
     private bool boatSailing = true;
     private InputAction sailToggle;
-
     private bool sailEnabled = true;
     private Rigidbody2D rb;
     private WindManager windManager;
@@ -42,14 +41,16 @@ public class BoatController : MonoBehaviour
     private float relativeWindDirection;
     private float boatWaterSpeed;
     private Vector2 boatWaterVector;
+    private InputAction resetLevel;
+
 
     private void OnEnable()
     {
         InputActionMap playerControls = inputActions.FindActionMap("Player");
         sailToggle = playerControls.FindAction("SailToggle");
-
         sailToggle.Enable();
-        Debug.Log("SailToggle enabled");
+        resetLevel = playerControls.FindAction("ResetLevel");
+        resetLevel.Enable();
     }
 
     private void OnDisable()
@@ -64,7 +65,6 @@ public class BoatController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         rudderController = GetComponent<RudderController>();
         rudderController.SetRudderMoveSpeed(rudderMoveSpeed);
-        
         rb.linearVelocity = rb.linearVelocity + VectorUtilities.PolarToVector(currentManager.GetCurrentDirection(), currentManager.GetCurrentSpeed() * currentMaxSpeedMod);
     }
 
@@ -83,6 +83,10 @@ public class BoatController : MonoBehaviour
         if (sailEnabled)
         {
             RotateSailToMatchWind();
+        }
+        if (resetLevel.triggered)
+        {
+            Loader.RestartLevel();
         }
     }
 
