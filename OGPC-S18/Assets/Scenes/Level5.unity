@@ -1468,6 +1468,18 @@ PrefabInstance:
       propertyPath: rudderPositionIndicator
       value: 
       objectReference: {fileID: 5740006248610952843}
+    - target: {fileID: 3905709696271631512, guid: 9c93eb8aeee652f4fb93fed4cf7ad965, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3905709696271631512, guid: 9c93eb8aeee652f4fb93fed4cf7ad965, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3905709696271631512, guid: 9c93eb8aeee652f4fb93fed4cf7ad965, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 7903215555601454814, guid: 9c93eb8aeee652f4fb93fed4cf7ad965, type: 3}
       propertyPath: m_Name
       value: Boat
@@ -1484,6 +1496,10 @@ PrefabInstance:
       propertyPath: boatHeadingText
       value: 
       objectReference: {fileID: 3507775143554296883}
+    - target: {fileID: 8658796691103070892, guid: 9c93eb8aeee652f4fb93fed4cf7ad965, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8948939780204026237, guid: 9c93eb8aeee652f4fb93fed4cf7ad965, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
