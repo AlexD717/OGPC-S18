@@ -231,7 +231,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 292c53765e7cbf049ae7502874617ebc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nearClipPlane: -0.1
+  nearClipPlane: -5
 --- !u!1 &6651425003773810461
 GameObject:
   m_ObjectHideFlags: 0
