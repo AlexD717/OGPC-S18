@@ -22,6 +22,7 @@ public class TutorialManager : MonoBehaviour
 
     private GameObject player;
 
+    private bool firstFrame = true;
     private bool playerDockedToEndPort = false;
 
     private void Start()
@@ -45,23 +46,18 @@ public class TutorialManager : MonoBehaviour
         levelManager.tutorialLevel = true;
 
         hurricanePos = hurricane.transform.position;
-
-        // Disable the actions the player hasn't learned yet
-        playerInputActions.FindAction("Rotation").Disable();
-        playerInputActions.FindAction("SailToggle").Disable();
-        playerInputActions.FindAction("Interact").Disable();
-        playerInputActions.FindAction("ResetLevel").Disable();
-        mapInputActions.FindAction("MapZoom").Disable();
-        mapInputActions.FindAction("MapToggle").Disable();
-        mapInputActions.FindAction("MapPan").Disable();
-        mapInputActions.FindAction("ResetLevel").Disable();
-        
-
-        Debug.Log("Sail toggle disabled");
     }
 
     void Update()
     {
+        if (firstFrame)
+        {
+            // Disable the actions the player hasn't learned yet
+            playerInputActions.FindAction("Rotation").Disable();
+            playerInputActions.FindAction("SailToggle").Disable();
+            Debug.Log("Sail toggle disabled");
+            firstFrame = false;
+        }
 
         // Only show the active pop-up
         for (int i = 0; i < popUps.Length; i++)
@@ -72,6 +68,7 @@ public class TutorialManager : MonoBehaviour
             case 0:
                 // Introduction 1
                 Time.timeScale = 0f;
+                mapInputActions.FindAction("MapToggle").Disable();
                 if (Input.GetKeyDown(KeyCode.Tab))
                 {
                     popUpIndex++;
