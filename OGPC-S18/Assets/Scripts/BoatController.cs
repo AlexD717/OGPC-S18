@@ -1,4 +1,5 @@
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -20,18 +21,11 @@ public class BoatController : MonoBehaviour
     [SerializeField] private float currentMaxSpeedMod;
 
     [Header("References")]
-    [SerializeField] private Transform sail;
-    [SerializeField] private Transform player;
-    [SerializeField] private Transform compass;
+    private Transform sail;
     [SerializeField] private InputActionAsset inputActions;
-
-    [Header("Debug References")]
-    [SerializeField] private TextMeshProUGUI boatHeadingText;
-    [SerializeField] private TextMeshProUGUI boatSpeedText;
-    float boatHeading;
     float boatSpeed;
 
-    private bool boatSailing = true;
+    public bool boatSailing { get; private set; } = true;
     private InputAction sailToggle;
     private bool sailEnabled = true;
     private Rigidbody2D rb;
@@ -66,11 +60,11 @@ public class BoatController : MonoBehaviour
         rudderController = GetComponent<RudderController>();
         rudderController.SetRudderMoveSpeed(rudderMoveSpeed);
         rb.linearVelocity = rb.linearVelocity + VectorUtilities.PolarToVector(currentManager.GetCurrentDirection(), currentManager.GetCurrentSpeed() * currentMaxSpeedMod);
+        sail = this.transform.GetChild(0);
     }
 
-    private void Update()
+    void Update()
     {
-        UpdateUI();
         if (!boatSailing)
         {
             return;
@@ -83,6 +77,10 @@ public class BoatController : MonoBehaviour
         if (sailEnabled)
         {
             RotateSailToMatchWind();
+        }
+        else
+        {
+            sail.gameObject.SetActive(false);
         }
         if (resetLevel.triggered)
         {
@@ -113,7 +111,6 @@ public class BoatController : MonoBehaviour
         boatWaterVector = rb.linearVelocity - VectorUtilities.PolarToVector(currentManager.GetCurrentDirection(), currentManager.GetCurrentSpeed() * currentMaxSpeedMod);
         boatWaterSpeed = boatWaterVector.magnitude;
 
-        boatHeading = (360 - rb.transform.localEulerAngles.z) % 360;
         boatSpeed = rb.linearVelocity.magnitude;
     }
 
@@ -131,13 +128,6 @@ public class BoatController : MonoBehaviour
             windSailRotation = ((360 - relativeWindDirection) / 2) % 90;
         }
         sail.transform.localRotation = Quaternion.Euler(0, 0, windSailRotation);
-    }
-
-    private void UpdateUI()
-    {
-        boatHeadingText.text = $"Boat Heading: {boatHeading.ToString("F1")}";
-        boatSpeedText.text = $"Boat Speed: {boatSpeed.ToString("F1")}";
-        compass.rotation = Quaternion.Euler(0,0,90 - player.eulerAngles.z);
     }
 
     private void AddWind2Boat()
