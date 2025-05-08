@@ -65,6 +65,10 @@ public class BoatController : MonoBehaviour
 
     void Update()
     {
+        if (resetLevel.triggered)
+        {
+            Loader.RestartLevel();
+        }
         if (!boatSailing)
         {
             return;
@@ -81,10 +85,6 @@ public class BoatController : MonoBehaviour
         else
         {
             sail.gameObject.SetActive(false);
-        }
-        if (resetLevel.triggered)
-        {
-            Loader.RestartLevel();
         }
     }
 
