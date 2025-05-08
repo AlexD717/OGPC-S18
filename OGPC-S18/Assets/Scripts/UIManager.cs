@@ -3,6 +3,12 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
+    private int numberOfLevels;
+
+    private void OnEnable()
+    {
+        numberOfLevels = SceneManager.sceneCountInBuildSettings - 4; // Exclude the main menu, tutorial, level select, and loading screen scenes
+    }
     public void LoadLevelByName(string name)
     {
         Loader.LoadByName(name);
@@ -15,7 +21,15 @@ public class UIManager : MonoBehaviour
 
     public void NextSene()
     {
-        Loader.LoadByIndex(SceneManager.GetActiveScene().buildIndex + 1);
+        if (SceneManager.GetActiveScene().buildIndex + 1 >= numberOfLevels)
+        {
+            Loader.LoadByName("LevelSelect");
+            return;
+        }
+        else
+        {
+            Loader.LoadByIndex(SceneManager.GetActiveScene().buildIndex + 1);
+        }
     }
 
     public void RestartCurrentScene()
