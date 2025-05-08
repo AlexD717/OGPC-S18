@@ -724,7 +724,7 @@ PrefabInstance:
     - target: {fileID: 5505037150619177460, guid: 53b48771f587d6943bc6897a90ad7b98, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 83d55fabad79c4d4abbd238bedbc96c4, type: 3}
+      objectReference: {fileID: 5049059679262521404, guid: 83d55fabad79c4d4abbd238bedbc96c4, type: 3}
     - target: {fileID: 5911827614192544121, guid: 53b48771f587d6943bc6897a90ad7b98, type: 3}
       propertyPath: m_text
       value: Play Level 4
@@ -842,7 +842,7 @@ PrefabInstance:
     - target: {fileID: 5505037150619177460, guid: 53b48771f587d6943bc6897a90ad7b98, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: ea81564401a62e848842f571cde935ce, type: 3}
+      objectReference: {fileID: 7605422557452617252, guid: ea81564401a62e848842f571cde935ce, type: 3}
     - target: {fileID: 5911827614192544121, guid: 53b48771f587d6943bc6897a90ad7b98, type: 3}
       propertyPath: m_text
       value: Play Level 3
@@ -1229,7 +1229,7 @@ PrefabInstance:
     - target: {fileID: 5505037150619177460, guid: 53b48771f587d6943bc6897a90ad7b98, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: f8819f3ac3961ff4cb8ed118a72f4731, type: 3}
+      objectReference: {fileID: -3571278149730965589, guid: f8819f3ac3961ff4cb8ed118a72f4731, type: 3}
     - target: {fileID: 5911827614192544121, guid: 53b48771f587d6943bc6897a90ad7b98, type: 3}
       propertyPath: m_text
       value: Play Level 2
@@ -1536,7 +1536,7 @@ PrefabInstance:
     - target: {fileID: 5505037150619177460, guid: 53b48771f587d6943bc6897a90ad7b98, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 4938d5bf8a04c4d4ca1c7b54b13da57b, type: 3}
+      objectReference: {fileID: 7028842072390148906, guid: 4938d5bf8a04c4d4ca1c7b54b13da57b, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
