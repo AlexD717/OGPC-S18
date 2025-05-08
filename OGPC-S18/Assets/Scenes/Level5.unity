@@ -1112,7 +1112,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3943873451533215520, guid: ed1cd7b19b3f61940910eb6210a529fb, type: 3}
       propertyPath: hurricaneSpeed
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
