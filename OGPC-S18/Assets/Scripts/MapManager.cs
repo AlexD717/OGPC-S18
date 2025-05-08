@@ -1,7 +1,6 @@
 using UnityEngine;
 using Unity.Cinemachine;
 using UnityEngine.InputSystem;
-using System.Collections;
 
 public class MapManager : MonoBehaviour
 {
