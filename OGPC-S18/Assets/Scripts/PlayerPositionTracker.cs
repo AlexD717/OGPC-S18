@@ -62,14 +62,9 @@ public class PlayerPositionTracker : MonoBehaviour
 
     public void ExportData()
     {
-        Debug.Log("Exporting Data");
-        Debug.Log(data);
-
         // Save the CSV to a file
         string filePath = "data:text/csv;charset=utf-8," + System.Uri.EscapeDataString(data);
         Application.OpenURL(filePath); // Open the URL to trigger the download
-
-        Debug.Log($"Positions saved to {filePath}");
     }
 
     public void PlayerToggledMap(bool active)

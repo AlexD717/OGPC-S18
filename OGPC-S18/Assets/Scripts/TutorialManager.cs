@@ -55,7 +55,6 @@ public class TutorialManager : MonoBehaviour
             // Disable the actions the player hasn't learned yet
             playerInputActions.FindAction("Rotation").Disable();
             playerInputActions.FindAction("SailToggle").Disable();
-            Debug.Log("Sail toggle disabled");
             firstFrame = false;
         }
 
@@ -479,7 +478,6 @@ public class TutorialManager : MonoBehaviour
                 // Player told they are on their own
                 if (Input.GetKeyDown(KeyCode.Tab))
                 {
-                    Debug.Log("Loading Main Menu");
                     Loader.LoadByName("MainMenu");
                 }
                 break;
@@ -497,7 +495,6 @@ public class TutorialManager : MonoBehaviour
 
     public void PlayerDied()
     {
-        Debug.Log($"Player died. On death popUpIndex is {onDeathPopUpIndex}");
         if (onDeathPopUpIndex != 0)
         {
             popUpIndex = onDeathPopUpIndex;

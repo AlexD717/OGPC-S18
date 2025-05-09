@@ -88,8 +88,6 @@ public class LevelManager : MonoBehaviour
 
     public void PlayerWon()
     {
-        Debug.Log("You Won!");
-
         SFXManager sFXManager = FindFirstObjectByType<SFXManager>();
         sFXManager.PlayerWon();
 
@@ -99,7 +97,6 @@ public class LevelManager : MonoBehaviour
     public void PlayerLost()
     {
         playerLost = true;
-        Debug.Log("You Lost!");
         countdownText.text = "0.00";
 
         SFXManager sFXManager = FindFirstObjectByType<SFXManager>();

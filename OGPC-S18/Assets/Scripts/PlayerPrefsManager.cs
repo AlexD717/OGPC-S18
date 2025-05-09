@@ -4,7 +4,6 @@ public static class PlayerPrefsManager
 {
     public static void LevelCompleted(int level, float highscore)
     {
-        Debug.Log("Level Completed: " + level + " with highscore: " + highscore);
         // Saves max level past
         int maxLevelPassed = GetMaxLevelPast();
         if (level > maxLevelPassed)

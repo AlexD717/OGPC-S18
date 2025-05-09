@@ -29,7 +29,6 @@ public class BoatHealth : MonoBehaviour
         {
             if (tutorialLevel)
             {
-                Debug.Log($"Boat collided with {collision.gameObject.name} in tutorial level. Ignoring collision for tutorial purposes.");
                 TutorialManager tutorialManager = FindFirstObjectByType<TutorialManager>();
                 if (tutorialManager != null)
                 {
@@ -40,7 +39,6 @@ public class BoatHealth : MonoBehaviour
             }
 
             // Boat is colliding with an object that should deal damage
-            Debug.Log($"Boat collided with {collision.gameObject.name}");
             TakeDamage(baseDamageFromCollisions + boatController.GetBoatSpeed() * speedDamageMult);
         }
     }
@@ -48,7 +46,6 @@ public class BoatHealth : MonoBehaviour
     public void TakeDamage(float damage)
     {
         shipHealth -= damage;
-        Debug.Log($"Ship took {damage} damage. Current health: {shipHealth}");
 
         // Play damage sound effect
         SFXManager sFXManager = FindFirstObjectByType<SFXManager>();
@@ -73,6 +70,5 @@ public class BoatHealth : MonoBehaviour
     public void ResetHealth()
     {
         shipHealth = maxShipHealth;
-        Debug.Log("Ship health reset to max.");
     }
 }
