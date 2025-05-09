@@ -18,7 +18,9 @@ public class MapManager : MonoBehaviour
     private InputAction resetLevel;
 
     [SerializeField] private float panSensitivity;
-    [SerializeField] private float zoomSensitivity;
+    [SerializeField] private float windowsSensitivity;
+    [SerializeField] private float webSensitivity;
+    private float zoomSensitivity;
     [SerializeField] private Vector2 zoomLimits;
     [SerializeField] private float zoomAmount;
     [SerializeField] private bool keepOriginalZoomAmount = true;
@@ -35,6 +37,13 @@ public class MapManager : MonoBehaviour
 
     private void Start()
     {
+        // Change zoom sensitivity based on platform
+#if UNITY_WEBGL
+        zoomSensitivity = webSensitivity;
+#else
+        zoomSensitivity = windowsSensitivity;
+#endif
+
         player = GameObject.FindGameObjectWithTag("Player");
         canvas = transform.GetChild(0).gameObject;
 
