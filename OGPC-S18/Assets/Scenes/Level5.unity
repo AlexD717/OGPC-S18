@@ -376,6 +376,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 123.01
       objectReference: {fileID: 0}
+    - target: {fileID: 2688697126637624244, guid: 141cea0263ce6b346a1b45e989552ab1, type: 3}
+      propertyPath: portName
+      value: Port of Thieves
+      objectReference: {fileID: 0}
     - target: {fileID: 7359282265619272969, guid: 141cea0263ce6b346a1b45e989552ab1, type: 3}
       propertyPath: m_Name
       value: EndPort
@@ -467,7 +471,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8584749577235315376, guid: 9e0ee1631593008429d3b842f58fcebb, type: 3}
       propertyPath: portName
-      value: Jellybean Harbor
+      value: Moorio Kart
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -572,7 +576,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8584749577235315376, guid: 9e0ee1631593008429d3b842f58fcebb, type: 3}
       propertyPath: portName
-      value: Port Star
+      value: Bioshore
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

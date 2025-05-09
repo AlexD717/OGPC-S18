@@ -704,6 +704,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 23
       objectReference: {fileID: 0}
+    - target: {fileID: 2688697126637624244, guid: 141cea0263ce6b346a1b45e989552ab1, type: 3}
+      propertyPath: portName
+      value: Overwake
+      objectReference: {fileID: 0}
     - target: {fileID: 7359282265619272969, guid: 141cea0263ce6b346a1b45e989552ab1, type: 3}
       propertyPath: m_Name
       value: EndPort
@@ -800,6 +804,10 @@ PrefabInstance:
     - target: {fileID: 8552568258094953589, guid: 9e0ee1631593008429d3b842f58fcebb, type: 3}
       propertyPath: m_SortingOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8584749577235315376, guid: 9e0ee1631593008429d3b842f58fcebb, type: 3}
+      propertyPath: portName
+      value: "No Buoy\u2019s Sky"
       objectReference: {fileID: 0}
     - target: {fileID: 8985478504023979310, guid: 9e0ee1631593008429d3b842f58fcebb, type: 3}
       propertyPath: m_LocalRotation.w
@@ -966,6 +974,10 @@ PrefabInstance:
     - target: {fileID: 4976201908680733392, guid: 9e0ee1631593008429d3b842f58fcebb, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8584749577235315376, guid: 9e0ee1631593008429d3b842f58fcebb, type: 3}
+      propertyPath: portName
+      value: Halo Reefach
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
