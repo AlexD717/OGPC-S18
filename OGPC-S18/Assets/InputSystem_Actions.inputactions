@@ -216,6 +216,17 @@
                     "action": "ExitLevel",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c9a5407f-1288-45da-9ce5-484da692b9b0",
+                    "path": "<Keyboard>/l",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ExitLevel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
