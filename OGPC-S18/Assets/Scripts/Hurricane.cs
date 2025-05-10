@@ -85,7 +85,6 @@ public class Hurricane : MonoBehaviour
             if (waypointIndex == waypoints.Count - 1)
             {
                 if (loopWaypoints) { waypointIndex = 0; }
-                else { Debug.Log("Hurricane reached final waypoint."); }
             }
             else
             {
@@ -129,7 +128,7 @@ public class Hurricane : MonoBehaviour
         // Convert to degrees (optional)
         float thetaDeg = theta * Mathf.Rad2Deg;
 
-        //Debug.Log($"Polar Coordinates — Radius: {r}, Angle: {theta} rad ({thetaDeg}°)");
+        //Debug.Log($"Polar Coordinates ï¿½ Radius: {r}, Angle: {theta} rad ({thetaDeg}ï¿½)");
 
         return (360 - thetaDeg) % 360;
     }
