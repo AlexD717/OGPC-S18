@@ -16,6 +16,7 @@ public class MapManager : MonoBehaviour
     private InputAction mapPan;
     private InputAction mapZoom;
     private InputAction resetLevel;
+    private InputAction exitLevel;
 
     [SerializeField] private float panSensitivity;
     [SerializeField] private float windowsSensitivity;
@@ -82,12 +83,14 @@ public class MapManager : MonoBehaviour
         mapPan = mapControls.FindAction("MapPan");
         mapZoom = mapControls.FindAction("MapZoom");
         resetLevel = mapControls.FindAction("ResetLevel");
+        exitLevel = mapControls.FindAction("ExitLevel");
 
         mapToggle.Enable();
         mapReset.Enable();
         mapPan.Enable();
         mapZoom.Enable();
         resetLevel.Enable();
+        exitLevel.Enable();
     }
 
     private void OnDisable()
@@ -97,6 +100,7 @@ public class MapManager : MonoBehaviour
         mapPan.Disable();
         mapZoom.Disable();
         resetLevel.Disable();
+        exitLevel.Disable();
     }
 
     private void Update()
@@ -135,6 +139,10 @@ public class MapManager : MonoBehaviour
         if (resetLevel.triggered)
         {
             Loader.RestartLevel();
+        }
+        if (exitLevel.triggered)
+        {
+            Loader.LoadByName("LevelSelect");
         }
     }
 

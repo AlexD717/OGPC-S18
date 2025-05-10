@@ -34,6 +34,7 @@ public class BoatController : MonoBehaviour
     private float boatWaterSpeed;
     private Vector2 boatWaterVector;
     private InputAction resetLevel;
+    private InputAction exitLevel;
 
 
     private void OnEnable()
@@ -43,11 +44,15 @@ public class BoatController : MonoBehaviour
         sailToggle.Enable();
         resetLevel = playerControls.FindAction("ResetLevel");
         resetLevel.Enable();
+        exitLevel = playerControls.FindAction("ExitLevel");
+        exitLevel.Enable();
     }
 
     private void OnDisable()
     {
         sailToggle.Disable();
+        resetLevel.Disable();
+        exitLevel.Disable();
     }
 
     private void Start()
@@ -66,6 +71,10 @@ public class BoatController : MonoBehaviour
         if (resetLevel.triggered)
         {
             Loader.RestartLevel();
+        }
+        else if (exitLevel.triggered)
+        {
+            Loader.LoadByName("LevelSelect");
         }
         if (!boatSailing)
         {
