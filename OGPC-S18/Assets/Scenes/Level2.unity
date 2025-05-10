@@ -176,6 +176,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 255.58
       objectReference: {fileID: 0}
+    - target: {fileID: 8584749577235315376, guid: 9e0ee1631593008429d3b842f58fcebb, type: 3}
+      propertyPath: portName
+      value: Abyss Creed
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1264,6 +1268,10 @@ PrefabInstance:
     - target: {fileID: 2420729669903513784, guid: 141cea0263ce6b346a1b45e989552ab1, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[28].y
       value: 7.6475577
+      objectReference: {fileID: 0}
+    - target: {fileID: 2688697126637624244, guid: 141cea0263ce6b346a1b45e989552ab1, type: 3}
+      propertyPath: portName
+      value: The Legend of Selda
       objectReference: {fileID: 0}
     - target: {fileID: 3321844346572402222, guid: 141cea0263ce6b346a1b45e989552ab1, type: 3}
       propertyPath: m_Size.x

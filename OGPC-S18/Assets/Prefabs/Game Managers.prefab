@@ -631,8 +631,11 @@ MonoBehaviour:
   mapCamera: {fileID: 0}
   inputActions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   panSensitivity: 5
-  zoomSensitivity: 1000
+  windowsSensitivity: 1000
+  webSensitivity: 8
   zoomLimits: {x: 18, y: 280}
+  zoomAmount: 0
+  keepOriginalZoomAmount: 1
   cameraZoomsOutOnPlayerPosition: 1
   startInMapView: 1
 --- !u!1 &9193759913618306606
