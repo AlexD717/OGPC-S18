@@ -8,14 +8,11 @@ public class RudderController : MonoBehaviour
     
     [SerializeField] private InputActionAsset inputActions;
     private InputAction rotationAxis;
-    private float rotationInput;
-
-    [SerializeField] private RectTransform rudderPositionIndicator;
-    
+    private float rotationInput;    
     private void OnEnable()
     {
         // Get the "Rotation" action from the Input Action Asset
-        var playerControls = inputActions.FindActionMap("Player");
+        InputActionMap playerControls = inputActions.FindActionMap("Player");
         rotationAxis = playerControls.FindAction("Rotation");
 
         // Enable the action
@@ -31,15 +28,13 @@ public class RudderController : MonoBehaviour
     private void Update()
     {
         // Reads rotation value
-        rotationInput = rotationAxis.ReadValue<float>();
-
-        UpdateUI();
+        UpdateRudder();
     }
 
-    private void UpdateUI()
+    private void UpdateRudder()
     {
-        rudderPosition = Mathf.Lerp(rudderPositionIndicator.localPosition.x, rotationInput * 200, rudderMoveSpeed/10f * Time.deltaTime);
-        rudderPositionIndicator.localPosition = new Vector2(rudderPosition, rudderPositionIndicator.localPosition.y);
+        rotationInput = rotationAxis.ReadValue<float>();
+        rudderPosition = Mathf.Lerp(rudderPosition, rotationInput * 200, rudderMoveSpeed/10f * Time.deltaTime);
     }
 
     public float GetRudderPosition()

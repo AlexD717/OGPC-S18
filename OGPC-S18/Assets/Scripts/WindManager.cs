@@ -2,11 +2,6 @@ using UnityEngine;
 
 public class WindManager : MonoBehaviour
 {
-    [Header("References")]
-
-    [SerializeField] private Transform windIndicator;
-    [SerializeField] private Transform player;
-
     [Header("Starting Wind Condition")]
     [SerializeField] private float windHeading; // starting wind direction, 0 is North, 90 is East, 180 is South, and 270 is West
     [SerializeField] private float windSpeed; // starting windspeed
@@ -22,12 +17,14 @@ public class WindManager : MonoBehaviour
     int frameCount = 0; // Frame counter
     [SerializeField] private Vector2 windSpeedRange; //Clamps on wind range
     [SerializeField] private Vector2 windHeadingRange; //Clamps on wind direction
+    private Transform player;
     float[] magDeltas;
     float[] angDeltas;
 
 
     private void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player").transform;
         //Generation Variable/Array Stuff
         if (stabilityLevels < 2) {stabilityLevels = 2;}
     
@@ -61,13 +58,6 @@ public class WindManager : MonoBehaviour
         if (windSpeed == windSpeedRange.x || windSpeed == windSpeedRange.y) {for (int i=0; i < magDeltas.Length;i++) {magDeltas[i] = 0f;}}
 
     }
-
-    private void UpdateUI()
-    {
-        windIndicator.rotation = Quaternion.Euler(0, 0, 90 - (windHeading+player.eulerAngles.z));
-        windIndicator.localScale = new Vector3(windSpeed / windSpeedRange.y, windSpeed/windSpeedRange.y, 1f);
-    }
-
     private void Update()
     {
         frameCount++;
@@ -96,10 +86,8 @@ public class WindManager : MonoBehaviour
                     return;
                 }
             }
-
             UpdateWind();
         }
-        UpdateUI();
     }
 
     public float GetWindDirection()

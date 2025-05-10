@@ -2,11 +2,6 @@ using UnityEngine;
 
 public class CurrentManager : MonoBehaviour
 {
-
-    [Header("References")]
-    [SerializeField] private Transform currentIndicator;
-    [SerializeField] private Transform player;
-
     [Header("Starting Current Condition")]
     [SerializeField] public float currentHeading; // starting current direction, 0 is North, 90 is East, 180 is South, and 270 is West
     [SerializeField] public float currentSpeed; // starting current speed
@@ -21,6 +16,7 @@ public class CurrentManager : MonoBehaviour
     [SerializeField] private int updateInterval; // Updates values every "this many frames"
     [SerializeField] private Vector2 currentSpeedRange; //Clamps on wind range
     [SerializeField] private Vector2 currentHeadingRange; //Clamps on wind direction
+    private Transform player;
 
     float[] magDeltas;
     float[] angDeltas;
@@ -28,13 +24,13 @@ public class CurrentManager : MonoBehaviour
     Vector2 currentVector;
 
     private void Start()
-    {   
+    {
+        player = GameObject.FindGameObjectWithTag("Player").transform;
 
-        if (stabilityLevels < 2) {stabilityLevels = 2;}
-    
+        if (stabilityLevels < 2) { stabilityLevels = 2; }
+
         magDeltas = new float[stabilityLevels];
         angDeltas = new float[stabilityLevels];
-
 
         //starting deltas are all 0
         for (int i = 0; i < stabilityLevels; i++)
@@ -70,13 +66,6 @@ public class CurrentManager : MonoBehaviour
         currentVector = VectorUtilities.PolarToVector(currentHeading,currentSpeed);
     }
 
-    private void UpdateUI()
-    {
-        currentIndicator.rotation = Quaternion.Euler(0, 0, 90 - (currentHeading+player.eulerAngles.z));
-        currentIndicator.localScale = new Vector3(currentSpeed/currentSpeedRange.y, currentSpeed/currentSpeedRange.y, 1f);
-    }
-
-
     int count = 0;
     private void Update()
     {
@@ -86,7 +75,6 @@ public class CurrentManager : MonoBehaviour
             count = 0;
             UpdateCurrent();
         }
-        UpdateUI();
     }
 
     public float GetCurrentDirection()
