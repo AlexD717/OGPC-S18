@@ -22,6 +22,25 @@ public class LevelManager : MonoBehaviour
     private bool showEndScreen = false;
     public bool tutorialLevel = false;
 
+    // Input actions
+    private InputAction resetLevel;
+    private InputAction exitLevel;
+
+    private void OnEnable()
+    {
+        InputActionMap playerControls = inputActions.FindActionMap("Player");
+        resetLevel = playerControls.FindAction("ResetLevel");
+        resetLevel.Enable();
+        exitLevel = playerControls.FindAction("ExitLevel");
+        exitLevel.Enable();
+    }
+
+    private void OnDisable()
+    {
+        resetLevel.Disable();
+        exitLevel.Disable();
+    }
+
     private void Start()
     {
         winScreen.gameObject.SetActive(false);
@@ -61,6 +80,16 @@ public class LevelManager : MonoBehaviour
 
     private void Update()
     {
+        // Check for input actions
+        if (resetLevel.triggered)
+        {
+            Loader.RestartLevel();
+        }
+        else if (exitLevel.triggered)
+        {
+            Loader.LoadByName("LevelSelect");
+        }
+
         if (showEndScreen) { return; }
 
         if (gameEnded)

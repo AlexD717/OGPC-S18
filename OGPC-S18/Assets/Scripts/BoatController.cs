@@ -33,16 +33,12 @@ public class BoatController : MonoBehaviour
     private float relativeWindDirection;
     private float boatWaterSpeed;
     private Vector2 boatWaterVector;
-    private InputAction resetLevel;
-
 
     private void OnEnable()
     {
         InputActionMap playerControls = inputActions.FindActionMap("Player");
         sailToggle = playerControls.FindAction("SailToggle");
         sailToggle.Enable();
-        resetLevel = playerControls.FindAction("ResetLevel");
-        resetLevel.Enable();
     }
 
     private void OnDisable()
@@ -63,10 +59,6 @@ public class BoatController : MonoBehaviour
 
     void Update()
     {
-        if (resetLevel.triggered)
-        {
-            Loader.RestartLevel();
-        }
         if (!boatSailing)
         {
             return;
