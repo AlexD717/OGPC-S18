@@ -1047,6 +1047,17 @@
                     "action": "ExitLevel",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e3a0be49-0469-42a1-bed7-cbf6c8af0dd1",
+                    "path": "<Keyboard>/l",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ExitLevel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
